@@ -37,7 +37,7 @@ public class GroupController extends HttpServlet {
 		System.out.println(grouplist);
 		request.getSession().setAttribute("grouplist", grouplist);
 
-		request.getRequestDispatcher("/WEB-INF/views/grouphome.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/group/grouphome.jsp").forward(request, response);
 	}
 
 	/**

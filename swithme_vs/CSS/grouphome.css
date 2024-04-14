@@ -1,0 +1,14 @@
+.wrap-group {
+    height: 350px;
+    width: 100%;
+    background-color: rgb(221, 204, 255, 0.2);
+
+}
+
+
+.wrap-my {
+    /* 중앙 배치 */
+    width: 960px;
+    margin: 0 auto;
+    align-items: center;
+}

@@ -5,12 +5,6 @@
     margin: 0 auto;
 }
 
-.wrap-body {
-    /* 중앙 배치 */
-    width: 960px;
-    margin: 0 auto;
-}
-
 .wrapper {
     height: auto;
     min-height: 100%;

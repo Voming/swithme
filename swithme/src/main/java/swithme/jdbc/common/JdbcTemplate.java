@@ -36,37 +36,37 @@ public class JdbcTemplate {
 		return conn;
 	}
 	
-	public static void autoCommit(Connection con, boolean autocommit) {
+	public static void autoCommit(Connection conn, boolean autocommit) {
 		try {
-			if (con != null)
-				con.setAutoCommit(autocommit);
+			if (conn != null)
+				conn.setAutoCommit(autocommit);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void Commit(Connection con) {
+	public static void Commit(Connection conn) {
 		try {
-			if (con != null)
-				con.commit();
+			if (conn != null)
+				conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void Rollback(Connection con) {
+	public static void Rollback(Connection conn) {
 		try {
-			if (con != null)
-				con.rollback();
+			if (conn != null)
+				conn.rollback();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void close(Connection con) {
+	public static void close(Connection conn) {
 		try {
-			if (con != null)
-				con.close();
+			if (conn != null)
+				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

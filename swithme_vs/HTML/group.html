@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swithme</title>
+
+    <!-- reset.css -->
+    <link href="/css/reset.css" rel="stylesheet">
+    <!-- 레이아웃 설정 -->
+    <link href="/css/core.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+
+    <!-- carousel -->
+    <link rel="stylesheet" href="/Carousel_assets/owl.carousel.css">
+    <link rel="stylesheet" href="/Carousel_assets/owl.theme.default.css">
+  
+    <!-- jQuery 선언 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <script>
+        $(carouselHandler)
+        function carouselHandler() {
+            $('.wrap-group .owl-carousel').owlCarousel({
+                items: 3,
+                margin: 10,
+                loop: true,
+                nav: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true
+            });
+        };
+    </script>
+
+    <div class="wrapper">
+        <div class="wrap-header">
+            <header>
+                <div class="tn">
+                    <!-- 최상단 네비(로고 및 회원가입, 로그인) -->
+                    <div class="nav1-wrap">
+                        <div class="logo-side">
+                            <a href="#">
+                                <img src="/Images/logo.jpg" alt>
+                            </a>
+                        </div>
+                        <div class="log">
+                            <ul>
+                                <li><a href="#">로그인</a></li>
+                                <li><a href="#">회원가입</a></li>
+                                <li><a href="#">마이페이지</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bn">
+                    <div class="nav2-wrap">
+                        <ul>
+                            <li><a href="#">나의기록</a></li>
+                            <li><a class="active" href="#">그룹</a></li>
+                            <li><a href="/HTML/lanking.html">랭킹</a></li>
+                            <li><a href="#">커뮤니티</a></li>
+                            <li><a href="#">시험달력</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hrline">
+                    <hr>
+                </div>
+
+            </header>
+        </div>
+        <div class="wrap-body">
+            <div class="wrap-group">
+                <div class="wrap-my">
+                    <div>
+                        <p>내 그룹</p>
+                    </div>
+                    <div class="owl-carousel">
+                        <div class="item">
+                            <img src="http://via.placeholder.com/290X180.jpg/">
+                        </div>
+                        <div class="item">
+                            <img src="http://via.placeholder.com/290X180.jpg/">
+                        </div>
+                        <div class="item">
+                            <img src="http://via.placeholder.com/290X180.jpg/">
+                        </div>
+                        <div class="item">
+                            <img src="http://via.placeholder.com/290X180.jpg/">
+                        </div>
+                        <div class="item">
+                            <img src="http://via.placeholder.com/290X180.jpg/">
+                        </div>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap-footer">
+        <footer>
+            <div class="inner">
+                <ul>
+                    <li>
+                        <div class="tf">
+                            <p>스윗미</p>
+                        </div>
+                        <div class="to">
+                            <p>정보</p>
+                            <p>문의하기</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>커뮤니티</p>
+                        </div>
+                        <div class="to">
+                            <p>깃허브</p>
+                            <p>인스타그램</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>제작자</p>
+                        </div>
+                        <div class="to">
+                            <p>김보민</p>
+                            <p>김은진</p>
+                            <p>송채원</p>
+                            <p>오예인</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>법적고지</p>
+                        </div>
+                        <div class="to">
+                            <p>개인정보 처리방침</p>
+                            <p>운영정책</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+     <!-- carousel -->
+    <script src="/Carousel_js/owl.carousel.js"></script>
+    <script src="/Carousel_js/owl.autoplay.js"></script>
+    <script src="/Carousel_js/owl.navigation.js"></script>
+</body>
+
+</html>

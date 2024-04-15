@@ -1,0 +1,58 @@
+.wrap-body .main{
+    width: 960px;
+    margin: 0 auto;
+    height: 700px;
+    /* background-color: lightgray;   */
+    position: relative;
+    
+}
+.wrap-body p{
+    font-family: "IM_Hyemin-Regular";
+    font-size: 15px;
+}
+
+.wrap-body .add{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform : translate(-50%,-20%);
+    text-align: center;
+}
+
+.wrap-body form >*{
+    margin-bottom: 36px;
+    font-size: 17px;
+}
+.wrap-body .title{
+    font-family: "IM_Hyemin-Bold";
+    font-size: 20px;
+}
+.wrap-body input[type='text']{
+    height: 40px;
+    width: 200px;
+    border-radius: 10px; 
+    background-color: lightgray;
+    border: none; 
+
+}
+
+
+.wrap-body input{ 
+    font-family: "IM_Hyemin-Regular";
+}
+.wrap-body .sub-color{
+    display: flex; /* Flexbox를 사용하여 요소를 나란히 배치 */
+    justify-content : center;
+
+}
+.wrap-body .sub-color > p{
+    margin-right: 10px;
+}
+.wrap-body .btn{
+    border: none;
+    background-color: var(--color_purple_1);
+  color: white;
+  width: 75px;
+  border-radius: 10px;
+}

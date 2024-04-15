@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+header .tn {
+    /* 자식들의 기준점 */
+    position: relative;
+}
+
+header .logo-side {
+    margin-top: 15px;
+}
+
+header .tn .log {
+    /* 로그인 오른쪽 고정 */
+    font-size: 15px;
+    position: absolute;
+    top: 8px;
+    right: 0;
+}
+
+header .log li {
+    /* 로그인 정렬 */
+    display: inline-block;
+    text-align: center;
+    margin: 0 15px 0 15px;
+}
+
+header .log a {
+    /* 로그인 폰트 세팅 */
+    font-family: "IM_Hyemin-Bold";
+    font-size: var(--font4);
+    font-weight: bolder;
+}
+
+header .nav2-wrap ul {
+    margin-bottom: 15px;
+}
+
+header .nav2-wrap li {
+    /* 상단 네비 가로 정렬 */
+    display: inline-block;
+    margin: 20px 0 10px 0;
+    margin-right: 45px;
+}
+
+header .nav2-wrap li a {
+    font-size: var(--font3);
+    font-family: "IM_Hyemin-Bold";
+}
+
+header .nav2-wrap li a:hover,
+header .nav2-wrap li a.active {
+    /* 클릭된 페이지 표시 */
+    background-color: rgba(221, 204, 255, 0.7);
+}
+
+header hr {
+    /* 구분선 */
+    width: 100%;
+    background: var(--color_purple_1);
+    height: 1px;
+    border: 0;
+    margin: 0;
+}

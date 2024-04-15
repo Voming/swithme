@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swithme</title>
+
+    <!-- reset.css -->
+    <link href="/css/reset.css" rel="stylesheet">
+    <!-- 레이아웃 설정 -->
+    <link href="/css/core.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+
+    <link href="/css/addsubject.css" rel="stylesheet">
+
+    <!-- jQuery 선언 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> -->
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="wrap-header">
+            <header>
+                <div class="tn">
+                    <!-- 최상단 네비(로고 및 회원가입, 로그인) -->
+                    <div class="nav1-wrap">
+                        <div class="logo-side">
+                            <a href="#">
+                                <img src="/Images/logo.jpg" alt>
+                            </a>
+                        </div>
+                        <div class="log">
+                            <ul>
+                                <li><a href="#">로그인</a></li>
+                                <li><a href="#">회원가입</a></li>
+                                <li><a href="#">마이페이지</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bn">
+                    <div class="nav2-wrap">
+                        <ul>
+                            <li><a class="active" href="#">나의기록</a></li>
+                            <li><a href="#">그룹</a></li>
+                            <li><a href="#">랭킹</a></li>
+                            <li><a href="#">커뮤니티</a></li>
+                            <li><a href="#">시험달력</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hrline">
+                    <hr>
+                </div>
+
+            </header>
+        </div>
+        <div class="wrap-body">
+            <section class="main">
+                <!-- 모달로 변경할 예정 -->
+                <div class="add">
+                    <form action="" method="post">
+                        <div class="subject ">
+                            <p class="title">추가할 과목 이름</p>
+                        </div>
+                        <div class="add-name"><input type="text" name="sub-name" placeholder="     e.g 자바, 파이썬, SQL"></div>
+                        <div class="sub-color">
+                            <p>과목 색상</p>
+                            <select name="select">
+                                <option value="cpink">핑크</option>
+                                <option value="cyellow">노랑</option>
+                                <option value="cgreen">초록</option>
+                                <option value="cblue">파랑</option>
+                                <option value="cpurple">보라</option>
+                            </select>
+                        </div>
+                        <button type="reset" class="btn cancle">
+                            <p>취소</p>
+                        </button>
+                        <button type="submit" class="btn done">
+                            <p>완료</p>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <div class="wrap-footer">
+        <footer>
+            <div class="inner">
+                <ul>
+                    <li>
+                        <div class="tf">
+                            <p>스윗미</p>
+                        </div>
+                        <div class="to">
+                            <p>정보</p>
+                            <p>문의하기</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>커뮤니티</p>
+                        </div>
+                        <div class="to">
+                            <p>깃허브</p>
+                            <p>인스타그램</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>제작자</p>
+                        </div>
+                        <div class="to">
+                            <p>김보민</p>
+                            <p>김은진</p>
+                            <p>송채원</p>
+                            <p>오예인</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tf">
+                            <p>법적고지</p>
+                        </div>
+                        <div class="to">
+                            <p>개인정보 처리방침</p>
+                            <p>운영정책</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

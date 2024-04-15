@@ -65,7 +65,8 @@
             <section class="main">
                 <!-- 모달로 변경할 예정 -->
                 <div class="add">
-                    <form action="" method="post">
+                    <!-- controller 추가 -->
+                    <form action="${pageContaxt.request.contextPath}/addsubject" method="post">
                         <div class="subject ">
                             <p class="title">추가할 과목 이름</p>
                         </div>
@@ -73,11 +74,11 @@
                         <div class="sub-color">
                             <p>과목 색상</p>
                             <select name="select">
-                                <option value="cpink">핑크</option>
-                                <option value="cyellow">노랑</option>
-                                <option value="cgreen">초록</option>
-                                <option value="cblue">파랑</option>
-                                <option value="cpurple">보라</option>
+                                <option value="cpink"><p>핑크</p></option>
+                                <option value="cyellow"><p>노랑</p></option>
+                                <option value="cgreen"><p>초록</p></option>
+                                <option value="cblue"><p>파랑</p></option>
+                                <option value="cpurple"><p>보라</p></option>
                             </select>
                         </div>
                         <button type="reset" class="btn cancle">

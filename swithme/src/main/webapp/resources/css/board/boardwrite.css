@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.wrap-body {
+	width: 960px;
+	margin: auto;
+}
+
+.boardwrite {
+	margin: 60px 100px 15px;
+}
+
+
+textarea{
+	resize: none;
+	border: none;
+	border-radius: 20px;
+	background: rgb(237, 237, 237);
+	padding: 10px 15px;
+
+}
+
+table, th, td {
+	border-collapse: separate;
+	border-spacing: 5px 28px;
+
+}
+
+
+input {
+	width: 100%;
+	border: none;
+	border-radius: 20px;
+	background: rgb(237, 237, 237);
+	padding: 10px 15px;
+	
+}
+
+th{
+	background: rgb(237, 237, 237);
+	border-radius: 20px;
+	padding: 10px 20px;
+	
+}
+
+#form-write > table > tbody > tr:nth-child(2) > th {
+	vertical-align: top;
+		
+}
+
+.btn{
+	display: flex;
+}
+
+button {
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+}
+
+button:hover {
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+
+#form-write > div > div:nth-child(3) > button {
+	margin-left: auto;
+}

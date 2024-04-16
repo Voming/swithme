@@ -6,6 +6,8 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/basic/header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/basic/footer.css" rel="stylesheet">
+
+<link href="${pageContext.request.contextPath}/resources/css/member/login.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,48 +16,7 @@
 <meta charset="UTF-8">
 
 <title>login</title>
-
-<style>
-.wrap-body{
-    padding: 0;
-    margin: 0;
-    border: none;
-    display: flex;
-}
-
-.wrap-login{
-    display: block;
-    width: 400px;
-    height: 350px;
-    padding: 40px;
-    box-sizing: border-box;
-}
-
-#login-form{
-    width: 300px;
-    border: 0;
-}
-	
-#login-form input{
-    width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    background-color: #F8F8F8;
-}
-
-.btn.submit{
-	width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-
-</style>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -67,13 +28,16 @@
 			<fieldset>
 				<form id="login-form">
 					<div>
-						<label>아이디</label><input type="text" name="id">
+						<input type="text" name="id" placeholder="아이디">
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd">
+						<input type="password" name="pwd" placeholder="비밀번호">
 					</div>
 					<div>
 						<button type="button" class="btn submit" >로그인</button>
+					</div>
+					<div class="join-btn">
+					<a href="">회원가입하기</a>
 					</div>
 				</form>
 			</fieldset>
@@ -84,5 +48,48 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 
+
+
+	<script>
+	$(loadedHandler);
+	function loadedHandler() {
+		$("#login-form .btn.submit").on("click", frmClickHandler);
+	}
+
+	function frmClickHandler() {
+		console.log("클릭");
+		console.log($("#login-form").serialize());
+		console.log($("[name=id]").val());
+		console.log($("[pwd=id]").val());
+		$.ajax({
+					url : "${pageContext.request.contextPath}/login",
+					method : "post",
+					data :
+					{
+						id : $("#login-form [name=id]").val(),
+						pwd : $("#login-form [name=pwd]").val()
+					},
+					success : function(result) {
+						console.log(result);
+						if (result == 1) {
+							alert("반갑습니다");
+							var prePage = "${prePage}";
+							if (prePage == "write") {
+								location.href = "${pageContext.request.contextPath}/";
+							}
+							location.href = "${pageContext.request.contextPath}/";
+						} else {
+							alert("아이디 비밀번호 일치하지 않음");
+							$("[name=pwd]").val("");
+						}
+					},
+					error : function(request, status, error) {
+						alert("code: " + request.status + "\n"
+								+ "message: " + request.responseText + "\n"
+								+ "error: " + error);
+					}
+				});
+	}
+	</script>
 </body>
 </html>

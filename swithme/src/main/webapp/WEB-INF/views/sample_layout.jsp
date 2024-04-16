@@ -18,7 +18,23 @@
 
 	<div class="wrapper">
 		<div class="wrap-header">
-			<%@include file="/WEB-INF/views/basic/header.jsp"%>
+			<header>
+				<%@include file="/WEB-INF/views/basic/header.jsp"%>
+				<div class="bn">
+					<div class="nav2-wrap">
+						<ul>
+							<li><a class="active" href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a  href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
+							<li><a href="#">시험달력</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-"></div>

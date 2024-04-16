@@ -33,10 +33,25 @@
 <title>sample</title>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="wrap-header">
-			<%@include file="/WEB-INF/views/basic/header.jsp"%>
+			<header>
+				<%@include file="/WEB-INF/views/basic/header.jsp"%>
+				<div class="bn">
+					<div class="nav2-wrap">
+						<ul>
+							<li><a class="active" href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
+							<li><a href="#">시험달력</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="hrline">
+					<hr>
+				</div>
+			</header>
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-main">
@@ -95,9 +110,11 @@
 		function loadedHandler() {
 			$("#start").on("click", startClickHandler);
 			$("#stop").on("click", stopClickHandler);
+
 			$("#today").ready(function() {
 				todayHandler();
 			});
+
 			$("#currentTime").ready(function() {
 				currentTime();
 				setInterval(currentTime, 1000);
@@ -122,6 +139,7 @@
 		}
 		function stopClickHandler() {
 			endTime = new Date();
+			console.log("멈춰!!!");
 			clearInterval(intervalCountdownID);
 
 		}
@@ -134,9 +152,10 @@
 			diffMin = Math.floor(diffMSec / (60 * 1000));
 			 */
 			diffMSec = nowTime.getTime() - startTime.getTime();
-			diffHour = Math.floor(diffMSec / (60 * 60 * 1000));
-			diffMin = Math.floor(diffMSec / (60 * 1000));
-			diffMSec = Math.floor(diffMSec / 1000);
+			diffSec = diffMSec / 1000;
+			diffHour = Math.floor(diffSec / (60 * 60));
+			diffMin = Math.floor(diffSec / 60 - diffHour * 60);
+			diffMSec = Math.floor(diffSec - diffMin * 60 - diffHour * 60 * 60);
 
 			if (diffMSec < 10) {
 				diffMSec = '0' + diffMSec;
@@ -150,6 +169,7 @@
 
 			diffTime = diffHour + ":" + diffMin + ":" + diffMSec;
 			$("#countdown").text(diffTime);
+
 			/* 확인용 */
 			console.log(diffHour + ":" + diffMin + ":" + diffMSec);
 

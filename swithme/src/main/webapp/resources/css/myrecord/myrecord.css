@@ -53,7 +53,8 @@
 	margin-right: 10px;
 }
 
-.wrap-body .btn {
+.wrap-body .timer.box .btn {
+
 	border: none;
 	background-color: var(--color_purple_1);
 	color: white;
@@ -64,6 +65,7 @@
 .wrap-body .timer.box {
 	width: 100%;
 	height: 50px;
+	position : relative;
 	/* TODO 과목 증가시 높이 증가..? */
 	min-height: 430px;
 	display: flex;
@@ -72,7 +74,8 @@
 }
 
 .wrap-body .timer.box .study-info {
-	position: relative; width : 25%;
+	position: relative;
+	width : 25%;
 	background-color: var(--color_purple_3);
 	width: 25%;
 }
@@ -93,7 +96,18 @@
 	width: 75px;
 	border-radius: 10px;
 }
+.wrap-body .timer.box .study-info .btnGroup{
+	position : absolute;
+	bottom: 0px;
+	right : 0px;
+	
+}
 
+.wrap-body .timer.box .study-info .btn{
+	margin-right : 10px;
+	margin-bottom : 10px;
+
+}
 .wrap-body .mem-id {
 	font-size: 17px;
 	background-color: var(--color_purple_2);

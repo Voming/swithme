@@ -1,0 +1,121 @@
+.wrap-body .wrap-main {
+	width: 960px;
+	margin: 0 auto;
+	height: 700px;
+	/* background-color: lightgray;   */
+	font-family: "IM_Hyemin-Regular";
+	position: relative;
+	font-size: 15px;
+}
+
+.wrap-body .wrap-main p {
+	font-family: "IM_Hyemin-Regular";
+	font-size: 15px;
+}
+/* 과목 추가 모달 css */
+.wrap-body .add {
+	height: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+	text-align: center;
+}
+
+.wrap-body form>* {
+	margin-bottom: 36px;
+	font-size: 17px;
+}
+
+.wrap-body .title {
+	font-family: "IM_Hyemin-Bold";
+	font-size: 20px;
+}
+
+.wrap-body input[type='text'] {
+	height: 40px;
+	width: 200px;
+	border-radius: 10px;
+	background-color: lightgray;
+	border: none;
+}
+
+.wrap-body input {
+	font-family: "IM_Hyemin-Regular";
+}
+
+.wrap-body .sub-color {
+	display: flex; /* Flexbox를 사용하여 요소를 나란히 배치 */
+	justify-content: center;
+}
+
+.wrap-body .sub-color>p {
+	margin-right: 10px;
+}
+
+.wrap-body .btn {
+	border: none;
+	background-color: var(--color_purple_1);
+	color: white;
+	width: 75px;
+	border-radius: 10px;
+}
+/*-------------------------------------*/
+.wrap-body .timer.box {
+	width: 100%;
+	height: 50px;
+	/* TODO 과목 증가시 높이 증가..? */
+	min-height: 430px;
+	display: flex;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.wrap-body .timer.box .study-info {
+	position: relative; width : 25%;
+	background-color: var(--color_purple_3);
+	width: 25%;
+}
+
+.wrap-body .timer.box .study-info  li {
+	padding: 10px;
+}
+
+.wrap-body .timer.box .study-info  li>div {
+	padding: 5px;
+}
+
+.wrap-body .btn {
+	border: none;
+	padding: 2px;
+	background-color: var(--color_purple_1);
+	color: white;
+	width: 75px;
+	border-radius: 10px;
+}
+
+.wrap-body .mem-id {
+	font-size: 17px;
+	background-color: var(--color_purple_2);
+}
+
+.wrap-body .timer.box .study-countdown-box {
+	width: 75%;
+	font-size: 64px;
+	background-color: var(--color_purple_1);
+	position: relative;
+}
+
+.wrap-body .timer.box .study-countdown {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.wrap-body .timer.box .study-countdown>p {
+	font-family: IM_Hyemin-Bold;
+	color: white;
+	font-size: 64px;
+}

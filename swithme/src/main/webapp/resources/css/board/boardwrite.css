@@ -29,6 +29,8 @@
 	border-radius: 20px;
 	background: rgb(237, 237, 237);
 	padding: 10px 15px;
+	position: absolute;
+	left: 120px;
 
 }
 
@@ -42,10 +44,6 @@
 
 }
 
-.wrap-body .content{
-	position: absolute;
-	left: 120px;
-}
 
 
 

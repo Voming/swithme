@@ -31,7 +31,7 @@
 						</li>
 						<li>
 							<div class="txt-content"><p>내용</p></div>
-							<div><textarea class="content" cols="80" rows="25" placeholder="내용을 입력하시오." required></textarea></div>
+							<div><textarea name="content" cols="80" rows="25" placeholder="내용을 입력하시오." required></textarea></div>
 						</li>	
 						
 					</ul>		

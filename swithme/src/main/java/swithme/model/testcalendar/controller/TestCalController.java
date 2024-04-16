@@ -35,7 +35,10 @@ public class TestCalController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ajax get");
 		
-		service.testCalApiCall();
+		//1 : 기술사 2: 기능장 3: 기사 산업기사
+		service.testCalApiCall(1); 
+		service.testCalApiCall(2);
+		service.testCalApiCall(3);
 		request.getRequestDispatcher("/WEB-INF/views/testcalendar/updatecal.jsp").forward(request, response);
 	}
 

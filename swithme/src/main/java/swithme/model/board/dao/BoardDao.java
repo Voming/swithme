@@ -14,20 +14,12 @@ import swithme.model.board.dto.BoardListDto;
 
 public class BoardDao {
 
-	// select all
+	//게시글 한 페이지에 나열
 		public List<BoardListDto> selectAllList(Connection conn) {
 			List<BoardListDto> result = null;
-			String sql = "SELECT BOARD_ID, TITLE, BOARD_WRITER, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE FROM BOARD";
+			String sql = "SELECT BOARD_ID, TITLE, BOARD_WRITER, WRITE_TIME, READ_COUNT  FROM BOARD";
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-
-//			private int boardId;
-//			private String boardWriter;
-//			private String title;
-//			private String content;
-//			private String writeTime; //timeStamp
-//			private int readCount;
-//			private int boardLike;
 
 			try {
 
@@ -54,10 +46,10 @@ public class BoardDao {
 		}
 	
 	
-	//total count
+	//게시판 한 페이지에 나오는 총 게시글 수
 	public int selectTotalCount(Connection conn) {
 		int result = 0;
-		String sql = "SELECT COUNT(*) C FROM BOARD";
+		String sql = "SELECT COUNT(*) c FROM BOARD";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -65,7 +57,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				result = rs.getInt("C");
+				result = rs.getInt("c");
 			}
 			
 		} catch (SQLException e) {
@@ -77,7 +69,7 @@ public class BoardDao {
 	} 
 	
 
-
+	//게시글 하나 선택
 	public BoardDto selectOne(Connection conn, Integer boardId) {
 		BoardDto result = null;
 		String sql = "SELECT * FROM BOARD WHERE BOARD_ID = ?";
@@ -103,6 +95,7 @@ public class BoardDao {
 		return result;
 	}
 
+	//게시글 추가
 	public int insert(Connection conn, BoardDto dto) {
 		int result = 0;
 		String sql = "INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE"
@@ -125,6 +118,7 @@ public class BoardDao {
 
 	}
 
+	//게시글 수정
 	public int update(Connection conn, BoardDto dto) {
 		int result = 0;
 		String sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE BOARD_ID = ?";
@@ -145,6 +139,7 @@ public class BoardDao {
 		return result;
 	}
 
+	//게시글 삭제
 	public int delete(Connection conn, Integer boardId) {
 		int result = 0;
 		String sql = "DELETE FROM BOARD WHERE BOARD_ID =?";

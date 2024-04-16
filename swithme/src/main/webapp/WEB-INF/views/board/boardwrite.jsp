@@ -16,6 +16,7 @@
     <div class="wrapper">
         <div class="wrap-header">
            <%@include file="/WEB-INF/views/basic/header.jsp"%>
+
         </div>
         
         <div class="wrap-body">
@@ -23,7 +24,6 @@
         		<p>게시글 작성</p>
         	</div>
         	<form id="form-write" method="post" action="insert.no">
-			
 					<ul class="write">
 						<li>
 							<div><p>제목</p></div>
@@ -35,7 +35,6 @@
 						</li>	
 						
 					</ul>		
-				
 				<div class="btn">
 					<div><button type="button" class="btn write">등록</button></div>
 					<div><button type="button" class="btn esc">취소</button></div>
@@ -47,6 +46,7 @@
 
     <div class="wrap-footer">
       <%@include file="/WEB-INF/views/basic/footer.jsp"%>
+
     </div>
 </body>
 </html>

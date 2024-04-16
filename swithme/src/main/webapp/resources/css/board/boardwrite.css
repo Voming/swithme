@@ -17,6 +17,9 @@ body > div.wrapper > div.wrap-body > div > p {
     font-weight: bolder;
 }
 
+div {
+	display: inline-block;
+}
 
 #form-write > ul > li:nth-child(1) > div:nth-child(1) > p, 
 #form-write > ul > li:nth-child(2) > div.txt-content > p {
@@ -45,6 +48,7 @@ body > div.wrapper > div.wrap-body > div > p {
 
 }
 
+
 .wrap-body .write {
 	position: relative;
 }
@@ -57,7 +61,7 @@ body > div.wrapper > div.wrap-body > div > p {
 
 
  input{
-	width: 635px;
+	width: 100%;
 	border: none;
 	border-radius: 20px;
 	background: rgb(237, 237, 237);
@@ -68,6 +72,7 @@ body > div.wrapper > div.wrap-body > div > p {
 
 
 .wrap-body .btn{
+
 	display: flex;
 	position: relative;
 	top:230px;

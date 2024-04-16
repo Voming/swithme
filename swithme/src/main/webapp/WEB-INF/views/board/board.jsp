@@ -3,7 +3,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/board/board.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/board/board.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

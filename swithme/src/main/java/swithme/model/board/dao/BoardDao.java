@@ -10,17 +10,46 @@ import java.util.List;
 import static swithme.jdbc.common.JdbcTemplate.close;
 
 import swithme.model.board.dto.BoardDto;
-import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
 
 public class BoardDao {
 
+	//게시글 한 페이지에 나열
+		public List<BoardListDto> selectAllList(Connection conn) {
+			List<BoardListDto> result = null;
+			String sql = "SELECT BOARD_ID, TITLE, BOARD_WRITER, WRITE_TIME, READ_COUNT  FROM BOARD";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					result = new ArrayList<BoardListDto>();
+					do {
+
+						BoardListDto dto = new BoardListDto(rs.getInt("BOARD_ID"), rs.getString("TITLE"),
+								rs.getString("BOARD_WRITER"), rs.getString("WRITE_TIME"), rs.getInt("READ_COUNT"));
+						result.add(dto);
+					} while (rs.next());
+
+				}
+			} catch (SQLException e) {
+
+			}
+			close(rs);
+			close(pstmt);
+			return result;
+
+		}
 	
 	
-	//total count
+	//게시판 한 페이지에 나오는 총 게시글 수
 	public int selectTotalCount(Connection conn) {
 		int result = 0;
-		String sql = "SELECT COUNT(*) C FROM BOARD";
+		String sql = "SELECT COUNT(*) c FROM BOARD";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -28,7 +57,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				result = rs.getInt("C");
+				result = rs.getInt("c");
 			}
 			
 		} catch (SQLException e) {
@@ -39,46 +68,8 @@ public class BoardDao {
 		return result;
 	} 
 	
-	
-	// select all
-	public List<BoardListDto> selectAllList(Connection conn) {
-		List<BoardListDto> result = null;
-		String sql = "SELECT BOARD_ID, TITLE, BOARD_WRITER, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE FROM BOARD";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
-//		private int boardId;
-//		private String boardWriter;
-//		private String title;
-//		private String content;
-//		private String writeTime; //timeStamp
-//		private int readCount;
-//		private int boardLike;
-
-		try {
-
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				result = new ArrayList<BoardListDto>();
-				do {
-
-					BoardListDto dto = new BoardListDto(rs.getInt("BOARD_ID"), rs.getString("TITLE"),
-							rs.getString("BOARD_WRITER"), rs.getString("WRITE_TIME"), rs.getInt("READ_COUNT"));
-					result.add(dto);
-				} while (rs.next());
-
-			}
-		} catch (SQLException e) {
-
-		}
-		close(rs);
-		close(pstmt);
-		return result;
-
-	}
-
+	//게시글 하나 선택
 	public BoardDto selectOne(Connection conn, Integer boardId) {
 		BoardDto result = null;
 		String sql = "SELECT * FROM BOARD WHERE BOARD_ID = ?";
@@ -104,7 +95,8 @@ public class BoardDao {
 		return result;
 	}
 
-	public int insert(Connection conn, BoardInsertDto dto) {
+	//게시글 추가
+	public int insert(Connection conn, BoardDto dto) {
 		int result = 0;
 		String sql = "INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE"
 				+ "VALUES(SEQ_BOARD_ID.nextval,?, ?, ?, default, default, default)";
@@ -126,6 +118,7 @@ public class BoardDao {
 
 	}
 
+	//게시글 수정
 	public int update(Connection conn, BoardDto dto) {
 		int result = 0;
 		String sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE BOARD_ID = ?";
@@ -146,6 +139,7 @@ public class BoardDao {
 		return result;
 	}
 
+	//게시글 삭제
 	public int delete(Connection conn, Integer boardId) {
 		int result = 0;
 		String sql = "DELETE FROM BOARD WHERE BOARD_ID =?";

@@ -20,19 +20,21 @@
         
         <div class="wrap-body">
         	<div class="boardwrite">
-        		게시글 작성
+        		<p>게시글 작성</p>
         	</div>
         	<form id="form-write" method="post" action="insert.no">
-				<table>
-					<tr>
-						<th>제목</th>
-						<td><input type="text" name="title" placeholder="제목을 입력하시오." required></td>	
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td><textarea name="content" cols="80" rows="25" placeholder="내용을 입력하시오." required></textarea></td>
-					</tr>		
-				</table>
+			
+					<ul class="write">
+						<li>
+							<div><p>제목</p></div>
+							<div><input type="text" name="title" placeholder="제목을 입력하시오." required></div>
+						</li>
+						<li>
+							<div class="txt-content"><p>내용</p></div>
+							<div><textarea name="content" cols="80" rows="25" placeholder="내용을 입력하시오." required></textarea></div>
+						</li>	
+						
+					</ul>		
 				
 				<div class="btn">
 					<div><button type="button" class="btn write">등록</button></div>

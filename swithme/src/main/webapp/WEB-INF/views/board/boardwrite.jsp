@@ -3,7 +3,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/board/boardwrite.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/board/boardwrite.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,39 +15,7 @@
 <body>
     <div class="wrapper">
         <div class="wrap-header">
-            <header>
-                <div class="tn">
-                    <!-- 최상단 네비(로고 및 회원가입, 로그인) -->
-                    <div class="nav1-wrap">
-                        <div class="logo-side">
-                            <a href="#">
-                                <img src="<%=request.getContextPath()%>/resources/images/logo.jpg" alt>
-                            </a>
-                        </div>
-                        <div class="log">
-                            <ul>
-                                <li><a href="#">로그인</a></li>
-                                <li><a href="#">회원가입</a></li>
-                                <li><a href="#">마이페이지</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="bn">
-                    <div class="nav2-wrap">
-                        <ul>
-                            <li><a href="#">나의기록</a></li>
-                            <li><a href="/HTML/group_home.html" >그룹</a></li>
-                            <li><a href="#">랭킹</a></li>
-                            <li><a class="active" href="#">커뮤니티</a></li>
-                            <li><a href="#">시험달력</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="hrline">
-                    <hr>
-                </div>
-            </header>
+           <%@include file="/WEB-INF/views/basic/header.jsp"%>
         </div>
         
         <div class="wrap-body">
@@ -76,50 +44,7 @@
 	</div>
 
     <div class="wrap-footer">
-        <footer>
-            <div class="inner">
-                <ul>
-                    <li>
-                        <div class="tf">
-                            <p>스윗미</p>
-                        </div>
-                        <div class="to">
-                            <p>정보</p>
-                            <p>문의하기</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tf">
-                            <p>커뮤니티</p>
-                        </div>
-                        <div class="to">
-                            <p>깃허브</p>
-                            <p>인스타그램</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tf">
-                            <p>제작자</p>
-                        </div>
-                        <div class="to">
-                            <p>김보민</p>
-                            <p>김은진</p>
-                            <p>송채원</p>
-                            <p>오예인</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tf">
-                            <p>법적고지</p>
-                        </div>
-                        <div class="to">
-                            <p>개인정보 처리방침</p>
-                            <p>운영정책</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </footer>
+      <%@include file="/WEB-INF/views/basic/footer.jsp"%>
     </div>
 </body>
 </html>

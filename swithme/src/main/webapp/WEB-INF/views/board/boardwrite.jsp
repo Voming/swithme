@@ -1,9 +1,9 @@
-<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/core.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/layout.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/board/boardwrite.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/reset.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/core.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/board/boardwrite.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

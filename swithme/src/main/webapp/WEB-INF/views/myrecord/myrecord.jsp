@@ -95,9 +95,11 @@
 		function loadedHandler() {
 			$("#start").on("click", startClickHandler);
 			$("#stop").on("click", stopClickHandler);
+
 			$("#today").ready(function() {
 				todayHandler();
 			});
+
 			$("#currentTime").ready(function() {
 				currentTime();
 				setInterval(currentTime, 1000);
@@ -122,6 +124,7 @@
 		}
 		function stopClickHandler() {
 			endTime = new Date();
+			console.log("멈춰!!!");
 			clearInterval(intervalCountdownID);
 
 		}
@@ -134,9 +137,10 @@
 			diffMin = Math.floor(diffMSec / (60 * 1000));
 			 */
 			diffMSec = nowTime.getTime() - startTime.getTime();
-			diffHour = Math.floor(diffMSec / (60 * 60 * 1000));
-			diffMin = Math.floor(diffMSec / (60 * 1000));
-			diffMSec = Math.floor(diffMSec / 1000);
+			diffSec = diffMSec / 1000;
+			diffHour = Math.floor(diffSec / (60 * 60));
+			diffMin = Math.floor(diffSec / 60 - diffHour * 60);
+			diffMSec = Math.floor(diffSec - diffMin * 60 - diffHour * 60 * 60);
 
 			if (diffMSec < 10) {
 				diffMSec = '0' + diffMSec;
@@ -150,6 +154,7 @@
 
 			diffTime = diffHour + ":" + diffMin + ":" + diffMSec;
 			$("#countdown").text(diffTime);
+
 			/* 확인용 */
 			console.log(diffHour + ":" + diffMin + ":" + diffMSec);
 

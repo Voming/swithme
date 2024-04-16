@@ -1,11 +1,11 @@
 package swithme.model.board.dto;
 
 public class BoardListDto {
-
+	
 	private int boardId;
 	private String title;
 	private String boardWriter;
-	private String writeTime;
+	private String writeTime; //timeStamp
 	private int readCount;
 	
 	@Override
@@ -43,6 +43,9 @@ public class BoardListDto {
 		return readCount;
 	}
 	
+	
+	
+
 	
 	
 }

@@ -11,10 +11,21 @@
 	
 }
 
-.wrap-body p {
+body > div.wrapper > div.wrap-body > div > p {
+	font-family: "IM_Hyemin-Bold";
+    font-size: var(--font3);
+    font-weight: bolder;
+}
+
+
+#form-write > ul > li:nth-child(1) > div:nth-child(1) > p, 
+#form-write > ul > li:nth-child(2) > div.txt-content > p {
 	border-radius: 20px;
 	background: rgb(237, 237, 237);
 	padding: 10px 30px;
+	font-family: "IM_Hyemin-Bold";
+    font-size: var(--font3);
+    font-weight: bolder;
 	
 }
 
@@ -45,8 +56,6 @@
 }
 
 
-
-
  input{
 	width: 635px;
 	border: none;
@@ -70,6 +79,9 @@
 	border-radius: 20px;
 	background: #DDCCFF;
 	padding: 10px 30px;
+	font-family: "IM_Hyemin-Bold";
+    font-size: var(--font3);
+    font-weight: bolder;
 }
 
 

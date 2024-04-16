@@ -20,7 +20,7 @@
         
         <div class="wrap-body">
         	<div class="boardwrite">
-        		게시글 작성
+        		<p>게시글 작성</p>
         	</div>
         	<form id="form-write" method="post" action="insert.no">
 			

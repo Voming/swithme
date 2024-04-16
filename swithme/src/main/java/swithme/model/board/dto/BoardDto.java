@@ -19,7 +19,6 @@ public class BoardDto {
 	private int boardLike;
 	
 	
-	
 	@Override
 	public String toString() {
 		return "BoardDto [boardId=" + boardId + ", boardWriter=" + boardWriter + ", title=" + title + ", content="

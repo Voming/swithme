@@ -6,6 +6,8 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/basic/header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/basic/footer.css" rel="stylesheet">
+
+<link href="${pageContext.request.contextPath}/resources/css/member/login.css" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,47 +17,6 @@
 
 <title>login</title>
 
-<style>
-.wrap-body{
-    padding: 0;
-    margin: 0;
-    border: none;
-    display: flex;
-}
-
-.wrap-login{
-    display: block;
-    width: 400px;
-    height: 350px;
-    padding: 40px;
-    box-sizing: border-box;
-}
-
-#login-form{
-    width: 300px;
-    border: 0;
-}
-	
-#login-form input{
-    width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    background-color: #F8F8F8;
-}
-
-.btn.submit{
-	width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-
-</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -67,10 +28,10 @@
 			<fieldset>
 				<form id="login-form">
 					<div>
-						<label>아이디</label><input type="text" name="id">
+						<input type="text" name="id" placeholder="아이디">
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd">
+						<input type="password" name="pwd" placeholder="비밀번호">
 					</div>
 					<div>
 						<button type="button" class="btn submit" >로그인</button>

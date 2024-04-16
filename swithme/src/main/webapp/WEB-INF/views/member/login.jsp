@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 
 <title>login</title>
-
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -51,7 +51,45 @@
 
 
 	<script>
-		
+	$(loadedHandler);
+	function loadedHandler() {
+		$("#login-form .btn.submit").on("click", frmClickHandler);
+	}
+
+	function frmClickHandler() {
+		console.log("클릭");
+		console.log($("#login-form").serialize());
+		console.log($("[name=id]").val());
+		console.log($("[pwd=id]").val());
+		$.ajax({
+					url : "${pageContext.request.contextPath}/login",
+					method : "post",
+					data :
+					{
+						id : $("#login-form [name=id]").val(),
+						pwd : $("#login-form [name=pwd]").val()
+					},
+					success : function(result) {
+						console.log(result);
+						if (result == 1) {
+							alert("반갑습니다");
+							var prePage = "${prePage}";
+							if (prePage == "write") {
+								location.href = "${pageContext.request.contextPath}/";
+							}
+							location.href = "${pageContext.request.contextPath}/";
+						} else {
+							alert("아이디 비밀번호 일치하지 않음");
+							$("[name=pwd]").val("");
+						}
+					},
+					error : function(request, status, error) {
+						alert("code: " + request.status + "\n"
+								+ "message: " + request.responseText + "\n"
+								+ "error: " + error);
+					}
+				});
+	}
 	</script>
 </body>
 </html>

@@ -49,8 +49,8 @@
 				items : 3,
 				margin : 10,
 				loop : true,
-				nav : true,
-				autoplay : true,
+				dots : true,
+				//autoplay: true,
 				autoplayTimeout : 3000,
 				autoplayHoverPause : true
 			});
@@ -64,7 +64,8 @@
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a class="active"
+								href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="#">시험달력</a></li>
@@ -79,28 +80,71 @@
 		<div class="wrap-body">
 			<div class="wrap-group">
 				<div class="wrap-my">
-					<div>
+					<div class="txt-my">
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
 						<div class="item">
-							<img src="http://via.placeholder.com/290X180.jpg/">
+							<figure>
+								<img src="http://via.placeholder.com/290X180.jpg/">
+								<figcaption>그룹명</figcaption>
+							</figure>
 						</div>
 						<div class="item">
-							<img src="http://via.placeholder.com/290X180.jpg/">
+							<figure>
+								<img src="http://via.placeholder.com/290X180.jpg/">
+								<figcaption>그룹명</figcaption>
+							</figure>
 						</div>
 						<div class="item">
-							<img src="http://via.placeholder.com/290X180.jpg/">
+							<figure>
+								<img src="http://via.placeholder.com/290X180.jpg/">
+								<figcaption>그룹명</figcaption>
+							</figure>
 						</div>
 						<div class="item">
-							<img src="http://via.placeholder.com/290X180.jpg/">
+							<figure>
+								<img src="http://via.placeholder.com/290X180.jpg/">
+								<figcaption>그룹명</figcaption>
+							</figure>
 						</div>
 						<div class="item">
-							<img src="http://via.placeholder.com/290X180.jpg/">
+							<figure>
+								<img src="http://via.placeholder.com/290X180.jpg/">
+								<figcaption>그룹명</figcaption>
+							</figure>
 						</div>
 					</div>
 					<div class=""></div>
 				</div>
+			</div>
+			<div class="wrap-search">
+				<div>
+					<p>그룹찾기</p>
+				</div>
+				<div>
+					<div class="search" >
+						<input type="text" value="&nbsp;찾고싶은 스터디 그룹명을 검색 하세요.">
+						<button type="button"
+							onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+							<img class="search-btn"
+								src="${pageContext.request.contextPath}/resources/images/find.png"
+								alt="찾기">
+						</button>
+					</div>
+				</div>
+				<div class="move-make">
+					<div>
+						<p>원하는 그룹이 없다면?</p>
+					</div>
+					<div>
+						<button type="button"
+							onclick="location.href='${pageContext.request.contextPath}/myrecord'">그룹
+							생성하러 가기</button>
+					</div>
+				</div>
+			</div>
+			<div class="wrap-openlist">
 			</div>
 		</div>
 	</div>

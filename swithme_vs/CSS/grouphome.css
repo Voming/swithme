@@ -1,14 +1,22 @@
-.wrap-group {
+.wrap-body .wrap-group {
     height: 350px;
     width: 100%;
     background-color: rgb(221, 204, 255, 0.2);
 
 }
 
-
-.wrap-my {
+.wrap-body .wrap-my {
     /* 중앙 배치 */
     width: 960px;
     margin: 0 auto;
     align-items: center;
+}
+
+.wrap-body .txt-my{
+	padding-top:60px;
+}
+
+.wrap-body .owl-carousel .item{
+	width: 290px;
+	height: 180px;
 }

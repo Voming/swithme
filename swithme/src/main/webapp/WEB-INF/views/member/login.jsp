@@ -36,6 +36,9 @@
 					<div>
 						<button type="button" class="btn submit" >로그인</button>
 					</div>
+					<div class="join-btn">
+					<a href="">회원가입하기</a>
+					</div>
 				</form>
 			</fieldset>
 			</div>
@@ -45,5 +48,10 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 
+
+
+	<script>
+		
+	</script>
 </body>
 </html>

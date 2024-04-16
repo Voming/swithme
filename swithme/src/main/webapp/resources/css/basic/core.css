@@ -14,31 +14,37 @@ a {
 }
 
 @font-face {
-    font-family: 'IM_Hyemin-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
-    font-weight: 700;
-    font-style: normal;
+	font-family: 'IM_Hyemin-Bold';
+	 src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff'); 
+	/* src: url(/resources/fonts/IM_Hyemin-Bold.ttf); font-weight : 700; */
+	font-style: normal;
+	font-weight: 700;
 }
 
 @font-face {
-    font-family: "IM_Hyemin-Regular";
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
-    font-weight: 400;
-    font-style: normal;
+	font-family: "IM_Hyemin-Regular";
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff'); 
+	/* src: url(/resources/fonts/IM_Hyemin-Regular.ttf); */
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: "LaundryGothic-Bold";
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
+	font-family: "LaundryGothic-Bold";
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2'); 
+	/* src: url(/resources/fonts/LaundryGothic-Bold.ttf); */
+	font-weight: 700;
+	font-style: normal;
 }
+
 @font-face {
-    font-family: 'LaundryGothic-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'LaundryGothic-Regular';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2'); 
+	/* src: url(/resources/fonts/LaundryGothic-Regular.ttf); */
+	font-weight: 400;
+	font-style: normal;
 }
+
 
 :root {
     --color_purple_1: #8066FF;

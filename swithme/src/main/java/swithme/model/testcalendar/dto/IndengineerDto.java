@@ -1,34 +1,21 @@
 package swithme.model.testcalendar.dto;
 
-import java.sql.Date;
-
 public class IndengineerDto {
-	//
-//	DESCRIPTION	VARCHAR2(30 BYTE)
-//	DOCREGSTARTDT	DATE
-//	DOCREGENDDT	DATE
-//	DOCEXAMDT	DATE
-//	DOCPASSDT	DATE
-//	PRACREGSTARTDT	DATE
-//	PRACREGENDDT	DATE
-//	PRACEXAMSTARTDT	DATE
-//	PRACEXAMENDDT	DATE
-//	PRACPASSDT	DATE
 	private String descriptString;
-	private Date docRegStart;
-	private Date docRegEnd;
-	private Date docExam;
-	private Date docPass;
-	private Date pracRegStart;
-	private Date pracRegEnd;
-	private Date pracExamStart;
-	private Date pracExamEnd;
-	private Date pracPass;
+	private String docRegStart;
+	private String docRegEnd;
+	private String docExam;
+	private String docPass;
+	private String pracRegStart;
+	private String pracRegEnd;
+	private String pracExamStart;
+	private String pracExamEnd;
+	private String pracPass;
 
 	
 
-	public IndengineerDto(String descriptString, Date docRegStart, Date docRegEnd, Date docExam, Date docPass,
-			Date pracRegStart, Date pracRegEnd, Date pracExamStart, Date pracExamEnd, Date pracPass) {
+	public IndengineerDto(String descriptString, String docRegStart, String docRegEnd, String docExam, String docPass,
+			String pracRegStart, String pracRegEnd, String pracExamStart, String pracExamEnd, String pracPass) {
 		super();
 		this.descriptString = descriptString;
 		this.docRegStart = docRegStart;
@@ -54,39 +41,39 @@ public class IndengineerDto {
 		return descriptString;
 	}
 
-	public Date getDocRegStart() {
+	public String getDocRegStart() {
 		return docRegStart;
 	}
 
-	public Date getDocRegEnd() {
+	public String getDocRegEnd() {
 		return docRegEnd;
 	}
 
-	public Date getDocExam() {
+	public String getDocExam() {
 		return docExam;
 	}
 
-	public Date getDocPass() {
+	public String getDocPass() {
 		return docPass;
 	}
 
-	public Date getPracRegStart() {
+	public String getPracRegStart() {
 		return pracRegStart;
 	}
 
-	public Date getPracRegEnd() {
+	public String getPracRegEnd() {
 		return pracRegEnd;
 	}
 
-	public Date getPracExamStart() {
+	public String getPracExamStart() {
 		return pracExamStart;
 	}
 
-	public Date getPracExamEnd() {
+	public String getPracExamEnd() {
 		return pracExamEnd;
 	}
 
-	public Date getPracPass() {
+	public String getPracPass() {
 		return pracPass;
 	}
 

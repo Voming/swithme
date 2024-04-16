@@ -7,12 +7,12 @@ import static swithme.jdbc.common.JdbcTemplate.*;
 
 import swithme.model.board.dao.BoardDao;
 import swithme.model.board.dto.BoardDto;
-import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
 
 public class BoardService {
 	
 	BoardDao dao = new BoardDao();
+	
 
 	public List<BoardListDto> selectAllList() {
 		List<BoardListDto> result = null;
@@ -33,7 +33,7 @@ public class BoardService {
 		
 	}
 	
-	public int insert(BoardInsertDto dto) {
+	public int insert(BoardDto dto) {
 		int result = 0;
 		
 		Connection conn = getConnection(true);

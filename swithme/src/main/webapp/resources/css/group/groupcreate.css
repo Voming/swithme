@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.wrap-body .wrap-create {
+	/* 내 그룹 중앙 배치 */
+	width: 960px;
+	margin: 0 auto;
+
+}
+
+.wrap-body .frm-create {
+	margin: 60px 0 80px 0;
+	display:flex;
+}
+
+
+.wrap-body legend {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font1);
+	margin-bottom: 50px;
+}
+
+.wrap-body ul {
+	font-family: "IM_Hyemin-Reguarl";
+	font-size: var(--font3);
+}
+
+
+
+.frm-create input[type=text]{
+	width: 540px;
+}

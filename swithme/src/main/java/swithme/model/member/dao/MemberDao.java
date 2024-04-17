@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static swithme.jdbc.common.JdbcTemplate.close;
 import swithme.model.member.dto.MemberDto;
 import swithme.model.member.dto.MemberInfoDto;
@@ -65,6 +64,29 @@ public class MemberDao {
 			close(pstmt);
 			return result;
 		}
+		
+		//checkid
+		public int selectCheckId(Connection conn, String memId) {
+			int result = 0;
+			String sql = "SELECT COUNT(*) c  FROM MEMBER WHERE MEM_ID=?";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				pstmt.setString(1, memId);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt("c");
+				}			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			System.out.println("result"+result);
+			close(rs);
+			close(pstmt);
+			return result;
+			
+		}
+		
 		
 	//select list - all
 		public List<MemberDto> selectAllList(Connection conn) {

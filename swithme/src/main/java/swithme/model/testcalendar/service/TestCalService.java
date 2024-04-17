@@ -124,7 +124,6 @@ public class TestCalService {
 				System.out.println("기사 산업기사 : " + dtolist);
 			}
 	
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

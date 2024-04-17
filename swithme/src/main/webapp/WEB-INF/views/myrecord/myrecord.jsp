@@ -40,9 +40,27 @@
 	crossorigin="anonymous"></script>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<!-- 풀캘린더 CDN -->
+<script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
+"></script>
+    <script>
 
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
 
-<title>나의 기록</title>
+    </script>
+    <!--chart.js CDN  -->
+    <script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
+"></script>
+    
+<title>SWITH.ME</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -189,6 +207,7 @@
 						</div>
 					</div>
 				</div>
+				 <div id='calendar' class="study-calender"></div>
 			</div>
 		</div>
 	</div>

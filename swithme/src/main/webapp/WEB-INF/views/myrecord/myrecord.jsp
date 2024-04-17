@@ -1,5 +1,11 @@
 <!-- reset.css -->
 <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+
+<link
 	href="${pageContext.request.contextPath}/resources/css/basic/reset.css"
 	rel="stylesheet">
 <!-- 레이아웃 설정 -->
@@ -26,11 +32,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!--부트스트랩  -->
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 
-<title>sample</title>
+<title>나의 기록</title>
 </head>
 <body>
 	<div class="wrapper">
@@ -40,7 +52,8 @@
 				<div class="bn">
 					<div class="nav2-wrap">
 						<ul>
-							<li><a class="active" href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a class="active"
+								href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
@@ -88,7 +101,7 @@
 								<P>시작</P>
 							</button>
 							<button type="button" id="stop" class="btn">
-								<p>멈춤</p>
+								<p>종료</p>
 							</button>
 						</div>
 					</div>
@@ -98,7 +111,84 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="subject-modal">
+					<!-- TODO 과목 수정 -->
+					<div >
+						<button type="button" class="btn re-sub btn-primary"
+							data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							<p>과목 수정하기</p>
+						</button>
+						<!-- Modal -->
+						<div class="modal fade" id="staticBackdrop"
+							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="staticBackdropLabel">과목
+											수정</h1>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">...</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+										<button type="button" class="btn btn-primary">완료</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+		<!-- 과목추가 --> 
+					<div>
+						<!-- Modal -->
+						<button type="button" class="btn add-sub"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+							<p>과목 추가하기</p>
+						</button>
+						
+						<!-- Modal -->
+						<div class="add modal" id="exampleModal2" >
+						  <div class="modal-dialog">
+							<div class="modal-content">
+								<div class="btn modal-close" data-bs-dismiss="modal">x</div>
+								<!-- controller 추가 -->
+								<form action="${pageContaxt.request.contextPath}/addsubject"
+									method="post">
+									<div class="subject ">
+										<p class="title">추가할 과목 이름</p>
+									</div>
+									<div class="add-name">
+										<input type="text" name="sub-name"
+											placeholder="     e.g 자바, 파이썬, SQL">
+									</div>
+									<div class="sub-color">
+										<p>과목 색상</p>
+										<select name="select">
+											<option value="cpink"><p>핑크</p>
+											</option>
+											<option value="cyellow"><p>노랑</p>
+											</option>
+											<option value="cgreen"><p>초록</p>
+											</option>
+											<option value="cblue"><p>파랑</p>
+											</option>
+											<option value="cpurple"><p>보라</p>
+											</option>
+										</select>
+									</div>
+									<button class="btn" type="button" data-bs-dismiss="modal">
+										<p>취소</p>
+									</button>
+									<button type="submit" class="btn done">
+										<p>완료</p>
+									</button>
+								</form>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

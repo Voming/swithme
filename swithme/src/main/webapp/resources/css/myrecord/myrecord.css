@@ -134,3 +134,41 @@
 	color: white;
 	font-size: 64px;
 }
+.wrap-body .subject-modal {
+	padding : 10px;
+	display: flex;
+	flex-direction : row;
+	justify-content: flex-end;
+}
+
+/* 모달  */
+.wrap-body .subject-modal .btn{
+	width : 120px;
+	margin : 5px;
+}
+.wrap-body  .wrap-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(237, 237, 237, 0.2);
+    width: 100%;
+    height: 100%;
+    /* 뒷배경 애들이 클릭이 안 됨 이 클래스의 자식들도 같이 앞으로 온다 */
+    z-index: 1000;
+}
+
+/* 글 부분 */
+.wrap-body  .wrap-modal>.modal-content {
+    margin: 0 auto;
+    /*가운데 정렬 , 기본 option*/
+    width: 500px;
+    position: relative;
+    top: 50px;
+    left: 100px;
+    background-color: #D9D9D9;
+}
+
+.wrap-body  .wrap-modal>.modal-content .modal-close:hover {
+    cursor: pointer;
+}

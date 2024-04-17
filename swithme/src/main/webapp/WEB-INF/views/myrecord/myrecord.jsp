@@ -188,21 +188,28 @@
 			console.log("getDay : " + day2);
 
 			/* 요일이 이상해요 */
-			switch (day) {
+			switch (day2) {
 			case 0:
-				week = '수요일';
-			case 1:
-				week = '목요일';
-			case 2:
-				week = '금요일';
-			case 3:
-				week = '토요일';
-			case 4:
 				week = '일요일';
-			case 5:
+				break;
+			case 1:
 				week = '월요일';
-			case 6:
+				break;
+			case 2:
 				week = '화요일';
+				break;
+			case 3:
+				week = '수요일';
+				break;
+			case 4:
+				week = '목요일';
+				break;
+			case 5:
+				week = '금요일';
+				break;
+			case 6:
+				week = '토요일';
+				break;
 			}
 			var today = month + "월 " + date + "일 " + week;
 			$("#today").text(today);

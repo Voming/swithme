@@ -18,6 +18,7 @@
 <title>login</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
+
 <body>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -42,7 +43,7 @@
 		<div class="wrap-body">
 			<div class="wrap-login">
 			<fieldset>
-				<form id="login-form">
+				<form id="login-form"  action="${pageContext.request.contextPath }/login" method="post">
 					<div>
 						<input type="text" name="id" placeholder="아이디">
 					</div>
@@ -53,7 +54,7 @@
 						<button type="button" class="btn submit" >로그인</button>
 					</div>
 					<div class="join-btn">
-					<a href="">회원가입하기</a>
+					<a href="${pageContext.request.contextPath}/join">회원가입하기</a>
 					</div>
 				</form>
 			</fieldset>
@@ -76,7 +77,7 @@
 		console.log("클릭");
 		console.log($("#login-form").serialize());
 		console.log($("[name=id]").val());
-		console.log($("[pwd=id]").val());
+		console.log($("[name=pwd]").val());
 		$.ajax({
 					url : "${pageContext.request.contextPath}/login",
 					method : "post",
@@ -90,10 +91,10 @@
 						if (result == 1) {
 							alert("반갑습니다");
 							var prePage = "${prePage}";
-							if (prePage == "write") {
-								location.href = "${pageContext.request.contextPath}/";
+							if (prePage == "myrecord") {
+								location.href = "${pageContext.request.contextPath}/myrecord";
 							}
-							location.href = "${pageContext.request.contextPath}/";
+							location.href = "${pageContext.request.contextPath}/myrecord";
 						} else {
 							alert("아이디 비밀번호 일치하지 않음");
 							$("[name=pwd]").val("");
@@ -106,6 +107,12 @@
 					}
 				});
 	}
+
+	
+	
 	</script>
+	
+	
+
 </body>
 </html>

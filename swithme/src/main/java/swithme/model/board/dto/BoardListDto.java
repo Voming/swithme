@@ -2,11 +2,21 @@ package swithme.model.board.dto;
 
 public class BoardListDto {
 	
+//	BOARD_ID     NOT NULL NUMBER         
+//	BOARD_WRITER NOT NULL VARCHAR2(20)   
+//	TITLE        NOT NULL VARCHAR2(120)  
+//	CONTENT      NOT NULL VARCHAR2(4000) 
+//	WRITE_TIME   NOT NULL TIMESTAMP(6)   
+//	READ_COUNT   NOT NULL NUMBER         
+//	BOARD_LIKE   NOT NULL NUMBER 
+	
 	private int boardId;
 	private String title;
 	private String boardWriter;
 	private String writeTime; //timeStamp
 	private int readCount;
+	
+	
 	
 	@Override
 	public String toString() {

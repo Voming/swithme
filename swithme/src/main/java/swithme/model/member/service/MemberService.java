@@ -33,14 +33,13 @@ public class MemberService {
 	}
 	
 	// select checkId
-//	public int selectCheckId(String memId) {
-//		int result = 0;
-//		Connection conn = getConnection(true);
-//		result = dao.selectCheckId(conn, memId);
-//		close(conn);
-//		return result;
-//	}
-		
+	public int selectCheckId(String memId) {
+		int result = 0;
+		Connection conn = getConnection(false);
+		result = dao.selectCheckId(conn, memId);
+		close(conn);
+		return result;
+	}
 	
 	//select all
 	public List<MemberDto> selectAllList() {

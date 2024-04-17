@@ -1,6 +1,6 @@
 
 .wrap-body{
-    padding: 0;
+    padding:0;
     margin:0;
     border: none;
     display: flex;
@@ -19,7 +19,6 @@
 #login-form{
     width: 320px;
     border: 0;
-	
 }
 	
 #login-form input{
@@ -27,7 +26,8 @@
     height: 50px;
     padding: 0 10px;
     box-sizing: border-box;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
+    margin-top: 25px;
     border-radius: 10px;
     background-color: #F8F8F8;
 }
@@ -38,17 +38,31 @@
     padding: 0 10px;
     box-sizing: border-box;
     border-radius: 10px;
+    margin-top: 25px;
 }
 
 fieldset{
 	position: absolute;
-    top: 50%;
-    left: 50%;
-    transform : translate(-50%,-80%);
+    top:50%;
+    left:50%;
+    transform : translate(-50%,-60%);
 }
-
 
 .join-btn{
 	text-align: center;
 	margin-top: 40px;
 }
+
+.wrap-login{
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+}
+
+.valid_desc-id {
+	color:red;
+}
+.valid_desc-pw {
+	color:red;
+} 
+
+

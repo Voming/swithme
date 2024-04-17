@@ -23,8 +23,8 @@
 				<div class="bn">
 					<div class="nav2-wrap">
 						<ul>
-							<li><a class="active" href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a  href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
@@ -37,7 +37,29 @@
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="wrap-"></div>
+			<div class="wrap-create">
+				<form class="frm-create">
+				<div class="flex">
+					<fieldset>
+						<legend>그룹 만들기</legend>
+							<ul>
+								<li><label>그룹명</label> <input type="text" name="groupName"
+									value="그룹명을 입력하세요" /></li>
+								<li><label>공개</label> <input type="radio" name="chk_open"
+									value="open"> <label>비공개</label> <input type="radio"
+									name="chk_close" value="close"></li>
+								<li><label>비밀번호</label> <input type="text" name="groupPwd"
+									value="숫자로 된 비밀번호를 입력하세요" /></li>
+								<li><label>그룹 설명</label> <textarea rows="20" cols="80"></textarea>
+								</li>
+								<li><label>그룹 대표 이미지</label> <input type="file" /></li>
+
+							</ul>
+							<button type="submit">제출하기</button>
+					</fieldset>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="wrap-footer">

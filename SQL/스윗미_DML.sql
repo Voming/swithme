@@ -139,5 +139,13 @@ insert into sgroup_member values ((select sgroup_id from sgroup where sgroup_nam
 
 -- 회원 한명이 포함된 모든 그룹 조회
 select * from sgroup where sgroup_id in (select sgroup_id from sgroup_member where sgroup_mem_id = 'song');
-
+-- 회원 한명이 포함된 그룹 수
+select count(*) from sgroup where sgroup_id in (select sgroup_id from sgroup_member where sgroup_mem_id = 'song');
 --그룹원의 일주일치 공부량 조회
+
+
+-- 공개 그룹 검색
+SELECT * FROM SGROUP WHERE SGROUP_OPEN = 0;
+-- 검색 개수 제한
+SELECT S.* FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE SGROUP_OPEN = 0) S
+WHERE ROWNUM BETWEEN 1 AND 2;

@@ -68,7 +68,7 @@
 								href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="#">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -154,7 +154,7 @@
 					</div>
 					<div>
 						<button type="button"
-							onclick="location.href='${pageContext.request.contextPath}/myrecord'">그룹
+							onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹
 							생성하러 가기</button>
 					</div>
 				</div>

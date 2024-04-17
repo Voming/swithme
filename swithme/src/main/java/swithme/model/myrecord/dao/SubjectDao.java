@@ -28,6 +28,28 @@ public class SubjectDao {
 //	SUBJECT_DEL_DATE          TIMESTAMP(6) 
 //	SUBJECT_COLOR    NOT NULL CHAR(1)   
 	
+	public SubjectDto selectOne(Connection conn, int memid) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SubjectDto vo = null;
+		try {
+			String sql = "select * from subject where MEM_ID=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new SubjectDto(rs.getInt("SUBJECT_ID"),rs.getString("MEM_ID"),rs.getString("SUBJECT_NAME"),rs.getString("SUBJECT_ADD_DATE"),rs.getString("SUBJECT_DEL_DATE"),rs.getString("SUBJECT_COLOR"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return vo;
+	}
+	
 
 	//과목 불러오기...? select 
 	//TODO 유저 아이디에 맞는 것만

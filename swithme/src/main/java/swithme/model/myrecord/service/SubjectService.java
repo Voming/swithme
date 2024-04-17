@@ -1,5 +1,6 @@
 package swithme.model.myrecord.service;
 
+
 import static swithme.jdbc.common.JdbcTemplate.*;
 
 import java.sql.Connection;
@@ -12,6 +13,14 @@ import swithme.model.myrecord.dto.SubjectDto;
 
 public class SubjectService {
 	private SubjectDao dao = new SubjectDao();
+	
+	public SubjectDto selectOne(int memid) {
+		SubjectDto vo = null;
+		Connection conn = getConnection(true);
+		vo= dao.selectOne(conn, memid);
+		close(conn);
+		return vo;
+	}
 	
 	//과목 불러오기...? select 
 	//TODO 유저 아이디에 맞는 것만

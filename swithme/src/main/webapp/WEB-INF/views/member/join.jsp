@@ -12,7 +12,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>sample</title>
+<title>SWITH.ME</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -36,12 +37,40 @@
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="wrap-"></div>
+			<div class="wrap-join">
+				<form action="${pageContext.request.contextPath }/join" method="post">
+					<div>
+						<label>이메일</label><input type="text" name="email">
+						<button type="button" class="btn code" >인증코드</button>
+					</div>
+					<div>
+						<label>이메일 확인</label><input type="text" name="email" placeholder="인증코드">
+					</div>
+					<div>
+						<label>아이디</label><input type="text" name="id">
+						<button type="button" class="btn checkid">중복확인</button>
+					</div>
+					<div>
+						<label>비밀번호</label><input type="password" name="pwd">
+					</div>
+					<div>
+						<label>비밀번호 확인</label><input type="password" name="pwdr">
+					</div>
+					<div>
+						<input type="submit" value="회원가입">
+					</div>
+				</form>
+			
+			</div>
 		</div>
 	</div>
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
+	
+	
+	
+	
 
 </body>
 </html>

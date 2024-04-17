@@ -27,10 +27,5 @@ public class MemberLoginDto {
 	public String getMemPwd() {
 		return memPwd;
 	}
-	
-	
-	
 
-	
-	
 }

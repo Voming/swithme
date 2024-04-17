@@ -9,14 +9,63 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static swithme.jdbc.common.JdbcTemplate.close;
 import swithme.model.member.dto.MemberDto;
+import swithme.model.member.dto.MemberInfoDto;
+import swithme.model.member.dto.MemberLoginDto;
 
 
 
 public class MemberDao {
-
-
+	//select one login
+		public MemberInfoDto loginGetInfo(Connection conn, MemberLoginDto dto) {
+			MemberInfoDto result=null;
+			String sql = "SELECT MEM_ID,MEM_EMAIL  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getMemId());
+				pstmt.setString(2, dto.getMemPwd());
+				rs = pstmt.executeQuery();	
+				if(rs.next()) {
+					result = new MemberInfoDto(rs.getString("MEM_ID"),rs.getString("MEM_EMAIL"));
+					System.out.println(result);
+				}		
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close(rs);
+			close(pstmt);
+			return result;
+		}
+		
+		
+		//select one login
+		public int login(Connection conn, MemberLoginDto dto) {
+			int result = 0;
+			String sql = "SELECT COUNT(*) c  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getMemId());
+				pstmt.setString(2, dto.getMemPwd());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt("c");
+				}			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close(rs);
+			close(pstmt);
+			return result;
+		}
+		
 	//select list - all
 		public List<MemberDto> selectAllList(Connection conn) {
 			List<MemberDto> result= null;
@@ -68,7 +117,7 @@ public class MemberDao {
 		}
 		
 		//insert
-		public int insert (Connection conn, MemberDto dto) {
+		public int insert(Connection conn, MemberDto dto) {
 			int result= 0;
 			String sql="INSERT INTO MEMBER (MEM_ID, MEM_PWD, MEM_EMAIL) VALUES(?,?,?)";
 			PreparedStatement pstmt=null;
@@ -90,7 +139,7 @@ public class MemberDao {
 		//update
 		public int update (Connection conn, MemberDto dto) {
 			int result= 0;
-			String sql=""; 
+			String sql="";   //TODO
 			PreparedStatement pstmt=null;
 			
 			try {

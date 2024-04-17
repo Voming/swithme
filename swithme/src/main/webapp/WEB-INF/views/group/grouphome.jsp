@@ -86,31 +86,46 @@
 					<div class="owl-carousel">
 						<div class="item">
 							<figure>
-								<img src="http://via.placeholder.com/290X180.jpg/">
+								<button type="button"
+									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+									<img src="http://via.placeholder.com/290X180.jpg/">
+								</button>
 								<figcaption>그룹명</figcaption>
 							</figure>
 						</div>
 						<div class="item">
 							<figure>
-								<img src="http://via.placeholder.com/290X180.jpg/">
+								<button type="button"
+									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+									<img src="http://via.placeholder.com/290X180.jpg/">
+								</button>
 								<figcaption>그룹명</figcaption>
 							</figure>
 						</div>
 						<div class="item">
 							<figure>
-								<img src="http://via.placeholder.com/290X180.jpg/">
+								<button type="button"
+									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+									<img src="http://via.placeholder.com/290X180.jpg/">
+								</button>
 								<figcaption>그룹명</figcaption>
 							</figure>
 						</div>
 						<div class="item">
 							<figure>
-								<img src="http://via.placeholder.com/290X180.jpg/">
+								<button type="button"
+									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+									<img src="http://via.placeholder.com/290X180.jpg/">
+								</button>
 								<figcaption>그룹명</figcaption>
 							</figure>
 						</div>
 						<div class="item">
 							<figure>
-								<img src="http://via.placeholder.com/290X180.jpg/">
+								<button type="button"
+									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+									<img src="http://via.placeholder.com/290X180.jpg/">
+								</button>
 								<figcaption>그룹명</figcaption>
 							</figure>
 						</div>

@@ -1,0 +1,41 @@
+.wrap-body{
+	display:flex;
+	justify-content: center;
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+}
+
+form{
+	margin-top:100px;
+	
+}
+
+.wrap-welcome{
+	width:300px;
+}
+
+.btn.join{
+	width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 50px;	
+    background-color:#BF80FF;
+}
+
+.btn.join:hover{
+	background-color:#8066FF;
+}
+.btn.login{
+	width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color:#BF80FF;
+}
+
+.btn.login:hover{
+	background-color:#8066FF;
+}

@@ -110,12 +110,5 @@ END;
 /
 commit;
 
-select*from subject;
-select * from record order by record_id asc;
---아이디, 과목이름, 날짜 / 4월로 지정됨
-exec PRO_RECORD_INSERT_MORNING('hyuk','HTML','01');
-exec PRO_RECORD_INSERT_LUNCH('hyuk','천칭','01');
-exec PRO_RECORD_INSERT_DINNER('hyuk','C#','01');
-delete from record;
+--select*from subject;
 
-commit;

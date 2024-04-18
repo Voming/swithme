@@ -16,8 +16,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<div class="wrapper">
+			
+		<div class="wrapper">
 		<div class="wrap-header">
 			<header>
 				<%@include file="/WEB-INF/views/basic/header.jsp"%>
@@ -25,11 +25,10 @@
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a  href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="#">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
+							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -71,7 +70,7 @@
 								<button type="button" class="btn esc">취소</button>
 							</div>
 							<div>
-								<button type="button" class="btn board">목록</button>
+								<button type="button" class="btn board" onClick="location.href='${pageContext.request.contextPath}/board'">목록</button>
 							</div>
 						</div>
 					</li>
@@ -92,8 +91,7 @@ $(loadedHandler);
 
 function loadedHandler(){
 	$(".btn.write").on("click", btnWriteClickHandler);
-/* 	$(".btn.esc").on("click", btnEscClickHandler);
-	$(".btn.board").on("click", btnBoardClickHandler); */
+/* 	$(".btn.esc").on("click", btnEscClickHandler); */
 }
 
 function btnWriteClickHandler(){
@@ -113,10 +111,8 @@ function btnWriteClickHandler(){
 	frm.method="post";
 	frm.action="${pageContext.request.contextPath}/boardwrite";
 	frm.submit();
-	
-	
-	
 }
+
 
 </script>   
     

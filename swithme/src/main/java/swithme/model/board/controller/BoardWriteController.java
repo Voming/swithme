@@ -49,7 +49,7 @@ public class BoardWriteController extends HttpServlet {
 		String title = request.getParameter("title"); // form 태그 안에 있는 name 따라감
 		String content = request.getParameter("content");
 		
-		BoardInsertDto dto = new BoardInsertDto("song", title, content); 
+		BoardInsertDto dto = new BoardInsertDto("oh", title, content); 
 		//jsp에서 쓴 내용을 dto에 담아서 service로 가지고 가는것
 		
 		int result = service.insert(dto); 

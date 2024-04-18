@@ -77,7 +77,7 @@
   
 }
 
-.wrap-body  .move-make button {
+.wrap-body .move-make button{
 	margin: 66px 0 20px 90px;
 	background-color: var(--color_purple_3);
 	font-family: "IM_Hyemin-Bold";
@@ -88,7 +88,7 @@
 	border-radius: 10px;
 }
 
-.wrap-body .frm-create button:hover{
+.wrap-body .move-make button:hover{
 	background: var(--color_purple_1);
 	color: white;
 }

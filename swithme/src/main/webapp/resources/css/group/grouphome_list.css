@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.wrap-openlist a{
+	font-family: "IM_Hyemin-Regular";
+}
 .group-tab-nav {
     padding: 20px 0;
     display: flex;
@@ -13,6 +16,8 @@
 .group-tab-nav li a{
 	padding: 3px 20px;
 	margin-right: 10px;
+	font-weight: bold;
+    font-size: var(--font4);
 }
 
 .tab-body .group-tab-nav li a{

@@ -14,12 +14,13 @@ import swithme.model.myrecord.dto.SubjectDto;
 public class SubjectService {
 	private SubjectDao dao = new SubjectDao();
 	
-	public SubjectDto selectOne(int memid) {
-		SubjectDto vo = null;
-		Connection conn = getConnection(true);
-		vo= dao.selectOne(conn, memid);
+	//과목 이름만 
+	public String selectOne(String memid) {
+		String sujectName = null;
+		Connection conn = getConnection(false);
+		sujectName= dao.selectOne(conn, memid);
 		close(conn);
-		return vo;
+		return sujectName;
 	}
 	
 	//과목 불러오기...? select 
@@ -28,7 +29,7 @@ public class SubjectService {
 		System.out.println(">>>>>>serv select  memId : "+memId);
 		
 		List<SubjectDto> result = null;
-		Connection conn = getConnection(true);
+		Connection conn = getConnection(false);
 		result = dao.select(conn, memId);
 			System.out.println(">>>>>>serv select  result : "+result);
 		close(conn);
@@ -38,12 +39,10 @@ public class SubjectService {
 	
 	//과목 추가 insert
 	//public 
-//	TODO subjectId 시퀀스 넣기
 	public int insert( SubjectAddDto dto) {
 		System.out.println(">>>>>>serv insert  dto : "+dto);
-		 
-		int result = 0;
-		Connection conn = getConnection(true);
+		int result = -1;
+		Connection conn = getConnection(false);
 		result = dao.insert(conn, dto);
 		System.out.println(">>>>>>serv insert  result : "+result);
 		close(conn);
@@ -56,8 +55,8 @@ public class SubjectService {
 	public int update(SubjectAddDto dto) {
 		//과목,맴버 ID를 조건으로 하는 행의 과목이름과 컬러 변경
 		System.out.println(">>>>>>update  SubjectDto : "+dto);
-		int result = 0;
-		Connection conn = getConnection(true);
+		int result = -1;
+		Connection conn = getConnection(false);
 		result = dao.update(conn, dto);
 			System.out.println(">>>>>>serv update  result : "+result);
 		close(conn);
@@ -68,8 +67,8 @@ public class SubjectService {
 	//과목 삭제 delete DEL_DATE = default //조건 : 과목,맴버 아이디 
 	public int delete(SubjectDeleteDto dto) {
 		System.out.println(">>>>>>delete SubjectDeleteDto : "+dto);
-		int result = 0;
-		Connection conn = getConnection(true);
+		int result = -1;
+		Connection conn = getConnection(false);
 		result = dao.delete(conn, dto);
 			System.out.println(">>>>>>serv delete  result : "+result);
 		close(conn);

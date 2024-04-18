@@ -28,17 +28,18 @@ public class SubjectDao {
 //	SUBJECT_DEL_DATE          TIMESTAMP(6) 
 //	SUBJECT_COLOR    NOT NULL CHAR(1)   
 	
-	public SubjectDto selectOne(Connection conn, int memid) {
+	//과목이름
+	public String selectOne(Connection conn, String memid) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		SubjectDto vo = null;
+		String sujectName = null;
 		try {
-			String sql = "select * from subject where MEM_ID=?";
+			String sql = "select SUBJECT_NAME from subject where MEM_ID=? and SUBJECT_DEL_DATE IS NULL";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memid);
+			pstmt.setString(1, memid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				vo = new SubjectDto(rs.getInt("SUBJECT_ID"),rs.getString("MEM_ID"),rs.getString("SUBJECT_NAME"),rs.getString("SUBJECT_ADD_DATE"),rs.getString("SUBJECT_DEL_DATE"),rs.getString("SUBJECT_COLOR"));
+				sujectName =rs.getString("SUBJECT_NAME");
 				
 			}
 		} catch (Exception e) {
@@ -47,7 +48,7 @@ public class SubjectDao {
 			close(rs);
 			close(pstmt);
 		}
-		return vo;
+		return sujectName;
 	}
 	
 
@@ -89,14 +90,13 @@ public class SubjectDao {
 		System.out.println(">>>>>>insert  dto : "+dto);
 		 
 		int result = 0;
-		String sql="INSERT INTO SUBJECT VALUES(?,?,?,DEFAULT,NULL,?)";
+		String sql="INSERT INTO SUBJECT VALUES(SEQ_SUBJECT_ID.nextval,?,?,DEFAULT,NULL,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getSubjectId());
-			pstmt.setString(2, dto.getSubjectMemId());
-			pstmt.setString(3, dto.getSubjectName());
-			pstmt.setString(4, dto.getSubjectColor());
+			pstmt.setString(1, dto.getSubjectMemId());
+			pstmt.setString(2, dto.getSubjectName());
+			pstmt.setString(3, dto.getSubjectColor());
 			
 			result=pstmt.executeUpdate();
 		}catch (SQLException e) {
@@ -111,7 +111,7 @@ public class SubjectDao {
 	
 
 
-	//과목 수정 update
+	//과목 수정 update TODO
 	public int update(Connection conn, SubjectAddDto dto) {
 		//과목,맴버 ID를 조건으로 하는 행의 과목이름과 컬러 변경
 		System.out.println(">>>>>>update  SubjectDto : "+dto);
@@ -124,7 +124,6 @@ public class SubjectDao {
 			
 			pstmt.setString(1, dto.getSubjectName());
 			pstmt.setString(2, dto.getSubjectColor());
-			pstmt.setInt(3, dto.getSubjectId());
 			pstmt.setString(4, dto.getSubjectMemId());
 			
 			result=pstmt.executeUpdate();

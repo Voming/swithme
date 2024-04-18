@@ -27,13 +27,13 @@
 	rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!--부트스트랩  -->
-
+<jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -41,25 +41,24 @@
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- 풀캘린더 CDN -->
-<script src="
+<script
+	src="
 https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 "></script>
-    <script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth'
+		});
+		calendar.render();
+	});
+</script>
+<!--chart.js CDN  -->
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    </script>
-    <!--chart.js CDN  -->
-    <script src="
-https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
-"></script>
-    
+
 <title>SWITH.ME</title>
 </head>
 <body>
@@ -97,22 +96,20 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
 
 							</li>
 							<!-- 과목수에 따라 li 생성후 붙여넣기 -->
-							<li>
-								<div>
-									<p>sub1</p>
-								</div>
-								<div>
-									<p>time1</p>
-								</div>
-							</li>
-							<li>
-								<div>
-									<p>sub2</p>
-								</div>
-								<div>
-									<p>time3</p>
-								</div>
-							</li>
+							<c:forEach items="${sublist}" var="vo" varStatus="vs">
+								<li><c:choose>
+										<c:when test="${empty vo.subjectName}">
+											<div>
+												<p>총 공부시간</p>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div>${vo.subjectName}</div>
+										</c:otherwise>
+									</c:choose>
+									<div>${vo.difftime }</div></li>
+							</c:forEach>
+
 						</ul>
 						<div class="btnGroup">
 							<button type="button" id="start" class="btn">
@@ -125,13 +122,18 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
 					</div>
 					<div class="study-countdown-box">
 						<div class="study-countdown">
-							<p id="countdown"></p>
+							<div>
+								<p id="selSub">과목명</p>
+							</div>
+							<div>
+								<p id="countdown">00:00:00</p>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="subject-modal">
 					<!-- TODO 과목 수정 -->
-					<div >
+					<div>
 						<button type="button" class="btn re-sub btn-primary"
 							data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 							<p>과목 수정하기</p>
@@ -158,56 +160,92 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
 							</div>
 						</div>
 					</div>
-		<!-- 과목추가 --> 
+					<!-- 과목추가 -->
 					<div>
 						<!-- Modal -->
-						<button type="button" class="btn add-sub"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+						<button type="button" class="btn add-sub" data-bs-toggle="modal"
+							data-bs-target="#exampleModal2">
 							<p>과목 추가하기</p>
 						</button>
-						
+
 						<!-- Modal -->
-						<div class="add modal" id="exampleModal2" >
-						  <div class="modal-dialog">
-							<div class="modal-content">
-								<div class="btn modal-close" data-bs-dismiss="modal">x</div>
-								<!-- controller 추가 -->
-								<form action="${pageContaxt.request.contextPath}/addsubject"
-									method="post">
-									<div class="subject ">
-										<p class="title">추가할 과목 이름</p>
-									</div>
-									<div class="add-name">
-										<input type="text" name="sub-name"
-											placeholder="     e.g 자바, 파이썬, SQL">
-									</div>
-									<div class="sub-color">
-										<p>과목 색상</p>
-										<select name="select">
-											<option value="cpink"><p>핑크</p>
-											</option>
-											<option value="cyellow"><p>노랑</p>
-											</option>
-											<option value="cgreen"><p>초록</p>
-											</option>
-											<option value="cblue"><p>파랑</p>
-											</option>
-											<option value="cpurple"><p>보라</p>
-											</option>
-										</select>
-									</div>
-									<button class="btn" type="button" data-bs-dismiss="modal">
-										<p>취소</p>
-									</button>
-									<button type="submit" class="btn done">
-										<p>완료</p>
-									</button>
-								</form>
-							</div>
+						<div class="add modal" id="exampleModal2">
+							<div class="modal-dialog ">
+								<div class="modal-content">
+									<div class="btn modal-close" data-bs-dismiss="modal">x</div>
+									<!-- controller 추가 -->
+									<form id="frm-add">
+										<div class="subject ">
+											<p class="title">추가할 과목 이름</p>
+										</div>
+										<div class="add-name">
+											<input type="text" name="subName"
+												placeholder="     e.g 자바, 파이썬, SQL">
+										</div>
+										<div class="sub-color">
+											<p>과목 색상</p>
+											<select name="selectColor">
+												<option value="1">핑크</option>
+												<option value="2">노랑</option>
+												<option value="3">초록</option>
+												<option value="4">파랑</option>
+												<option value="5">보라</option>
+											</select>
+										</div>
+										<button class="btn" type="button" data-bs-dismiss="modal">
+											<p>취소</p>
+										</button>
+										<button type="submit" class="btn done">
+											<p>완료</p>
+										</button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				 <div id='calendar' class="study-calender"></div>
+				<div calss="sub-title">
+					<p>출석</p>
+				</div>
+				<div id='calendar' class="study-calender"></div>
+				<div class="statistics-part">
+					<div calss="sub-title">
+						<p>통계</p>
+					</div>
+					<canvas id="myChart"></canvas>
+					<script>
+						var data = {
+							labels : [ 'January', 'February', 'March', 'April',
+									'May', 'June', 'July' ],
+							datasets : [ {
+								label : 'My First Dataset',
+								backgroundColor : 'rgb(255, 99, 132)',
+								borderColor : 'rgb(255, 99, 132)',
+								data : [ 0, 10, 5, 2, 20, 30, 45 ]
+							} ]
+						};
+
+						// 그래프 옵션
+						var options = {
+							scales : {
+								yAxes : [ {
+									ticks : {
+										beginAtZero : true
+									}
+								} ]
+							}
+						};
+
+						// 그래프 생성
+						var ctx = document.getElementById('myChart')
+								.getContext('2d');
+						var myChart = new Chart(ctx, {
+							type : 'doughnut',
+							data : data,
+							options : options
+						});
+					</script>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -229,7 +267,17 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js
 				setInterval(currentTime, 1000);
 			});
 
-			/*  함수();*/
+			/* 과목 읽어오기 */
+			$(".btn.done").on("click", btnAddSubjectClickHandler);
+		}
+
+		// 과목 읽어오기  
+		function btnAddSubjectClickHandler() {
+			console.log($("#frm-add").serialize());
+			var frm = document.getElementById("frm-add");
+			frm.method = "post";
+			frm.action = "${pageContext.request.contextPath}/addsubject";
+			frm.submit();
 		}
 
 		let intervalCountdownID;

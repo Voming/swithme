@@ -6,9 +6,6 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/basic/header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/basic/footer.css" rel="stylesheet">
-
-<link href="${pageContext.request.contextPath}/resources/css/member/join.css" rel="stylesheet">
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -27,7 +25,7 @@
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a  href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
@@ -40,71 +38,56 @@
 			</header>
 		</div>
 		<div class="wrap-body">
-			<div class="wrap-join">
-				<form action="${pageContext.request.contextPath }/join" method="post">
+			<div class="wrap-mypage">
+				<form id="login-form"  action="${pageContext.request.contextPath}/login" method="post">
 					<div>
-						<label>이메일</label><input type="text" name="email">
-						<button type="button" class="btn code">인증코드</button>
+						<legend>아이디</legend>
+						<input type="text" name="id">
 					</div>
 					<div>
-						<label>이메일 확인</label><input type="text" name="email" placeholder="인증코드">
+						<legend>비밀번호</legend>
+						<input type="password" name="pwd">
 					</div>
 					<div>
-						<label>아이디</label><input type="text" name="id">
-						<button type="button" class="btn checkid">중복확인</button>
+						<legend>각오</legend>
+						<input type="text" name="fight">
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd">
+						<button type="button" class="btn change" id="change">수정완료</button>
 					</div>
-					<div>
-						<label>비밀번호 확인</label><input type="password" name="pwdr">
-						<span class="desc-pwd"></span>
+					<div> 
+						<button class="btn logout" id="logout">로그아웃</button>
 					</div>
-					<div>
-						<input type="submit" value="회원가입">
+					<div> 
+						<button class="btn out">탈퇴하기</button>
 					</div>
 				</form>
-			
 			</div>
 		</div>
 	</div>
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
-	
-	
-	
+
+
 <script>
-$(loadedHandler);
-
-function loadedHandler(){
-	$(".btn.checkid").on("click", btnCheckidClickHandler);
+$(loadHandler);
+function loadHandler() {
+	$(".btn.logout").on("click",btnLogoutClickHandler);
 }
-function btnCheckidClickHandler(){
-	var idVal = $("[name=id]").val();
-	$.ajax({  
-		url : "${pageContext.request.contextPath }/checkid"
-		,method : "post"
-		,data : { swithid : $("[name=id]").val() }
-		,success : function(result){
-			console.log(result);
-			if(result > 0){
-				alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
-			}else {
-				alert("사용가능");
-			}	
 
-		}
-		,error : function(request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
-}
- 
-</script>
+
+function btnLogoutClickHandler(){
+
+	alert("로그아웃");
 	
+	var logout = document.getElementById("logout");
+	logout.action="${pageContext.request.contextPath}/logout";
+	logout.method="post";
+	logout.submit();
+}
+
+</script>
 
 </body>
 </html>

@@ -27,9 +27,27 @@
 <head>
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+<script>
+$(loadedHandler);
 
+function loadedHandler() {
+	$(".btn.open").on("click", btnFileClickHandler);
+}
+function btnFileClickHandler(){
+	if($(this).val() == "open"){
+		$(".dpwd").hide();
+
+	}else {
+		$(".dpwd").show();
+	}	
+	var isOpen = $('input[type=radio]:checked').val();
+	console.log(isOpen);
+}
+
+</script>
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -49,32 +67,43 @@
 				</div>
 				<div class="hrline">
 					<hr>
+						[[${loginInfo}]]
 				</div>
 			</header>
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-create">
-				<form class="frm-create">
-					<fieldset>
-						<legend>그룹 만들기</legend>
+				<div class="gname">
+					<P>그룹 만들기</P>
+				</div>
+				<div>
+					<form class="frm-create">
 						<ul>
 							<li><p>그룹명</p></li>
-							<li><input type="text" name="groupName" value="그룹명을 입력하세요" /></li>
-							<li><label>공개</label> <input type="radio" name="chk_open"
-								value="open"> <label>비공개</label> <input type="radio"
-								name="chk_close" value="close"></li>
-							<li><p>비밀번호</p></li>
-							<li><input type="text" name="groupPwd"
-								value="숫자로 된 비밀번호를 입력하세요" /></li>
+							<li><input type="text" name="groupName" placeholder="그룹명을 입력하세요" /></li>
+							<li><div class="wrap-open">
+								<label>공개</label> 
+								<input type="radio" name="chkopen" value="open" class="btn open" checked="checked">
+								<label>비공개</label> 
+								<input type="radio" name="chkopen" value="close" class="btn open">
+								</div>
+							</li>
+								
+							<li><div class="dpwd" style="display:none"><p>비밀번호</p></div></li>
+							<li><div class="dpwd" style="display:none">
+									<input type="text" name="groupPwd" placeholder="숫자로 된 비밀번호를 입력하세요" />
+								 </div></li>
 							<li><p>그룹 설명</p></li>
-							<li><textarea rows="20" cols="80"></textarea></li>
-							<li><p>그룹 대표 이미지</p> <input type="file" /></li>
-							<li><button type="submit">제출하기</button></li>
+							<li><textarea rows="20" cols="77" placeholder="그룹 설명을 입력하세요(ex. 공부 목적, 규칙 등)"></textarea></li>
+							<li><p>그룹 대표 이미지</p> </li>
+							<li><input type="file" class="btnb" /></li>
+							<li><div class="wbtn"><button type="submit" class="btnb">그룹 만들기</button></div></li>
 						</ul>
-					</fieldset>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
+		
 
 		<div class="wrap-footer">
 			<%@include file="/WEB-INF/views/basic/footer.jsp"%>

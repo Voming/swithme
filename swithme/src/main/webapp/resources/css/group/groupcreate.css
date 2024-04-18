@@ -1,31 +1,84 @@
 @charset "UTF-8";
 
-.wrap-body .wrap-create {
+.wrap-body {
 	/* 내 그룹 중앙 배치 */
 	width: 960px;
 	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
 
+.wrap-body .wrap-create {
+	margin: 60px 0 80px 0;
 }
 
 .wrap-body .frm-create {
 	margin: 60px 0 80px 0;
-	display:flex;
 }
 
-
-.wrap-body legend {
+.wrap-body .wrap-create .gname {
+	text-align: center;
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font1);
 	margin-bottom: 50px;
 }
 
-.wrap-body ul {
-	font-family: "IM_Hyemin-Reguarl";
+.wrap-body .frm-create  p, label {
+	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 }
 
-
-
-.frm-create input[type=text]{
+.wrap-body .frm-create input[type=text] {
 	width: 540px;
+	height: 30px;
+	background-color: var(--color_gray_1);
+	border: none;
+	font-family: "IM_Hyemin-Regular";
 }
+
+.wrap-body .frm-create input[type=text]:focus {
+  outline: none;
+}
+
+
+.wrap-body .frm-create  input[type="radio"] {
+	margin: 0 30px 0 20px;
+	accent-color: var(--color_purple_1);
+}
+
+.wrap-body .frm-create .wbtn {
+	display: flex;
+	justify-content: center;
+}
+
+.wrap-body .frm-create textarea {
+	width: 540px;
+	background-color: var(--color_gray_1);
+	border: none;
+	resize: none;
+	font-family: "IM_Hyemin-Regular";
+}
+
+.wrap-body .frm-create textarea:focus {
+  outline: none;
+}
+
+.wrap-body .frm-create li {
+	margin: 20px 0 20px 0;
+}
+
+.wrap-body .frm-create button[type="submit"]{
+	background: var(--color_purple_3);
+	font-family: "IM_Hyemin-Bold";
+	border-radius: 10px;
+	border: none;
+	height: 30px;
+	width: 120px;
+	color: white;
+}
+
+.wrap-body .frm-create button[type="submit"]:hover{
+	background: var(--color_purple_1);
+	color: white;
+}
+	

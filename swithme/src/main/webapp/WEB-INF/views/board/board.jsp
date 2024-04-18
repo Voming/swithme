@@ -61,7 +61,7 @@
 					<c:choose>
 						<c:when test="${empty mapboardlist.boardlistdto}">
 	          				<tr>
-	          					<td colspan="5">
+	          					<td colspan="5" style="border-bottom: none;">
 	          						게시글이 존재하지 않습니다.
 	          					</td>
 	          				</tr>

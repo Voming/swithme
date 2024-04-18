@@ -43,8 +43,10 @@
 </head>
 <body>
 	<script>
-		$(carouselHandler)
-		function carouselHandler() {
+		$(loadedHandler);
+
+		function loadedHandler() {
+			//캐러셀 호출
 			$('.wrap-group .owl-carousel').owlCarousel({
 				items : 3,
 				margin : 10,
@@ -54,7 +56,29 @@
 				autoplayTimeout : 3000,
 				autoplayHoverPause : true
 			});
-		};
+			
+			
+			$(".btn.make").on("click", btnMakeClickHandler);
+		}
+		function btnMakeClickHandler() {
+			/* 로그인 체크 */
+			
+			var loginInfo = "${loginInfo}";
+
+			if (loginInfo) {
+				
+					location.href = "${pageContext.request.contextPath}/group/create";
+			} else {
+				var result = confirm("로그인이 되야어 그룹 생성이 가능합니다.이동하시겠습니까");
+				if (result) {
+					location.href = "${pageContext.request.contextPath}/login";
+				} else {
+					location.href = "${pageContext.request.contextPath}/group";
+				}
+
+			}
+ 
+		}
 	</script>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -74,6 +98,7 @@
 				</div>
 				<div class="hrline">
 					<hr>
+					[[${loginInfo}]]
 				</div>
 			</header>
 		</div>
@@ -139,8 +164,8 @@
 				</div>
 				<div>
 					<div class="search" >
-						<input type="text" value="&nbsp;찾고싶은 스터디 그룹명을 검색 하세요.">
-						<button type="button"
+						<input type="text" placeholder="&nbsp;찾고싶은 스터디 그룹명을 검색 하세요.">
+						<button type="button"  class="btn find"
 							onclick="location.href='${pageContext.request.contextPath}/myrecord'">
 							<img class="search-btn"
 								src="${pageContext.request.contextPath}/resources/images/find.png"
@@ -153,9 +178,7 @@
 						<p>원하는 그룹이 없다면?</p>
 					</div>
 					<div>
-						<button type="button"
-							onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹
-							생성하러 가기</button>
+						<button type="button" class="btn make">그룹 생성하러 가기</button>
 					</div>
 				</div>
 			</div>

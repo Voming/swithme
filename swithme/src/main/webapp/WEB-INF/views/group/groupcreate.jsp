@@ -22,6 +22,7 @@
 	rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,21 +31,46 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
-<script>
+	<script>
 $(loadedHandler);
 
 function loadedHandler() {
-	$(".btn.open").on("click", btnFileClickHandler);
+	$(".btn.open").on("click", btnOpenClickHandler);
+	$(".btn.create").on("click", btnCreateClickHandler);
 }
-function btnFileClickHandler(){
+function btnOpenClickHandler(){
 	if($(this).val() == "open"){
 		$(".dpwd").hide();
 
+		$(".dpwd").remove();
 	}else {
-		$(".dpwd").show();
+		var htmlVal = `<div class="dpwd"><p>비밀번호</p>
+			<input type="text" name="groupPwd" placeholder="숫자로 된 비밀번호를 입력하세요" required /></div>`;
+		
+		$(".wrap-open").after(htmlVal);  
 	}	
 	var isOpen = $('input[type=radio]:checked').val();
 	console.log(isOpen);
+}
+
+function btnCreateClickHandler(){
+	console.log("들어옴");
+	if ($("[name=groupName]").val().trim().length == 0) {
+		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
+		return;
+	}
+	if ($("[name=groupPwd]").val().trim().length == 0) {
+		alert("빈칸만 입력할 수 없습니다. 비밀번호를 작성해주세요");
+		return;
+	} 
+
+	var frm = document.getElementsByClassName("frm-create");
+	console.log(frm);
+	frm.method = "post"; //content길이가 길 예정 한글 3, 영문자 1 바이트
+	frm.action = "${pageContext.request.contextPath}/group/create";
+	frm.enctype = "multipart/form-data";   //form 태그 내부에 input type="file"이 있다면 
+	//TODO 인식안됨
+	frm.submit(); //값을 보내야 controller에서 인식함
 }
 
 </script>
@@ -67,7 +93,7 @@ function btnFileClickHandler(){
 				</div>
 				<div class="hrline">
 					<hr>
-						[[${loginInfo}]]
+					[[${loginInfo}]]
 				</div>
 			</header>
 		</div>
@@ -78,35 +104,33 @@ function btnFileClickHandler(){
 				</div>
 				<div>
 					<form class="frm-create">
-						<ul>
-							<li><p>그룹명</p></li>
-							<li><input type="text" name="groupName" placeholder="그룹명을 입력하세요" /></li>
-							<li><div class="wrap-open">
-								<label>공개</label> 
-								<input type="radio" name="chkopen" value="open" class="btn open" checked="checked">
-								<label>비공개</label> 
-								<input type="radio" name="chkopen" value="close" class="btn open">
-								</div>
-							</li>
-								
-							<li><div class="dpwd" style="display:none"><p>비밀번호</p></div></li>
-							<li><div class="dpwd" style="display:none">
-									<input type="text" name="groupPwd" placeholder="숫자로 된 비밀번호를 입력하세요" />
-								 </div></li>
-							<li><p>그룹 설명</p></li>
-							<li><textarea rows="20" cols="77" placeholder="그룹 설명을 입력하세요(ex. 공부 목적, 규칙 등)"></textarea></li>
-							<li><p>그룹 대표 이미지</p> </li>
-							<li><input type="file" class="btnb" /></li>
-							<li><div class="wbtn"><button type="submit" class="btnb">그룹 만들기</button></div></li>
-						</ul>
+						<div><p>그룹명</p>
+							<input type="text" name="groupName" placeholder="그룹명을 입력하세요" required />
+						</div>
+						<div class="wrap-open">
+							<label>공개</label> 
+							<input type="radio" name="groupOpen" value="open" class="btn open" checked="checked"> 
+							<label>비공개</label>
+							<input type="radio" name="groupOpen" value="close" class="btn open">
+						</div>
+						<div>
+							<p>그룹 설명</p>
+							<textarea rows="20" name="groupExp" placeholder="그룹 설명을 입력하세요(ex. 공부 목적, 규칙 등)"></textarea>
+						</div>
+						<div>
+							<p>그룹 대표 이미지</p>
+							<input type="file" name="uploadfile" required />
+						</div>	
+						<div class="wbtn">
+							<button type="submit" class="btn create">그룹 만들기</button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		
-
-		<div class="wrap-footer">
-			<%@include file="/WEB-INF/views/basic/footer.jsp"%>
-		</div>
+	</div>
+	<div class="wrap-footer">
+		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
+	</div>
 </body>
 </html>

@@ -8,18 +8,21 @@
 	/* background-color: lightgray;   */
 	font-family: "IM_Hyemin-Regular";
 	position: relative;
-	font-size: 15px;
 }
 
 .wrap-body .wrap-main p {
 	font-family: "IM_Hyemin-Regular";
 	font-size: 15px;
 }
+.wrap-body .wrap-main .sub-title{
+	font-family: "IM_Hyemin-Bold";
+	font-size: 20px;
+}
 /* 과목 추가 모달 css */
 .wrap-body .add {
 	height: 100%;
 	position: absolute;
-	top: 50%;
+	top: 20%;
 	left: 50%;
 	transform: translate(-50%, -20%);
 	text-align: center;
@@ -30,7 +33,7 @@
 	font-size: 17px;
 }
 
-.wrap-body .title {
+.wrap-body .title  {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 20px;
 }
@@ -130,13 +133,19 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
+	
 }
-
-.wrap-body .timer.box .study-countdown>p {
+.wrap-body .timer.box .study-countdown #selSub {
+	font-family: IM_Hyemin-Bold;
+	color: white;
+	padding-bottom : 5px;
+}
+.wrap-body .timer.box .study-countdown #countdown {
 	font-family: IM_Hyemin-Bold;
 	color: white;
 	font-size: 64px;
 }
+
 .wrap-body .subject-modal {
 	padding : 10px;
 	display: flex;
@@ -172,3 +181,16 @@
 	width: 60%;
 	
 }
+.wrap-body .wrap-main .sub-title {
+	font-size: 20px;
+}
+
+.wrap-body .wrap-main .statistics-part{
+	min-height: 960px;
+	background-color: #a5ea89;
+}
+
+
+
+
+

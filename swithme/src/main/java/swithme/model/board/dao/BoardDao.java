@@ -10,6 +10,7 @@ import java.util.List;
 import static swithme.jdbc.common.JdbcTemplate.close;
 
 import swithme.model.board.dto.BoardDto;
+import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
 
 public class BoardDao {
@@ -136,26 +137,33 @@ public class BoardDao {
 		return result;
 	}
 	
+	
+//	private String title;
+//	private String content;
+//	private String boardWriter;
 
 	//게시글 추가
-	public int insert(Connection conn, BoardDto dto) {
+	public int insert(Connection conn, BoardInsertDto dto) {
+		System.out.println("boarddao insert");
 		int result = 0;
-		String sql = "INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE"
-				+ "VALUES(SEQ_BOARD_ID.nextval,?, ?, ?, default, default, default)";
+		String sql = "INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE)"
+				+ " VALUES(SEQ_BOARD_ID.nextval,?, ?, ?, default, default, default)";
+		//앞에 띄어쓰기 하기
 		PreparedStatement pstmt = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, dto.getTitle());
-			pstmt.setString(2, dto.getContent());
 			pstmt.setString(1, dto.getBoardWriter());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getContent());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
 		}
 		close(pstmt);
+		System.out.println("boarddao insert 완료" + result);
 		return result;
 
 	}

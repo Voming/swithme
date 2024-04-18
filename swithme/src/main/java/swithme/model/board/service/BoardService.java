@@ -9,6 +9,7 @@ import static swithme.jdbc.common.JdbcTemplate.*;
 
 import swithme.model.board.dao.BoardDao;
 import swithme.model.board.dto.BoardDto;
+import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
 
 public class BoardService {
@@ -16,6 +17,8 @@ public class BoardService {
 	BoardDao dao = new BoardDao();
 	
 	public Map<String, Object> selectPage(int boardNum, int boardPageNum, int currentPage) {
+		
+		
 		//현재페이지: currentPage
 		//게시판 페이지 하단에 표시할 페이지 수: boardPageNum
 		//한 페이지 당 글 수: boardNum
@@ -32,7 +35,7 @@ public class BoardService {
 		int end = boardNum*currentPage;	
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1) 
-		int totalPageCount = (totalboardCount%boardNum == 0)? (totalboardCount%boardNum) : (totalboardCount%boardNum) + 1;
+		int totalPageCount = (totalboardCount%boardNum == 0)? (totalboardCount/boardNum) : (totalboardCount/boardNum) + 1;
 							//조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼	
 		
 		//시작페이지 
@@ -41,13 +44,15 @@ public class BoardService {
 		//끝페이지
 		int endPageNum= (startPageNum+boardPageNum > totalPageCount)? totalPageCount: startPageNum+boardPageNum -1;
 		
-		List<BoardListDto> dto = dao.selectPage(conn, start, end);
+		List<BoardListDto> boardlistdto = dao.selectPage(conn, start, end);
 		close(conn);
 		
 		result = new HashMap<String, Object>();
-		result.put(null, dto);
-		
-		
+		result.put("boardlistdto", boardlistdto);
+		result.put("totalboardCount", totalboardCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPage);
 		return result;
 		
 		
@@ -75,16 +80,16 @@ public class BoardService {
 		
 		close(conn);
 		return result;
+		//새로운 객체를 생성해서 연결하고 끊었다 하는것 => UNPOOLED
 		
 	}
 	
 	//게시글 추가
-	public int insert(BoardDto dto) {
+	public int insert(BoardInsertDto dto) {
 		int result = 0;
 		
-		Connection conn = getConnection(true);
+		Connection conn = getConnection(false);
 		result = dao.insert(conn, dto);
-		
 		close(conn);
 		return result;
 	}

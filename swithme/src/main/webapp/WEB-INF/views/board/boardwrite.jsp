@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -42,7 +43,7 @@
 			<div class="boardwrite">
 				<p>게시글 작성</p>
 			</div>
-			<form id="form-write" method="post" action="insert.no">
+			<form id="form-write">
 				<ul class="write">
 					<li>
 						<div>
@@ -83,5 +84,41 @@
       <%@include file="/WEB-INF/views/basic/footer.jsp"%>
 
     </div>
+    
+    
+<script>
+
+$(loadedHandler);
+
+function loadedHandler(){
+	$(".btn.write").on("click", btnWriteClickHandler);
+/* 	$(".btn.esc").on("click", btnEscClickHandler);
+	$(".btn.board").on("click", btnBoardClickHandler); */
+}
+
+function btnWriteClickHandler(){
+	
+	if($("[name=title]").val().trim().length == 0) {
+		alert("빈 제목 안됨. 제목 채워라");
+		return;
+	}
+	// return 쓰면 여기서 단계가 끊김.
+	
+	if($("[name=content]").val().trim().length == 0) {
+		alert("빈 내용 안됨. 내용 채워라");
+		return;
+	}
+	
+	var frm = document.getElementById("form-write");
+	frm.method="post";
+	frm.action="${pageContext.request.contextPath}/boardwrite";
+	frm.submit();
+	
+	
+	
+}
+
+</script>   
+    
 </body>
 </html>

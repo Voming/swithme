@@ -58,10 +58,10 @@ fieldset{
     font-family: "IM_Hyemin-Regular";
 }
 
-.valid_desc-id {
+.desc-id {
 	color:red;
 }
-.valid_desc-pw {
+.desc-pwd {
 	color:red;
 } 
 

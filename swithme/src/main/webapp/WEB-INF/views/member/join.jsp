@@ -6,6 +6,9 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/basic/header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/basic/footer.css" rel="stylesheet">
+
+<link href="${pageContext.request.contextPath}/resources/css/member/join.css" rel="stylesheet">
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +30,7 @@
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="#">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -41,7 +44,7 @@
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
 						<label>이메일</label><input type="text" name="email">
-						<button type="button" class="btn code" >인증코드</button>
+						<button type="button" class="btn code">인증코드</button>
 					</div>
 					<div>
 						<label>이메일 확인</label><input type="text" name="email" placeholder="인증코드">
@@ -55,6 +58,7 @@
 					</div>
 					<div>
 						<label>비밀번호 확인</label><input type="password" name="pwdr">
+						<span class="desc-pwd"></span>
 					</div>
 					<div>
 						<input type="submit" value="회원가입">
@@ -70,6 +74,36 @@
 	
 	
 	
+<script>
+$(loadedHandler);
+
+function loadedHandler(){
+	$(".btn.checkid").on("click", btnCheckidClickHandler);
+}
+function btnCheckidClickHandler(){
+	var idVal = $("[name=id]").val();
+	$.ajax({  
+		url : "${pageContext.request.contextPath }/checkid"
+		,method : "post"
+		,data : { swithid : $("[name=id]").val() }
+		,success : function(result){
+			console.log(result);
+			if(result > 0){
+				alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
+			}else {
+				alert("사용가능");
+			}	
+
+		}
+		,error : function(request, status, error){
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+	});
+}
+ 
+</script>
 	
 
 </body>

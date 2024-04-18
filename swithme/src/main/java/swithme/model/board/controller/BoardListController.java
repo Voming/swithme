@@ -1,6 +1,11 @@
 package swithme.model.board.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,10 +56,10 @@ public class BoardListController extends HttpServlet {
 			}
 			
 		}
+			
 		request.setAttribute("mapboardlist", service.selectPage(boardNum, boardPageNum, currentPage));
 		request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
-		
-		
+
 	
 	}
 

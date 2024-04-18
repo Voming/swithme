@@ -77,11 +77,9 @@ public class BoardService {
 		BoardDto result = null;
 		Connection conn = getConnection(true);
 		result= dao.selectOne(conn, boardId);
-		
 		close(conn);
-		return result;
-		//새로운 객체를 생성해서 연결하고 끊었다 하는것 => UNPOOLED
 		
+		return result;
 	}
 	
 	//게시글 추가

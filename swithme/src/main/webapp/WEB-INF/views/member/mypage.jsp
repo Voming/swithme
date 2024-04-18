@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 
@@ -38,13 +39,55 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-mypage">
-			
+				<form id="login-form"  action="${pageContext.request.contextPath}/login" method="post">
+					<div>
+						<legend>아이디</legend>
+						<input type="text" name="id">
+					</div>
+					<div>
+						<legend>비밀번호</legend>
+						<input type="password" name="pwd">
+					</div>
+					<div>
+						<legend>각오</legend>
+						<input type="text" name="fight">
+					</div>
+					<div>
+						<button type="button" class="btn change" id="change">수정완료</button>
+					</div>
+					<div> 
+						<button class="btn logout" id="logout">로그아웃</button>
+					</div>
+					<div> 
+						<button class="btn out">탈퇴하기</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
+
+
+<script>
+$(loadHandler);
+function loadHandler() {
+	$(".btn.logout").on("click",btnLogoutClickHandler);
+}
+
+
+function btnLogoutClickHandler(){
+
+	alert("로그아웃");
+	
+	var logout = document.getElementById("logout");
+	logout.action="${pageContext.request.contextPath}/logout";
+	logout.method="post";
+	logout.submit();
+}
+
+</script>
 
 </body>
 </html>

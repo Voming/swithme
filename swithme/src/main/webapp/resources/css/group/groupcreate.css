@@ -68,7 +68,7 @@
 	margin: 20px 0 20px 0;
 }
 
-.wrap-body .frm-create button[type="submit"]{
+.wrap-body .frm-create button[type="button"]{
 	background: var(--color_purple_3);
 	font-family: "IM_Hyemin-Bold";
 	border-radius: 10px;
@@ -78,7 +78,7 @@
 	color: white;
 }
 
-.wrap-body .frm-create button[type="submit"]:hover{
+.wrap-body .frm-create button[type="button"]:hover{
 	background: var(--color_purple_1);
 	color: white;
 }

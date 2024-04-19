@@ -1,20 +1,20 @@
 .wrap-body{
 	display:flex;
 	justify-content: center;
-	font-size: var(--font3);
-    font-family: "IM_Hyemin-Regular";
+	font-size:var(--font3);
+    font-family:"IM_Hyemin-Regular";
 }
 
-form{
+.wrap-body form{
 	margin-top:100px;
 	
 }
 
-.wrap-welcome{
+.wrap-body .wrap-welcome{
 	width:300px;
 }
 
-.btn.join{
+.wrap-body .btn.join{
 	width: 100%;
     height: 50px;
     padding: 0 10px;
@@ -24,10 +24,10 @@ form{
     background-color:#BF80FF;
 }
 
-.btn.join:hover{
+.wrap-body .btn.join:hover{
 	background-color:#8066FF;
 }
-.btn.login{
+.wrap-body .btn.login{
 	width: 100%;
     height: 50px;
     padding: 0 10px;
@@ -36,6 +36,6 @@ form{
     background-color:#BF80FF;
 }
 
-.btn.login:hover{
+.wrap-body .btn.login:hover{
 	background-color:#8066FF;
 }

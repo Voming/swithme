@@ -1,31 +1,11 @@
-<!-- reset.css -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/basic/reset.css"
-	rel="stylesheet">
-<!-- 레이아웃 설정 -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/basic/core.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/basic/layout.css"
-	rel="stylesheet">
-
-<link
-	href="${pageContext.request.contextPath}/resources/css/basic/header.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/basic/footer.css"
-	rel="stylesheet">
-<!-- 그룹 만들기 레이아웃 -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/groupcreate.css"
-	rel="stylesheet">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 그룹 만들기 레이아웃 -->
+<link href="${pageContext.request.contextPath}/resources/css/group/groupcreate.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

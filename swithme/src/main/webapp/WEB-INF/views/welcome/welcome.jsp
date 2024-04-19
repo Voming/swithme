@@ -41,11 +41,8 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-welcome">
-			<form>
-			<div> <button type="button" class="btn join">회원가입</button></div>
-			<div> <button type="button" class="btn login">로그인</button></div>
-			</form>
-			
+				<div> <button type="button" class="btn join">회원가입</button></div>
+				<div> <button type="button" class="btn login">로그인</button></div>
 			</div>
 		</div>
 	</div>

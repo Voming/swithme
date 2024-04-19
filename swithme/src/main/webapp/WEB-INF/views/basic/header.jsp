@@ -15,6 +15,7 @@
 				<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
 				<li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage">로그아웃</a></li>
 			</ul>
 		</div>
 	</div>

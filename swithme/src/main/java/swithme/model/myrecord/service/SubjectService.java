@@ -6,13 +6,16 @@ import static swithme.jdbc.common.JdbcTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import swithme.model.myrecord.dao.RecordDao;
 import swithme.model.myrecord.dao.SubjectDao;
 import swithme.model.myrecord.dto.SubjectAddDto;
 import swithme.model.myrecord.dto.SubjectDeleteDto;
+import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.dto.SubjectDto;
 
 public class SubjectService {
 	private SubjectDao dao = new SubjectDao();
+	private RecordDao daoRecord = new RecordDao();
 	
 	//과목 이름만 
 	public String selectOne(String memid) {
@@ -37,16 +40,24 @@ public class SubjectService {
 	}
 	
 	
-	//과목 추가 insert
+	//과목 추가 insert - 후 결과화면 조화 한번에 하기
 	//public 
-	public int insert( SubjectAddDto dto) {
-		System.out.println(">>>>>>serv insert  dto : "+dto);
-		int result = -1;
+	public List<SubjectDifftimeDto> insertSubjectAndSelectRecord( SubjectAddDto dto) {
+		System.out.println(">>>>>>serv insertSubjectAndSelectRecord  dto : "+dto);
+		
+		List<SubjectDifftimeDto> result = null;
+		int insertResult = -1;
 		Connection conn = getConnection(false);
-		result = dao.insert(conn, dto);
+
+		// insert subject
+		insertResult = dao.insert(conn, dto);
+		
+		// select record
+		// 과목추가에 성공 여부와 상관없이 화면을 다시 display 해야 하므로 정보를 조회해 옴
+		result = daoRecord.subjectDifftime(conn, dto.getSubjectMemId());
+		
 		System.out.println(">>>>>>serv insert  result : "+result);
 		close(conn);
-		//autoCommit(conn, true);
 		return result;
 	}
 	

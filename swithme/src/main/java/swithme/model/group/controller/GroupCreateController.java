@@ -17,7 +17,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import swithme.model.group.dto.FileWriteDto;
 import swithme.model.group.dto.GroupCreateDto;
-import swithme.model.group.dto.GroupDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
@@ -106,10 +105,16 @@ public class GroupCreateController extends HttpServlet {
 		int groupPwd = 0;
 		if(groupPwdstr != null && !groupPwdstr.equals("")) {
 			try {
-				int deptno = Integer.parseInt(groupPwdstr);
+				groupPwd = Integer.parseInt(groupPwdstr);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		if(groupOpen.equals("open")) {
+			groupOpen = "0";
+		}else {
+			groupOpen = "1";
 		}
 		
 		
@@ -120,11 +125,11 @@ public class GroupCreateController extends HttpServlet {
 		System.out.println(groupPwd);
 		System.out.println(groupExp);
 		
-		//BoardInsertDto dto = new BoardInsertDto(subject, content, boardWriter.getMemId());
+		
 		GroupCreateDto dto = new GroupCreateDto(groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
 		System.out.println(dto);
-		
-		
+		int result = service.insert(dto);
+		System.out.println(result);
 		response.sendRedirect(request.getContextPath()+"/group");
 	}
 

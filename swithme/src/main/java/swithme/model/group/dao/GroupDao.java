@@ -1,153 +1,48 @@
 package swithme.model.group.dao;
 
-import static swithme.jdbc.common.JdbcTemplate.close;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
+import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 
 public class GroupDao {
 
 	// 나의 전체그룹 검색
-	public List<GroupDto> selectMyList(Connection conn, String memberId) {
-		List<GroupDto> result = null;
-		String sql = "SELECT * FROM SGROUP WHERE SGROUP_ID IN"
-				+ " (SELECT SGROUP_ID FROM SGROUP_MEMBER WHERE SGROUP_MEM_ID = ?)";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberId);
-			rs = pstmt.executeQuery();
-			// ResetSet처리
-			if (rs.next()) {
-				result = new ArrayList<GroupDto>();
-				do {
-					GroupDto dto = new GroupDto(rs.getInt("SGROUP_ID"), rs.getString("SGROUP_NAME"),
-							rs.getString("SGROUP_OPEN"), rs.getInt("SGROUP_PWD"), rs.getString("SGROUP_EXPLAIN"),
-							rs.getString("SGROUP_IMG_PATH"), rs.getString("SGROUP_IMG_NAME"));
-					result.add(dto);
-				} while (rs.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close(rs);
-		close(pstmt);
+	public List<GroupDto> selectMyList(SqlSession session, String memberId) {
+		List<GroupDto> result = session.selectList("group.selectMyList",memberId);
 		return result;
 	}
 	//나의 그룹 수 
-	public int selectMyCount(Connection conn, String groupName) {
-		int result = 0;
-		String sql = "SELECT COUNT(*) FROM SGROUP WHERE SGROUP_ID IN "
-				+ " (SELECT SGROUP_ID FROM SGROUP_MEMBER WHERE SGROUP_MEM_ID = ?)";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, groupName);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				result = rs.getInt(1);
-				System.out.println(result);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close(rs);
-		close(pstmt);
+	public int selectMyCount(SqlSession session, String memberId) {
+		int result = session.selectOne("group.selectMyCount", memberId);
 		return result;
 	}
 	//공개 그룹 전체 범위 있음
-	public List<GroupDto> selectAllOpenList(Connection conn, int start, int end) {
-		List<GroupDto> result = null;
-		String sql = "SELECT S.* FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE SGROUP_OPEN = 0) S"
-				+ "WHERE ROWNUM BETWEEN ? AND ?";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			
-			rs = pstmt.executeQuery();
+	public List<GroupDto> selectAllOpenList(SqlSession session, int start, int end) {
+		Map<String, Integer> param = new HashMap<String, Integer>();
+		param.put("startRounum", start);
+		param.put("endRounum", end);
 		
-			if (rs.next()) {
-				result = new ArrayList<GroupDto>();
-				do {
-					GroupDto dto = new GroupDto(rs.getInt("SGROUP_ID"), rs.getString("SGROUP_NAME"),
-							rs.getString("SGROUP_OPEN"), rs.getInt("SGROUP_PWD"), rs.getString("SGROUP_EXPLAIN"),
-							rs.getString("SGROUP_IMG_PATH"), rs.getString("SGROUP_IMG_NAME"));
-					result.add(dto);
-				} while (rs.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close(rs);
-		close(pstmt);
+		List<GroupDto> result = session.selectList("group.selectAllOpenList", param);
 		return result;
 	}
 	
 	// 그룹 전체
-	public List<GroupDto> selectAllList(Connection conn) {
-		List<GroupDto> result = null;
-		String sql = "SELECT * FROM SGROUP";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			// ResetSet처리
-			if (rs.next()) {
-				result = new ArrayList<GroupDto>();
-				do {
-					GroupDto dto = new GroupDto(rs.getInt("SGROUP_ID"), rs.getString("SGROUP_NAME"),
-							rs.getString("SGROUP_OPEN"), rs.getInt("SGROUP_PWD"), rs.getString("SGROUP_EXPLAIN"),
-							rs.getString("SGROUP_IMG_PATH"), rs.getString("SGROUP_IMG_NAME"));
-					result.add(dto);
-				} while (rs.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close(rs);
-		close(pstmt);
+	public List<GroupDto> selectAllList(SqlSession session) {
+		List<GroupDto> result = session.selectList("group.selectAllList");
 		return result;
 	}
 
-	public int insert(Connection conn, GroupDto dto) {
-		int result = 0;
-		String sql = "INSERT INTO SGROUP (SGROUP_NAME,SGROUP_PWD,SGROUP_EXPLAIN) VALUES (?, ?, ?)";
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			if (dto.getGroupName() != null && dto.getGroupPwd() != null & dto.getGroupEx() != null) {
-				// ? 처리
-				pstmt.setString(1, dto.getGroupName());
-				pstmt.setInt(2, dto.getGroupPwd());
-				pstmt.setString(3, dto.getGroupEx());
-
-				result = pstmt.executeUpdate();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		close(pstmt);
+	public int insert(SqlSession session, GroupCreateDto dto) {
+		int result = session.insert("group.insert", dto);
 		return result;
 	}
 
-	public int update(Connection conn, String newgroupId, String groupId) {
+/*	public int update(SqlSession session, String newgroupId, String groupId) {
 		int result = 0;
 		String sql = "UPDATE SGROUP SET MEM_ID=? WHERE SGROUP_ID=?";
 		PreparedStatement pstmt = null;
@@ -164,7 +59,7 @@ public class GroupDao {
 		return result;
 	}
 
-	public int delete(Connection conn, String groupId) {
+	public int delete(SqlSession session, String groupId) {
 		int result = 0;
 		String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?";
 		PreparedStatement pstmt = null;
@@ -178,6 +73,6 @@ public class GroupDao {
 		}
 		close(pstmt);
 		return result;
-	}
+	}*/
 
 }

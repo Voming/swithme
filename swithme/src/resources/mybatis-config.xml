@@ -10,12 +10,6 @@
 
 	<typeAliases>
 		<typeAlias
-			type="swithme.model.group.dto.GroupDto"
-			alias="GroupDto" />
-		<typeAlias
-			type="swithme.model.group.dto.GroupCreateDto"
-			alias="GroupCreateDto" />
-		<typeAlias
 			type="swithme.model.board.dto.BoardDto"
 			alias="BoardDto" />
 		<typeAlias
@@ -24,6 +18,10 @@
 		<typeAlias
 			type="swithme.model.board.dto.BoardInsertDto"
 			alias="BoardInsertDto" />
+		<typeAlias type="swithme.model.group.dto.GroupDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupCreateDto" />
+		<typeAlias type="swithme.model.board.dto.BoardDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias
 			type="swithme.model.board.dto.BoardListDto"
 			alias="BoardListDto" />
@@ -61,6 +59,10 @@
 
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/group-mapper.xml"/>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/record-mapper.xml"/>
+		<mapper resource="mappers/testcalendar-mapper.xml"/>
 		<!-- xxx-mapper.xml 생성 후 추가 -->
 	</mappers>
 </configuration>

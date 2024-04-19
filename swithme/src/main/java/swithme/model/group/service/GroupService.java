@@ -1,14 +1,12 @@
 package swithme.model.group.service;
 
-import static swithme.jdbc.common.JdbcTemplate.*;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.group.dao.GroupDao;
+import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 
 public class GroupService {
@@ -17,61 +15,61 @@ public class GroupService {
 	// 나의 전체그룹 검색
 	public List<GroupDto> selectMyList(String memberId) {
 		List<GroupDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.selectMyList(conn, memberId);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectMyList(session, memberId);
+		session.close();
 		return result;
 	}
 
 	// 나의 그룹 수
 	public int selectMyCount(String groupName) {
 		int result = 0;
-		Connection conn = getConnection(false);
-		result = dao.selectMyCount(conn, groupName);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectMyCount(session, groupName);
+		session.close();
 		return result;
 	}
 
 	// 공개 그룹 전체 범위 있음
 	public List<GroupDto> selectAllOpenList(int start, int end) {
 		List<GroupDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.selectAllOpenList(conn, start, end);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectAllOpenList(session, start, end);
+		session.close();
 		return result;
 	}
 
 	// 그룹 전체
 	public List<GroupDto> selectAllList() {
 		List<GroupDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.selectAllList(conn);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectAllList(session);
+		session.close();
 		return result;
 	}
 
-	public int insert(GroupDto dto) {
+	public int insert(GroupCreateDto dto) {
 		int result = 0;
-		Connection conn = getConnection(false);
-		result = dao.insert(conn, dto);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.insert(session, dto);
+		session.close();
 		return result;
 	}
 
-	public int update(String newgroupId, String groupId) {
+/*	public int update(String newgroupId, String groupId) {
 		int result = 0;
-		Connection conn = getConnection(false);
-		result = dao.update(conn, newgroupId, groupId);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.update(session, newgroupId, groupId);
+		session.close();
 		return result;
 	}
 
 	public int delete(String groupId) {
 		int result = 0;
-		Connection conn = getConnection(false);
-		result = dao.delete(conn, groupId);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.delete(session, groupId);
+		session.close();
 		return result;
-	}
+	}*/
 
 }

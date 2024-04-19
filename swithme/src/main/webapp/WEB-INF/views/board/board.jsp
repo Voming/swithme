@@ -72,7 +72,8 @@
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
 									<tr class="tr-sec">
 										<td style="text-align: center;">${dto.boardId}</td>
-										<td>${dto.title}</td>
+										<td><a href="${pageContext.request.contextPath }/boardcontent?id=${vo.boardId }">${dto.title }</a></td>
+										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
 										<td>${dto.boardWriter}</td>
 										<td>${dto.writeTime}</td>
 										<td>${dto.readCount}</td>

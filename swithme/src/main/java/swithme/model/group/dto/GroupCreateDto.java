@@ -1,5 +1,7 @@
 package swithme.model.group.dto;
 
+import swithme.model.member.dto.MemberInfoDto;
+
 public class GroupCreateDto {
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
@@ -8,17 +10,19 @@ public class GroupCreateDto {
 //	SGROUP_EXPLAIN	VARCHAR2(4000 BYTE)
 //	SGROUP_IMG_PATH	VARCHAR2(1000 BYTE)
 //	SGROUP_IMG_NAME	VARCHAR2(200 BYTE)
-
+	
+	private String groupWriter;
 	private String groupName;
 	private String groupOpen;
 	private Integer groupPwd;
 	private String groupEx;
 	private String groupImgPath;
 	private String groupImgName;
-
-	public GroupCreateDto(String groupName, String groupOpen, Integer groupPwd, String groupEx, String groupImgPath,
-			String groupImgName) {
+	
+	public GroupCreateDto(String groupWriter, String groupName, String groupOpen, Integer groupPwd, String groupEx,
+			String groupImgPath, String groupImgName) {
 		super();
+		this.groupWriter = groupWriter;
 		this.groupName = groupName;
 		this.groupOpen = groupOpen;
 		this.groupPwd = groupPwd;
@@ -26,35 +30,34 @@ public class GroupCreateDto {
 		this.groupImgPath = groupImgPath;
 		this.groupImgName = groupImgName;
 	}
-
 	@Override
 	public String toString() {
-		return "GroupCreateDto [groupName=" + groupName + ", groupOpen=" + groupOpen + ", groupPwd=" + groupPwd
-				+ ", groupEx=" + groupEx + ", groupImgPath=" + groupImgPath + ", groupImgName=" + groupImgName + "]";
+		return "GroupCreateDto [groupWriter=" + groupWriter + ", groupName=" + groupName + ", groupOpen=" + groupOpen
+				+ ", groupPwd=" + groupPwd + ", groupEx=" + groupEx + ", groupImgPath=" + groupImgPath
+				+ ", groupImgName=" + groupImgName + "]";
 	}
-
+	public String getGroupWriter() {
+		return groupWriter;
+	}
 	public String getGroupName() {
 		return groupName;
 	}
-
 	public String getGroupOpen() {
 		return groupOpen;
 	}
-
 	public Integer getGroupPwd() {
 		return groupPwd;
 	}
-
 	public String getGroupEx() {
 		return groupEx;
 	}
-
 	public String getGroupImgPath() {
 		return groupImgPath;
 	}
-
 	public String getGroupImgName() {
 		return groupImgName;
 	}
+
+	
 
 }

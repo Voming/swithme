@@ -34,7 +34,7 @@ public class GroupController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<GroupDto> grouplist = service.selectAllList();
-		System.out.println(grouplist);
+	
 		request.getSession().setAttribute("grouplist", grouplist);
 
 		request.getRequestDispatcher("/WEB-INF/views/group/grouphome.jsp").forward(request, response);

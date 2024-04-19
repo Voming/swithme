@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import swithme.model.group.dto.FileWriteDto;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
@@ -91,8 +90,6 @@ public class GroupCreateController extends HttpServlet {
 				System.out.println(f1.length()); // 그 파일의 크기 
 			}
 			System.out.println( fileName+"  :  "+orginFileName);
-
-			FileWriteDto filedto = new FileWriteDto(fileName, orginFileName);
 		}
 		
 		
@@ -118,7 +115,8 @@ public class GroupCreateController extends HttpServlet {
 		}
 		
 		
-		MemberInfoDto groupWriter = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		String groupWriter = loginInfo.getMemId();
 		
 		System.out.println(groupName);
 		System.out.println(groupOpen);
@@ -126,7 +124,7 @@ public class GroupCreateController extends HttpServlet {
 		System.out.println(groupExp);
 		
 		
-		GroupCreateDto dto = new GroupCreateDto(groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
+		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
 		System.out.println(dto);
 		int result = service.insert(dto);
 		System.out.println(result);

@@ -63,11 +63,12 @@
 				<p>댓글</p>
 				<div class="reply">
 					<div class="r-1">
-						<div>제목</div>
-						<div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-							when an unknown printer took a galley of type andscrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 
-							electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-							and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+						<div>
+							<input type="text" placeholder="제목을 입력하세요.">					
+						</div>
+						<div>
+							<textarea name="content" cols="136" rows="5" placeholder="내용을 입력하시오."></textarea>
+						</div>
 						</div>
 					<div class="r-2">
 						<ul>

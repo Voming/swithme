@@ -40,28 +40,20 @@
 			<div class="content-main">
 				<div class="title">
 					<div class="t-1">
-						<div>제목</div>
+						<div>${dto.title }</div>
 					</div>
 					<div class="t-2">
 						<ul>
-							<li>작성자</li>
-							<li>날짜</li>
+							<li>${dto.boardWriter }</li>
+							<li>${dto.writeTime }</li>
 							<li>
-								<p>좋아요<p>
+								<p>${dto.boardLike }<p>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="content">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-					when an unknown printer took a galley of type andscrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 
-					electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-					and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-					when an unknown printer took a galley of type andscrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 
-					electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-					and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-						
+					${dto.content}
 				</div>
 			</div>
 			
@@ -98,6 +90,27 @@
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
+
+
+
+<script>
+$(loadedHandler);
+
+function loadedHandler(){
+	$(".btn.write").on("click", boardWriteClickHandler);
+	$(".btn.board").on("click", boardClickHandler);	
+}
+
+function boardWriteClickHandler(){
+	location.href = "${pageContext.request.contextPath}/boardwrite";
+}
+
+function boardClickHandler(){
+	location.href = "${pageContext.request.contextPath}/board";
+}
+
+</script>
+
 
 </body>
 </html>

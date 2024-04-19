@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.wrap-openlist a{
+	font-family: "IM_Hyemin-Regular";
+}
+.group-tab-nav {
+    padding: 20px 0;
+    display: flex;
+    text-align: center;
+}
+
+.group-tab-nav li {
+	text-align: center;
+}
+
+.group-tab-nav li a{
+	padding: 3px 20px;
+	margin-right: 10px;
+	font-weight: bold;
+    font-size: var(--font4);
+}
+
+.tab-body .group-tab-nav li a{
+	border: 2px solid var(--color_purple_1);
+	border-radius: 10px;
+}
+
+
+.tab-body .group-tab-nav li a:hover,
+.tab-body .group-tab-nav li a.active {
+    background: var(--color_purple_1);
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+.wrap-body .wrap-openlist {
+	/*여기서부터 그룹 리스트 */
+	/* 중앙 배치 */
+	width: 960px;
+	margin: 0 auto;
+	align-items: center;
+}
+.group-tab-content{
+	display: flex;
+	justify-content: center;
+}
+
+.group-tab-content .group-box {
+    text-align: left;
+}
+
+.group-tab-content .group-box {
+    display: inline-block;
+}
+
+.group-tab-content .group-box li {
+    margin: 8px;
+    float: left;
+    border: 1px solid var(--color_gray_1);
+    border-radius: 5px;
+    width: 220px;
+    height: 200px;
+}
+
+.group-tab-content .group-box .box {
+    width: 220px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.group-tab-content .group-box .img_g {
+    width: 220px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.group-tab-content .group-box .tag {
+    color: white;
+    font-weight: bold;
+    font-size: var(--font5);
+    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+}
+
+.group-tab-content .box .description a {
+    display: block;
+    padding: 3px 0;
+}
+
+.group-tab-content .box .description .name-sub{
+    height: 40px;
+}

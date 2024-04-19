@@ -82,7 +82,7 @@ public class BoardDao {
 	public List<BoardListDto> selectPage(Connection conn, int start, int end) {
 		List<BoardListDto> result = null;
 		String sql = "SELECT T2.*" + "   FROM (SELECT T1.*, ROWNUM RN"
-				+ "       FROM (SELECT BOARD_ID, TITLE, WRITE_TIME, BOARD_WRITER, READ_COUNT FROM BOARD ORDER BY BOARD_ID DESC) T1 ) T2"
+				+ "       FROM (SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_WRITER, READ_COUNT FROM BOARD ORDER BY BOARD_ID DESC) T1 ) T2"
 				+ "   WHERE RN BETWEEN ?   AND ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -147,10 +147,10 @@ public class BoardDao {
 		System.out.println("boarddao insert");
 		int result = 0;
 		String sql = "INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE)"
-				+ " VALUES(SEQ_BOARD_ID.nextval,?, ?, ?, default, default, default)";
+				+ " VALUES(SEQ_BOARD_ID.nextval, ?, ?, ?, default, default, default)";
 		//앞에 띄어쓰기 하기
 		PreparedStatement pstmt = null;
-
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 

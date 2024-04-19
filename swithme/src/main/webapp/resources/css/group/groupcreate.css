@@ -20,11 +20,12 @@
 	text-align: center;
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font1);
-	margin-bottom: 50px;
+	margin-bottom: 50px; 
 }
 
 .wrap-body .frm-create  p, label {
 	font-family: "IM_Hyemin-Bold";
+	margin: 20px 0 20px 0;
 	font-size: var(--font3);
 }
 
@@ -63,7 +64,7 @@
   outline: none;
 }
 
-.wrap-body .frm-create li {
+.wrap-body .frm-create div{
 	margin: 20px 0 20px 0;
 }
 

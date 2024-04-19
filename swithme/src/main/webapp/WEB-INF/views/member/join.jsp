@@ -43,15 +43,15 @@
 			<div class="wrap-join">
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
-						<label>이메일</label><input type="text" name="email">
+						<label>아이디</label><input type="text" name="id">
+						<button type="button" class="btn check">중복확인</button>
+					</div>
+					<div>
+						<label>이메일</label><input type="email" name="email">
 						<button type="button" class="btn code">인증코드</button>
 					</div>
 					<div>
-						<label>이메일 확인</label><input type="text" name="email" placeholder="인증코드">
-					</div>
-					<div>
-						<label>아이디</label><input type="text" name="id">
-						<button type="button" class="btn checkid">중복확인</button>
+						<label>이메일 확인</label><input type="email" name="email" placeholder="인증코드">
 					</div>
 					<div>
 						<label>비밀번호</label><input type="password" name="pwd">
@@ -78,14 +78,17 @@
 $(loadedHandler);
 
 function loadedHandler(){
-	$(".btn.checkid").on("click", btnCheckidClickHandler);
+	$(".btn.check").on("click", btnCheckClickHandler);
 }
-function btnCheckidClickHandler(){
+
+function btnCheckClickHandler(){
 	var idVal = $("[name=id]").val();
+	console.log($("[name=id]").val());
+	
 	$.ajax({  
 		url : "${pageContext.request.contextPath }/checkid"
 		,method : "post"
-		,data : { swithid : $("[name=id]").val() }
+		,data : { id:idVal }
 		,success : function(result){
 			console.log(result);
 			if(result > 0){
@@ -93,7 +96,6 @@ function btnCheckidClickHandler(){
 			}else {
 				alert("사용가능");
 			}	
-
 		}
 		,error : function(request, status, error){
 			alert("code: "+request.status + "\n" + "message: " 

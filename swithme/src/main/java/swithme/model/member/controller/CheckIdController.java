@@ -31,7 +31,10 @@ public class CheckIdController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("###checkid 진입");
-		String memId=request.getParameter("swithid");
+
+		
+		String memId=request.getParameter("id");
+		System.out.println("id"+memId);
 		
 		int result = new MemberService().selectCheckId(memId);
 		response.getWriter().append(String.valueOf(result));

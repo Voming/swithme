@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+.wrap-body {
+	width: 960px;
+	margin: auto;
+}
+
+
+.wrap-body .p-first {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font1);
+	font-weight: bolder;
+	text-align: center;
+	margin: 40px 0 20px 0;
+}
+
+
+.wrap-body .p-sec {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font4);
+	font-weight: bolder;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.wrap-body table {
+ 	border-collapse: separate;
+	line-height: 3em;
+	margin-left: auto; 
+	margin-right: auto;
+
+}
+
+
+.wrap-body td {
+	border-bottom: 1px solid black;
+}
+
+.wrap-body > div:nth-child(2) > table > tbody:nth-child(4) > tr > td {
+	border: none;
+}
+
+.wrap-body > table > tbody:nth-child(1) > tr {
+	text-align: center;
+}
+
+.wrap-body > table > tbody:nth-child(2) > tr-sec > td:nth-child(1), 
+ td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+	 text-align: center;
+ }
+
+
+.wrap-body .btn {
+	display: flex;
+	justify-content:end;
+	margin-top: 10px;
+}
+
+.wrap-body .btn.write {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+	text-align: right;
+
+}
+
+.wrap-body .btn.write:hover {
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+.wrapper > div.wrap-body > div:nth-child(3) > ul{
+	text-align: center;
+}
+
+
+ .wrapper > div.wrap-body > div:nth-child(3) > ul > li {
+	text-align: center;
+	display:inline-block;
+
+ 	margin: 10px 5px;
+	padding: 6px 8px;
+	border: none;
+	border-radius: 100px;
+	background: #DDCCFF;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	
+}
+
+
+ .wrapper > div.wrap-body > div:nth-child(3) > ul > li:hover {
+	text-align: center;
+	display:inline-block;
+	
+	margin: 10px 5px;
+	padding: 6px 8px;
+	
+	border: none;
+	border-radius: 100px;
+	background: #8066FF;
+	color: white;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	cursor: pointer;
+	display:inline-block;
+		
+} 
+
+ /* .wrapper > div.wrap-body > div:nth-child(3) > ul > li > a {
+	text-align: center;
+	display:inline-block;
+ 	margin: 10px 5px;
+	padding: 6px 8px;
+
+	border: none;
+	border-radius: 100px;
+	background: #DDCCFF;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	
+}
+
+  .wrapper > div.wrap-body > div:nth-child(3) > ul > li > a:hover {
+	text-align: center;
+ 	margin: 10px 5px;
+	padding: 6px 8px;
+	
+	border: none;
+	border-radius: 100px;
+	background: #8066FF;
+	color: white;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	cursor: pointer;
+	display:inline-block;
+}
+ */

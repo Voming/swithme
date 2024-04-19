@@ -67,12 +67,16 @@ public class MemberDao {
 		
 		//checkid
 		public int selectCheckId(Connection conn, String memId) {
+			System.out.println("selectCheckId 들어오나?");
+			System.out.println(">>>>>>>>>>>>>> " +memId);
+			
 			int result = 0;
-			String sql = "SELECT COUNT(*) c  FROM MEMBER WHERE MEM_ID=?";
+			String sql = "SELECT COUNT(*) c FROM MEMBER WHERE MEM_ID=?";
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				pstmt.setString(1, memId);
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1 , memId);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					result = rs.getInt("c");
@@ -84,7 +88,6 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 			return result;
-			
 		}
 		
 		

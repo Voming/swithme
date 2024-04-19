@@ -21,6 +21,9 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/group/grouphome.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/group/grouphome_list.css"
+	rel="stylesheet">
 
 <!-- carousel -->
 <link
@@ -59,6 +62,17 @@
 			
 			
 			$(".btn.make").on("click", btnMakeClickHandler);
+			
+			//그룹 탭
+			 // $('.prd-tab-content > div').hide();
+            $('.group-tab-nav a').click(function () {
+                console.log(this);
+                $('.group-tab-content > div').hide().filter(this.hash).fadeIn();
+                $('.group-tab-nav a').removeClass('active');
+                console.log(this);
+                $(this).addClass('active');
+                return false;
+            }).filter(':eq(0)').click();
 		}
 		function btnMakeClickHandler() {
 			/* 로그인 체크 */
@@ -155,7 +169,6 @@
 							</figure>
 						</div>
 					</div>
-					<div class=""></div>
 				</div>
 			</div>
 			<div class="wrap-search">
@@ -183,6 +196,120 @@
 				</div>
 			</div>
 			<div class="wrap-openlist">
+				<div class="tab-body">
+					<p>전체그룹</p>
+					<ul class="group-tab-nav">
+						<li><a href="#tab01">전체</a></li>
+						<li><a href="#tab02">추천 그룹</a></li>
+					</ul>
+					<div class="group-tab-content">
+						<div id="tab01">
+							<ul class="group-box">
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div id="tab02">
+							<ul class="group-box">
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="box">
+										<img class="img_g"
+											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
+											onClick="location.href='TODO상세페이지로 변경하기'">
+										<div class="tag">
+											<p style="background-color: black;  padding: 3px;  font-size: var(--font5);">공개</p>
+										</div>
+										<div class="description">
+											<a class="name"
+												style="font-size: var(--font4); font-weight: bold;">그룹명
+											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
+												설명입니다</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>

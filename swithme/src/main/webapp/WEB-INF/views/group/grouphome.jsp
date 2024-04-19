@@ -97,9 +97,11 @@
 
 		<c:choose>
 			<c:when test="${empty loginInfo }">
-				<div class="wrap-welcome">
-					<div class="check-login"> <button type="button" class="btn join">회원가입</button></div>
-					<div> <button type="button" class="btn login">로그인</button></div>
+				<div class="check-login">
+					<button type="button" class="btn join"
+						onclick="location.href='${pageContext.request.contextPath}/join'">회원가입</button>
+					<button type="button" class="btn login"
+						onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
 				</div>
 			</c:when>
 			<c:otherwise>

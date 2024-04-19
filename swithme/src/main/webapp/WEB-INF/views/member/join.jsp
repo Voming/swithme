@@ -43,28 +43,27 @@
 			<div class="wrap-join">
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
-						<label>아이디</label><input type="text" name="id">
+						<label>아이디</label><input type="text" name="id" requried>
 						<button type="button" class="btn check">중복확인</button>
 					</div>
 					<div>
-						<label>이메일</label><input type="email" name="email">
+						<label>이메일</label><input type="email" name="email" requried>
 						<button type="button" class="btn code">인증코드</button>
 					</div>
 					<div>
-						<label>이메일 확인</label><input type="email" name="email" placeholder="인증코드">
+						<label>이메일 확인</label><input type="text" name="emailr" placeholder="인증코드" requried>
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd">
+						<label>비밀번호</label><input type="password" name="pwd" placeholder="영문자와 숫자로만 입력하세요" requried>
 					</div>
 					<div>
-						<label>비밀번호 확인</label><input type="password" name="pwdr">
+						<label>비밀번호 확인</label><input type="password" name="pwdr" requried>
 						<span class="desc-pwd"></span>
 					</div>
 					<div>
 						<input type="submit" value="회원가입">
 					</div>
 				</form>
-			
 			</div>
 		</div>
 	</div>
@@ -72,8 +71,7 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	
-	
-	
+
 <script>
 $(loadedHandler);
 
@@ -107,6 +105,22 @@ function btnCheckClickHandler(){
  
 </script>
 	
+<script>
 
+
+$("input").keyup(function(){
+	var pwd1=$("[name=pwd]").val();
+	var pwd2=$("[name=pwdr]").val();
+	if(pwd1 != "" || pwd2 != ""){
+		if(pwd1 == pwd2) {
+			$(".desc-pwd").html("일치").css('color', 'green');
+		} else {
+			$(".desc-pwd").html("불일치").css('color', 'red');
+		}
+	}
+});
+	
+
+</script>
 </body>
 </html>

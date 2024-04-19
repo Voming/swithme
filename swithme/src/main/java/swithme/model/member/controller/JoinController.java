@@ -46,7 +46,7 @@ public class JoinController extends HttpServlet {
 		int result = new MemberService().insert(dto);
 		if(result < 0 ) {
 			// 회원가입실패시
-			response.sendRedirect(request.getContextPath()+"/"); //TODO
+			response.sendRedirect(request.getContextPath()+"/welcome"); 
 			return;
 		}
 		// 회원가입정상

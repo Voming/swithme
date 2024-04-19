@@ -19,16 +19,22 @@
 
 	<select id="selectAllOpenList" parameterType="map"
 		resultType="GroupDto">
-		SELECT S.* FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE SGROUP_OPEN = 0)
+		SELECT S.* FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE
+		SGROUP_OPEN = 0)
 		S
 		WHERE ROWNUM BETWEEN #{startRounum} AND #{endRounum}
 	</select>
-	
+
 	<select id="selectAllList" resultType="GroupDto">
 		SELECT * FROM SGROUP
 	</select>
-	
+
 	<insert id="insert" parameterType="GroupCreateDto">
-		INSERT INTO SGROUP VALUES (SEQ_SGROUP_ID.nextval, #{groupName}, #{groupOpen},#{groupPwd},#{groupEx},#{groupImgPath},#{groupImgName})
+		INSERT ALL
+			INTO SGROUP VALUES (SEQ_SGROUP_ID.nextval, #{groupName},
+			#{groupOpen},#{groupPwd},#{groupEx},#{groupImgPath},#{groupImgName})
+			INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{groupWriter})
+		SELECT *
+		FROM DUAL
 	</insert>
 </mapper>

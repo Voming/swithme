@@ -116,6 +116,10 @@ public class GroupCreateController extends HttpServlet {
 		
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		if(loginInfo == null) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return;
+		}
 		String groupWriter = loginInfo.getMemId();
 		
 		System.out.println(groupName);
@@ -128,7 +132,8 @@ public class GroupCreateController extends HttpServlet {
 		System.out.println(dto);
 		int result = service.insert(dto);
 		System.out.println(result);
-		response.sendRedirect(request.getContextPath()+"/group");
+		//response.sendRedirect(request.getContextPath()+"/group");
+		response.getWriter().append(String.valueOf(result));
 	}
 
 }

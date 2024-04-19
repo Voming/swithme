@@ -1,13 +1,7 @@
-<!-- reset.css -->
-<link href="${pageContext.request.contextPath}/resources/css/basic/reset.css" rel="stylesheet">
-<!-- 레이아웃 설정 -->
-<link href="${pageContext.request.contextPath}/resources/css/basic/core.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/basic/layout.css" rel="stylesheet">
-
-<link href="${pageContext.request.contextPath}/resources/css/basic/header.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/basic/footer.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +30,19 @@
 				</div>
 			</header>
 		</div>
-		<div class="wrap-body">
-			<div class="wrap-"></div>
-		</div>
+		<c:choose>
+			<c:when test="${empty loginInfo }">
+				<div class="wrap-welcome">
+					<div class="check-login"> <button type="button" class="btn join">회원가입</button></div>
+					<div> <button type="button" class="btn login">로그인</button></div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="wrap-body">
+					<div class="wrap-"></div>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>

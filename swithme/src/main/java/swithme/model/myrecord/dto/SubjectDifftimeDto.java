@@ -1,24 +1,22 @@
 package swithme.model.myrecord.dto;
 
 public class SubjectDifftimeDto {
-		private int recordSubjectId;
+		private int SubjectId;
 		private String subjectName;
 		private String difftime;
 		@Override
 		public String toString() {
-			return "SubjectDifftimeDto [recordSubjectId=" + recordSubjectId + ", subjectName=" + subjectName
-					+ ", difftime=" + difftime + "]";
+			return "SubjectDifftimeDto [SubjectId=" + SubjectId + ", subjectName=" + subjectName + ", difftime="
+					+ difftime + "]";
 		}
-		
-		public SubjectDifftimeDto(int recordSubjectId, String subjectName, String difftime) {
+		public SubjectDifftimeDto(int subjectId, String subjectName, String difftime) {
 			super();
-			this.recordSubjectId = recordSubjectId;
+			SubjectId = subjectId;
 			this.subjectName = subjectName;
 			this.difftime = difftime;
 		}
-
-		public int getRecordSubjectId() {
-			return recordSubjectId;
+		public int getSubjectId() {
+			return SubjectId;
 		}
 		public String getSubjectName() {
 			return subjectName;
@@ -26,6 +24,7 @@ public class SubjectDifftimeDto {
 		public String getDifftime() {
 			return difftime;
 		}
+
 		
 		
 

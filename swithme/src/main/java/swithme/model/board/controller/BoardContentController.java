@@ -47,7 +47,7 @@ public class BoardContentController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/board/boardcontent.jsp");
 			
 		} catch (NumberFormatException e) {
-			response.sendRedirect(request.getContextPath() + "boardcontent");
+			response.sendRedirect(request.getContextPath() + "/board");
 		}
 	}
 

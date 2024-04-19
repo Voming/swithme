@@ -48,16 +48,19 @@ public class BoardListController extends HttpServlet {
 		//client 가 페이지 지정하고 들어온게 있다면 그것에 맞게 현재페이지 바껴야함
 		
 		String pageNum = request.getParameter("page");
+//		1. 앞에서 string 값을 받아와서(페이지가 일단 값이 string으로 옴
 		if(pageNum != null && !pageNum.equals("")) {
 			
 			try {
 				currentPage = Integer.parseInt(pageNum);
+				// 2. string 을 int로 바꿔주고
 			} catch (NumberFormatException e) {
 			}
 			
 		}
 			
 		request.setAttribute("mapboardlist", service.selectPage(boardNum, boardPageNum, currentPage));
+		// 3. 여기서 다시 jsp로 값을 내보냄(int형으로 내보냄 - 페이지 숫자가 보임) 
 		request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
 
 	

@@ -48,19 +48,6 @@
                 $(this).addClass('active');
                 return false;
             }).filter(':eq(0)').click();
-            
-            
-            $(".btn.join").on("click",btnJoinClickHandler);
-        	$(".btn.login").on("click",btnLoginClickHandler);
-        }
-
-
-        function btnJoinClickHandler(){
-        	location.href="${pageContext.request.contextPath}/join";
-        }
-
-        function btnLoginClickHandler(){
-        	location.href="${pageContext.request.contextPath}/login";
         }
 
 		function btnMakeClickHandler() {

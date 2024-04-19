@@ -11,6 +11,10 @@ exec PRO_RECORD_INSERT_DINNER('won','D_3','18');
 exec PRO_RECORD_INSERT_MORNING('won','D_3','19');
 exec PRO_RECORD_INSERT_LUNCH('won','SQL','19');
 exec PRO_RECORD_INSERT_DINNER('won','D_1','19');
+
+exec PRO_RECORD_INSERT_MORNING('song','JAVA','19');
+exec PRO_RECORD_INSERT_LUNCH('song','spring','19');
+exec PRO_RECORD_INSERT_DINNER('song','C#','19');
 --delete from record;
 select * from record where record_mem_id='won' order by record_end desc
 ;

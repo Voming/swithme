@@ -46,6 +46,7 @@ public class SubjectService {
 		result = dao.insert(conn, dto);
 		System.out.println(">>>>>>serv insert  result : "+result);
 		close(conn);
+		//autoCommit(conn, true);
 		return result;
 	}
 	

@@ -120,10 +120,10 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 
 						</ul>
 						<div class="btnGroup">
-							<button type="button" id="start" class="btn">
+							<button type="button" id="start" class="btn start">
 								<P>시작</P>
 							</button>
-							<button type="button" id="stop" class="btn">
+							<button type="button" disabled="true" id="stop" class="btn stop">
 								<p>종료</p>
 							</button>
 						</div>
@@ -261,6 +261,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	<script type="text/javascript">
+	
 		$(loadedHandler);
 		function loadedHandler() {
 			$("#start").on("click", startClickHandler);
@@ -271,7 +272,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			});
 
 			$("#currentTime").ready(function() {
-				currentTime();
+				currentTimeHandler();
 				setInterval(currentTime, 1000);
 			});
 
@@ -300,12 +301,21 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			startTime = new Date();
 			intervalCountdownID = setInterval(intervalCountdownCb, 1000, "p1",
 					"p2");
+			
+			//버튼 활성화
+			$("#start").prop("disabled", true);
+			$("#stop").prop("disabled", false);
 
 		}
 		function stopClickHandler() {
 			endTime = new Date();
 			console.log("멈춰!!!");
 			clearInterval(intervalCountdownID);
+			console.log(intervalCountdownID);
+			
+			//버튼 활성화
+			  $("#start").prop("disabled", false);
+			  $("#stop").prop("disabled", true);
 
 		}
 		/* 시간 계산 setInterval 사용 */
@@ -381,7 +391,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 
 		}
 
-		function currentTime() {
+		function currentTimeHandler() {
 			var time = new Date();
 			var localTime = time.toLocaleTimeString();
 			$("#currentTime").text(localTime);

@@ -151,7 +151,7 @@ function btnColorHandler(){
 } 
 
 function btnGreyHandler(){
-	$("#loginbtn").css('background','');
+	$("#loginbtn").css('background','#DDCCFF');
 }
 
 function onInput() {

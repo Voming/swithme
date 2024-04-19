@@ -73,8 +73,8 @@
 									<tr class="tr-sec">
 										<td style="text-align: center;">${dto.boardId}</td>
 										<td>${dto.title}</td>
-										<td>${dto.writeTime}</td>
 										<td>${dto.boardWriter}</td>
+										<td>${dto.writeTime}</td>
 										<td>${dto.readCount}</td>
 									</tr>
 								</c:forEach>

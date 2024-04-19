@@ -369,7 +369,8 @@ function loadedHandler() {
 				error : ajaxErrorHandler,
 				success : function(result) {
 					console.log("성공");
-
+					//location.replace="${pageContext.request.contextPath}/myrecord";
+					location.reload(true);
 				}
 			});
 		}

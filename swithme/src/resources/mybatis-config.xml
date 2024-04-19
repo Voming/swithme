@@ -34,6 +34,7 @@
 		<typeAlias
 			type="swithme.model.testcalendar.dto.ProengineerDto"
 			alias="ProengineerDto" />
+		<package name="swithme.model.myrecord.dto"/>
 	</typeAliases>
 
 	<environments default="dbserverSwithme">
@@ -62,6 +63,7 @@
 		<mapper resource="mappers/group-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/record-mapper.xml"/>
+		<mapper resource="mappers/subject-mapper.xml"/>
 		<mapper resource="mappers/testcalendar-mapper.xml"/>
 		<!-- xxx-mapper.xml 생성 후 추가 -->
 	</mappers>

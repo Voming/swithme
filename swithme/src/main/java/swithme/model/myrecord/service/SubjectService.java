@@ -1,10 +1,12 @@
 package swithme.model.myrecord.service;
 
 
-import static swithme.jdbc.common.JdbcTemplate.*;
+import static swithme.jdbc.common.MybatisTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.myrecord.dao.RecordDao;
 import swithme.model.myrecord.dao.SubjectDao;
@@ -20,9 +22,9 @@ public class SubjectService {
 	//과목 이름만 
 	public String selectOne(String memid) {
 		String sujectName = null;
-		Connection conn = getConnection(false);
-		sujectName= dao.selectOne(conn, memid);
-		close(conn);
+		SqlSession session = getSqlSession();
+		sujectName= dao.selectOne(session, memid);
+		session.close();
 		return sujectName;
 	}
 	
@@ -32,10 +34,10 @@ public class SubjectService {
 		System.out.println(">>>>>>serv select  memId : "+memId);
 		
 		List<SubjectDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.select(conn, memId);
+		SqlSession session = getSqlSession();
+		result = dao.select(session, memId);
 			System.out.println(">>>>>>serv select  result : "+result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -46,17 +48,17 @@ public class SubjectService {
 		
 		List<SubjectDifftimeDto> result = null;
 		int insertResult = -1;
-		Connection conn = getConnection(false);
+		SqlSession session = getSqlSession();
 
 		// insert subject
-		insertResult = dao.insert(conn, dto);
+		insertResult = dao.insert(session, dto);
 		
 		// select record
 		// 과목추가에 성공 여부와 상관없이 화면을 다시 display 해야 하므로 정보를 조회해 옴
-		result = daoRecord.subjectDifftime(conn, dto.getSubjectMemId());
+		result = daoRecord.subjectDifftime(session, dto.getSubjectMemId());
 		
 		System.out.println(">>>>>>serv insert  result : "+result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -66,13 +68,13 @@ public class SubjectService {
 		System.out.println(">>>>>>serv insert  dto : "+dto);
 		
 		int result = -1;
-		Connection conn = getConnection(false);
+		SqlSession session = getSqlSession();
 
 		// insert subject
-		result = dao.insert(conn, dto);
+		result = dao.insert(session, dto);
 		
 		System.out.println(">>>>>>serv insert  result : "+result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -82,10 +84,10 @@ public class SubjectService {
 		//과목,맴버 ID를 조건으로 하는 행의 과목이름과 컬러 변경
 		System.out.println(">>>>>>update  SubjectDto : "+dto);
 		int result = -1;
-		Connection conn = getConnection(false);
-		result = dao.update(conn, dto);
+		SqlSession session = getSqlSession();
+		result = dao.update(session, dto);
 			System.out.println(">>>>>>serv update  result : "+result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -94,10 +96,10 @@ public class SubjectService {
 	public int delete(SubjectDeleteDto dto) {
 		System.out.println(">>>>>>delete SubjectDeleteDto : "+dto);
 		int result = -1;
-		Connection conn = getConnection(false);
-		result = dao.delete(conn, dto);
+		SqlSession session = getSqlSession();
+		result = dao.delete(session, dto);
 			System.out.println(">>>>>>serv delete  result : "+result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	

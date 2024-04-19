@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="subject">
+
+<select id="selectOne" parameterType="string" resultType="string">
+select SUBJECT_NAME from subject where MEM_ID=#{memid} and SUBJECT_DEL_DATE IS NULL
+</select>
+
+<select id="select" parameterType="string" resultType="SubjectDto">
+SELECT * FROM SUBJECT WHERE MEM_ID = #{memid}
+</select>
+
+<insert id="insert" parameterType="SubjectAddDto">
+INSERT INTO SUBJECT VALUES(SEQ_SUBJECT_ID.nextval,#{subjectMemId},#{subjectName},DEFAULT,NULL,#{subjectColor})
+</insert>
+<update id="update" parameterType="SubjectAddDto">
+UPDATE SUBJECT SET SUBJECT_NAME = #{subjectName} , SUBJECT_COLOR = #{subjectColor}  WHERE SUBJECT_ID = #{TODO_EJKIM} AND MEM_ID = #{subjectMemId} 
+</update>
+<delete id="delete" parameterType="SubjectDeleteDto">
+UPDATE SUBJECT SET SUBJECT_NAME = #{subjectName} , SUBJECT_COLOR = #{subjectColor}  WHERE SUBJECT_ID = #{TODO_EJKIM} AND MEM_ID = #{subjectMemId} 
+</delete>
+
+</mapper>

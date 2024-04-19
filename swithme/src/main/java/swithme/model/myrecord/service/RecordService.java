@@ -1,10 +1,11 @@
 package swithme.model.myrecord.service;
 
-import static swithme.jdbc.common.JdbcTemplate.close;
-import static swithme.jdbc.common.JdbcTemplate.getConnection;
+import static swithme.jdbc.common.MybatisTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.myrecord.dao.RecordDao;
 import swithme.model.myrecord.dto.RecordDto;
@@ -20,19 +21,19 @@ public class RecordService {
 	public List<SubjectDifftimeDto> subjectDifftime(String memId){
 		System.out.println(">>>>>>rec dao subjectDifftime  memId : " + memId);
 		List<SubjectDifftimeDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.subjectDifftime(conn,memId);
+		SqlSession session = getSqlSession();
+		result = dao.subjectDifftime(session,memId);
 		System.out.println(">>>>>>rec subjectDifftime  result : " + result);
-		close(conn);
+		session.close();
 		return result;
 
 	}
 	// selectOne
 	public RecordDto selectOne(int recordSubjectId) {
 		RecordDto vo = null;
-		Connection conn = getConnection(false);
-		vo = dao.selectOne(conn, recordSubjectId);
-		close(conn);
+		SqlSession session = getSqlSession();
+		vo = dao.selectOne(session, recordSubjectId);
+		session.close();
 		return vo;
 	}
 
@@ -41,10 +42,10 @@ public class RecordService {
 		System.out.println(">>>>>>rec select ");
 
 		List<RecordDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.select(conn);
+		SqlSession session = getSqlSession();
+		result = dao.select(session);
 		System.out.println(">>>>>>rec select  result : " + result);
-		close(conn);
+		session.close();
 		return result;
 	}
 
@@ -53,10 +54,10 @@ public class RecordService {
 		System.out.println(">>>>>>rec insert  dto : " + dto);
 
 		int result = -1;
-		Connection conn = getConnection(false);
-		result = dao.insertStartTime(conn, dto);
+		SqlSession session = getSqlSession();
+		result = dao.insertStartTime(session, dto);
 		System.out.println(">>>>>>rec insert  result : " + result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	// insert
@@ -64,10 +65,10 @@ public class RecordService {
 		System.out.println(">>>>>>rec insert  dto : " + dto);
 
 		int result = 0;
-		Connection conn = getConnection(false);
-		result = dao.insertEndTime(conn, dto);
+		SqlSession session = getSqlSession();
+		result = dao.insertEndTime(session, dto);
 		System.out.println(">>>>>>rec insert  result : " + result);
-		close(conn);
+		session.close();
 		return result;
 	}
 	// rec은 delete,update없음

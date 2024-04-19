@@ -16,12 +16,12 @@ public class RecordService {
 	private RecordDao dao = new RecordDao();
 	
 	//과목별 학습 시간과 당일 총 학습시간
-	public List<SubjectDifftimeDto> SubjectDifftime(String memId){
-		System.out.println(">>>>>>rec dao SubjectDifftime  memId : " + memId);
+	public List<SubjectDifftimeDto> subjectDifftime(String memId){
+		System.out.println(">>>>>>rec dao subjectDifftime  memId : " + memId);
 		List<SubjectDifftimeDto> result = null;
 		Connection conn = getConnection(false);
-		result = dao.SubjectDifftime(conn,memId);
-		System.out.println(">>>>>>rec SubjectDifftime  result : " + result);
+		result = dao.subjectDifftime(conn,memId);
+		System.out.println(">>>>>>rec subjectDifftime  result : " + result);
 		close(conn);
 		return result;
 

@@ -1,15 +1,11 @@
-<link href="<%=request.getContextPath()%>/resources/css/basic/reset.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/core.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/board/board.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<%=request.getContextPath()%>/resources/css/board/board.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <meta charset="UTF-8">
 <title>게시판</title>
@@ -37,7 +33,19 @@
 				</div>
 			</header>
 		</div>
-		<div class="wrap-body">
+		<c:choose>
+			<c:when test="${empty loginInfo }">
+				<div class="wrap-welcome">
+					<div class="check-login">
+						<button type="button" class="btn join"
+							onclick="location.href='${pageContext.request.contextPath}/join'">회원가입</button>
+						<button type="button" class="btn login"
+							onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="wrap-body">
 			<div class="pgroup">
 				<p class="p-first">자유 게시판</p>
 				<p class="p-sec">자유롭게 소통해요~</p>
@@ -72,8 +80,10 @@
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
 									<tr class="tr-sec">
 										<td style="text-align: center;">${dto.boardId}</td>
-										<td><a href="${pageContext.request.contextPath }/boardcontent?id=${vo.boardId }">${dto.title }</a></td>
+										<td><a href="${pageContext.request.contextPath }/boardcontent?id=${dto.boardId }">${dto.title }</a></td>
 										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
+										<!-- url에 있는 parameter 값 가지고 와서 쓸 수 있기 때문에 여기 있는 id는
+										BoardContentController에에서 쓰임 -->
 										<td>${dto.boardWriter}</td>
 										<td>${dto.writeTime}</td>
 										<td>${dto.readCount}</td>
@@ -125,6 +135,9 @@
 			</div>
 
 		</div>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 
 	<div class="wrap-footer">

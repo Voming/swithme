@@ -29,7 +29,7 @@ import swithme.model.myrecord.dto.SubjectDto;
 public class RecordDao {
 	
 // 오늘의 과목 학습 시간 
-	public List<SubjectDifftimeDto> SubjectDifftime(Connection conn,String memId){
+	public List<SubjectDifftimeDto> subjectDifftime(Connection conn,String memId){
 		System.out.println(">>>>>>rec SubjectDifftime  memId : " + memId);
 
 		List<SubjectDifftimeDto> result = null;
@@ -48,7 +48,7 @@ public class RecordDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
 			pstmt.setString(2, memId);
-
+    
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = new ArrayList<SubjectDifftimeDto>();

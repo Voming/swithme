@@ -6,7 +6,7 @@
     height:100%;
 }
 
-.wrap-join{
+.wrap-body .wrap-join{
 	position: absolute;
 	top: 50%; /* 전체 높이 위에서부터  */
     left: 50%; /* 전체 넓이 왼쪽에서부터 절반 */
@@ -17,17 +17,17 @@
     
 }
 
-.btn.check{
+.wrap-body .wrap-join .btn.check{
 	background-color:white;
 	border:none;
 }
 
-.btn.code{
+.wrap-body .wrap-join .btn.code{
 	background-color:white;
 	border:none;
 }
 
-input[type=text]{
+.wrap-body .wrap-join input[type=text]{
 	width: 70%;
     height: 30px;
     padding: 0 10px;
@@ -36,7 +36,7 @@ input[type=text]{
     margin-bottom:30px;
 }
 
-input[type=email]{
+.wrap-body .wrap-join input[type=email]{
 	width: 70%;
     height: 30px;
     padding: 0 10px;
@@ -45,7 +45,7 @@ input[type=email]{
      margin-bottom:30px;
 }
 
-input[type=password]{
+.wrap-body .wrap-join input[type=password]{
 	width: 70%;
     height: 30px;
     padding: 0 10px;
@@ -53,6 +53,17 @@ input[type=password]{
      border-radius: 10px;
      margin-bottom:30px;
 }
-label{
+.wrap-body .wrap-join label{
 	margin-right:30px;
+}
+
+.wrap-body .wrap-join .btn.join{
+	text-align: center;
+	width: 40%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-top: 25px;
+    background-color:#DDCCFF;
 }

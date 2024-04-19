@@ -8,6 +8,7 @@
 	/* background-color: lightgray;   */
 	font-family: "IM_Hyemin-Regular";
 	position: relative;
+
 }
 
 .wrap-body .wrap-main p {
@@ -26,7 +27,11 @@
 	left: 50%;
 	transform: translate(-50%, -20%);
 	text-align: center;
+	
+	
+	/*모달창 위치*/
 }
+
 
 .wrap-body form>* {
 	margin-bottom: 36px;
@@ -71,12 +76,13 @@
 }
 .wrap-body .timer.box {
 	width: 100%;
-	height: 50px;
 	position: relative;
 	/* TODO 과목 증가시 높이 증가..? */
 	min-height: 430px;
+	
 	display: flex;
-	position: relative;
+    flex-direction: row;
+	
 	box-sizing: border-box;
 }
 
@@ -85,10 +91,17 @@
 	width: 25%;
 	background-color: var(--color_purple_3);
 	width: 25%;
+   display: flex;
+    flex-direction: column;
+}
+.wrap-body .timer.box .study-info .sujblsit{
+		margin-bottom: 40px;
 }
 
 .wrap-body .timer.box .study-info  li {
 	padding: 10px;
+
+	
 }
 
 .wrap-body .timer.box .study-info  li>div {
@@ -105,6 +118,7 @@
 }
 
 .wrap-body .timer.box .study-info .btnGroup {
+
 	position: absolute;
 	bottom: 0px;
 	right: 0px;

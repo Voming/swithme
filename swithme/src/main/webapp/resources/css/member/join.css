@@ -1,0 +1,58 @@
+.wrap-body{
+    display:flex;
+    justify-content: center;
+ 	padding:0;
+    margin:0;
+    height:100%;
+}
+
+.wrap-join{
+	position: absolute;
+	top: 50%; /* 전체 높이 위에서부터  */
+    left: 50%; /* 전체 넓이 왼쪽에서부터 절반 */
+    transform: translate(-50%, -50%); /* 해당 요소의 높이, 넓이의 절반만큼 돌아가기 */
+    width:70%;
+    font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+    
+}
+
+.btn.check{
+	background-color:white;
+	border:none;
+}
+
+.btn.code{
+	background-color:white;
+	border:none;
+}
+
+input[type=text]{
+	width: 70%;
+    height: 30px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom:30px;
+}
+
+input[type=email]{
+	width: 70%;
+    height: 30px;
+    padding: 0 10px;
+    box-sizing: border-box;
+     border-radius: 10px;
+     margin-bottom:30px;
+}
+
+input[type=password]{
+	width: 70%;
+    height: 30px;
+    padding: 0 10px;
+    box-sizing: border-box;
+     border-radius: 10px;
+     margin-bottom:30px;
+}
+label{
+	margin-right:30px;
+}

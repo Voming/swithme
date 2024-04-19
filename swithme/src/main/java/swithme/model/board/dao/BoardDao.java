@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import static swithme.jdbc.common.JdbcTemplate.close;
 
+import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
@@ -49,15 +50,11 @@ public class BoardDao {
 	
 
 	//게시글 하나 선택
-	public BoardDto selectOne(SqlSession session, Integer boardId) {
-		BoardDto result = session.selectOne("board.selectOne", boardId);
+	public BoardContentDto selectOne(SqlSession session, Integer boardId) {
+		BoardContentDto result = session.selectOne("board.selectOne", boardId);
 		return result;
 	}
-	
-	
-//	private String title;
-//	private String content;
-//	private String boardWriter;
+
 
 	//게시글 추가
 	public int insert(SqlSession session, BoardInsertDto dto) {

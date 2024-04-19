@@ -10,6 +10,7 @@ import static swithme.jdbc.common.JdbcTemplate.*;
 
 import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.board.dao.BoardDao;
+import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
@@ -74,8 +75,8 @@ public class BoardService {
 	
 	
 	//게시글 상세 페이지 들어가서 보는 것
-	public BoardDto selectOne(int boardId) {
-		BoardDto result = null;
+	public BoardContentDto selectOne(int boardId) {
+		BoardContentDto result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result= dao.selectOne(session, boardId);
 		session.close();

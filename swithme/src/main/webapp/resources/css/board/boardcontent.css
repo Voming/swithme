@@ -15,6 +15,7 @@
 
 .wrap-body .title {
 	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
 	resize: none;
 	border: none;
 	border-radius: 20px;
@@ -24,8 +25,32 @@
 
 }
 
+.wrap-body > div.content-main > div.title > div.t-1 > div {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	padding-bottom: 30px;
+}
+
+.wrap-body > div.content-main > div.title > div.t-2 > ul{
+	display:flex;
+	
+}
+
+ .wrap-body > div.content-main > div.title > div.t-2 > ul > li {
+	flex: 1 1 0;	
+}
+
+.wrap-body > div.content-main > div.title > div.t-2 > ul > li:nth-child(2) {
+	flex: 2 0 0;
+}
+
+.wrap-body > div.content-main > div.title > div.t-2 > ul > li:nth-child(3) > p:nth-child(1){
+	text-align: end;
+}
+
 .wrap-body .content {
 	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font2);
 	resize: none;
 	border: none;
 	border-radius: 20px;
@@ -43,11 +68,99 @@
 
 .wrap-body .reply {
 	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font3);
 	resize: none;
 	border: none;
 	border-radius: 20px;
 	background: rgb(237, 237, 237);
  	padding: 20px 20px;
- 	margin: 20px 40px 20px 40px;
+ 	margin: 10px 40px 20px 40px;
 
+}
+
+body > div.wrapper > div.wrap-body > div.board-reply > p {
+	font-family: "IM_Hyemin-Bold";
+	margin-left: 45px;
+	font-size: var(--font2);
+}
+
+ .wrap-body > div.board-reply > div > div.r-1 {
+	padding-bottom: 25px;
+}
+
+body > div.wrapper > div.wrap-body > div.board-reply > div > div.r-1 > div:nth-child(1) {
+	padding-bottom: 10px;
+}
+
+ .wrap-body > div.board-reply > div > div.r-2 {
+ 	font-size: var(--font4);
+ }
+
+.wrap-body > div.board-reply > div > div.r-2 > ul{
+	display:flex;
+	
+}
+
+.wrap-body > div.board-reply > div > div.r-2 > ul > li {
+	flex: 1 1 0;	
+}
+
+.wrap-body > div.board-reply > div > div.r-2 > ul > li:nth-child(2) {
+	flex: 2 0 0;
+}
+
+.wrap-body > div.board-reply > div > div.r-2 > ul > li:nth-child(3) > p:nth-child(1){
+	text-align: end;
+}
+
+.wrap-body .btn {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.wrap-body > div.board-reply > div.btn > button.btn.write {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+	margin-left: 40px;
+	text-align: right;
+
+}
+
+.wrap-body > div.board-reply > div.btn > button.btn.write:hover {
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	margin-left: 40px;
+	cursor: pointer;
+}
+
+.wrap-body > div.board-reply > div.btn > button.btn.board {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+	margin-right: 40px;
+	text-align: right;
+
+}
+
+.wrap-body > div.board-reply > div.btn > button.btn.board:hover {
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	margin-right: 40px;
+	cursor: pointer;
 }

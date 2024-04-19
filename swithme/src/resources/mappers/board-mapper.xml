@@ -17,7 +17,7 @@
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
-	<select id="selectOne" resultType="BoardDto"
+	<select id="selectOne" resultType="BoardContentDto"
 		parameterType="_int">
 		SELECT * FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>

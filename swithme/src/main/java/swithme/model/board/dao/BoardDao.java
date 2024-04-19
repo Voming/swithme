@@ -1,18 +1,14 @@
 package swithme.model.board.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import static swithme.jdbc.common.JdbcTemplate.close;
 
 import swithme.model.board.dto.BoardContentDto;
+
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;

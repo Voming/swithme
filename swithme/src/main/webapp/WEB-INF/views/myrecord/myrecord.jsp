@@ -74,6 +74,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			<c:otherwise>
 				<div class="wrap-body">
 					<div class="wrap-main">
+					<div class=".myrecord">
 						<!-- 내가 할 곳 -->
 						<div class="timer box">
 							<div class="study-info">
@@ -94,7 +95,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 													</div>
 												</c:when>
 												<c:otherwise>
-													<div id="subId" class="${vo.subjectName}">${vo.subjectName}</div>
+													<div id="${vo.subjectName}" class="subId" data-subject-name="${vo.subjectName}" data-subject-id="${vo.subjectId}" >${vo.subjectName}</div>
 												</c:otherwise>
 											</c:choose> <c:choose>
 												<c:when test="${empty vo.difftime}">
@@ -248,6 +249,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 							</script>
 						</div>
 					</div>
+					</div>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -259,6 +261,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 	<script type="text/javascript">
 		$(loadedHandler);
 		function loadedHandler() {
+
 			$("#start").on("click", startClickHandler);
 			$("#stop").on("click", stopClickHandler);
 
@@ -276,14 +279,15 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			
 		}
 		
+		/*과목 이름 클릭시 해당과목이름 화면에 띄움, subjectName 받아오기 */
 		 function ready() {
 			   alert('DOM이 준비되었습니다!');
-				$("#subId").on("click",subIdClickHandler);
+				$(".subId").on("click",subIdClickHandler);
 		 }
 	    document.addEventListener("DOMContentLoaded", ready);
 		
 		function subIdClickHandler(){
-			var tagId = $(this).attr('class');
+			var tagId = $(this).data('subject-name');
 			alert(tagId);
 			
 		}

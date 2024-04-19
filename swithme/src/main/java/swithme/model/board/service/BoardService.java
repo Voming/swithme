@@ -79,7 +79,11 @@ public class BoardService {
 		BoardContentDto result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result= dao.selectOne(session, boardId);
+		
+		System.out.println("BoardContentDao" + boardId);
+		
 		session.close();
+		
 		
 		return result;
 	}

@@ -28,29 +28,33 @@ import swithme.model.myrecord.dto.SubjectDto;
 
 public class RecordDao {
 	
+// 오늘의 과목 학습 시간 
 	public List<SubjectDifftimeDto> SubjectDifftime(Connection conn,String memId){
 		System.out.println(">>>>>>rec SubjectDifftime  memId : " + memId);
 
 		List<SubjectDifftimeDto> result = null;
-		String sql = "SELECT RECORD_SUBJECT_ID "
-				+ ",(SELECT SUBJECT_NAME from SUBJECT where SUBJECT_ID=RECORD_SUBJECT_ID) AS SUBJECT_NAME "
-				+ ", SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME "
-				+ " from RECORD "
-				+ " where RECORD_MEM_ID =? and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') "
-				+ " GROUP BY CUBE(RECORD_SUBJECT_ID)";
+		String sql = "select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME    "
+				+ " from (SELECT SUBJECT_ID, SUBJECT_NAME  FROM SUBJECT WHERE MEM_ID =? AND SUBJECT_DEL_DATE IS NULL) t1   "
+				+ " FULL JOIN  "
+				+ " ( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME  "
+				+ "   FROM RECORD WHERE RECORD_MEM_ID =?  and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')  "
+				+ "   group by cube(RECORD_SUBJECT_ID) ) t2  "
+				+ " on (SUBJECT_ID = RECORD_SUBJECT_ID)  "
+				+ " ORDER BY SUBJECT_ID ASC NULLS FIRST  " ;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
+			pstmt.setString(2, memId);
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = new ArrayList<SubjectDifftimeDto>();
 				do {
 
-					SubjectDifftimeDto dto = new SubjectDifftimeDto(rs.getInt("RECORD_SUBJECT_ID"),
+					SubjectDifftimeDto dto = new SubjectDifftimeDto(rs.getInt("SUBJECT_ID"),
 							rs.getString("SUBJECT_NAME"), rs.getString("DIFFTIME"));
 					result.add(dto);
 					

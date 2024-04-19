@@ -88,7 +88,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 				<!-- 내가 할 곳 -->
 				<div class="timer box">
 					<div class="study-info">
-						<ul>
+						<ul class="sujblsit">
 							<li class="mem-id"><p>MEM_ID</p></li>
 							<li>
 								<div id="today">today</div>
@@ -106,8 +106,16 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 										<c:otherwise>
 											<div>${vo.subjectName}</div>
 										</c:otherwise>
-									</c:choose>
-									<div>${vo.difftime }</div></li>
+									</c:choose> <c:choose>
+										<c:when test="${empty vo.difftime}">
+											<div>
+												<p>00:00:00</p>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div>${vo.difftime}</div>
+										</c:otherwise>
+									</c:choose></li>
 							</c:forEach>
 
 						</ul>
@@ -170,7 +178,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 
 						<!-- Modal -->
 						<div class="add modal" id="exampleModal2">
-							<div class="modal-dialog ">
+							<div class="modal-dialog .modal-dialog-centered">
 								<div class="modal-content">
 									<div class="btn modal-close" data-bs-dismiss="modal">x</div>
 									<!-- controller 추가 -->

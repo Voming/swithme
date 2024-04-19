@@ -19,7 +19,7 @@
 
 	<select id="selectOne" resultType="BoardContentDto"
 		parameterType="_int">
-		SELECT * FROM BOARD WHERE BOARD_ID = #{boardId}
+		SELECT TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>
 
 	<insert id="insert" parameterType="BoardInsertDto">

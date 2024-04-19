@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 </head>
 <body>
 	<script>
@@ -20,8 +21,6 @@ function loadedHandler() {
 }
 function btnOpenClickHandler(){
 	if($(this).val() == "open"){
-		$(".dpwd").hide();
-
 		$(".dpwd").remove();
 	}else {
 		var htmlVal = `<div class="dpwd"><p>비밀번호</p>
@@ -33,8 +32,19 @@ function btnOpenClickHandler(){
 	console.log(isOpen);
 }
 
+/* function btnCreateClickHandler(){
+	
+
+	var frm = document.getElementsByClassName("frm-create");
+	console.log(frm[0]);
+	frm[0].method = "post"; //content길이가 길 예정 한글 3, 영문자 1 바이트
+	frm[0].action = "${pageContext.request.contextPath}/group/create";
+	frm[0].enctype = "multipart/form-data";   //form 태그 내부에 input type="file"이 있다면 
+	frm[0].submit(); //값을 보내야 controller에서 인식함
+}
+ */
 function btnCreateClickHandler(){
-	console.log("들어옴");
+	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
 		return;
@@ -45,13 +55,33 @@ function btnCreateClickHandler(){
 			return;
 		} 
 	}
+	
+	console.log($(".frm-create").serialize());
+	
+	// ajax - encType="multipart/form-data" 
+	console.log( new FormData($(".frm-create").get(0)) );
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath }/group/create"
+		, method : "post"
+	// ajax - encType="multipart/form-data" 
+		, data : new FormData($(".frm-create").get(0)) 
+		, contentType : false
+		, processData : false
 
-	var frm = document.getElementsByClassName("frm-create");
-	console.log(frm[0]);
-	frm[0].method = "post"; //content길이가 길 예정 한글 3, 영문자 1 바이트
-	frm[0].action = "${pageContext.request.contextPath}/group/create";
-	frm[0].enctype = "multipart/form-data";   //form 태그 내부에 input type="file"이 있다면 
-	frm[0].submit(); //값을 보내야 controller에서 인식함
+		, success : function(result){
+			console.log(result);
+			if(result > 1 ){
+				alert("그룹이 생성되었습니다.");
+				location.href="${pageContext.request.contextPath }/group";
+			}else {
+				alert("그룹 생성이 불가합니다");
+			}
+		}
+		,error : ajaxErrorHandler
+		
+	});
+	
 }
 
 </script>

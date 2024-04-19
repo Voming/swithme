@@ -59,18 +59,19 @@ function btnCreateClickHandler(){
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
 		return;
 	}
-	if ($("[name=groupPwd]").val().trim().length == 0) {
-		alert("빈칸만 입력할 수 없습니다. 비밀번호를 작성해주세요");
-		return;
-	} 
+	if ($("[name=groupPwd]").length > 0){
+		if ($("[name=groupPwd]").val().trim().length == 0) {
+			alert("빈칸만 입력할 수 없습니다. 비밀번호를 작성해주세요");
+			return;
+		} 
+	}
 
 	var frm = document.getElementsByClassName("frm-create");
-	console.log(frm);
-	frm.method = "post"; //content길이가 길 예정 한글 3, 영문자 1 바이트
-	frm.action = "${pageContext.request.contextPath}/group/create";
-	frm.enctype = "multipart/form-data";   //form 태그 내부에 input type="file"이 있다면 
-	//TODO 인식안됨
-	frm.submit(); //값을 보내야 controller에서 인식함
+	console.log(frm[0]);
+	frm[0].method = "post"; //content길이가 길 예정 한글 3, 영문자 1 바이트
+	frm[0].action = "${pageContext.request.contextPath}/group/create";
+	frm[0].enctype = "multipart/form-data";   //form 태그 내부에 input type="file"이 있다면 
+	frm[0].submit(); //값을 보내야 controller에서 인식함
 }
 
 </script>
@@ -122,7 +123,7 @@ function btnCreateClickHandler(){
 							<input type="file" name="uploadfile" required />
 						</div>	
 						<div class="wbtn">
-							<button type="submit" class="btn create">그룹 만들기</button>
+							<button type="button" class="btn create">그룹 만들기</button>
 						</div>
 					</form>
 				</div>

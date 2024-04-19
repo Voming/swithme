@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<properties resource="db.properties"/>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias
+			type="swithme.model.group.dto.GroupDto"
+			alias="GroupDto" />
+		<typeAlias
+			type="swithme.model.group.dto.GroupCreateDto"
+			alias="GroupCreateDto" />
+		<typeAlias
+			type="swithme.model.board.dto.BoardDto"
+			alias="BoardDto" />
+		<typeAlias
+			type="swithme.model.board.dto.BoardInsertDto"
+			alias="BoardInsertDto" />
+		<typeAlias
+			type="swithme.model.board.dto.BoardListDto"
+			alias="BoardListDto" />
+		<typeAlias
+			type="swithme.model.testcalendar.dto.IndengineerDto"
+			alias="IndengineerDto" />
+		<typeAlias
+			type="swithme.model.testcalendar.dto.MastercraftsmentDto"
+			alias="MastercraftsmentDto" />
+		<typeAlias
+			type="swithme.model.testcalendar.dto.ProengineerDto"
+			alias="ProengineerDto" />
+	</typeAliases>
+
+	<environments default="dbserverSwithme">
+		<environment id="dbserverSwithme">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.swithme.dbserver.url}" />
+				<property name="username" value="${jbdc.swithme.username}" />
+				<property name="password" value="${jbdc.swithme.password}" />
+			</dataSource>
+		</environment>
+		<environment id="localhostSwithme">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.swithme.localhost.url}" />
+				<property name="username" value="${jdbc.swithme.username}" />
+				<property name="password" value="${jdbc.swithme.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<!-- xxx-mapper.xml 생성 후 추가 -->
+	</mappers>
+</configuration>
+
+

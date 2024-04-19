@@ -1,12 +1,14 @@
 package swithme.model.board.service;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
 import static swithme.jdbc.common.JdbcTemplate.*;
 
+import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.board.dao.BoardDao;
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
@@ -24,12 +26,12 @@ public class BoardService {
 		//한 페이지 당 글 수: boardNum
 		
 		Map<String, Object> result = null;
-		Connection conn = getConnection(false);
+		SqlSession session = MybatisTemplate.getSqlSession();
 		
 //		--총 게시글 개수 알아보기 
 //		SELECT COUNT(*)/n개 FROM BOARD;
 //		DB 가서 그때그때 알아와야함 - 게시글이 몇개이냐에 따라 달라질 수 있어서
-		int totalboardCount = dao.selectTotalPageCount(conn);
+		int totalboardCount = dao.selectTotalPageCount(session);
 		
 		int start = boardNum*(currentPage-1)+1;
 		int end = boardNum*currentPage;	
@@ -44,8 +46,8 @@ public class BoardService {
 		//끝페이지
 		int endPageNum= (startPageNum+boardPageNum > totalPageCount)? totalPageCount: startPageNum+boardPageNum -1;
 		
-		List<BoardListDto> boardlistdto = dao.selectPage(conn, start, end);
-		close(conn);
+		List<BoardListDto> boardlistdto = dao.selectPage(session, start, end);
+		session.close();
 		
 		result = new HashMap<String, Object>();
 		result.put("boardlistdto", boardlistdto);
@@ -62,12 +64,11 @@ public class BoardService {
 	//게시판에 게시글 나타내기
 	public List<BoardListDto> selectAllList() {
 		List<BoardListDto> result = null;
-		Connection conn = getConnection(false);
-		//true - localhost
-		//false - 강사님꺼
-		result = dao.selectAllList(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+	
+		result = dao.selectAllList(session);
 		
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -75,9 +76,9 @@ public class BoardService {
 	//게시글 상세 페이지 들어가서 보는 것
 	public BoardDto selectOne(int boardId) {
 		BoardDto result = null;
-		Connection conn = getConnection(true);
-		result= dao.selectOne(conn, boardId);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result= dao.selectOne(session, boardId);
+		session.close();
 		
 		return result;
 	}
@@ -86,9 +87,9 @@ public class BoardService {
 	public int insert(BoardInsertDto dto) {
 		int result = 0;
 		
-		Connection conn = getConnection(false);
-		result = dao.insert(conn, dto);
-		close(conn);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.insert(session, dto);
+		session.close();
 		return result;
 	}
 	
@@ -97,10 +98,10 @@ public class BoardService {
 	public int update(BoardDto dto) {
 		int result = 0;
 		
-		Connection conn = getConnection(true);
-		result = dao.update(conn, dto);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.update(session, dto);
 		
-		close(conn);
+		session.close();
 		return result;
 	}
 	
@@ -108,10 +109,10 @@ public class BoardService {
 	public int delete(Integer boardId) {
 		int result = 0;
 		
-		Connection conn = getConnection(true);
-		result = dao.delete(conn, boardId);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.delete(session, boardId);
 		
-		close(conn);
+		session.close();
 		return result;
 	}
 	

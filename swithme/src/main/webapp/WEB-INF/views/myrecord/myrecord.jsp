@@ -1,3 +1,6 @@
+<link
+	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"
+	rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -5,9 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"
-	rel="stylesheet">
 <meta charset="UTF-8">
 <!--부트스트랩  -->
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
@@ -86,14 +86,15 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 									</li>
 									<!-- 과목수에 따라 li 생성후 붙여넣기 -->
 									<c:forEach items="${sublist}" var="vo" varStatus="vs">
-										<li><c:choose>
+										<li>
+										<c:choose>
 												<c:when test="${empty vo.subjectName}">
 													<div>
 														<p>총 공부시간</p>
 													</div>
 												</c:when>
 												<c:otherwise>
-													<div>${vo.subjectName}</div>
+													<div id="subId" class="${vo.subjectName}">${vo.subjectName}</div>
 												</c:otherwise>
 											</c:choose> <c:choose>
 												<c:when test="${empty vo.difftime}">
@@ -104,7 +105,8 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 												<c:otherwise>
 													<div>${vo.difftime}</div>
 												</c:otherwise>
-											</c:choose></li>
+											</c:choose>
+											</li>
 									</c:forEach>
 
 								</ul>
@@ -168,7 +170,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 								</button>
 
 								<!-- Modal -->
-								<div class="add modal" id="exampleModal2">
+								<div class="add-sub modal" id="exampleModal2">
 									<div class="modal-dialog .modal-dialog-centered">
 										<div class="modal-content">
 											<div class="btn modal-close" data-bs-dismiss="modal">x</div>
@@ -271,8 +273,20 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 
 			/* 과목  추가하기 */
 			$(".btn.done").on("click", btnAddSubjectClickHandler);
+			
 		}
-
+		
+		 function ready() {
+			   alert('DOM이 준비되었습니다!');
+				$("#subId").on("click",subIdClickHandler);
+		 }
+	    document.addEventListener("DOMContentLoaded", ready);
+		
+		function subIdClickHandler(){
+			var tagId = $(this).attr('class');
+			alert(tagId);
+			
+		}
 		// 과목 추가하기  
 		function btnAddSubjectClickHandler() {
 			console.log($("#frm-add").serialize());

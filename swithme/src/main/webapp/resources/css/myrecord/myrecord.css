@@ -20,7 +20,7 @@
 	font-size: 20px;
 }
 /* 과목 추가 모달 css */
-.wrap-body .add {
+.wrap-body .add-sub {
 	height: 100%;
 	position: absolute;
 	top: 20%;
@@ -175,7 +175,7 @@
 
 
 /* 글 부분 */
-.wrap-body  .wrap-modal>.modal-content {
+ .wrap-body  .wrap-modal > .modal-content {
     margin: 0 auto;
     /*가운데 정렬 , 기본 option*/
     width: 500px;
@@ -184,7 +184,7 @@
     left: 100px;
     background-color: #D9D9D9;
 }
-
+ 
 .wrap-body  .modal-content .modal-close:hover {
     cursor: pointer;
     

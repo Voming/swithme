@@ -74,7 +74,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			<c:otherwise>
 				<div class="wrap-body">
 					<div class="wrap-main">
-					<div class=".myrecord">
+					<div class="myrecord">
 						<!-- 내가 할 곳 -->
 						<div class="timer box">
 							<div class="study-info">

@@ -1,4 +1,4 @@
-.wrap-body .wrap-main {
+.wrap-body .wrap-main .myrecord{
 	width: 960px;
 	margin: 0 auto;
 	height: auto;
@@ -11,16 +11,16 @@
 
 }
 
-.wrap-body .wrap-main p {
+.wrap-body .wrap-main .myrecord p {
 	font-family: "IM_Hyemin-Regular";
 	font-size: 15px;
 }
-.wrap-body .wrap-main .sub-title{
+.wrap-body .wrap-main .myrecord .sub-title{
 	font-family: "IM_Hyemin-Bold";
 	font-size: 20px;
 }
 /* 과목 추가 모달 css */
-.wrap-body .add-sub {
+.wrap-body .myrecord .add-sub {
 	height: 100%;
 	position: absolute;
 	top: 20%;
@@ -33,17 +33,17 @@
 }
 
 
-.wrap-body form>* {
+.wrap-body .myrecord form>* {
 	margin-bottom: 36px;
 	font-size: 17px;
 }
 
-.wrap-body .title  {
+.wrap-body .myrecord .title  {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 20px;
 }
 
-.wrap-body input[type='text'] {
+.wrap-body .myrecord input[type='text'] {
 	height: 40px;
 	width: 200px;
 	border-radius: 10px;
@@ -51,22 +51,22 @@
 	border: none;
 }
 
-.wrap-body input {
+.wrap-body .myrecord input {
 	font-family: "IM_Hyemin-Regular";
 }
 
-.wrap-body .sub-color {
+.wrap-body .myrecord .sub-color {
 	display: flex; /* Flexbox를 사용하여 요소를 나란히 배치 */
 	justify-content: center;
 }
 
-.wrap-body .sub-color>p {
+.wrap-body .myrecord .sub-color>p {
 	margin-right: 10px;
 }
 
 
 /*-------------------------------------*/
-.wrap-body .btn {
+.wrap-body .myrecord .btn {
 	border: none;
 	background-color: var(--color_purple_1);
 	color: white;
@@ -74,7 +74,7 @@
 	border-radius: 10px;
 	cursor: pointer;
 }
-.wrap-body .timer.box {
+.wrap-body .myrecord .timer.box {
 	width: 100%;
 	position: relative;
 	/* TODO 과목 증가시 높이 증가..? */
@@ -86,7 +86,7 @@
 	box-sizing: border-box;
 }
 
-.wrap-body .timer.box .study-info {
+.wrap-body .myrecord .timer.box .study-info {
 	position: relative;
 	width: 25%;
 	background-color: var(--color_purple_3);
@@ -94,21 +94,21 @@
    display: flex;
     flex-direction: column;
 }
-.wrap-body .timer.box .study-info .sujblsit{
+.wrap-body .myrecord .timer.box .study-info .sujblsit{
 		margin-bottom: 40px;
 }
 
-.wrap-body .timer.box .study-info  li {
+.wrap-body .myrecord .timer.box .study-info  li {
 	padding: 10px;
 
 	
 }
 
-.wrap-body .timer.box .study-info  li>div {
+.wrap-body .myrecord .timer.box .study-info  li>div {
 	padding: 5px;
 }
 
-.wrap-body .btn {
+.wrap-body .myrecord .btn {
 	border: none;
 	padding: 2px;
 	background-color: var(--color_purple_1);
@@ -117,31 +117,31 @@
 	border-radius: 10px;
 }
 
-.wrap-body .timer.box .study-info .btnGroup {
+.wrap-body .myrecord .timer.box .study-info .btnGroup {
 
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
 }
 
-.wrap-body .timer.box .study-info .btn {
+.wrap-body .myrecord .timer.box .study-info .btn {
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
 
-.wrap-body .mem-id {
+.wrap-body .myrecord .mem-id {
 	font-size: 17px;
 	background-color: var(--color_purple_2);
 }
 
-.wrap-body .timer.box .study-countdown-box {
+.wrap-body .myrecord .timer.box .study-countdown-box {
 	width: 75%;
 	font-size: 64px;
 	background-color: var(--color_purple_1);
 	position: relative;
 }
 
-.wrap-body .timer.box .study-countdown {
+.wrap-body .myrecord .timer.box .study-countdown {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -149,18 +149,18 @@
 	text-align: center;
 	
 }
-.wrap-body .timer.box .study-countdown #selSub {
+.wrap-body .myrecord .timer.box .study-countdown #selSub {
 	font-family: IM_Hyemin-Bold;
 	color: white;
 	padding-bottom : 5px;
 }
-.wrap-body .timer.box .study-countdown #countdown {
+.wrap-body .myrecord .timer.box .study-countdown #countdown {
 	font-family: IM_Hyemin-Bold;
 	color: white;
 	font-size: 64px;
 }
 
-.wrap-body .subject-modal {
+.wrap-body .myrecord .subject-modal {
 	padding : 10px;
 	display: flex;
 	flex-direction : row;
@@ -168,14 +168,14 @@
 }
 
 /* 모달  */
-.wrap-body .subject-modal .btn{
+.wrap-body .myrecord .subject-modal .btn{
 	width : 120px;
 	margin : 5px;
 }
 
 
 /* 글 부분 */
- .wrap-body  .wrap-modal > .modal-content {
+ .wrap-body .myrecord  .wrap-modal > .modal-content {
     margin: 0 auto;
     /*가운데 정렬 , 기본 option*/
     width: 500px;
@@ -185,21 +185,21 @@
     background-color: #D9D9D9;
 }
  
-.wrap-body  .modal-content .modal-close:hover {
+.wrap-body .myrecord  .modal-content .modal-close:hover {
     cursor: pointer;
     
 }
-.wrap-body .wrap-main .study-calender{
+.wrap-body .wrap-main .myrecord .study-calender{
 	margin : 20px 0 ;
 	padding : 20px 0;
 	width: 60%;
 	
 }
-.wrap-body .wrap-main .sub-title {
+.wrap-body .wrap-main .myrecord .sub-title {
 	font-size: 20px;
 }
 
-.wrap-body .wrap-main .statistics-part{
+.wrap-body .wrap-main .myrecord .statistics-part{
 	min-height: 960px;
 	background-color: #a5ea89;
 }

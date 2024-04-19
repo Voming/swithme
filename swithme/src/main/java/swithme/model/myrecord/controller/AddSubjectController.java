@@ -42,13 +42,14 @@ public class AddSubjectController extends HttpServlet {
 		String memId = loginInfo.getMemId();
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax 는 MEMID  " + memId);
 		
-		
-		
 		SubjectAddDto dto = new SubjectAddDto( memId, subName, selectColor);
 		
-		List<SubjectDifftimeDto> sublist = service.insertSubjectAndSelectRecord(dto);
-		request.setAttribute("sublist", sublist);
-		request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
+		// ajax
+//		List<SubjectDifftimeDto> sublist = service.insertSubjectAndSelectRecord(dto);
+//		to Json getWrite....
+		
+		int result = service.insert(dto);
+		response.sendRedirect(request.getContextPath()+"/myrecord");
 		
 	}
 

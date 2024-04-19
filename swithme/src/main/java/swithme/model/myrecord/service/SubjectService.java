@@ -40,8 +40,7 @@ public class SubjectService {
 	}
 	
 	
-	//과목 추가 insert - 후 결과화면 조화 한번에 하기
-	//public 
+	//과목 추가 insert - 후 결과화면 조화 한번에 하기 (ajax)
 	public List<SubjectDifftimeDto> insertSubjectAndSelectRecord( SubjectAddDto dto) {
 		System.out.println(">>>>>>serv insertSubjectAndSelectRecord  dto : "+dto);
 		
@@ -62,6 +61,21 @@ public class SubjectService {
 	}
 	
 
+	//과목 추가 insert
+	public int insert( SubjectAddDto dto) {
+		System.out.println(">>>>>>serv insert  dto : "+dto);
+		
+		int result = -1;
+		Connection conn = getConnection(false);
+
+		// insert subject
+		result = dao.insert(conn, dto);
+		
+		System.out.println(">>>>>>serv insert  result : "+result);
+		close(conn);
+		return result;
+	}
+	
 
 	//과목 수정 update
 	public int update(SubjectAddDto dto) {

@@ -1,6 +1,3 @@
-<link
-	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"
-	rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,19 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"	rel="stylesheet">
 <!--부트스트랩  -->
-<jsp:include page="/WEB-INF/views/common/common_function.jsp" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- 풀캘린더 CDN -->
-<script
-	src="
-https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
-"></script>
+<script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -32,7 +26,6 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 	});
 </script>
 <!--chart.js CDN  -->
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -165,7 +158,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 							<!-- 과목추가 -->
 							<div>
 								<!-- Modal -->
-								<button type="button" class="btn add-sub" data-bs-toggle="modal"
+								<button type="button" class="btn add" data-bs-toggle="modal"
 									data-bs-target="#exampleModal2">
 									<p>과목 추가하기</p>
 								</button>
@@ -258,30 +251,33 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
-	<script type="text/javascript">
-		$(loadedHandler);
-		function loadedHandler() {
+<script type="text/javascript">
+let subjectName;
+let subjectId;
+$(loadedHandler);
+function loadedHandler() {
 
-			$("#start").on("click", startClickHandler);
-			$("#stop").on("click", stopClickHandler);
+	$("#start").on("click", startClickHandler);
+	$("#stop").on("click", stopClickHandler);
 
-			$("#today").ready(function() {
-				todayHandler();
-			});
+	$("#today").ready(function() {
+		todayHandler();
+	});
 
-			$("#currentTime").ready(function() {
-				currentTimeHandler();
-				setInterval(currentTimeHandler, 1000);
-			});
+	$("#currentTime").ready(function() {
+		currentTimeHandler();
+		setInterval(currentTimeHandler, 1000);
+	});
 
-			/* 과목  추가하기 */
-			$(".btn.done").on("click", btnAddSubjectClickHandler);
-			
-		}
+	/* 과목  추가하기 */
+	$(".btn.done").on("click", btnAddSubjectClickHandler);
+	
+	$(".subId").on("click",subIdClickHandler);
+	
+}
 		
 		/*과목 이름 클릭시 해당과목이름 화면에 띄움, subjectName 받아오기 */
-		 function ready() {
-			   alert('DOM이 준비되었습니다!');
+/* 		 function ready() {
 				$(".subId").on("click",subIdClickHandler);
 		 }
 	    document.addEventListener("DOMContentLoaded", ready);
@@ -290,6 +286,13 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 			var tagId = $(this).data('subject-name');
 			alert(tagId);
 			
+		} */
+
+		function subIdClickHandler(){
+			 subjectName = $(this).data('subject-name');
+			 subjectId = $(this).data('subject-id');
+			 
+			$("#selSub").text(subjectName);
 		}
 		// 과목 추가하기  
 		function btnAddSubjectClickHandler() {
@@ -308,7 +311,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 		let diffHour;
 		let diffTime;
 
-		// 10보다 작은 값에 0을 붙임
+/* 		// 10보다 작은 값에 0을 붙임
 		function addZero(n) {
 			return n < 10 ? '0' + n : n;
 		}
@@ -321,42 +324,48 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 					+ addZero(currentDate.getHours())
 					+ addZero(currentDate.getMinutes())
 					+ addZero(currentDate.getSeconds());
-		}
+		} */
 
 		function startClickHandler() {
+			
+			if(subjectName == null){
+				alert("과목을 선택 후 시작해주세요. 과목을 추가하지 않았다면 과목추가도 함께 진행해주세요");
+				return;
+			}
+			var sendDateTime = getCurrentDateTime(); 
 			startTime = new Date();
-			intervalCountdownID = setInterval(intervalCountdownCb, 1000, "p1",
-					"p2");
+			intervalCountdownID = setInterval(intervalCountdownCb, 1000, "p1","p2");
 
 			//버튼 활성화
 			$("#start").attr("disabled", true);
 			$("#stop").attr("disabled", false);
+			
+			
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/myrecord/recordstart.ajax",
+				data : {subjectId : subjectId, startTime: sendDateTime },
+				error : ajaxErrorHandler,
+				success : function(result) {
+					console.log("start 성공");
+				}
+			});
 
 		}
 		function stopClickHandler() {
+			var sendDateTime = getCurrentDateTime(); 
 			endTime = new Date();
 
-			console.log("멈춰!!!");
 			clearInterval(intervalCountdownID);
 
 			//버튼 활성화
 			$("#start").attr("disabled", false);
 			$("#stop").attr("disabled", true);
 
-			var timeData = {
-				startTime : startTime,
-				endTime : endTime
-			};
-
-			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			console.log(startTime);
-			console.log(endTime);
-			console.log(getCurrentDate());
-
 			$.ajax({
 				type : "post",
-				url : "${pageContext.request.contextPath}/addrecord.ajax",
-				data : timeData,
+				url : "${pageContext.request.contextPath}/myrecord/recordend.ajax",
+				data : {subjectId : subjectId, endTime: sendDateTime },
 				error : ajaxErrorHandler,
 				success : function(result) {
 					console.log("성공");
@@ -399,14 +408,11 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 		/* 날짜 표현하기 */
 		function todayHandler() {
 			var time = new Date();
-			console.log("time : " + time.toDateString());
 			var month = time.getMonth() + 1;
 			var date = time.getDate();
 			var day = time.getUTCDay();
 			var day2 = time.getDay();
 			var week;
-			console.log(typeof 0);
-			console.log("getDay : " + day2);
 
 			switch (day2) {
 			case 0:

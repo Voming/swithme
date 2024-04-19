@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.SubjectAddDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 
 /**
  * Servlet implementation class AddRecordController
  */
-@WebServlet("/addrecord.ajax")
+@WebServlet("/myrecord/addrecord.ajax")
 public class AddRecordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,8 +43,9 @@ public class AddRecordController extends HttpServlet {
 		String endTime= request.getParameter("endTime");
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax start : "+startTime);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax start : "+endTime);
-		//TODO memId
-		String memId= "won";
+		//TODO service 연결
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		String memId = loginInfo.getMemId();
 		
 		
 //		SubjectAddDto dto = new SubjectAddDto( memId, subName, selectColor);

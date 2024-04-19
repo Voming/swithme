@@ -32,26 +32,22 @@ public class MyrecordController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String subjectName = request.getParameter("subjectName");
-				//TODO memId 고정됨
-				// memId
+				
+				// memId 세션확인
 				MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-				System.out.println(">>>>>>>>myrecordController : "+loginInfo);
 //				if(loginInfo == null) {
 //					request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 //				}
 //				String memId = loginInfo.getMemId();
 				String memId = null;
-				if (loginInfo != null) {
+				if (loginInfo != null) { //로그인 했을 때
 					memId = loginInfo.getMemId();
 				}
-				System.out.println(">>>>>>>>>>>>>>>>>>>>>> DIFFFCONTROLERE MEMID  " + memId);
-				
 				
 				
 				List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 				request.setAttribute("sublist", sublist);
 				
-				System.out.println(">>>>>>>>result : "+sublist);
 				request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
 	}
 

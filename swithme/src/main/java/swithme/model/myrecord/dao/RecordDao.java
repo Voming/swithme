@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import swithme.model.myrecord.dto.RecordDto;
-import swithme.model.myrecord.dto.SubjectAddDto;
-import swithme.model.myrecord.dto.SubjectDeleteDto;
+import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
-import swithme.model.myrecord.dto.SubjectDto;
 //RECORD_ID         NOT NULL NUMBER       
 //RECORD_SUBJECT_ID NOT NULL NUMBER       
 //RECORD_MEM_ID     NOT NULL VARCHAR2(20) 
@@ -123,20 +121,49 @@ public class RecordDao {
 		return result;
 	}
 
-	// update
-	public int insert(Connection conn, RecordDto dto) {
-		System.out.println(">>>>>>rec insert  dto : " + dto);
+	// insert 공부시작 시간
+	public int insertStartTime(Connection conn, RecordTimeDto dto) {
+		System.out.println("\n >>>>>> rec insert  dto : " + dto);
 		// RECORD_ID NOT NULL NUMBER
 		// RECORD_SUBJECT_ID NOT NULL NUMBER
 		// RECORD_MEM_ID NOT NULL VARCHAR2(20)
 		// RECORD_START NOT NULL TIMESTAMP(6)
 		// RECORD_END TIMESTAMP(6)
 		int result = 0;
-		String sql = "INSERT INTO SUBJECT VALUES(?,?,?,DEFAULT,NULL)"; // 타임 부분이 어떻게 넣어야할지 모르겠음
+		String sql = "INSERT INTO RECORD VALUES(SEQ_RECORD_ID.nextval,?,?,to_date(?, 'yyyymmddhh24miss'),NULL)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getRecordId());
+			pstmt.setInt(1, dto.getRecordSubjectId());
+			pstmt.setString(2,  dto.getRecordMemId());
+			pstmt.setString(3, dto.getRecordStart() );
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("\n>>>>>>rec insert  result : " + result);
+
+		close(pstmt);
+		return result;
+	}
+	
+	
+	public int insertEndTime(Connection conn, RecordTimeDto dto) {
+		System.out.println("\n >>>>>> rec insert update  dto : " + dto);
+		// RECORD_ID NOT NULL NUMBER
+		// RECORD_SUBJECT_ID NOT NULL NUMBER
+		// RECORD_MEM_ID NOT NULL VARCHAR2(20)
+		// RECORD_START NOT NULL TIMESTAMP(6)
+		// RECORD_END TIMESTAMP(6)
+		int result = 0;
+		String sql = "UPDATE RECORD SET RECORD_END = to_date(?, 'yyyymmddhh24miss') ";
+		sql += " where RECORD_SUBJECT_ID = ? and RECORD_MEM_ID=?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getRecordStart());
 			pstmt.setInt(2, dto.getRecordSubjectId());
 			pstmt.setString(3, dto.getRecordMemId());
 
@@ -145,7 +172,7 @@ public class RecordDao {
 			e.printStackTrace();
 		}
 
-		System.out.println(">>>>>>rec insert  result : " + result);
+		System.out.println("\n>>>>>>rec insert  result : " + result);
 
 		close(pstmt);
 		return result;

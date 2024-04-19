@@ -21,7 +21,6 @@
 }
 /* 과목 추가 모달 css */
 .wrap-body .myrecord .add-sub {
-	height: 100%;
 	position: absolute;
 	top: 20%;
 	left: 50%;
@@ -68,6 +67,7 @@
 /*-------------------------------------*/
 .wrap-body .myrecord .btn {
 	border: none;
+	padding : 2px;
 	background-color: var(--color_purple_1);
 	color: white;
 	width: 75px;
@@ -107,7 +107,7 @@
 .wrap-body .myrecord .timer.box .study-info  li>div {
 	padding: 5px;
 }
-
+/* 
 .wrap-body .myrecord .btn {
 	border: none;
 	padding: 2px;
@@ -116,7 +116,7 @@
 	width: 75px;
 	border-radius: 10px;
 }
-
+ */
 .wrap-body .myrecord .timer.box .study-info .btnGroup {
 
 	position: absolute;

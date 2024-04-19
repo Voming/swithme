@@ -8,6 +8,7 @@ import java.util.List;
 
 import swithme.model.myrecord.dao.RecordDao;
 import swithme.model.myrecord.dto.RecordDto;
+import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 
 public class RecordService {
@@ -40,7 +41,7 @@ public class RecordService {
 		System.out.println(">>>>>>rec select ");
 
 		List<RecordDto> result = null;
-		Connection conn = getConnection(true);
+		Connection conn = getConnection(false);
 		result = dao.select(conn);
 		System.out.println(">>>>>>rec select  result : " + result);
 		close(conn);
@@ -48,17 +49,27 @@ public class RecordService {
 	}
 
 	// insert
-	public int insert(RecordDto dto) {
+	public int insertStartTime(RecordTimeDto dto) {
 		System.out.println(">>>>>>rec insert  dto : " + dto);
 
-		int result = 0;
-		Connection conn = getConnection(true);
-		result = dao.insert(conn, dto);
+		int result = -1;
+		Connection conn = getConnection(false);
+		result = dao.insertStartTime(conn, dto);
 		System.out.println(">>>>>>rec insert  result : " + result);
 		close(conn);
 		return result;
 	}
+	// insert
+	public int insertEndTime(RecordTimeDto dto) {
+		System.out.println(">>>>>>rec insert  dto : " + dto);
 
+		int result = 0;
+		Connection conn = getConnection(false);
+		result = dao.insertEndTime(conn, dto);
+		System.out.println(">>>>>>rec insert  result : " + result);
+		close(conn);
+		return result;
+	}
 	// rec은 delete,update없음
 
 }

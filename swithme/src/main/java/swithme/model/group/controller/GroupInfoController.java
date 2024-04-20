@@ -27,8 +27,6 @@ public class GroupInfoController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String groupIdstr = request.getParameter("groupId");
-		System.out.println(groupIdstr);
-		
 		int groupId = 0;
 		try {
 			groupId = Integer.parseInt(groupIdstr);

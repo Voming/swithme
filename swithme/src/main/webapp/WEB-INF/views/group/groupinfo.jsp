@@ -38,6 +38,8 @@
 				<div class="wrap-my">
 					<div class="txt-my">
 						<p>내 그룹</p>
+						<p>그룹 설명입니다그룹 설명입니다그룹 설명입니다그룹 설명입니다그룹 설명입니다</p>
+						<p>
 					</div>
 				</div>
 			</div>

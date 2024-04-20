@@ -28,10 +28,30 @@
 		VALUES(SEQ_BOARD_ID.nextval, #{boardWriter},
 		#{title}, #{content}, default, default, default)
 	</insert>
+	
+	<insert id="insertReplyWrite" parameterType="BoardReplyWriteDto">
+		INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{boardReplywriter}, #{boardReplycontent},
+				default, default, (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), DEFAULT)
+	</insert>
+	
+	<insert id="insertReplyWriteAgain" parameterType="BoardReplyWriteDto">
+		INSERT INTO BOARD_REPLY 
+		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${boardReplywriter}, ${boardReplycontent}, default ,
+				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
+				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
+				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} ))
+	</insert>
 
 	<update id="update" parameterType="BoardDto">
-		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID =
-		#{boardId}
+		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID = #{boardId}
+	</update>
+
+	<update id="updateReplyStep" parameterType="_int">
+		UPDATE BOARD_REPLY SET REPLY_STEP = REPLY_STEP+1  
+		WHERE REPLY_REF = ( SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
+    			AND
+    	REPLY_STEP > ( SELECT REPLY_STEP FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
 	</update>
 
 	<delete id="delete" parameterType="_int">

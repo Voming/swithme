@@ -94,7 +94,7 @@
 						preUrl = preUrl.substr(13);
 						location.href="${pageContext.request.contextPath}"+preUrl;
 					} else {
-						location.href="${pageContext.request.contextPath}/main";
+						location.href="${pageContext.request.contextPath}/myrecord";
 					}
 				}else {
 					alert("아이디 또는 패스워드가 일치하지 않습니다.\n다시 확인하고 로그인해주세요.");

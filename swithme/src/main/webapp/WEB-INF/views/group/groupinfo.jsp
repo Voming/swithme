@@ -32,8 +32,18 @@
 				</div>
 			</header>
 		</div>
+		[[${groupInfo }]]
 		<div class="wrap-body">
-			<div class="wrap-"></div>
+			<div class="wrap-group">
+				<div class="wrap-my">
+					<div class="txt-my">
+						<p>내 그룹</p>
+					</div>
+				</div>
+			</div>
+			<div class="group-mem">
+			
+			</div>
 		</div>
 	</div>
 	<div class="wrap-footer">

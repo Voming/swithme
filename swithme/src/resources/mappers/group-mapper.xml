@@ -44,4 +44,11 @@
 		SELECT *
 		FROM DUAL
 	</insert>
+
+	<select id="selectGroupInfo" parameterType="_int"
+		resultType="GroupInfoDto">
+		SELECT * FROM SGROUP
+		JOIN SGROUP_MEMBER USING (SGROUP_ID)
+		WHERE SGROUP_ID = '${groupId}'
+	</select>
 </mapper>

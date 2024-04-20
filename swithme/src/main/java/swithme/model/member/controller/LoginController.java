@@ -19,20 +19,14 @@ import swithme.model.member.service.MemberService;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LoginController() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String prePage=request.getParameter("prePage");
-		request.getSession().setAttribute("prePage", prePage);
-		System.out.println(prePage);
+		String url=request.getParameter("url");
+		request.getSession().setAttribute("url", url);
+		System.out.println(url);
 		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 	}
 

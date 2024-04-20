@@ -1,11 +1,16 @@
 package swithme.model.group.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.service.GroupService;
 
 /**
  * Servlet implementation class GroupInfoController
@@ -13,21 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/group/info")
 public class GroupInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	GroupService service = new GroupService();
+	
     public GroupInfoController() {
         super();
-        // TODO Auto-generated constructor stub
+      
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupId = request.getParameter("groupId");
+		String groupIdstr = request.getParameter("groupId");
+		System.out.println(groupIdstr);
 		
+		int groupId = 0;
+		try {
+			groupId = Integer.parseInt(groupIdstr);
+		}catch (NumberFormatException e) {
+			response.getWriter().append("-1");
+			return;
+		}
+		List<GroupInfoDto> groupInfo = service.selectGroupInfo(groupId);
+		request.getSession().setAttribute("groupInfo", groupInfo);
 		
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}

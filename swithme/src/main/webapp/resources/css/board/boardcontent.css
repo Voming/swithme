@@ -66,7 +66,7 @@
 	border: 0;	
 }
 
-.wrap-body .reply {
+#frm-reply {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font3);
 	resize: none;
@@ -77,34 +77,24 @@
  	margin: 10px 40px 20px 40px;
 }
 
-body > div.wrapper > div.wrap-body > div.board-reply > p {
+.wrap-body > div.board-reply > p {
 	font-family: "IM_Hyemin-Bold";
 	margin-left: 45px;
 	font-size: var(--font2);
 }
 
- .wrap-body > div.board-reply > div > div.r-1 {
-	padding-bottom: 15px;
-}
-
-.wrap-body > div.board-reply > div > div.r-1 > div:nth-child(1) {
+.wrap-body > div.board-reply > #frm-reply > div.r-1 > div {
 	padding-bottom: 10px;
-}
-
-
-.wrap-body > div.board-reply > div.reply > div.r-1 > div:nth-child(1) > input[type=text] {
-	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
-	border: none;
-	background: rgb(237, 237, 237);
 	
 }
 
-input:focus {
-  outline: none;
+.wrap-body > div.board-reply > #frm-reply  > div.r-2 > div:nth-child(1) {
+	padding-bottom: 15px;
 }
 
-.wrap-body > div.board-reply > div.reply > div.r-1 > div:nth-child(2) > textarea {
+
+.wrap-body > div.board-reply >#frm-reply > div.r-2 > div > textarea {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
 	border: none;
@@ -116,26 +106,72 @@ textarea:focus {
   outline: none;
 }
 
- .wrap-body > div.board-reply > div > div.r-2 {
+.wrap-body > div.board-reply > #frm-reply > div.r-3 {
  	font-size: var(--font4);
  }
 
-.wrap-body > div.board-reply > div > div.r-2 > ul{
+.wrap-body > div.board-reply > form > div.r-3 > ul{
 	display:flex;
 	
 }
 
-.wrap-body > div.board-reply > div > div.r-2 > ul > li {
+.wrap-body > div.board-reply > form > div.r-3 > ul > li {
 	flex: 1 1 0;	
 }
 
-.wrap-body > div.board-reply > div > div.r-2 > ul > li:nth-child(2) {
+.wrap-body > div.board-reply > form> div.r-3 > ul > li:nth-child(2) {
 	flex: 2 0 0;
 }
 
-.wrap-body > div.board-reply > div > div.r-2 > ul > li:nth-child(3) > p:nth-child(1){
+.wrap-body > div.board-reply > form > div.r-3 > ul > li:nth-child(3){
 	text-align: end;
 }
+
+.wrap-body > div.board-reply > div.wrap-reply2 {
+	font-family: "IM_Hyemin-Regular";
+ 	font-size: var(--font4);
+	resize: none;
+	border: none;
+	border-radius: 20px;
+	background: rgb(237, 237, 237);
+ 	padding: 20px 20px;
+ 	margin: 10px 40px 20px 120px;
+ }
+
+.wrap-body > div.board-reply > .wrap-reply2 >  #frm-reply2  > div.r-1 > div {
+	padding-bottom: 15px;
+}
+
+
+.wrap-body > div.board-reply > .wrap-reply2 > #frm-reply2  > div.r-2 > div > textarea {
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	border: none;
+	resize: none;
+	background: rgb(237, 237, 237);
+}
+
+
+
+.wrap-body > div.board-reply > .wrap-reply2 > #frm-reply2  > div.r-3 > ul{
+	display:flex;
+	
+}
+
+.wrap-body > div.board-reply > .wrap-reply2 > #frm-reply2 > div.r-3 > ul > li {
+	flex: 1 1 0;	
+}
+
+
+.wrap-body > div.board-reply > .wrap-reply2 > #frm-reply2 > div.r-3 > ul > li:nth-child(2) {
+	flex: 2 0 0;
+	cursor: pointer;
+}
+
+.wrap-body > div.board-reply >.wrap-reply2 > #frm-reply2  > div.r-3 > ul > li:nth-child(3) {
+	text-align: end;
+}
+
 
 .wrap-body .btn {
 	display: flex;
@@ -188,3 +224,4 @@ textarea:focus {
 	margin-right: 40px;
 	cursor: pointer;
 }
+

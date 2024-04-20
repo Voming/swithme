@@ -9,18 +9,19 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="swithme.model.board.dto.BoardDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardContentDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupCreateDto" />
 		<typeAlias type="swithme.model.group.dto.GroupMylistDto" />
+		
 		<typeAlias type="swithme.model.board.dto.BoardDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
+		
 		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.MastercraftsmentDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.ProengineerDto"/>
+		
 		<package name="swithme.model.myrecord.dto"/>
 	</typeAliases>
 

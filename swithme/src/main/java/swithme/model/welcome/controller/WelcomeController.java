@@ -20,7 +20,6 @@ public class WelcomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getParameter("url");
-		request.getSession().setAttribute("url", url);
 		System.out.println(url);
 		
 		request.getRequestDispatcher("/WEB-INF/views/basic/welcome.jsp").forward(request, response);

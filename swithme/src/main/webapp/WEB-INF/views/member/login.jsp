@@ -42,7 +42,6 @@
 				</div>
 			</header>
 		</div>
-		[[${url}]]
 		<div class="wrap-body">
 			<div class="wrap-login">
 			<fieldset>

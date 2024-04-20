@@ -105,7 +105,6 @@ function btnCreateClickHandler(){
 				</div>
 				<div class="hrline">
 					<hr>
-					[[${loginInfo}]]
 				</div>
 			</header>
 		</div>

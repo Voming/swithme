@@ -8,13 +8,14 @@ import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.group.dao.GroupDao;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
+import swithme.model.group.dto.GroupMylistDto;
 
 public class GroupService {
 	private GroupDao dao = new GroupDao();
 
 	// 나의 전체그룹 검색
-	public List<GroupDto> selectMyList(String memberId) {
-		List<GroupDto> result = null;
+	public List<GroupMylistDto> selectMyList(String memberId) {
+		List<GroupMylistDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectMyList(session, memberId);
 		session.close();
@@ -47,11 +48,17 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-
-	public int insert(GroupCreateDto dto) {
+	// 그룹 생성
+	public int insert(GroupCreateDto dto, String mememberId) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.insert(session, dto);
+		int myGCount =  dao.selectMyCount(session, mememberId);
+		if(myGCount <= 5) {
+			result = dao.insert(session, dto);
+		}else {
+			result = -1;
+		}
+		
 		session.close();
 		return result;
 	}

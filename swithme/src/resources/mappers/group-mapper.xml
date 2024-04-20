@@ -3,18 +3,21 @@
 <mapper namespace="group">
 
 	<select id="selectMyList" parameterType="string"
-		resultType="GroupDto">
-		SELECT * FROM SGROUP WHERE SGROUP_ID IN"
+		resultType="GroupMylistDto">
+		SELECT SGROUP_ID, SGROUP_NAME, SGROUP_IMG_PATH,
+		SGROUP_IMG_NAME FROM SGROUP
+		WHERE SGROUP_ID IN
 		(SELECT SGROUP_ID
-		FROM SGROUP_MEMBER
-		WHERE SGROUP_MEM_ID = #{memberId})
+		FROM
+		SGROUP_MEMBER
+		WHERE
+		SGROUP_MEM_ID = #{memberId})
 	</select>
 
 	<select id="selectMyCount" parameterType="string"
 		resultType="_int">
-		SELECT COUNT(*) FROM SGROUP WHERE SGROUP_ID IN
-		(SELECT
-		SGROUP_ID FROM SGROUP_MEMBER WHERE SGROUP_MEM_ID = #{memberId})
+		select count(*) from SGROUP_MEMBER
+		WHERE SGROUP_MEM_ID = #{memberId};
 	</select>
 
 	<select id="selectAllOpenList" parameterType="map"
@@ -31,9 +34,10 @@
 
 	<insert id="insert" parameterType="GroupCreateDto">
 		INSERT ALL
-			INTO SGROUP VALUES (SEQ_SGROUP_ID.nextval, #{groupName},
-			#{groupOpen},#{groupPwd},#{groupEx},#{groupImgPath},#{groupImgName})
-			INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{groupWriter})
+		INTO SGROUP VALUES
+		(SEQ_SGROUP_ID.nextval, #{groupName},
+		#{groupOpen},#{groupPwd},#{groupEx},#{groupImgPath},#{groupImgName})
+		INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{groupWriter})
 		SELECT *
 		FROM DUAL
 	</insert>

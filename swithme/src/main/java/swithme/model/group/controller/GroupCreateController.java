@@ -39,9 +39,6 @@ public class GroupCreateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-
 		request.getRequestDispatcher("/WEB-INF/views/group/groupcreate.jsp").forward(request, response);
 	}
 
@@ -130,7 +127,7 @@ public class GroupCreateController extends HttpServlet {
 		
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
 		System.out.println(dto);
-		int result = service.insert(dto);
+		int result = service.insert(dto, groupWriter);
 		System.out.println(result);
 		//response.sendRedirect(request.getContextPath()+"/group");
 		response.getWriter().append(String.valueOf(result));

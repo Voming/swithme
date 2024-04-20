@@ -8,12 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
+import swithme.model.group.dto.GroupMylistDto;
 
 public class GroupDao {
 
 	// 나의 전체그룹 검색
-	public List<GroupDto> selectMyList(SqlSession session, String memberId) {
-		List<GroupDto> result = session.selectList("group.selectMyList",memberId);
+	public List<GroupMylistDto> selectMyList(SqlSession session, String memberId) {
+		List<GroupMylistDto> result = session.selectList("group.selectMyList",memberId);
 		return result;
 	}
 	//나의 그룹 수 

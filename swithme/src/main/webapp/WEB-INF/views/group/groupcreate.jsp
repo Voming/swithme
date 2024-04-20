@@ -71,10 +71,12 @@ function btnCreateClickHandler(){
 
 		, success : function(result){
 			console.log(result);
-			if(result > 1 ){
+			if(result = -1){
+				alert("그룹은 5개 이하로 생성 및 가입이 가능합니다.");
+			} else if(result > 0 ){
 				alert("그룹이 생성되었습니다.");
 				location.href="${pageContext.request.contextPath }/group";
-			}else {
+			} else {
 				alert("그룹 생성이 불가합니다");
 			}
 		}

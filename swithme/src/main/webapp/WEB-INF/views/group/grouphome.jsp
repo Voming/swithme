@@ -5,27 +5,15 @@
 <html>
 <head>
 <!-- group_home-->
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/grouphome.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/grouphome_list.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/grouphome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/grouphome_list.css" rel="stylesheet">
 
 <!-- carousel -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.carousel.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.theme.default.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.theme.default.css" rel="stylesheet">
 
-<!-- wellcom -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/welcome/welcome.css"
-	rel="stylesheet">
 <meta charset="UTF-8">
-<title>group home</title>
+<title>SWITH.ME</title>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
@@ -101,57 +89,32 @@
 			</header>
 		</div>
 		<div class="wrap-body">
+		${myGrouplist}
+		<%-- <c:if test="${not empty dto.filedtolist }">
+	<div>
+		<c:forEach items="${dto.filedtolist }" var="filedto">
+		<div><a href="${pageContext.request.contextPath }/files/${filedto.savedFilePathName}" download="${filedto.orginalFileName }">${filedto.orginalFileName }</a></div>
+		</c:forEach>
+	</div> --%>
 			<div class="wrap-group">
 				<div class="wrap-my">
 					<div class="txt-my">
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
-						<div class="item">
-							<figure>
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
-									<img src="http://via.placeholder.com/290X180.jpg/">
-								</button>
-								<figcaption>그룹명</figcaption>
-							</figure>
-						</div>
-						<div class="item">
-							<figure>
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
-									<img src="http://via.placeholder.com/290X180.jpg/">
-								</button>
-								<figcaption>그룹명</figcaption>
-							</figure>
-						</div>
-						<div class="item">
-							<figure>
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
-									<img src="http://via.placeholder.com/290X180.jpg/">
-								</button>
-								<figcaption>그룹명</figcaption>
-							</figure>
-						</div>
-						<div class="item">
-							<figure>
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
-									<img src="http://via.placeholder.com/290X180.jpg/">
-								</button>
-								<figcaption>그룹명</figcaption>
-							</figure>
-						</div>
-						<div class="item">
-							<figure>
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/myrecord'">
-									<img src="http://via.placeholder.com/290X180.jpg/">
-								</button>
-								<figcaption>그룹명</figcaption>
-							</figure>
-						</div>
+					<c:if test="${not empty myGrouplist }">
+						<c:forEach items="${myGrouplist}" var="groupDto">
+							<div class="item">
+								<figure>
+									<button type="button"
+										onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}' ">
+										<img src="${pageContext.request.contextPath }/files/${groupDto.groupImgName}">
+									</button>
+									<figcaption>${groupDto.groupName }</figcaption>
+								</figure>
+							</div>
+						</c:forEach>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -298,7 +261,6 @@
 							</ul>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>

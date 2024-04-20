@@ -51,29 +51,12 @@ function getCurrentDateDisplay() {
   console.log("getCurrentDateTimeDisplay:"+returnVal);
   return returnVal;
 }
-function checkLogin(msq, prePage){
-	var loginInfo = "${loginInfo}";
-	if (!loginInfo){
-		var result = confirm("로그인이 되야어 그룹 만들기가 가능합니다.이동하시겠습니까");
-		if (result) {
-			location.href = "${pageContext.request.contextPath}/login?prePage=" + prePage;
-		} else {
-			
-		}
-		return;
-	}else{
-		return false;
-	}
-	
-}
-
 
 //ajax error 부분
 function ajaxErrorHandler (request, status, error){
 	alert("code: "+request.status + "\n" + "message: " 
 			+ request.responseText + "\n"
 			+ "error: "+error);
-
 }
 
 

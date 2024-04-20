@@ -12,7 +12,7 @@
 		<typeAlias type="swithme.model.group.dto.GroupDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupCreateDto" />
 		<typeAlias type="swithme.model.group.dto.GroupMylistDto" />
-		
+		<typeAlias type="swithme.model.group.dto.GroupInfoDto" />
 		<typeAlias type="swithme.model.board.dto.BoardDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto"/>

@@ -1,1 +1,19 @@
 @charset "UTF-8";
+
+.wrap-body .wrap-group {
+	height: 350px;
+	width: 100%;
+	background-color: rgb(221, 204, 255, 0.2);
+}
+
+.wrap-body .wrap-my {
+	/* 내 그룹 중앙 배치 */
+	width: 960px;
+	margin: 0 auto;
+	align-items: center;
+}
+
+.wrap-body .txt-my {
+	padding-top: 50px;
+	padding-bottom: 10px;
+}

@@ -26,25 +26,15 @@ import swithme.model.member.dto.MemberInfoDto;
 public class GroupCreateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	GroupService service = new GroupService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public GroupCreateController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/group/groupcreate.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/group/create doPost()");
 		
@@ -56,7 +46,6 @@ public class GroupCreateController extends HttpServlet {
 			uploadPathFile.mkdirs();
 		}
 		
-		
 		int uploadFileLimit = 10*1024*1024; //10M 제한
 		
 		//form enctype = "multipart/form-data"형태로 전달된 경우
@@ -65,8 +54,7 @@ public class GroupCreateController extends HttpServlet {
 				uploadFileLimit, //업로드 파일 크기 제한
 				"UTF-8",
 				new DefaultFileRenamePolicy() //was서버에 저장할 디렉토리에 동일 이름이 존재할 때 새로운 이름 부여 방식
-				);
-		
+				);		
 		
 		//jsp -> controller file 딱 1개일 경우
 		String filePath = multiReq.getFilesystemName("uploadfile");
@@ -86,10 +74,7 @@ public class GroupCreateController extends HttpServlet {
 			}else {
 				System.out.println(f1.length()); // 그 파일의 크기 
 			}
-			System.out.println( fileName+"  :  "+orginFileName);
 		}
-		
-		
 
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
@@ -111,25 +96,17 @@ public class GroupCreateController extends HttpServlet {
 			groupOpen = "1";
 		}
 		
-		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		if(loginInfo == null) {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
 		String groupWriter = loginInfo.getMemId();
-		
-		System.out.println(groupName);
-		System.out.println(groupOpen);
-		System.out.println(groupPwd);
-		System.out.println(groupExp);
-		
-		
+	
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
 		System.out.println(dto);
 		int result = service.insert(dto, groupWriter);
-		System.out.println("result" + result);
-		//response.sendRedirect(request.getContextPath()+"/group");
+		//ajax에 result 
 		response.getWriter().append(String.valueOf(result));
 	}
 

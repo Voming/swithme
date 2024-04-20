@@ -18,6 +18,7 @@
 
 <title>SWITH.ME</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 </head>
 
 <body>
@@ -41,6 +42,7 @@
 				</div>
 			</header>
 		</div>
+		[[${url}]]
 		<div class="wrap-body">
 			<div class="wrap-login">
 			<fieldset>
@@ -76,42 +78,33 @@
 		$("#login-form .btn.submit").on("click", frmClickHandler);
 	}
 
-	function frmClickHandler() {
-		console.log("클릭");
-		console.log($("#login-form").serialize());
-		console.log($("[name=id]").val());
-		console.log($("[name=pwd]").val());
+	function frmClickHandler(){
+		let preUrl = "${param.url }";
+		preUrl = (preUrl) ? "?url="+preUrl : "";
+		console.log("preUrl : "+preUrl);
 		$.ajax({
-					url : "${pageContext.request.contextPath}/login",
-					method : "post",
-					data :
-					{
-						id : $("#login-form [name=id]").val(),
-						pwd : $("#login-form [name=pwd]").val()
-					},
-					success : function(result) {
-						console.log(result);
-						if (result == 1) {
-							alert("반갑습니다");
-							var prePage = "${prePage}";
-							if (prePage == "myrecord") {
-								location.href = "${pageContext.request.contextPath}/myrecord";
-							} else if(prePage == "group"){
-								location.href = "${pageContext.request.contextPath}/group";
-							}
-							
-							location.href = "${pageContext.request.contextPath}/myrecord";
-						} else {
-							alert("아이디 비밀번호 일치하지 않음");
-							$("[name=pwd]").val("");
-						}
-					},
-					error : function(request, status, error) {
-						alert("code: " + request.status + "\n"
-								+ "message: " + request.responseText + "\n"
-								+ "error: " + error);
+			url:"${pageContext.request.contextPath }/login"
+			, method : "post"
+			, data : $("#login-form").serialize()
+			, success : function(result){
+				console.log(result);
+				if(result == 1 ){
+					alert("반갑습니다.");
+					if(preUrl){
+						// 이전페이지로 이동
+						preUrl = preUrl.substr(13);
+						location.href="${pageContext.request.contextPath}"+preUrl;
+					} else {
+						location.href="${pageContext.request.contextPath}/main";
 					}
-				});
+				}else {
+					alert("아이디 또는 패스워드가 일치하지 않습니다.\n다시 확인하고 로그인해주세요.");
+					$("[name=pwd]").val("");
+				}
+			}
+			,error : ajaxErrorHandler
+		});
+		
 	}
 
 	

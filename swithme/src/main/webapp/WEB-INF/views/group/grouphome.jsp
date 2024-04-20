@@ -100,7 +100,7 @@
 								<div class="item">
 									<figure>
 										<button type="button"
-											onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}'">
+											onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
 											<img
 												src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
 										</button>
@@ -152,7 +152,7 @@
 											<div class="box">
 												<img class="img_g"
 													src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}" alt="그룹 사진"
-													onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}'">
+													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
 												<div class="tag">
 													<p style="background-color: black; padding: 3px; font-size: var(--font5);">
 														<c:if test="${groupDto.groupOpen == '0'}">공개</c:if>

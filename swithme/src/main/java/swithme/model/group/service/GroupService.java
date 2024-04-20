@@ -66,8 +66,8 @@ public class GroupService {
 	}
 	
 	// 선택된 그룹 하나 전체 정보
-	public List<GroupInfoDto> selectGroupInfo(int groupId) {
-		List<GroupInfoDto> result = null;
+	public GroupInfoDto selectGroupInfo(int groupId) {
+		GroupInfoDto result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectGroupInfo(session, groupId);
 		session.close();

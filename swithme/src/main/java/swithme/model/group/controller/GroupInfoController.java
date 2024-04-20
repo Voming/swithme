@@ -34,7 +34,7 @@ public class GroupInfoController extends HttpServlet {
 			response.getWriter().append("-1");
 			return;
 		}
-		List<GroupInfoDto> groupInfo = service.selectGroupInfo(groupId);
+		GroupInfoDto groupInfo = service.selectGroupInfo(groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);
 		
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);

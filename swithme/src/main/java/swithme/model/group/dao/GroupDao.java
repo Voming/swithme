@@ -49,8 +49,8 @@ public class GroupDao {
 	}
 
 	// 선택된 그룹 하나 전체 정보
-	public List<GroupInfoDto> selectGroupInfo(SqlSession session, int groupId) {
-		List<GroupInfoDto> result = session.selectList("group.selectGroupInfo", groupId);
+	public GroupInfoDto selectGroupInfo(SqlSession session, int groupId) {
+		GroupInfoDto result = session.selectOne("group.selectGroupInfo", groupId);
 		return result;
 	}
 

@@ -10,10 +10,45 @@
 	/* 내 그룹 중앙 배치 */
 	width: 960px;
 	margin: 0 auto;
-	align-items: center;
+	display: flex;
+}
+	
+
+.wrap-body .wrap-my {
+	padding-top: 40px;
+	padding-bottom: 10px;
+	
+	position: relative;
 }
 
 .wrap-body .txt-my {
-	padding-top: 50px;
-	padding-bottom: 10px;
+	margin-right: 30px;
+	width: 500px;
+}
+
+.wrap-my .myGImg{
+	width: 430px;
+	height: 270px;
+	border-radius: 20px;
+}
+.wrap-my img{
+	width: 430px;
+	height: 270px;
+	object-fit: cover;
+	
+}
+
+.wrap-my .myGName{
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font1);
+	margin: 10px 0 40px 0;
+}
+.wrap-my .myGExp{
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font3);
+	
+}
+.wrap-my button {
+	position: absolute;
+	bottom: 20px;
 }

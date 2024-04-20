@@ -51,4 +51,17 @@
 		JOIN SGROUP_MEMBER USING (SGROUP_ID)
 		WHERE SGROUP_ID = '${groupId}'
 	</select>
+
+	<select id="selectGroupRecordSumList" parameterType="_int"
+		resultType="GroupRecordSumDto">
+		SELECT
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) - TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) ,
+		RECORD_MEM_ID
+		FROM
+		RECORD
+		WHERE RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID IN (SELECT
+		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE SGROUP_ID = '#{groupId}')
+		GROUP BY RECORD_MEM_ID;
+
+	</select>
 </mapper>

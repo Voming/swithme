@@ -25,25 +25,32 @@ SELECT S.SGROUP_ID, S.SGROUP_NAME, S.SGROUP_OPEN,
 
     
 select * from sgroup_member;
-insert into SGROUP_MEMBER(sgroup_id, sgroup_mem_id) VALUES (53, 'a');
-
+insert into SGROUP_MEMBER(sgroup_id, sgroup_mem_id) VALUES (53, 'song');
+insert into SGROUP_MEMBER(sgroup_id, sgroup_mem_id) VALUES (53, 'won');
+commit;
 
 
 select *from member;
 
-select * from record  where record_mem_id = 'song';
+select * from record  where record_mem_id = 'oh';
 
 
 
 
---원본
+--원본 기록 있는 사용자만 나옴
 SELECT
-    round(SUM(to_number(to_char(record_end, 'HH24MISS')) - to_number(to_char(record_start, 'HH24MISS'))) / 100) , record_mem_id
+    round(SUM(to_number(to_char(record_end, 'HH24MISS')) - to_number(to_char(record_start, 'HH24MISS'))) / 100) AS "SUM_MIN", record_mem_id AS "MEMID"
 FROM
     record
-WHERE record_start >= ( sysdate - 7 ) AND  record_mem_id IN (SELECT SGROUP_MEM_ID FROM  SGROUP_MEMBER WHERE SGROUP_ID = '53')
+WHERE record_start >= ( sysdate - 7 ) AND  record_mem_id IN (SELECT SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE SGROUP_ID = '53')
 GROUP BY record_mem_id;
 
+--원본 기록 있는 사용자만 나옴
+SELECT
+    round(SUM(to_number(to_char(record_end, 'HH24MISS')) - to_number(to_char(record_start, 'HH24MISS'))) / 100) 
+FROM
+    record
+WHERE record_start >= ( sysdate - 7 ) AND  record_mem_id = 'b';
 
 
 

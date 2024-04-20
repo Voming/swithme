@@ -49,19 +49,35 @@
 		resultType="GroupInfoDto">
 		SELECT * FROM SGROUP
 		JOIN SGROUP_MEMBER USING (SGROUP_ID)
-		WHERE SGROUP_ID = '${groupId}'
+		WHERE SGROUP_ID = ${groupId}
 	</select>
 
+	<resultMap id="recordSumResultMap"
+		type="swithme.model.group.dto.GroupRecordSumDto">
+		<result property="SUM_MIN" column="sumMin" />
+		<result property="MEM_ID" column="memId" />
+	</resultMap>
+
 	<select id="selectGroupRecordSumList" parameterType="_int"
-		resultType="GroupRecordSumDto">
+		resultMap="recordSumResultMap">
 		SELECT
-		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) - TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) ,
-		RECORD_MEM_ID
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
+		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) AS "SUM_MIN",
+		RECORD_MEM_ID AS "MEM_ID"
 		FROM
 		RECORD
-		WHERE RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID IN (SELECT
-		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE SGROUP_ID = '#{groupId}')
-		GROUP BY RECORD_MEM_ID;
+		WHERE RECORD_START >= ( SYSDATE - 7 ) AND
+		RECORD_MEM_ID IN (SELECT
+		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE
+		SGROUP_ID = ${groupId})
+		GROUP BY RECORD_MEM_ID
+	</select>
 
+	<select id="test" parameterType="string" resultType="_int">
+		SELECT
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) - TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100)
+		FROM
+		RECORD
+		WHERE RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID = #{memId}
 	</select>
 </mapper>

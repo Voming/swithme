@@ -54,9 +54,10 @@
 				<div>
 					<p>공부현황</p>
 				</div>
-				<div >
+				<div >[[${groupSumList }]]
 					<ul class="group-box">
-						<c:if test="${not empty OpenGrouplist }">
+					
+						<%-- <c:if test="${not empty OpenGrouplist }">
 							<c:forEach items="${OpenGrouplist}" var="groupDto">
 								<li>
 									<div class="box">
@@ -79,7 +80,7 @@
 									</div>
 								</li>
 							</c:forEach>
-						</c:if>
+						</c:if> --%>
 					</ul>
 				</div>
 

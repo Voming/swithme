@@ -6,6 +6,7 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="callSettersOnNulls" value="true"/>
 	</settings>
 
 	<typeAliases>
@@ -29,6 +30,10 @@
 		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.MastercraftsmentDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.ProengineerDto"/>
+		
+		<typeAlias type="java.util.Map"/>
+		<typeAlias type="java.util.HashMap"/>
+		<typeAlias type="java.util.List"/>
 		
 		<package name="swithme.model.myrecord.dto"/>
 	</typeAliases>

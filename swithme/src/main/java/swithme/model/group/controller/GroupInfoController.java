@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.service.GroupService;
 
 /**
@@ -35,7 +36,16 @@ public class GroupInfoController extends HttpServlet {
 			return;
 		}
 		GroupInfoDto groupInfo = service.selectGroupInfo(groupId);
+		
+		System.out.println("groupId : "+ groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);
+		
+		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
+		request.getSession().setAttribute("groupSumList", groupSumList);
+		System.out.println("groupSumList : " + groupSumList);
+		
+		int groupSum = service.test("song");
+		System.out.println("groupSum" + groupSum);
 		
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}

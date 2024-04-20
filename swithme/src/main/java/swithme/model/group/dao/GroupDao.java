@@ -11,6 +11,7 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoDto;
 import swithme.model.group.dto.GroupMylistDto;
+import swithme.model.group.dto.GroupRecordSumDto;
 
 public class GroupDao {
 
@@ -53,7 +54,16 @@ public class GroupDao {
 		GroupInfoDto result = session.selectOne("group.selectGroupInfo", groupId);
 		return result;
 	}
+	
+	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId){
+		List<GroupRecordSumDto> result =  session.selectList("group.selectGroupRecordSumList", groupId);
+		return result;
+	}
 
+	public int test(SqlSession session, String memId){
+		int result = session.selectOne("group.test", memId);
+		return result;
+	}
 	/*
 	 * public int update(SqlSession session, String newgroupId, String groupId) {
 	 * int result = 0; String sql = "UPDATE SGROUP SET MEM_ID=? WHERE SGROUP_ID=?";

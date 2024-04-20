@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import swithme.jdbc.common.MybatisTemplate;
+
 import swithme.model.group.dao.GroupDao;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoDto;
 import swithme.model.group.dto.GroupMylistDto;
+import swithme.model.group.dto.GroupRecordSumDto;
 
 public class GroupService {
 	private GroupDao dao = new GroupDao();
@@ -74,6 +76,21 @@ public class GroupService {
 		return result;
 	}
 
+	public List<GroupRecordSumDto> selectGroupRecordSumList(int groupId){
+		List<GroupRecordSumDto> result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectGroupRecordSumList(session, groupId);
+		session.close();
+		return result;
+	}
+	
+	public int test(String memId){
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.test(session, memId);
+		session.close();
+		return result;
+	}
 
 /*	public int update(String newgroupId, String groupId) {
 		int result = 0;

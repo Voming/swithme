@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-
-import swithme.model.board.dto.BoardContentDto;
-
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
+import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardListDto;
+import swithme.model.board.dto.BoardReplyListDto;
+import swithme.model.board.dto.BoardReplyWriteDto;
 
 public class BoardDao {
 
@@ -42,8 +42,6 @@ public class BoardDao {
 		
 		return result;
 	}
-	
-	
 
 	//게시글 하나 선택
 	public BoardContentDto selectOne(SqlSession session, Integer boardId) {
@@ -51,10 +49,14 @@ public class BoardDao {
 		
 		System.out.println("BoardContentDto : " + result);
 		return result;
-		
+			
+	}
+	
+	//댓글 
+	public List<BoardReplyListDto> selectBoardReplyList(SqlSession session, Integer boardId) {
+		return session.selectList("board.selectBoardReplyList", boardId);
 		
 	}
-
 
 	//게시글 추가
 	public int insert(SqlSession session, BoardInsertDto dto) {
@@ -63,14 +65,34 @@ public class BoardDao {
 		return result;
 
 	}
+	
+	//댓글 작성
+	public int insertReplyWrite(SqlSession session, BoardReplyWriteDto dto) {
+
+		return session.insert("board.insertReplyWrite", dto);
+	}
+	
+	//대댓글 작성
+	public int insertReplyWriteAgain(SqlSession session, BoardReplyWriteDto dto) {
+		
+		return session.insert("board.insertReplyWriteAgain", dto);
+	}
+	
 
 	//게시글 수정
 	public int update(SqlSession session, BoardDto dto) {
-		int result = session.insert("board.update", dto);
+		int result = session.update("board.update", dto);
 		
 		return result;
 	}
 
+	public int updateReplyStep(SqlSession session, Integer boardReplyid) {
+			return session.update("updateReplyStep", boardReplyid);
+			
+	}
+	
+	
+	
 	//게시글 삭제
 	public int delete(SqlSession session, Integer boardId) {
 		int result = session.delete("board.delete", boardId);

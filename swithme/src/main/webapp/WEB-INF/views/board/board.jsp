@@ -33,19 +33,8 @@
 				</div>
 			</header>
 		</div>
-		<c:choose>
-			<c:when test="${empty loginInfo }">
-				<div class="wrap-welcome">
-					<div class="check-login">
-						<button type="button" class="btn join"
-							onclick="location.href='${pageContext.request.contextPath}/join'">회원가입</button>
-						<button type="button" class="btn login"
-							onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
-					</div>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="wrap-body">
+		
+		<div class="wrap-body">
 			<div class="pgroup">
 				<p class="p-first">자유 게시판</p>
 				<p class="p-sec">자유롭게 소통해요~</p>
@@ -74,7 +63,7 @@
 	          					</td>
 	          				</tr>
 	          			
-	          		</c:when>
+	          			</c:when>
 						<c:otherwise>
 							<tbody>
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
@@ -105,7 +94,6 @@
 				</div>
 			</div>
 
-
 			<div>
 				<ul>
 					<c:if test="${mapboardlist.startPageNum > 1}">
@@ -135,8 +123,6 @@
 			</div>
 
 		</div>
-			</c:otherwise>
-		</c:choose>
 		
 	</div>
 

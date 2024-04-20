@@ -1,12 +1,12 @@
 package swithme.model.board.service;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-
 import static swithme.jdbc.common.JdbcTemplate.*;
+import org.apache.ibatis.session.SqlSession;
 
 import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.board.dao.BoardDao;
@@ -14,6 +14,8 @@ import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
+import swithme.model.board.dto.BoardReplyListDto;
+import swithme.model.board.dto.BoardReplyWriteDto;
 
 public class BoardService {
 	
@@ -73,6 +75,14 @@ public class BoardService {
 		return result;
 	}
 	
+	public List<BoardReplyListDto> selectBoardReplyList(Integer boardId) {
+		List<BoardReplyListDto> result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectBoardReplyList(session, boardId);
+		
+		session.close();
+		return result;
+	}
 	
 	//게시글 상세 페이지 들어가서 보는 것
 	public BoardContentDto selectOne(int boardId) {
@@ -98,6 +108,38 @@ public class BoardService {
 		return result;
 	}
 	
+	//댓글 작성
+	public int insertReplyWrite(BoardReplyWriteDto dto) {
+		int result = 0;
+		int resultUpdate = 0;
+		
+		SqlSession session = MybatisTemplate.getSqlSession();
+		
+		if(dto.getReplyId() != 0) {
+			resultUpdate = dao.updateReplyStep(session, dto.getReplyId());
+			
+			if(resultUpdate > -1 ) {
+				result = dao.insertReplyWriteAgain(session, dto);	
+			}
+						
+		} else {
+			result = dao.insertReplyWrite(session, dto);
+		}
+		
+		if(resultUpdate > -1 && result > 0) {
+			session.commit();
+			//이러면 정상
+		} else {
+			session.rollback();
+			//여기는 비정상
+		}
+
+		
+		result = dao.insertReplyWrite(session, dto);
+		session.close();
+		return result;
+	}
+	
 	
 	//게시글 수정
 	public int update(BoardDto dto) {
@@ -108,6 +150,18 @@ public class BoardService {
 		
 		session.close();
 		return result;
+	}
+	
+	public int updateReplyStep(Integer boardId) {
+			int result = -1;
+			// 0일때도 정상이라서 -1을 줘서 비정상 구분하기
+			// 0개행이 업데이트 되어도 정상이라서 0도 정상이다(업데이트 할게 없을수도 있음)
+			
+			SqlSession session = MybatisTemplate.getSqlSession();
+			result = dao.updateReplyStep(session, boardId);
+			
+			session.close();
+			return result;
 	}
 	
 	//게시글 삭제

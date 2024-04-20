@@ -8,8 +8,8 @@
 	<select id="selectTotalPageCount" resultType="_int">
 		SELECT COUNT(*) c FROM BOARD
 	</select>
-	<select id="selectPage" resultType="BoardListDto"
-		parameterType="map">
+	
+	<select id="selectPage" resultType="BoardListDto" parameterType="map">
 		SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
 		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME,
@@ -17,30 +17,35 @@
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
-	<select id="selectOne" resultType="BoardContentDto"
-		parameterType="_int">
+	<select id="selectOne" resultType="BoardContentDto" parameterType="_int">
 		SELECT TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>
-
+	
+	<select id="selectBoardReplyList" resultType="BoardReplyListDto" parameterType="_int">
+		SELECT REPLY_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
+		FROM BOARD_REPLY
+		WHERE BOARD_ID = #{boardId} 
+			ORDER BY REPLY_REF ASC, REPLY_STEP
+	</select>
+	
 	<insert id="insert" parameterType="BoardInsertDto">
 		INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME,
 		READ_COUNT, BOARD_LIKE)
-		VALUES(SEQ_BOARD_ID.nextval, #{boardWriter},
-		#{title}, #{content}, default, default, default)
+		VALUES(SEQ_BOARD_ID.nextval, #{boardWriter}, #{title}, #{content}, default, default, default)
 	</insert>
 	
 	<insert id="insertReplyWrite" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
-		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{boardReplywriter}, #{boardReplycontent},
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
 				default, default, (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), DEFAULT)
 	</insert>
 	
 	<insert id="insertReplyWriteAgain" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
-		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${boardReplywriter}, ${boardReplycontent}, default ,
-				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
-				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
-				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} ))
+		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${replyWriterid}, ${replyContent}, default ,
+				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
+				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
+				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} ))
 	</insert>
 
 	<update id="update" parameterType="BoardDto">
@@ -49,9 +54,9 @@
 
 	<update id="updateReplyStep" parameterType="_int">
 		UPDATE BOARD_REPLY SET REPLY_STEP = REPLY_STEP+1  
-		WHERE REPLY_REF = ( SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
+		WHERE REPLY_REF = ( SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID = #{replyId})
     			AND
-    	REPLY_STEP > ( SELECT REPLY_STEP FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
+    		  REPLY_STEP > ( SELECT REPLY_STEP FROM BOARD_REPLY WHERE REPLY_ID = #{replyId})
 	</update>
 
 	<delete id="delete" parameterType="_int">

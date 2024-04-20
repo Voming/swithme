@@ -14,28 +14,28 @@ public class BoardReplyDto {
 	
 	private Integer replyId;
 	private Integer boardId;
-	private String replyWriterId;
+	private String replyWriterid;
 	private String replyContent;
-	private String timeStamp;
+	private String replyWritetime;
 	private Integer replyRef;
 	private Integer replyStep;
 	private Integer replyLevel;
 	
 	@Override
 	public String toString() {
-		return "BoardReplyDto [replyId=" + replyId + ", boardId=" + boardId + ", replyWriterId=" + replyWriterId
-				+ ", replyContent=" + replyContent + ", timeStamp=" + timeStamp + ", replyRef=" + replyRef
+		return "BoardReplyDto [replyId=" + replyId + ", boardId=" + boardId + ", replyWriterid=" + replyWriterid
+				+ ", replyContent=" + replyContent + ", replyWritetime=" + replyWritetime + ", replyRef=" + replyRef
 				+ ", replyStep=" + replyStep + ", replyLevel=" + replyLevel + "]";
 	}
 
-	public BoardReplyDto(Integer replyId, Integer boardId, String replyWriterId, String replyContent, String timeStamp,
+	public BoardReplyDto(Integer replyId, Integer boardId, String replyWriterid, String replyContent, String replyWritetime,
 			Integer replyRef, Integer replyStep, Integer replyLevel) {
 		super();
 		this.replyId = replyId;
 		this.boardId = boardId;
-		this.replyWriterId = replyWriterId;
+		this.replyWriterid = replyWriterid;
 		this.replyContent = replyContent;
-		this.timeStamp = timeStamp;
+		this.replyWritetime = replyWritetime;
 		this.replyRef = replyRef;
 		this.replyStep = replyStep;
 		this.replyLevel = replyLevel;
@@ -49,16 +49,16 @@ public class BoardReplyDto {
 		return boardId;
 	}
 
-	public String getReplyWriterId() {
-		return replyWriterId;
+	public String getReplyWriterid() {
+		return replyWriterid;
 	}
 
 	public String getReplyContent() {
 		return replyContent;
 	}
 
-	public String getTimeStamp() {
-		return timeStamp;
+	public String getReplyWritetime() {
+		return replyWritetime;
 	}
 
 	public Integer getReplyRef() {

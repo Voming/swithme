@@ -36,6 +36,7 @@ public class GroupController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		if(loginInfo == null) {
+			request.getSession().setAttribute("prePage", "group");
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}

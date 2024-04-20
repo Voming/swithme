@@ -25,6 +25,9 @@ public class WelcomeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String prePage=request.getParameter("prePage");
+		request.getSession().setAttribute("prePage", prePage);
+		System.out.println(prePage);
 		request.getRequestDispatcher("/WEB-INF/views/basic/welcome.jsp").forward(request, response);
 	}
 

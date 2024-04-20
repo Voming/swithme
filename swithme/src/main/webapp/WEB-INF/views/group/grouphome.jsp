@@ -28,7 +28,7 @@
 				margin : 10,
 				loop : true,
 				dots : true,
-				//autoplay: true,
+				autoplay: true,
 				autoplayTimeout : 3000,
 				autoplayHoverPause : true
 			});

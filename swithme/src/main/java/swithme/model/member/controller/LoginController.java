@@ -32,28 +32,30 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String prePage=request.getParameter("prePage");
 		request.getSession().setAttribute("prePage", prePage);
+		System.out.println(prePage);
 		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id=request.getParameter("id");
-		String pwd=request.getParameter("pwd");
-		MemberLoginDto dto=new MemberLoginDto(id,pwd);
-		
-		//ajax
-				int result=0;
-				MemberInfoDto resultInfo= new MemberService().loginGetInfo(dto);		
-				if(resultInfo != null) {
-					//성공
-					request.getSession().setAttribute("loginInfo", resultInfo );
-					result=1;
-				}
-				response.getWriter().append(String.valueOf(result));
-			}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		MemberLoginDto dto = new MemberLoginDto(id, pwd);
+
+		// ajax
+		int result = 0;
+		MemberInfoDto resultInfo = new MemberService().loginGetInfo(dto);
+		if (resultInfo != null) {
+			// 성공
+			request.getSession().setAttribute("loginInfo", resultInfo);
+			result = 1;
+		}
+		response.getWriter().append(String.valueOf(result));
 	}
+}
 
 

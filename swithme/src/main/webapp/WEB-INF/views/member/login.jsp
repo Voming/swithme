@@ -96,7 +96,10 @@
 							var prePage = "${prePage}";
 							if (prePage == "myrecord") {
 								location.href = "${pageContext.request.contextPath}/myrecord";
+							} else if(prePage == "group"){
+								location.href = "${pageContext.request.contextPath}/group";
 							}
+							
 							location.href = "${pageContext.request.contextPath}/myrecord";
 						} else {
 							alert("아이디 비밀번호 일치하지 않음");

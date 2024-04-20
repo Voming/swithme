@@ -1,48 +1,47 @@
 package swithme.model.board.dto;
 
 public class BoardReplyWriteDto {
-
-	private Integer boardReplyid;
+	
+	private Integer replyId;
 	private int boardId;
-	private String boardReplywriter;
-	private String boardReplycontent;
-	private String boardReplywritetime; // java.sql.timestamp
+	private String replyWriterid;
+	private String replyContent;
+	private String replyWritetime; // java.sql.timestamp
 	
 	@Override
 	public String toString() {
-		return "BoardReplyWriteDto [boardReplyid=" + boardReplyid + ", boardId=" + boardId + ", boardReplywriter="
-				+ boardReplywriter + ", boardReplycontent=" + boardReplycontent + ", boardReplywritetime="
-				+ boardReplywritetime + "]";
+		return "BoardReplyWriteDto [replyId=" + replyId + ", boardId=" + boardId + ", replyWriterId=" + replyWriterid
+				+ ", replyContent=" + replyContent + ", replyWritetime=" + replyWritetime + "]";
 	}
 
-	public BoardReplyWriteDto(Integer boardReplyid, int boardId, String boardReplywriter, String boardReplycontent,
-			String boardReplywritetime) {
+	public BoardReplyWriteDto(Integer replyId, int boardId, String replyWriterid, String replyContent,
+			String replyWritetime) {
 		super();
-		this.boardReplyid = boardReplyid;
+		this.replyId = replyId;
 		this.boardId = boardId;
-		this.boardReplywriter = boardReplywriter;
-		this.boardReplycontent = boardReplycontent;
-		this.boardReplywritetime = boardReplywritetime;
+		this.replyWriterid = replyWriterid;
+		this.replyContent = replyContent;
+		this.replyWritetime = replyWritetime;
 	}
 
-	public Integer getBoardReplyid() {
-		return boardReplyid;
+	public Integer getReplyId() {
+		return replyId;
 	}
 
 	public int getBoardId() {
 		return boardId;
 	}
 
-	public String getBoardReplywriter() {
-		return boardReplywriter;
+	public String getReplyWriterid() {
+		return replyWriterid;
 	}
 
-	public String getBoardReplycontent() {
-		return boardReplycontent;
+	public String getReplyContent() {
+		return replyContent;
 	}
 
-	public String getBoardReplywritetime() {
-		return boardReplywritetime;
+	public String getReplyWritetime() {
+		return replyWritetime;
 	}
 	
 	

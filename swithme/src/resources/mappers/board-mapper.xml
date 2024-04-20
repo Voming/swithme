@@ -31,16 +31,16 @@
 	
 	<insert id="insertReplyWrite" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
-		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{boardReplywriter}, #{boardReplycontent},
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
 				default, default, (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), DEFAULT)
 	</insert>
 	
 	<insert id="insertReplyWriteAgain" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
-		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${boardReplywriter}, ${boardReplycontent}, default ,
-				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
-				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} )  , 
-				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${boardReplyid} ))
+		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${replyWriterid}, ${replyContent}, default ,
+				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
+				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
+				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} ))
 	</insert>
 
 	<update id="update" parameterType="BoardDto">
@@ -49,9 +49,9 @@
 
 	<update id="updateReplyStep" parameterType="_int">
 		UPDATE BOARD_REPLY SET REPLY_STEP = REPLY_STEP+1  
-		WHERE REPLY_REF = ( SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
+		WHERE REPLY_REF = ( SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID = #{replyId})
     			AND
-    	REPLY_STEP > ( SELECT REPLY_STEP FROM BOARD_REPLY WHERE REPLY_ID = #{boardReplyid})
+    	REPLY_STEP > ( SELECT REPLY_STEP FROM BOARD_REPLY WHERE REPLY_ID = #{replyId})
 	</update>
 
 	<delete id="delete" parameterType="_int">

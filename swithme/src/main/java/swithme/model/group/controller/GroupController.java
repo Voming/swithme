@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
@@ -40,11 +41,14 @@ public class GroupController extends HttpServlet {
 		}
 		String memberId = loginInfo.getMemId();
 		System.out.println(memberId);
+		//내 그룹
 		List<GroupMylistDto> myGrouplist = service.selectMyList(memberId);
-		System.out.println(myGrouplist.toString());
-	
 		request.getSession().setAttribute("myGrouplist", myGrouplist);
-
+		
+		//전체 그룹
+		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 20);
+		request.getSession().setAttribute("OpenGrouplist", OpenGrouplist);
+		System.out.println(OpenGrouplist);
 		request.getRequestDispatcher("/WEB-INF/views/group/grouphome.jsp").forward(request, response);
 	}
 

@@ -95,18 +95,19 @@
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
-					<c:if test="${not empty myGrouplist }">
-						<c:forEach items="${myGrouplist}" var="groupDto">
-							<div class="item">
-								<figure>
-									<button type="button"
-										onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}' ">
-										<img src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
-									</button>
-									<figcaption>${groupDto.groupName }</figcaption>
-								</figure>
-							</div>
-						</c:forEach>
+						<c:if test="${not empty myGrouplist }">
+							<c:forEach items="${myGrouplist}" var="groupDto">
+								<div class="item">
+									<figure>
+										<button type="button"
+											onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}'">
+											<img
+												src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
+										</button>
+										<figcaption>${groupDto.groupName }</figcaption>
+									</figure>
+								</div>
+							</c:forEach>
 						</c:if>
 					</div>
 				</div>
@@ -145,74 +146,28 @@
 					<div class="group-tab-content">
 						<div id="tab01">
 							<ul class="group-box">
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
+								<c:if test="${not empty OpenGrouplist }">
+									<c:forEach items="${OpenGrouplist}" var="groupDto">
+										<li>
+											<div class="box">
+												<img class="img_g"
+													src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}" alt="그룹 사진"
+													onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}'">
+												<div class="tag">
+													<p style="background-color: black; padding: 3px; font-size: var(--font5);">
+														<c:if test="${groupDto.groupOpen == '0'}">공개</c:if>
+														<c:if test="${groupDto.groupOpen == '1'}">비공개</c:if>
+													</p>
+												</div>
+												<div class="description">
+													<a class="name"
+														style="font-size: var(--font4); font-weight: bold;">${groupDto.groupName}</a> 
+													<a class="name-sub" style="font-size: var(--font5);">${groupDto.groupEx}</a>
+												</div>
+											</div>
+										</li>
+									</c:forEach>
+								</c:if>
 							</ul>
 						</div>
 						<div id="tab02">

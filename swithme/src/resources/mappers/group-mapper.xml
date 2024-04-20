@@ -17,13 +17,16 @@
 	<select id="selectMyCount" parameterType="string"
 		resultType="_int">
 		SELECT COUNT(*) FROM SGROUP_MEMBER
-		WHERE SGROUP_MEM_ID = #{memberId}
+		WHERE SGROUP_MEM_ID =
+		#{memberId}
 	</select>
 
 	<select id="selectAllOpenList" parameterType="map"
 		resultType="GroupDto">
-		SELECT S.* FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE
-		SGROUP_OPEN = 0)
+		SELECT S.SGROUP_ID, S.SGROUP_NAME, S.SGROUP_OPEN,
+		S.SGROUP_PWD, S.SGROUP_EXPLAIN, S.SGROUP_IMG_PATH, S.SGROUP_IMG_NAME
+		FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE
+		SGROUP_OPEN = '0')
 		S
 		WHERE ROWNUM BETWEEN #{startRounum} AND #{endRounum}
 	</select>

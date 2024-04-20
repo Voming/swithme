@@ -104,7 +104,6 @@ public class GroupCreateController extends HttpServlet {
 		String groupWriter = loginInfo.getMemId();
 	
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
-		System.out.println(dto);
 		int result = service.insert(dto, groupWriter);
 		//ajax에 result 
 		response.getWriter().append(String.valueOf(result));

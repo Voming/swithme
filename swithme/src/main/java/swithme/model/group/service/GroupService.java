@@ -54,7 +54,7 @@ public class GroupService {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		int myGCount =  dao.selectMyCount(session, memberId);
-		System.out.println(myGCount);
+		
 		if(myGCount >= 5) {
 			result = -1;
 		}else {

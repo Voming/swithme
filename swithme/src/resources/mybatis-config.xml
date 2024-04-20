@@ -18,10 +18,11 @@
 		<typeAlias type="swithme.model.group.dto.GroupMemberDto" />
 		
 		<typeAlias type="swithme.model.board.dto.BoardDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardContentDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardReplyListDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
 		
 		
 		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>

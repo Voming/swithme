@@ -49,14 +49,15 @@ public class GroupService {
 		return result;
 	}
 	// 그룹 생성
-	public int insert(GroupCreateDto dto, String mememberId) {
+	public int insert(GroupCreateDto dto, String memberId) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		int myGCount =  dao.selectMyCount(session, mememberId);
-		if(myGCount <= 5) {
-			result = dao.insert(session, dto);
-		}else {
+		int myGCount =  dao.selectMyCount(session, memberId);
+		System.out.println(myGCount);
+		if(myGCount >= 5) {
 			result = -1;
+		}else {
+			result = dao.insert(session, dto);
 		}
 		
 		session.close();

@@ -128,7 +128,7 @@ public class GroupCreateController extends HttpServlet {
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
 		System.out.println(dto);
 		int result = service.insert(dto, groupWriter);
-		System.out.println(result);
+		System.out.println("result" + result);
 		//response.sendRedirect(request.getContextPath()+"/group");
 		response.getWriter().append(String.valueOf(result));
 	}

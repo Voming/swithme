@@ -89,13 +89,6 @@
 			</header>
 		</div>
 		<div class="wrap-body">
-		${myGrouplist}
-		<%-- <c:if test="${not empty dto.filedtolist }">
-	<div>
-		<c:forEach items="${dto.filedtolist }" var="filedto">
-		<div><a href="${pageContext.request.contextPath }/files/${filedto.savedFilePathName}" download="${filedto.orginalFileName }">${filedto.orginalFileName }</a></div>
-		</c:forEach>
-	</div> --%>
 			<div class="wrap-group">
 				<div class="wrap-my">
 					<div class="txt-my">
@@ -108,7 +101,7 @@
 								<figure>
 									<button type="button"
 										onclick="location.href='${pageContext.request.contextPath}/group/info?grouid=${groupDto.groupId}' ">
-										<img src="${pageContext.request.contextPath }/files/${groupDto.groupImgName}">
+										<img src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
 									</button>
 									<figcaption>${groupDto.groupName }</figcaption>
 								</figure>

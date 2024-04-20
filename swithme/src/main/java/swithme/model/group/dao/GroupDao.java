@@ -39,6 +39,7 @@ public class GroupDao {
 	}
 
 	public int insert(SqlSession session, GroupCreateDto dto) {
+		
 		int result = session.insert("group.insert", dto);
 		return result;
 	}

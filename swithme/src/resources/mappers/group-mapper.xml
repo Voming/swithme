@@ -16,8 +16,8 @@
 
 	<select id="selectMyCount" parameterType="string"
 		resultType="_int">
-		select count(*) from SGROUP_MEMBER
-		WHERE SGROUP_MEM_ID = #{memberId};
+		SELECT COUNT(*) FROM SGROUP_MEMBER
+		WHERE SGROUP_MEM_ID = #{memberId}
 	</select>
 
 	<select id="selectAllOpenList" parameterType="map"

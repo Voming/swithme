@@ -19,6 +19,7 @@
 .wrap-body .owl-carousel img {
 	width: 290px;
 	height: 180px;
+	object-fit: cover;
 }
 
 .owl-carousel .item button{

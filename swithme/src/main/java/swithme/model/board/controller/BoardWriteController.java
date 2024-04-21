@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.service.BoardService;
+import swithme.model.member.dto.MemberInfoDto;
 
 /**
  * Servlet implementation class BoardWriteController
@@ -49,7 +50,14 @@ public class BoardWriteController extends HttpServlet {
 		String title = request.getParameter("title"); // form 태그 안에 있는 name 따라감
 		String content = request.getParameter("content");
 		
-		BoardInsertDto dto = new BoardInsertDto("oh", title, content); 
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		if(loginInfo == null) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return;
+		}
+		String boardWriter = loginInfo.getMemId();
+		
+		BoardInsertDto dto = new BoardInsertDto(boardWriter, title, content); 
 		//jsp에서 쓴 내용을 dto에 담아서 service로 가지고 가는것
 		
 		int result = service.insert(dto); 

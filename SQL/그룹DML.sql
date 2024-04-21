@@ -50,7 +50,7 @@ SELECT
     round(SUM(to_number(to_char(record_end, 'HH24MISS')) - to_number(to_char(record_start, 'HH24MISS'))) / 100) 
 FROM
     record
-WHERE record_start >= ( sysdate - 7 ) AND  record_mem_id = 'b';
+WHERE record_start >= ( sysdate - 7 ) AND  record_mem_id = 'song';
 
 
 
@@ -115,6 +115,27 @@ where sgroup_id = 52;
 
 
 select * from (
-    select * from sgroup order by DBMS_RANDOM.RANDOM
+select * from sgroup order by DBMS_RANDOM.RANDOM
 )
 where rownum <= 20;
+
+select * from sgroup where sgroup_name like '%번%';
+
+
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME    
+from (SELECT SUBJECT_ID, SUBJECT_NAME  FROM SUBJECT WHERE MEM_ID ='song'  AND SUBJECT_DEL_DATE IS NULL) t1   
+	FULL JOIN 
+	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
+	  FROM RECORD WHERE RECORD_MEM_ID ='song'  and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') 
+	  group by cube(RECORD_SUBJECT_ID) ) t2 
+	on (SUBJECT_ID = RECORD_SUBJECT_ID) 
+ORDER BY SUBJECT_ID ASC NULLS FIRST;
+
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME, SUBJECT_COLOR 
+from (SELECT SUBJECT_ID, SUBJECT_NAME ,SUBJECT_COLOR  FROM SUBJECT WHERE MEM_ID ='song' AND SUBJECT_DEL_DATE IS NULL) t1   
+	FULL JOIN 
+	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
+	  FROM RECORD WHERE RECORD_MEM_ID = 'song'  and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') 
+	  group by RECORD_SUBJECT_ID ) t2 
+	on (SUBJECT_ID = RECORD_SUBJECT_ID) 
+ORDER BY SUBJECT_ID ASC NULLS FIRST;

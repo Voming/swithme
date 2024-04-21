@@ -44,7 +44,7 @@ public class MyrecordController extends HttpServlet {
 					memId = loginInfo.getMemId();
 				}
 				
-				
+				// null일 때 : []
 				List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 				request.setAttribute("sublist", sublist);
 				

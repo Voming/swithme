@@ -1,3 +1,10 @@
+ul{
+	padding : 0px;
+}
+a{
+	color: black;
+    text-decoration: none;
+}
 .wrap-body .wrap-main .myrecord{
 	width: 960px;
 	margin: 0 auto;
@@ -14,8 +21,9 @@
 .wrap-body .wrap-main .myrecord p {
 	font-family: "IM_Hyemin-Regular";
 	font-size: 15px;
+	margin : 1px;
 }
-.wrap-body .wrap-main .myrecord .sub-title{
+.wrap-body .wrap-main .myrecord .sub-title >p{
 	font-family: "IM_Hyemin-Bold";
 	font-size: 20px;
 }
@@ -194,9 +202,6 @@
 	padding : 20px 0;
 	width: 60%;
 	
-}
-.wrap-body .wrap-main .myrecord .sub-title {
-	font-size: 20px;
 }
 
 .wrap-body .wrap-main .myrecord .statistics-part{

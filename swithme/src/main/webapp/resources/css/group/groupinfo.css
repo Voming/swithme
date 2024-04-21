@@ -18,12 +18,12 @@
 	padding-top: 40px;
 	padding-bottom: 10px;
 	
-	position: relative;
 }
 
 .wrap-body .txt-my {
 	margin-right: 30px;
 	width: 500px;
+	position: relative;
 }
 
 .wrap-my .myGImg{
@@ -35,7 +35,6 @@
 	width: 430px;
 	height: 270px;
 	object-fit: cover;
-	
 }
 
 .wrap-my .myGName{
@@ -48,7 +47,14 @@
 	font-size: var(--font3);
 	
 }
-.wrap-my button {
+.wrap-my .txt-my button {
 	position: absolute;
 	bottom: 20px;
+	background-color: var(--color_purple_1);
+	font-family: "IM_Hyemin-Bold";
+	color: white;
+	border: 0;
+	height: 25px;
+	width: 130px;
+	border-radius: 10px;
 }

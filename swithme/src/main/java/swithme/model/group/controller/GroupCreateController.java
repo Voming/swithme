@@ -72,22 +72,21 @@ public class GroupCreateController extends HttpServlet {
 
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
-		String groupPwdstr = multiReq.getParameter("groupPwd");
 		String groupExp = multiReq.getParameter("groupExp");
 		
 		int groupPwd = 0;
-		if(groupPwdstr != null && !groupPwdstr.equals("")) {
-			try {
-				groupPwd = Integer.parseInt(groupPwdstr);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
-		
 		if(groupOpen.equals("open")) {
 			groupOpen = "0";
 		}else {
 			groupOpen = "1";
+			String groupPwdstr = multiReq.getParameter("groupPwd");
+			if(groupPwdstr != null && !groupPwdstr.equals("")) {
+				try {
+					groupPwd = Integer.parseInt(groupPwdstr);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");

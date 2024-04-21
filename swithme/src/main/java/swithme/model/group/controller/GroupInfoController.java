@@ -40,13 +40,13 @@ public class GroupInfoController extends HttpServlet {
 		System.out.println("groupId : "+ groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);
 	
-//		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
-//		request.getSession().setAttribute("groupSumList", groupSumList);
-//		System.out.println("groupSumList : " + groupSumList);
-//		
-//		int groupSum = service.test("song");
-//		System.out.println("groupSum" + groupSum);
-//		
+		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
+		request.getSession().setAttribute("groupSumList", groupSumList);
+		System.out.println("groupSumList : " + groupSumList);
+		
+		int groupSum = service.test("song");
+		System.out.println("groupSum" + groupSum);
+
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}
 

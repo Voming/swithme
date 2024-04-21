@@ -30,22 +30,20 @@ function loadedHandler() {
 	}
 	
 	$(".btn.open").on("click", btnOpenClickHandler);
-	$(".btn.update").on("click", btnCreateClickHandler);
+	$(".btn.update").on("click", btnUpdateClickHandler);
 }
 function btnOpenClickHandler(){
 	if($(this).val() == "open"){
 		$(".dpwd").remove();
 	}else {
 		var htmlVal = `<div class="dpwd"><p>비밀번호</p>
-			<input type="text" name="groupPwd" value="${groupInfo.sgroupPwd }" required /></div>`;
+			<input type="text" name="groupPwd" placeholder="숫자로 된 비밀번호를 입력하세요" required /></div>`;
 		
 		$(".wrap-open").after(htmlVal);  
 	} 
-	var isOpen = $('input[type=radio]:checked').val();
-	console.log(isOpen);
 }
 
-function btnCreateClickHandler(){
+function btnUpdateClickHandler(){
 	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");

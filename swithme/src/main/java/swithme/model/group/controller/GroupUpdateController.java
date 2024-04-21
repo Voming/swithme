@@ -64,7 +64,6 @@ public class GroupUpdateController extends HttpServlet {
 
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
-		String groupPwdstr = multiReq.getParameter("groupPwd");
 		String groupExp = multiReq.getParameter("groupExp");
 
 		// jsp -> controller file 딱 1개일 경우
@@ -73,19 +72,19 @@ public class GroupUpdateController extends HttpServlet {
 		String orginFileName = null;
 
 		int groupPwd = 0;
-		if (groupPwdstr != null && !groupPwdstr.equals("")) {
-			try {
-				groupPwd = Integer.parseInt(groupPwdstr);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
-
 		if (groupOpen.equals("open")) {
 			groupOpen = "0";
 			groupPwd = 0;
 		} else {
 			groupOpen = "1";
+			String groupPwdstr = multiReq.getParameter("groupPwd");
+			if (groupPwdstr != null) {
+				try {
+					groupPwd = Integer.parseInt(groupPwdstr);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		int result = 0;

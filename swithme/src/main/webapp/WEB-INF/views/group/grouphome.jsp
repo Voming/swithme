@@ -95,7 +95,7 @@
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
-						<%-- <c:if test="${not empty myGrouplist }"> --%>
+						 <c:if test="${not empty myGrouplist }"> 
 							<c:forEach items="${myGrouplist}" var="groupDto">
 								<div class="item">
 									<figure>
@@ -108,7 +108,7 @@
 									</figure>
 								</div>
 							</c:forEach>
-						<%-- </c:if> --%>
+						</c:if> 
 					</div>
 				</div>
 			</div>
@@ -146,7 +146,7 @@
 					<div class="group-tab-content">
 						<div id="tab01">
 							<ul class="group-box">
-								<%-- <c:if test="${not empty OpenGrouplist }"> --%>
+								<c:if test="${not empty OpenGrouplist }"> 
 									<c:forEach items="${OpenGrouplist}" var="groupDto">
 										<li>
 											<div class="box">
@@ -167,7 +167,7 @@
 											</div>
 										</li>
 									</c:forEach>
-								<%-- </c:if> --%>
+								 </c:if> 
 							</ul>
 						</div>
 						<div id="tab02">

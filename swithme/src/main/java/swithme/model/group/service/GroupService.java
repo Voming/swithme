@@ -53,6 +53,14 @@ public class GroupService {
 		session.close();
 		return result;
 	}
+	
+	public List<GroupDto> selectFindList(String findName) {
+		List<GroupDto> result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectFindList(session, findName);
+		session.close();
+		return result;
+	}
 
 	// 그룹 전체
 	public List<GroupDto> selectAllList() {

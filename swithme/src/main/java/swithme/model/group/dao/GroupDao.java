@@ -43,6 +43,12 @@ public class GroupDao {
 		List<GroupDto> result = session.selectList("group.selectRandList");
 		return result;
 	}
+	
+	//그룹 찾기
+	public List<GroupDto> selectFindList(SqlSession session, String findName) {
+		List<GroupDto> result = session.selectList("group.selectFindList", findName);
+		return result;
+	}
 
 	// 그룹 전체
 	public List<GroupDto> selectAllList(SqlSession session) {

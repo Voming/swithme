@@ -36,9 +36,15 @@
 		SELECT
 		* FROM SGROUP ORDER BY DBMS_RANDOM.RANDOM
 		)
-		WHERE ROWNUM <![CDATA[<=]]>  20
+		WHERE
+		ROWNUM <![CDATA[<=]]>
+		20
 	</select>
 
+	<select id="selectFindList"  parameterType="string" resultType="GroupDto">
+	SELECT * FROM SGROUP WHERE SGROUP_NAME LIKE '%${findName}%' 
+	</select>
+	
 	<select id="selectAllList" resultType="GroupDto">
 		SELECT * FROM SGROUP
 	</select>

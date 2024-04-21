@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.wrap-body {
+	/* 중앙 배치 */
+	width: 960px;
+	margin: 0 auto;
+	align-items: center;
+	text-align: center;
+}
+
+.wrap-body .wrap-search  {
+	margin-bottom: 60px;
+}
+
+.wrap-body .wrap-search p {
+	font-size: var(--font1);
+	font-family: "IM_Hyemin-Bold";
+	margin: 70px 0 20px 0;
+}
+
+.wrap-body .wrap-search input{
+	height: 35px;
+	width: 600px;
+	border-radius: 20px;
+	border : 4px solid var(--color_purple_3);
+	font-family: "IM_Hyemin-Regular";
+	
+}
+.wrap-body .wrap-search .search{
+	position: relative;
+}
+
+.wrap-body .search button{
+	border: 0;
+	background-color:white;
+	position: absolute;
+    top: 20%;
+    right:20%;
+}
+

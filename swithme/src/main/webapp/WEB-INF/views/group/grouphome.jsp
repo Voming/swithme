@@ -33,11 +33,8 @@
 				autoplayHoverPause : true
 			});
 			
-			
-			$(".btn.make").on("click", btnMakeClickHandler);
-			
 			//그룹 탭
-			 // $('.prd-tab-content > div').hide();
+			// $('.prd-tab-content > div').hide();
             $('.group-tab-nav a').click(function () {
                 console.log(this);
                 $('.group-tab-content > div').hide().filter(this.hash).fadeIn();
@@ -46,26 +43,23 @@
                 $(this).addClass('active');
                 return false;
             }).filter(':eq(0)').click();
+            
+        	
+			$(".btn.find").on("click", btnFindClickHandler);
         }
+		
 
-		function btnMakeClickHandler() {
-			/* 로그인 체크 */
-			
-			var loginInfo = "${loginInfo}";
-
-			if (loginInfo) {
-				
-					location.href = "${pageContext.request.contextPath}/group/create";
-			} else {
-				var result = confirm("로그인이 되야어 그룹 생성이 가능합니다.이동하시겠습니까");
-				if (result) {
-					location.href = "${pageContext.request.contextPath}/login";
-				} else {
-					location.href = "${pageContext.request.contextPath}/group";
-				}
-
+		function btnFindClickHandler() {
+			if ($("[name=find]").val().trim().length == 0) {
+				alert("빈문자열만 입력할 수 없습니다. 검색할 그룹명을 작성해주세요.");
+				return;
 			}
- 
+			// 중요!
+			var frm = document.getElementById("frm-find");
+			
+			frm.method = "post"; // content 길이 길거라..
+			frm.action = "${pageContext.request.contextPath}/group/find";
+			frm.submit();
 		}
 	</script>
 	<div class="wrapper">
@@ -118,13 +112,15 @@
 				</div>
 				<div>
 					<div class="search">
-						<input type="text" placeholder="&nbsp;찾고싶은 스터디 그룹명을 검색 하세요.">
-						<button type="button" class="btn find"
-							onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+					<form id="frm-find">
+						<input type="text"  name="find" placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
+						<button type="button" class="btn find" 
+							onclick="location.href='${pageContext.request.contextPath}/group/find'">
 							<img class="search-btn"
 								src="${pageContext.request.contextPath}/resources/images/find.png"
 								alt="찾기">
 						</button>
+					</form>	
 					</div>
 				</div>
 				<div class="move-make">
@@ -132,7 +128,7 @@
 						<p>원하는 그룹이 없다면?</p>
 					</div>
 					<div>
-						<button type="button" class="btn make">그룹 생성하러 가기</button>
+						<button type="button" class="btn make" onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹 생성하러 가기</button>
 					</div>
 				</div>
 			</div>

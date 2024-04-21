@@ -61,24 +61,51 @@
 			
 			<div class="board-reply">
 				<p>댓글</p>
-				<div class="reply">
+				<form id="frm-reply">
+				<input type="hidden" name="boardId" value="${dto.boardId} ">
 					<div class="r-1">
 						<div>
-							<input type="text" placeholder="제목을 입력하세요.">					
+							작성자
 						</div>
+					</div>
+					<div class="r-2">
 						<div>
 							<textarea name="content" cols="136" rows="5" placeholder="내용을 입력하시오."></textarea>
 						</div>
-						</div>
-					<div class="r-2">
+					</div>
+					<div class="r-3">
 						<ul>
-							<li>작성자</li>
 							<li>날짜</li>
-							<li>
-								<p>등록/삭제<p>
-							</li>
+							<li class="replyreg" style="cursor: pointer;">댓글 달기</li>
+							<li>등록/삭제</li>
 						</ul>
 					</div>
+				</form>
+				
+				<div class="wrap-reply">
+				
+				</div>
+				
+				<div class="wrap-reply2">
+					<form id="frm-reply2">
+						<div class="r-1">
+							<div>
+								작성자
+							</div>
+						</div>
+						<div class="r-2">
+							<div>
+								<textarea name="content" cols="122" rows="5" placeholder="내용을 입력하시오."></textarea>
+							</div>
+						</div>
+						<div class="r-3">
+							<ul>
+								<li>날짜</li>
+								<li style="cursor: pointer;">댓글 달기</li>
+								<li>등록/삭제</li>
+							</ul>
+						</div>
+					</form>	
 				</div>			
 				<div class="btn">
 					<button type="button" class="btn write">글쓰기</button>
@@ -98,9 +125,105 @@
 $(loadedHandler);
 
 function loadedHandler(){
+	$("replyreg").on("click", boardReplyClickHandler);
 	$(".btn.write").on("click", boardWriteClickHandler);
-	$(".btn.board").on("click", boardClickHandler);	
+	$(".btn.board").on("click", boardClickHandler);
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/replycontent"
+		, method: "post"
+		/* url 접근 불가능하게 post 쓰기 */
+		, data: {boardId: "${dto.boardId}"}
+		, dataType: "json"
+		, success: function(result){
+			console.log("boardcontent ajax : " + result);
+			displayReplyWrap(result);
+			
+		}
+		, error: function(request, status, error){
+			//controller에서 전달해준 값 여기서 호출
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+		
+	});
 }
+
+function boardReplyClickHandler(){
+	
+	if($("#frm-reply [name=content]").val().trim().length == 0) {
+		alert("입력된 글이 없습니다. 입력 후 글을 등록해주세요.");
+		return;
+	}
+
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/replywrite",
+		method: "post",
+		data: $("#frm-reply").serialize(),
+		dataType: "json",
+		success: function(result){
+			console.log(result);
+			if(result == "-1") {
+				alert("댓글 작성이 되지 않았습니다. 게시글 목록으로 이동 후 다시 작성해주세요.");
+				location.href="${pageContext.request.contextPath}/board";
+				return;
+			}
+			if(result == "0") {
+				alert("댓글 등록에 실패하였습니다. 다시 시도해주세요.");
+				return;
+			}
+			displayReplyWrap(result);
+			
+		},
+		error: function(request, status, error){
+			//controller에서 전달해준 값 여기서 호출
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+		
+	});
+}
+
+function displayReplyWrap(datalist){
+
+	var htmlVal = '';
+	for(var idx in datalist){
+		var replydto = datalist[idx];
+		htmlVal += `
+			<form id="frm-reply">
+			<input type="hidden" name="boardId" value="${dto.boardId}">
+			<input type="hidden" name="ReplyId" value="\${replydto.replyId }">
+			<input type="hidden" name="ReplyLevel" value="\${replydto.replyLevel }">
+			<input type="hidden" name="ReplyStep" value="\${replydto.replyStep }">
+			<input type="hidden" name="ReplyRef" value="\${replydto.replyRef }">
+				<div class="r-1">
+					<div>
+						작성자
+					</div>
+				</div>
+				<div class="r-2">
+					<div>
+						<textarea name="content" cols="136" rows="5" placeholder="내용을 입력하시오."></textarea>
+					</div>
+				</div>
+				<div class="r-3">
+					<ul>
+						<li>날짜</li>
+						<li class="replyreg" style="cursor: pointer;">댓글 달기</li>
+						<li>등록/삭제</li>
+					</ul>
+				</div>
+			</form>
+		`;
+	}
+	$(".wrap-reply").html(htmlVal);
+	// html(새로운내용으로덮어쓰면기존event등록이사라짐)
+	// event 다시 등록
+}
+
 
 function boardWriteClickHandler(){
 	location.href = "${pageContext.request.contextPath}/boardwrite";

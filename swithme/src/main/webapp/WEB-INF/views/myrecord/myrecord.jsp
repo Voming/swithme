@@ -1,4 +1,4 @@
- <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
+<jsp:include page="/WEB-INF/views/common/links_file.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,15 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"	rel="stylesheet">
 <!--부트스트랩  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery 선언 -->
+<!-- jQuery 선언 및 css연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"	rel="stylesheet">
+<!--chart.js CDN  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- 풀캘린더 CDN -->
-<script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 
+<script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
@@ -25,8 +28,7 @@
 		calendar.render();
 	});
 </script>
-<!--chart.js CDN  -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 
 <title>SWITH.ME</title>
@@ -199,24 +201,81 @@
 								</div>
 							</div>
 						</div>
-						<div calss="sub-title">
+						<div class="sub-title">
 							<p>출석</p>
 						</div>
 						<div id='calendar' class="study-calender"></div>
 						<div class="statistics-part">
-							<div calss="sub-title">
-								<p>통계</p>
+							<div class="sub-title">
+								<p >통계</p>
 							</div>
 							<canvas id="myChart"></canvas>
 							<script>
+							$(document).ready(function(){
+								todayStudyTime();
+							});
+							let subejctNameList =[];
+							let recordTimeList=[];
+							let subjectColorList=[];
+							var colorNum
+							var numnum
+							function chooseColor(colorNum){
+								var colNum
+								switch (colorNum) {
+									
+								case '1':
+									colNum = '#FFB3E5';
+									break;
+								case '2':
+									colNum = '#FFE16F';
+									break;
+								case '3':
+									colNum = '#AED581';
+									break;
+								case '4':
+									colNum = '#99BBFF';
+									break;
+								case '5':
+									colNum = '#BF80FF';
+									break;
+								console.log("함수 안 colorNum   "+colNum);
+								return colorNum
+							}}
+							function todayStudyTime(){
+								$.ajax({
+									url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
+									,method:"post"
+									,error : ajaxErrorHandler
+									,data : {numnum : numnum} //data없인 안되는걸까
+									,dataType:"json"
+									,success: function(result){
+										//console.log("-------------------   "+result[0].subjectName);
+										for(let i = 0 ; i < result.length;i++){	
+											subejctNameList.push(result[i].subjectName);
+											//console.log("result[i].subjectName   :"+result[i].subjectName);
+											recordTimeList.push(result[i].difftime);
+											colorNum=result[i].subjectColor;
+											subjectColorList.push(chooseColor(colorNum));
+											
+											//확인용
+											console.log("*******colorNum    "+colorNum);
+											console.log(result[i].subjectColor);
+											console.log(chooseColor(result[i].subjectColor));
+										}
+										}
+									
+								});
+								
+							}//todayStudyTime
+							/**********************************************/
 								var data = {
-									labels : [ 'January', 'February', 'March',
-											'April', 'May', 'June', 'July' ],
+									labels : subejctNameList,
 									datasets : [ {
-										label : 'My First Dataset',
-										backgroundColor : 'rgb(255, 99, 132)',
-										borderColor : 'rgb(255, 99, 132)',
-										data : [ 0, 10, 5, 2, 20, 30, 45 ]
+										label : '오늘의 공부시간',
+										backgroundColor : subjectColorList,
+										borderColor : '#AED581',//subjectColorList,
+										
+										data : recordTimeList
 									} ]
 								};
 
@@ -271,184 +330,184 @@ function loadedHandler() {
 
 	/* 과목  추가하기 */
 	$(".btn.done").on("click", btnAddSubjectClickHandler);
-	
+	/* 과목  선택하기 */
 	$(".subId").on("click",subIdClickHandler);
 	
 }
 		
 		/*과목 이름 클릭시 해당과목이름 화면에 띄움, subjectName 받아오기 */
-/* 		 function ready() {
-				$(".subId").on("click",subIdClickHandler);
-		 }
-	    document.addEventListener("DOMContentLoaded", ready);
-		
-		function subIdClickHandler(){
-			var tagId = $(this).data('subject-name');
-			alert(tagId);
-			
+/* 		
+function ready() {$(".subId").on("click",subIdClickHandler);}
+document.addEventListener("DOMContentLoaded", ready);
+function subIdClickHandler(){
+	var tagId = $(this).data('subject-name');
+	alert(tagId);
+	
+} 
+*/
+//과목선택하기
+function subIdClickHandler(){
+	 subjectName = $(this).data('subject-name');
+	 subjectId = $(this).data('subject-id');
+	 
+	$("#selSub").text(subjectName);
+}
+// 과목 추가하기  
+function btnAddSubjectClickHandler() {
+	console.log($("#frm-add").serialize());
+	var frm = document.getElementById("frm-add");
+	frm.method = "post";
+	frm.action = "${pageContext.request.contextPath}/addsubject";
+	frm.submit();
+}
+
+let intervalCountdownID;
+let startTime;
+let endTime;
+let diffMSec;
+let diffMin;
+let diffHour;
+let diffTime;
+
+/* 	
+// 10보다 작은 값에 0을 붙임
+function addZero(n) {
+	return n < 10 ? '0' + n : n;
+}
+// 현재 시간을 리턴
+function getCurrentDate() {
+	var currentDate = new Date();
+	return currentDate.getFullYear().toString()
+			+ addZero(currentDate.getMonth() + 1)
+			+ addZero(currentDate.getDate())
+			+ addZero(currentDate.getHours())
+			+ addZero(currentDate.getMinutes())
+			+ addZero(currentDate.getSeconds());
 		} */
 
-		function subIdClickHandler(){
-			 subjectName = $(this).data('subject-name');
-			 subjectId = $(this).data('subject-id');
-			 
-			$("#selSub").text(subjectName);
+function startClickHandler() {
+	
+	if(subjectName == null){
+		alert("과목을 선택 후 시작해주세요. 과목을 추가하지 않았다면 과목추가도 함께 진행해주세요");
+		return;
+	}
+	var sendDateTime = getCurrentDateTime(); 
+	startTime = new Date();
+	intervalCountdownID = setInterval(intervalCountdownCb, 1000, "p1","p2");
+
+	//버튼 활성화
+	$("#start").attr("disabled", true);
+	$("#stop").attr("disabled", false);
+	
+	
+	$.ajax({
+		type : "post",
+		url : "${pageContext.request.contextPath}/myrecord/recordstart.ajax",
+		data : {subjectId : subjectId, startTime: sendDateTime },
+		error : ajaxErrorHandler,
+		success : function(result) {
+			console.log("start 성공");
 		}
-		// 과목 추가하기  
-		function btnAddSubjectClickHandler() {
-			console.log($("#frm-add").serialize());
-			var frm = document.getElementById("frm-add");
-			frm.method = "post";
-			frm.action = "${pageContext.request.contextPath}/addsubject";
-			frm.submit();
+	});
+
+}
+function stopClickHandler() {
+	var sendDateTime = getCurrentDateTime(); 
+	endTime = new Date();
+
+	clearInterval(intervalCountdownID);
+
+	//버튼 활성화
+	$("#start").attr("disabled", false);
+	$("#stop").attr("disabled", true);
+
+	$.ajax({
+		type : "post",
+		url : "${pageContext.request.contextPath}/myrecord/recordend.ajax",
+		data : {subjectId : subjectId, endTime: sendDateTime },
+		error : ajaxErrorHandler,
+		success : function(result) {
+			console.log("성공");
+			//location.replace="${pageContext.request.contextPath}/myrecord";
+			location.reload(true);
 		}
+	});
+}
+/* 시간 계산 setInterval 사용 */
+function intervalCountdownCb() {
+	nowTime = new Date();
+	/* 
+	diffMSec = nowTime.getTime() - startTime.getTime();
+	diffHour = Math.floor(diffMSec / (60 * 60 * 1000));
+	diffMin = Math.floor(diffMSec / (60 * 1000));
+	 */
+	diffMSec = nowTime.getTime() - startTime.getTime();
+	diffSec = diffMSec / 1000;
+	diffHour = Math.floor(diffSec / (60 * 60));
+	diffMin = Math.floor(diffSec / 60 - diffHour * 60);
+	diffMSec = Math.floor(diffSec - diffMin * 60 - diffHour * 60 * 60);
 
-		let intervalCountdownID;
-		let startTime;
-		let endTime;
-		let diffMSec;
-		let diffMin;
-		let diffHour;
-		let diffTime;
+	if (diffMSec < 10) {
+		diffMSec = '0' + diffMSec;
+	}
+	if (diffHour < 10) {
+		diffHour = '0' + diffHour;
+	}
+	if (diffMin < 10) {
+		diffMin = '0' + diffMin;
+	}
 
-/* 		// 10보다 작은 값에 0을 붙임
-		function addZero(n) {
-			return n < 10 ? '0' + n : n;
-		}
-		// 현재 시간을 리턴
-		function getCurrentDate() {
-			var currentDate = new Date();
-			return currentDate.getFullYear().toString()
-					+ addZero(currentDate.getMonth() + 1)
-					+ addZero(currentDate.getDate())
-					+ addZero(currentDate.getHours())
-					+ addZero(currentDate.getMinutes())
-					+ addZero(currentDate.getSeconds());
-		} */
+	diffTime = diffHour + ":" + diffMin + ":" + diffMSec;
+	$("#countdown").text(diffTime);
 
-		function startClickHandler() {
-			
-			if(subjectName == null){
-				alert("과목을 선택 후 시작해주세요. 과목을 추가하지 않았다면 과목추가도 함께 진행해주세요");
-				return;
-			}
-			var sendDateTime = getCurrentDateTime(); 
-			startTime = new Date();
-			intervalCountdownID = setInterval(intervalCountdownCb, 1000, "p1","p2");
+	/* 확인용 */
+	console.log(diffHour + ":" + diffMin + ":" + diffMSec);
 
-			//버튼 활성화
-			$("#start").attr("disabled", true);
-			$("#stop").attr("disabled", false);
-			
-			
-			$.ajax({
-				type : "post",
-				url : "${pageContext.request.contextPath}/myrecord/recordstart.ajax",
-				data : {subjectId : subjectId, startTime: sendDateTime },
-				error : ajaxErrorHandler,
-				success : function(result) {
-					console.log("start 성공");
-				}
-			});
+}
 
-		}
-		function stopClickHandler() {
-			var sendDateTime = getCurrentDateTime(); 
-			endTime = new Date();
+/* 날짜 표현하기 */
+function todayHandler() {
+	var time = new Date();
+	var month = time.getMonth() + 1;
+	var date = time.getDate();
+	var day = time.getUTCDay();
+	var day2 = time.getDay();
+	var week;
 
-			clearInterval(intervalCountdownID);
+	switch (day2) {
+	case 0:
+		week = '일요일';
+		break;
+	case 1:
+		week = '월요일';
+		break;
+	case 2:
+		week = '화요일';
+		break;
+	case 3:
+		week = '수요일';
+		break;
+	case 4:
+		week = '목요일';
+		break;
+	case 5:
+		week = '금요일';
+		break;
+	case 6:
+		week = '토요일';
+		break;
+	}
+	var today = month + "월 " + date + "일 " + week;
+	$("#today").text(today);
 
-			//버튼 활성화
-			$("#start").attr("disabled", false);
-			$("#stop").attr("disabled", true);
+}
 
-			$.ajax({
-				type : "post",
-				url : "${pageContext.request.contextPath}/myrecord/recordend.ajax",
-				data : {subjectId : subjectId, endTime: sendDateTime },
-				error : ajaxErrorHandler,
-				success : function(result) {
-					console.log("성공");
-					//location.replace="${pageContext.request.contextPath}/myrecord";
-					location.reload(true);
-				}
-			});
-		}
-		/* 시간 계산 setInterval 사용 */
-		function intervalCountdownCb() {
-			nowTime = new Date();
-			/* 
-			diffMSec = nowTime.getTime() - startTime.getTime();
-			diffHour = Math.floor(diffMSec / (60 * 60 * 1000));
-			diffMin = Math.floor(diffMSec / (60 * 1000));
-			 */
-			diffMSec = nowTime.getTime() - startTime.getTime();
-			diffSec = diffMSec / 1000;
-			diffHour = Math.floor(diffSec / (60 * 60));
-			diffMin = Math.floor(diffSec / 60 - diffHour * 60);
-			diffMSec = Math.floor(diffSec - diffMin * 60 - diffHour * 60 * 60);
+function currentTimeHandler() {
+	var time = new Date();
+	var localTime = time.toLocaleTimeString();
+	$("#currentTime").text(localTime);
 
-			if (diffMSec < 10) {
-				diffMSec = '0' + diffMSec;
-			}
-			if (diffHour < 10) {
-				diffHour = '0' + diffHour;
-			}
-			if (diffMin < 10) {
-				diffMin = '0' + diffMin;
-			}
-
-			diffTime = diffHour + ":" + diffMin + ":" + diffMSec;
-			$("#countdown").text(diffTime);
-
-			/* 확인용 */
-			console.log(diffHour + ":" + diffMin + ":" + diffMSec);
-
-		}
-
-		/* 날짜 표현하기 */
-		function todayHandler() {
-			var time = new Date();
-			var month = time.getMonth() + 1;
-			var date = time.getDate();
-			var day = time.getUTCDay();
-			var day2 = time.getDay();
-			var week;
-
-			switch (day2) {
-			case 0:
-				week = '일요일';
-				break;
-			case 1:
-				week = '월요일';
-				break;
-			case 2:
-				week = '화요일';
-				break;
-			case 3:
-				week = '수요일';
-				break;
-			case 4:
-				week = '목요일';
-				break;
-			case 5:
-				week = '금요일';
-				break;
-			case 6:
-				week = '토요일';
-				break;
-			}
-			var today = month + "월 " + date + "일 " + week;
-			$("#today").text(today);
-
-		}
-
-		function currentTimeHandler() {
-			var time = new Date();
-			var localTime = time.toLocaleTimeString();
-			$("#currentTime").text(localTime);
-
-		}
+}
 
 		/* today(); */
 	</script>

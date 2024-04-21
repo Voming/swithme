@@ -38,6 +38,12 @@ public class GroupDao {
 		return result;
 	}
 
+	// 랜덤 추천 그룹 20개 가져오기
+	public List<GroupDto> selectRandList(SqlSession session) {
+		List<GroupDto> result = session.selectList("group.selectRandList");
+		return result;
+	}
+
 	// 그룹 전체
 	public List<GroupDto> selectAllList(SqlSession session) {
 		List<GroupDto> result = session.selectList("group.selectAllList");
@@ -66,29 +72,23 @@ public class GroupDao {
 	}
 
 	public int update(SqlSession session, GroupUpdateDto dto) {
-		int result =  session.update("group.update", dto);
+		int result = session.update("group.update", dto);
 		return result;
 	}
-	
+
 	public int updateMin(SqlSession session, GroupUpdateMinDto dto) {
-		int result =  session.update("group.updateMin", dto);
+		int result = session.update("group.updateMin", dto);
 		return result;
 	}
 
-	/*public int delete(SqlSession session, String groupId) {
-		int result = 0;
-		String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?";
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, groupId);
-
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		close(pstmt);
-		return result;
-	}*/
+	/*
+	 * public int delete(SqlSession session, String groupId) { int result = 0;
+	 * String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?"; PreparedStatement pstmt
+	 * = null; try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,
+	 * groupId);
+	 * 
+	 * result = pstmt.executeUpdate(); } catch (Exception e) { e.printStackTrace();
+	 * } close(pstmt); return result; }
+	 */
 
 }

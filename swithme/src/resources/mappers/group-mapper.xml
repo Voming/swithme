@@ -31,6 +31,14 @@
 		WHERE ROWNUM BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
+	<select id="selectRandList" resultType="GroupDto">
+		SELECT * FROM (
+		SELECT
+		* FROM SGROUP ORDER BY DBMS_RANDOM.RANDOM
+		)
+		WHERE ROWNUM <![CDATA[<=]]>  20
+	</select>
+
 	<select id="selectAllList" resultType="GroupDto">
 		SELECT * FROM SGROUP
 	</select>
@@ -61,7 +69,8 @@
 	<select id="selectGroupRecordSumList" parameterType="_int"
 		resultType="GroupRecordSumDto">
 		SELECT
-		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS'))
+		-
 		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) AS "SUM_MIN",
 		RECORD_MEM_ID AS "MEM_ID"
 		FROM
@@ -85,14 +94,22 @@
 	</select>
 
 	<update id="update" parameterType="GroupUpdateDto">
-		UPDATE SGROUP SET SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD = #{sgroupPwd},
-		SGROUP_EXPLAIN = #{sgroupEx}, SGROUP_IMG_PATH = #{sgroupImgPath}, SGROUP_IMG_NAME= #{sgroupImgName}
-		WHERE SGROUP_ID = #{sgroupId}
+		UPDATE SGROUP SET SGROUP_NAME
+		= #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =
+		#{sgroupPwd},
+		SGROUP_EXPLAIN = #{sgroupEx}, SGROUP_IMG_PATH =
+		#{sgroupImgPath}, SGROUP_IMG_NAME= #{sgroupImgName}
+		WHERE SGROUP_ID =
+		#{sgroupId}
 	</update>
 
 	<update id="updateMin" parameterType="GroupUpdateMinDto">
-		UPDATE SGROUP SET SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD = #{sgroupPwd},
+		UPDATE SGROUP SET
+		SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =
+		#{sgroupPwd},
 		SGROUP_EXPLAIN = #{sgroupEx}
 		WHERE SGROUP_ID = #{sgroupId}
 	</update>
+
+
 </mapper>

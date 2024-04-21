@@ -41,6 +41,9 @@ public class GroupController extends HttpServlet {
 		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 20);
 		request.getSession().setAttribute("OpenGrouplist", OpenGrouplist);
 		
+		List<GroupDto> RandGrouplist = service.selectRandList();
+		request.getSession().setAttribute("RandGrouplist", RandGrouplist);
+		
 		request.getRequestDispatcher("/WEB-INF/views/group/grouphome.jsp").forward(request, response);
 	}
 

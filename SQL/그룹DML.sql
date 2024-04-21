@@ -106,3 +106,15 @@ SELECT      TO_CHAR(TRUNC(171425/(3600*24)),'FM00') || ':' ||
             TO_CHAR(TRUNC(MOD(171425,3600)/60),'FM00') || ':' ||
             TO_CHAR(MOD(171425,60),'FM00') "dd:hh:mm:ss 로 변경"
 FROM        DUAL;
+
+select * from sgroup;
+
+update sgroup set sgroup_explain= '수정중'
+where sgroup_id = 52;
+
+
+
+select * from (
+    select * from sgroup order by DBMS_RANDOM.RANDOM
+)
+where rownum <= 20;

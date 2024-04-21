@@ -44,6 +44,15 @@ public class GroupService {
 		session.close();
 		return result;
 	}
+	
+	//랜덤 추천 그룹 20개 가져오기
+	public List<GroupDto> selectRandList() {
+		List<GroupDto> result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectRandList(session);
+		session.close();
+		return result;
+	}
 
 	// 그룹 전체
 	public List<GroupDto> selectAllList() {

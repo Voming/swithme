@@ -2,9 +2,6 @@ package swithme.model.group.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +16,6 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class GroupController
- */
 @WebServlet("/group/create")
 public class GroupCreateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

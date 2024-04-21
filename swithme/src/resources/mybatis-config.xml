@@ -17,7 +17,9 @@
 		<typeAlias type="swithme.model.group.dto.GroupMylistDto" />
 		<typeAlias type="swithme.model.group.dto.GroupInfoDto" />
 		<typeAlias type="swithme.model.group.dto.GroupMemberDto" />
-		<typeAlias type="swithme.model.group.dto.GroupRecordSumDto" />
+		<typeAlias type="swithme.model.group.dto.GroupRecordSumDto"  alias="GroupRecordSumDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupUpdateDto"  alias="GroupUpdateDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupUpdateMinDto"  alias="GroupUpdateMinDto"/>
 		
 		<typeAlias type="swithme.model.board.dto.BoardDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto"/>

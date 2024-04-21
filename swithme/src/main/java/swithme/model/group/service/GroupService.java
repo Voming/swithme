@@ -12,6 +12,8 @@ import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordSumDto;
+import swithme.model.group.dto.GroupUpdateDto;
+import swithme.model.group.dto.GroupUpdateMinDto;
 
 public class GroupService {
 	private GroupDao dao = new GroupDao();
@@ -51,22 +53,23 @@ public class GroupService {
 		session.close();
 		return result;
 	}
+
 	// 그룹 생성
 	public int insert(GroupCreateDto dto, String memberId) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		int myGCount =  dao.selectMyCount(session, memberId);
-		
-		if(myGCount >= 5) {
+		int myGCount = dao.selectMyCount(session, memberId);
+
+		if (myGCount >= 5) {
 			result = -1;
-		}else {
+		} else {
 			result = dao.insert(session, dto);
 		}
-		
+
 		session.close();
 		return result;
 	}
-	
+
 	// 선택된 그룹 하나 전체 정보
 	public GroupInfoDto selectGroupInfo(int groupId) {
 		GroupInfoDto result = null;
@@ -76,15 +79,15 @@ public class GroupService {
 		return result;
 	}
 
-	public List<GroupRecordSumDto> selectGroupRecordSumList(int groupId){
+	public List<GroupRecordSumDto> selectGroupRecordSumList(int groupId) {
 		List<GroupRecordSumDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectGroupRecordSumList(session, groupId);
 		session.close();
 		return result;
 	}
-	
-	public int test(String memId){
+
+	public int test(String memId) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.test(session, memId);
@@ -92,20 +95,40 @@ public class GroupService {
 		return result;
 	}
 
-/*	public int update(String newgroupId, String groupId) {
+	public int update(GroupUpdateDto dto) {
+		int result = 0;
+		System.out.println(dto);
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.update(session, dto);
+
+		if (result > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+
+		session.close();
+		return result;
+
+	}
+
+	public int updateMin(GroupUpdateMinDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.update(session, newgroupId, groupId);
+		result = dao.updateMin(session, dto);
+		if (result > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
 		session.close();
 		return result;
 	}
 
-	public int delete(String groupId) {
-		int result = 0;
-		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.delete(session, groupId);
-		session.close();
-		return result;
-	}*/
+	/*
+	 * public int delete(String groupId) { int result = 0; SqlSession session =
+	 * MybatisTemplate.getSqlSession(); result = dao.delete(session, groupId);
+	 * session.close(); return result; }
+	 */
 
 }

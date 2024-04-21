@@ -43,17 +43,17 @@
 				<div class="wrap-my">
 					<c:if test="${not empty groupInfo }">
 						<div class="txt-my">
-							<div class="myGName">${groupInfo.groupName }</div>
-							<div class="myGExp">${groupInfo.groupEx }</div>
+							<div class="myGName">${groupInfo.sgroupName }</div>
+							<div class="myGExp">${groupInfo.sgroupEx }</div>
 							<!-- <p>활동중</p> -->
-							<button type="button"
-								onclick="location.href='${pageContext.request.contextPath}/group/update">그룹
+							<button type="button" 
+								onclick="location.href='${pageContext.request.contextPath}/group/update?groupId=${groupInfo.sgroupId}'">그룹
 								수정하기</button>
 						</div>
 						<div class="myGImg">
 							<img
-								src="${pageContext.request.contextPath }/files/${groupInfo.groupImgPath}"
-								alt="그룹 이미지">
+								src="${pageContext.request.contextPath }/files/${groupInfo.sgroupImgPath}"
+								alt="그룹 이미지"/>
 						</div>
 					</c:if>
 				</div>

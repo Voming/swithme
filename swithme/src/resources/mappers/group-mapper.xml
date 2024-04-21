@@ -38,9 +38,9 @@
 	<insert id="insert" parameterType="GroupCreateDto">
 		INSERT ALL
 		INTO SGROUP VALUES
-		(SEQ_SGROUP_ID.nextval, #{groupName},
-		#{groupOpen},#{groupPwd},#{groupEx},#{groupImgPath},#{groupImgName})
-		INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{groupWriter})
+		(SEQ_SGROUP_ID.nextval, #{sgroupName},
+		#{sgroupOpen},#{sgroupPwd},#{sgroupEx},#{sgroupImgPath},#{sgroupImgName})
+		INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{sgroupWriter})
 		SELECT *
 		FROM DUAL
 	</insert>
@@ -59,14 +59,15 @@
 	</resultMap>
 
 	<select id="selectGroupRecordSumList" parameterType="_int"
-		resultMap="recordSumResultMap">
+		resultType="GroupRecordSumDto">
 		SELECT
 		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
 		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) AS "SUM_MIN",
 		RECORD_MEM_ID AS "MEM_ID"
 		FROM
 		RECORD
-		WHERE RECORD_START >= ( SYSDATE - 7 ) AND
+		WHERE RECORD_START >= ( SYSDATE - 7
+		) AND
 		RECORD_MEM_ID IN (SELECT
 		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE
 		SGROUP_ID = ${groupId})
@@ -75,9 +76,23 @@
 
 	<select id="test" parameterType="string" resultType="_int">
 		SELECT
-		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) - TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100)
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
+		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100)
 		FROM
 		RECORD
-		WHERE RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID = #{memId}
+		WHERE
+		RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID = #{memId}
 	</select>
+
+	<update id="update" parameterType="GroupUpdateDto">
+		UPDATE SGROUP SET SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD = #{sgroupPwd},
+		SGROUP_EXPLAIN = #{sgroupEx}, SGROUP_IMG_PATH = #{sgroupImgPath}, SGROUP_IMG_NAME= #{sgroupImgName}
+		WHERE SGROUP_ID = #{sgroupId}
+	</update>
+
+	<update id="updateMin" parameterType="GroupUpdateMinDto">
+		UPDATE SGROUP SET SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD = #{sgroupPwd},
+		SGROUP_EXPLAIN = #{sgroupEx}
+		WHERE SGROUP_ID = #{sgroupId}
+	</update>
 </mapper>

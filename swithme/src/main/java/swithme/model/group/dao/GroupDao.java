@@ -6,12 +6,13 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordSumDto;
+import swithme.model.group.dto.GroupUpdateDto;
+import swithme.model.group.dto.GroupUpdateMinDto;
 
 public class GroupDao {
 
@@ -44,7 +45,6 @@ public class GroupDao {
 	}
 
 	public int insert(SqlSession session, GroupCreateDto dto) {
-
 		int result = session.insert("group.insert", dto);
 		return result;
 	}
@@ -54,32 +54,41 @@ public class GroupDao {
 		GroupInfoDto result = session.selectOne("group.selectGroupInfo", groupId);
 		return result;
 	}
-	
-	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId){
-		List<GroupRecordSumDto> result =  session.selectList("group.selectGroupRecordSumList", groupId);
+
+	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId) {
+		List<GroupRecordSumDto> result = session.selectList("group.selectGroupRecordSumList", groupId);
 		return result;
 	}
 
-	public int test(SqlSession session, String memId){
+	public int test(SqlSession session, String memId) {
 		int result = session.selectOne("group.test", memId);
 		return result;
 	}
-	/*
-	 * public int update(SqlSession session, String newgroupId, String groupId) {
-	 * int result = 0; String sql = "UPDATE SGROUP SET MEM_ID=? WHERE SGROUP_ID=?";
-	 * PreparedStatement pstmt = null; try { pstmt = conn.prepareStatement(sql);
-	 * pstmt.setString(1, newgroupId); pstmt.setString(2, groupId);
-	 * 
-	 * result = pstmt.executeUpdate(); } catch (Exception e) { e.printStackTrace();
-	 * } close(pstmt); return result; }
-	 * 
-	 * public int delete(SqlSession session, String groupId) { int result = 0;
-	 * String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?"; PreparedStatement pstmt
-	 * = null; try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,
-	 * groupId);
-	 * 
-	 * result = pstmt.executeUpdate(); } catch (Exception e) { e.printStackTrace();
-	 * } close(pstmt); return result; }
-	 */
+
+	public int update(SqlSession session, GroupUpdateDto dto) {
+		int result =  session.update("group.update", dto);
+		return result;
+	}
+	
+	public int updateMin(SqlSession session, GroupUpdateMinDto dto) {
+		int result =  session.update("group.updateMin", dto);
+		return result;
+	}
+
+	/*public int delete(SqlSession session, String groupId) {
+		int result = 0;
+		String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, groupId);
+
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		close(pstmt);
+		return result;
+	}*/
 
 }

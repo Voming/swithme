@@ -9,65 +9,65 @@ public class GroupInfoDto {
 //	SGROUP_IMG_PATH	VARCHAR2(1000 BYTE)
 //	SGROUP_IMG_NAME	VARCHAR2(200 BYTE)
 
-	private Integer groupId;
-	private String groupName;
-	private String groupOpen;
-	private Integer groupPwd;
-	private String groupEx;
-	private String groupImgPath;
-	private String groupImgName;
-	private String groupMemId;
-
-	public GroupInfoDto(Integer groupId, String groupName, String groupOpen, Integer groupPwd, String groupEx,
-			String groupImgPath, String groupImgName, String groupMemId) {
-		super();
-		this.groupId = groupId;
-		this.groupName = groupName;
-		this.groupOpen = groupOpen;
-		this.groupPwd = groupPwd;
-		this.groupEx = groupEx;
-		this.groupImgPath = groupImgPath;
-		this.groupImgName = groupImgName;
-		this.groupMemId = groupMemId;
-	}
+	private Integer sgroupId;
+	private String sgroupName;
+	private String sgroupOpen;
+	private Integer sgroupPwd;
+	private String sgroupEx;
+	private String sgroupImgPath;
+	private String sgroupImgName;
+	private String sgroupMemId;
 
 	@Override
 	public String toString() {
-		return "GroupInfoDto [groupId=" + groupId + ", groupName=" + groupName + ", groupOpen=" + groupOpen
-				+ ", groupPwd=" + groupPwd + ", groupEx=" + groupEx + ", groupImgPath=" + groupImgPath
-				+ ", groupImgName=" + groupImgName + ", groupMemId=" + groupMemId + "]";
+		return "GroupInfoDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupOpen=" + sgroupOpen
+				+ ", sgroupPwd=" + sgroupPwd + ", sgroupEx=" + sgroupEx + ", sgroupImgPath=" + sgroupImgPath
+				+ ", sgroupImgName=" + sgroupImgName + ", sgroupMemId=" + sgroupMemId + "]";
 	}
 
-	public Integer getGroupId() {
-		return groupId;
+	public GroupInfoDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+			String sgroupImgPath, String sgroupImgName, String sgroupMemId) {
+		super();
+		this.sgroupId = sgroupId;
+		this.sgroupName = sgroupName;
+		this.sgroupOpen = sgroupOpen;
+		this.sgroupPwd = sgroupPwd;
+		this.sgroupEx = sgroupEx;
+		this.sgroupImgPath = sgroupImgPath;
+		this.sgroupImgName = sgroupImgName;
+		this.sgroupMemId = sgroupMemId;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public Integer getSgroupId() {
+		return sgroupId;
 	}
 
-	public String getGroupOpen() {
-		return groupOpen;
+	public String getSgroupName() {
+		return sgroupName;
 	}
 
-	public Integer getGroupPwd() {
-		return groupPwd;
+	public String getSgroupOpen() {
+		return sgroupOpen;
 	}
 
-	public String getGroupEx() {
-		return groupEx;
+	public Integer getSgroupPwd() {
+		return sgroupPwd;
 	}
 
-	public String getGroupImgPath() {
-		return groupImgPath;
+	public String getSgroupEx() {
+		return sgroupEx;
 	}
 
-	public String getGroupImgName() {
-		return groupImgName;
+	public String getSgroupImgPath() {
+		return sgroupImgPath;
 	}
 
-	public String getGroupMemId() {
-		return groupMemId;
+	public String getSgroupImgName() {
+		return sgroupImgName;
+	}
+
+	public String getSgroupMemId() {
+		return sgroupMemId;
 	}
 
 }

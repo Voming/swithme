@@ -95,20 +95,20 @@
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
-						<c:if test="${not empty myGrouplist }">
+						<%-- <c:if test="${not empty myGrouplist }"> --%>
 							<c:forEach items="${myGrouplist}" var="groupDto">
 								<div class="item">
 									<figure>
 										<button type="button"
-											onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
+											onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
 											<img
-												src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
+												src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}">
 										</button>
-										<figcaption>${groupDto.groupName }</figcaption>
+										<figcaption>${groupDto.sgroupName }</figcaption>
 									</figure>
 								</div>
 							</c:forEach>
-						</c:if>
+						<%-- </c:if> --%>
 					</div>
 				</div>
 			</div>
@@ -146,28 +146,28 @@
 					<div class="group-tab-content">
 						<div id="tab01">
 							<ul class="group-box">
-								<c:if test="${not empty OpenGrouplist }">
+								<%-- <c:if test="${not empty OpenGrouplist }"> --%>
 									<c:forEach items="${OpenGrouplist}" var="groupDto">
 										<li>
 											<div class="box">
 												<img class="img_g"
-													src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}" alt="그룹 사진"
-													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
+													src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}" alt="그룹 사진"
+													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
 												<div class="tag">
 													<p style="background-color: black; padding: 3px; font-size: var(--font5);">
-														<c:if test="${groupDto.groupOpen == '0'}">공개</c:if>
-														<c:if test="${groupDto.groupOpen == '1'}">비공개</c:if>
+														<c:if test="${groupDto.sgroupOpen == '0'}">공개</c:if>
+														<c:if test="${groupDto.sgroupOpen == '1'}">비공개</c:if>
 													</p>
 												</div>
 												<div class="description">
 													<a class="name"
-														style="font-size: var(--font4); font-weight: bold;">${groupDto.groupName}</a> 
-													<a class="name-sub" style="font-size: var(--font5);">${groupDto.groupEx}</a>
+														style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</a> 
+													<a class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</a>
 												</div>
 											</div>
 										</li>
 									</c:forEach>
-								</c:if>
+								<%-- </c:if> --%>
 							</ul>
 						</div>
 						<div id="tab02">

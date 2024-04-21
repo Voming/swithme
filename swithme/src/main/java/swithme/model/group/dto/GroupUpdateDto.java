@@ -1,6 +1,6 @@
 package swithme.model.group.dto;
 
-public class GroupDto {
+public class GroupUpdateDto {
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
 //	SGROUP_OPEN	CHAR(1 BYTE)
@@ -19,12 +19,12 @@ public class GroupDto {
 
 	@Override
 	public String toString() {
-		return "GroupDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupOpen=" + sgroupOpen
+		return "GroupUpdateDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupOpen=" + sgroupOpen
 				+ ", sgroupPwd=" + sgroupPwd + ", sgroupEx=" + sgroupEx + ", sgroupImgPath=" + sgroupImgPath
 				+ ", sgroupImgName=" + sgroupImgName + "]";
 	}
 
-	public GroupDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupUpdateDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName) {
 		super();
 		this.sgroupId = sgroupId;

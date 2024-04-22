@@ -1,6 +1,52 @@
 @charset "UTF-8";
 
-.monthly {
+.wrap-body {
+	width: 960px;
+	margin: auto;
+}
+
+
+.wrap-body .monthly {
 	/* 랭킹 화면 들어올 시 monthly 는 안보임 */
 	display: none;
+}
+
+.wrap-body .btn.tab01{
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	border: 2px solid var(--color_purple_1);
+    border-radius: 20px;
+	background: white;
+	margin: 20px;
+	padding: 5px 30px;
+}
+
+.wrap-body .btn.tab01:hover {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	background: var(--color_purple_1);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    margin: 20px;
+    padding: 5px 30px;
+}
+
+.wrap-body .btn.tab02 {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	border: 2px solid var(--color_purple_1);
+	background: white;
+    border-radius: 20px;
+    padding: 5px 30px;
+	
+}
+.wrap-body .btn.tab02:hover {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	background: var(--color_purple_1);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 30px;
 }

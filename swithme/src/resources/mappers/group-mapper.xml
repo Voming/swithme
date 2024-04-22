@@ -74,8 +74,8 @@
 	</select>
 
 	<resultMap id="recordSumResultMap" type="GroupRecordSumDto">
-		<result property="MEM_ID" column="memId" />
-		<result property="SUM_MIN" column="sumMin" />
+		<result property="memId" column="MEM_ID" />
+		<result property="sumMin" column="SUM_MIN" />
 	</resultMap>
 
 	<select id="selectGroupRecordSumList" parameterType="_int"

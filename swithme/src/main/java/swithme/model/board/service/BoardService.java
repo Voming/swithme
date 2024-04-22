@@ -80,6 +80,8 @@ public class BoardService {
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectBoardReplyList(session, boardId);
 		
+		System.out.println("service :" + result.toString());
+		
 		session.close();
 		return result;
 	}
@@ -91,6 +93,7 @@ public class BoardService {
 		result= dao.selectOne(session, boardId);
 		
 		System.out.println("BoardContentDao" + boardId);
+		
 		
 		session.close();
 		

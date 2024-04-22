@@ -1,6 +1,6 @@
 package swithme.model.group.dto;
 
-public class GroupDto {
+public class GroupUpdateMinDto {
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
 //	SGROUP_OPEN	CHAR(1 BYTE)
@@ -14,26 +14,21 @@ public class GroupDto {
 	private String sgroupOpen;
 	private Integer sgroupPwd;
 	private String sgroupEx;
-	private String sgroupImgPath;
-	private String sgroupImgName;
 
 	@Override
 	public String toString() {
-		return "GroupDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupOpen=" + sgroupOpen
-				+ ", sgroupPwd=" + sgroupPwd + ", sgroupEx=" + sgroupEx + ", sgroupImgPath=" + sgroupImgPath
-				+ ", sgroupImgName=" + sgroupImgName + "]";
+		return "GroupUpdateMinDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupOpen=" + sgroupOpen
+				+ ", sgroupPwd=" + sgroupPwd + ", sgroupEx=" + sgroupEx + "]";
 	}
 
-	public GroupDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
-			String sgroupImgPath, String sgroupImgName) {
+	public GroupUpdateMinDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd,
+			String sgroupEx) {
 		super();
 		this.sgroupId = sgroupId;
 		this.sgroupName = sgroupName;
 		this.sgroupOpen = sgroupOpen;
 		this.sgroupPwd = sgroupPwd;
 		this.sgroupEx = sgroupEx;
-		this.sgroupImgPath = sgroupImgPath;
-		this.sgroupImgName = sgroupImgName;
 	}
 
 	public Integer getSgroupId() {
@@ -54,14 +49,6 @@ public class GroupDto {
 
 	public String getSgroupEx() {
 		return sgroupEx;
-	}
-
-	public String getSgroupImgPath() {
-		return sgroupImgPath;
-	}
-
-	public String getSgroupImgName() {
-		return sgroupImgName;
 	}
 
 }

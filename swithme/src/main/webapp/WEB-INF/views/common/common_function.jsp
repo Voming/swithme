@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
-
-
 <script>
 function getCurrentDateTime() {
   // 현재 날짜 시간 구하기 yyyymmddhh24miss
@@ -24,6 +21,7 @@ function getCurrentDateTime() {
   console.log("getCurrentDateTime:"+sendDateTime);
   return sendDateTime;
 }
+
 function getCurrentTimeDisplay() {
   // 현재 날짜 시간 구하기 am hh:mi:ss
   const now = new Date();
@@ -37,6 +35,7 @@ function getCurrentTimeDisplay() {
   console.log("getCurrentDateTimeDisplay:"+returnVal);
   return returnVal;
 }
+
 function getCurrentDateDisplay() {
   // 현재 날짜 시간 구하기 m월 d일 day
   // TODO

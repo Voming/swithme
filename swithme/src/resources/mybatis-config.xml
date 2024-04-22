@@ -10,14 +10,15 @@
 	</settings>
 
 	<typeAliases>
-	
-	
-		<typeAlias type="swithme.model.group.dto.GroupDto"/>
-		<typeAlias type="swithme.model.group.dto.GroupCreateDto" />
-		<typeAlias type="swithme.model.group.dto.GroupMylistDto" />
-		<typeAlias type="swithme.model.group.dto.GroupInfoDto" />
-		<typeAlias type="swithme.model.group.dto.GroupMemberDto" />
-		<typeAlias type="swithme.model.group.dto.GroupRecordSumDto" />
+
+		<typeAlias type="swithme.model.group.dto.GroupDto" alias="GroupDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupCreateDto" alias="GroupCreateDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupMylistDto" alias="GroupMylistDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupInfoListDto" alias="GroupInfoListDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupMemberDto" alias="GroupMemberDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupRecordSumDto"  alias="GroupRecordSumDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupUpdateDto"  alias="GroupUpdateDto"/>
+		<typeAlias type="swithme.model.group.dto.GroupUpdateMinDto"  alias="GroupUpdateMinDto"/>
 		
 		<typeAlias type="swithme.model.board.dto.BoardDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto"/>
@@ -26,6 +27,7 @@
 		<typeAlias type="swithme.model.board.dto.BoardReplyListDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
 		
+		<typeAlias type="swithme.model.ranking.dto.RankingDto"/>
 		
 		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.MastercraftsmentDto"/>
@@ -66,7 +68,6 @@
 		<mapper resource="mappers/record-mapper.xml"/>
 		<mapper resource="mappers/subject-mapper.xml"/>
 		<mapper resource="mappers/testcalendar-mapper.xml"/>
-		<!-- xxx-mapper.xml 생성 후 추가 -->
 	</mappers>
 </configuration>
 

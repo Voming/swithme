@@ -3,28 +3,26 @@ package swithme.model.group.dto;
 public class GroupMemberDto {
 //	SGROUP_ID	NUMBER
 //	SGROUP_MEM_ID	VARCHAR2(20 BYTE)
-	private Integer groupId;
-	private String groupMemId;
-
-	public GroupMemberDto(Integer groupId, String groupMemId) {
-		super();
-		this.groupId = groupId;
-		this.groupMemId = groupMemId;
-	}
+	private Integer sgroupId;
+	private String sgroupMemId;
 
 	@Override
 	public String toString() {
-		return "GroupMemberDto [groupId=" + groupId + ", groupMemId=" + groupMemId + "]";
+		return "GroupMemberDto [sgroupId=" + sgroupId + ", sgroupMemId=" + sgroupMemId + "]";
 	}
 
-	public Integer getGroupId() {
-		return groupId;
+	public GroupMemberDto(Integer sgroupId, String sgroupMemId) {
+		super();
+		this.sgroupId = sgroupId;
+		this.sgroupMemId = sgroupMemId;
 	}
 
-	public String getGroupMemId() {
-		return groupMemId;
+	public Integer getSgroupId() {
+		return sgroupId;
 	}
-	
-	
+
+	public String getSgroupMemId() {
+		return sgroupMemId;
+	}
 
 }

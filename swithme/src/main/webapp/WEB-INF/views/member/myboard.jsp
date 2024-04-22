@@ -1,18 +1,17 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<%=request.getContextPath()%>/resources/css/board/board.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="<%=request.getContextPath()%>/resources/css/member/myboard.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>게시판</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<title>나의 게시판</title>
 </head>
-
 <body>
-	<div class="wrapper">
+<div class="wrapper">
 		<div class="wrap-header">
 			<header>
 				<%@include file="/WEB-INF/views/basic/header.jsp"%>
@@ -22,9 +21,9 @@
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="#">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -33,9 +32,9 @@
 				</div>
 			</header>
 		</div>
-		
 		<div class="wrap-body">
-			<div class="pgroup">
+			<div class="wrap-board">
+							<div class="pgroup">
 				<p class="p-first">자유 게시판</p>
 				<p class="p-sec">자유롭게 소통해요~</p>
 			</div>
@@ -121,50 +120,11 @@
 					</c:if>
 				</ul>
 			</div>
-
+			</div>
 		</div>
-		
 	</div>
-
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
-
-	
-<script>
-$(loadedHandler);
-function loadedHandler() {
-	$(".btn.write").on("click", btnWriteClickHandler);
-	$("li.page").on("click", pageChangeHandler);
-
-	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
-	$(".page").on("mouseenter", pageMouseEnterHandler);
-	$(".page").on("mouseleave", pageMouseLeaveHandler);
-}
-
-function pageChangeHandler(){
-	location.href = "${pageContext.request.contextPath}/board?page="+$("input.pageHidden").val();
-	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
-}
-
-function btnWriteClickHandler() {
-	location.href = "${pageContext.request.contextPath}/boardwrite";
-
-}
-
-/* a태그에 마우스 올렸을 때 색 변환 */
-function pageMouseEnterHandler(){
-	$(".apage").css('color', 'white');
-}
-
-/* a태그에 마우스 뗐을 때 다시 원래색 변환 */
-function pageMouseLeaveHandler(){
-	$(".apage").css('color', 'black');
-}
-
-
-</script>
-
 </body>
-
 </html>

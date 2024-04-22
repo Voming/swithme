@@ -2,9 +2,6 @@ package swithme.model.group.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +16,6 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class GroupController
- */
 @WebServlet("/group/create")
 public class GroupCreateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -78,22 +72,21 @@ public class GroupCreateController extends HttpServlet {
 
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
-		String groupPwdstr = multiReq.getParameter("groupPwd");
 		String groupExp = multiReq.getParameter("groupExp");
 		
 		int groupPwd = 0;
-		if(groupPwdstr != null && !groupPwdstr.equals("")) {
-			try {
-				groupPwd = Integer.parseInt(groupPwdstr);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-		}
-		
 		if(groupOpen.equals("open")) {
 			groupOpen = "0";
 		}else {
 			groupOpen = "1";
+			String groupPwdstr = multiReq.getParameter("groupPwd");
+			if(groupPwdstr != null && !groupPwdstr.equals("")) {
+				try {
+					groupPwd = Integer.parseInt(groupPwdstr);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
@@ -104,7 +97,7 @@ public class GroupCreateController extends HttpServlet {
 		String groupWriter = loginInfo.getMemId();
 	
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
-		int result = service.insert(dto, groupWriter);
+		int result = service.insert(dto);
 		//ajax에 result 
 		response.getWriter().append(String.valueOf(result));
 	}

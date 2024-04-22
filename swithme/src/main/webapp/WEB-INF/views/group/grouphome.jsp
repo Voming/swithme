@@ -16,6 +16,7 @@
 <title>SWITH.ME</title>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 </head>
 <body>
 	<script>
@@ -33,11 +34,8 @@
 				autoplayHoverPause : true
 			});
 			
-			
-			$(".btn.make").on("click", btnMakeClickHandler);
-			
 			//그룹 탭
-			 // $('.prd-tab-content > div').hide();
+			// $('.prd-tab-content > div').hide();
             $('.group-tab-nav a').click(function () {
                 console.log(this);
                 $('.group-tab-content > div').hide().filter(this.hash).fadeIn();
@@ -46,27 +44,63 @@
                 $(this).addClass('active');
                 return false;
             }).filter(':eq(0)').click();
+            
+        	
+			$(".btn.find").on("click", btnFindClickHandler);
         }
+		
 
-		function btnMakeClickHandler() {
-			/* 로그인 체크 */
-			
-			var loginInfo = "${loginInfo}";
-
-			if (loginInfo) {
-				
-					location.href = "${pageContext.request.contextPath}/group/create";
-			} else {
-				var result = confirm("로그인이 되야어 그룹 생성이 가능합니다.이동하시겠습니까");
-				if (result) {
-					location.href = "${pageContext.request.contextPath}/login";
-				} else {
-					location.href = "${pageContext.request.contextPath}/group";
-				}
-
+		function btnFindClickHandler() {
+			if ($("[name=find]").val().trim().length == 0) {
+				alert("빈문자열만 입력할 수 없습니다. 검색할 그룹명을 작성해주세요.");
+				return;
 			}
- 
+
+			$.ajax({
+				url:"${pageContext.request.contextPath }/group/find.ajax"
+				, method : "post"
+				, data :  $("#frm-find").serialize()
+				, dataType : 'json'
+				, success: function(result){
+						console.log(result);
+						displayFindWrap(result);
+				}
+				,error : ajaxErrorHandler
+			});			
 		}
+		
+		function displayFindWrap(datalist){
+			var htmlVal = '';
+			for(var idx in datalist){
+				var findDto = datalist[idx];
+				console.log(findDto);
+				htmlVal+= `
+				<li>
+					<div class="box">
+						<img class="img_g"
+							src="${pageContext.request.contextPath}/files/\${findDto.sgroupImgPath}" alt="그룹 사진"
+							onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=\${findDto.sgroupId}'">
+						<div class="tag">
+							<p style="background-color: black; padding: 3px; font-size: var(--font5);">
+								<c:if test="\${findDto.sgroupOpen == '0'}">공개</c:if>
+								<c:if test="\${findDto.sgroupOpen == '1'}">비공개</c:if>
+							</p>
+						</div>
+						<div class="description">
+							<a class="name"
+								style="font-size: var(--font4); font-weight: bold;">\${findDto.sgroupName}</a> 
+							<a class="name-sub" style="font-size: var(--font5);">\${findDto.sgroupEx}</a>
+						</div>
+					</div>
+				</li>`;
+			}
+			$(".group-box").html(htmlVal);
+			$(".all-txt").hide();
+			$(".group-tab-nav").hide();
+			
+		}
+		
+		
 	</script>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -77,7 +111,7 @@
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
@@ -95,20 +129,20 @@
 						<p>내 그룹</p>
 					</div>
 					<div class="owl-carousel">
-						<c:if test="${not empty myGrouplist }">
+						 <c:if test="${not empty myGrouplist }"> 
 							<c:forEach items="${myGrouplist}" var="groupDto">
 								<div class="item">
 									<figure>
 										<button type="button"
-											onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
+											onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
 											<img
-												src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}">
+												src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}">
 										</button>
-										<figcaption>${groupDto.groupName }</figcaption>
+										<figcaption>${groupDto.sgroupName }</figcaption>
 									</figure>
 								</div>
 							</c:forEach>
-						</c:if>
+						</c:if> 
 					</div>
 				</div>
 			</div>
@@ -118,13 +152,14 @@
 				</div>
 				<div>
 					<div class="search">
-						<input type="text" placeholder="&nbsp;찾고싶은 스터디 그룹명을 검색 하세요.">
-						<button type="button" class="btn find"
-							onclick="location.href='${pageContext.request.contextPath}/myrecord'">
+					<form id="frm-find">
+						<input type="text"  name="find" placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
+						<button type="button" class="btn find" >
 							<img class="search-btn"
 								src="${pageContext.request.contextPath}/resources/images/find.png"
 								alt="찾기">
 						</button>
+					</form>	
 					</div>
 				</div>
 				<div class="move-make">
@@ -132,13 +167,13 @@
 						<p>원하는 그룹이 없다면?</p>
 					</div>
 					<div>
-						<button type="button" class="btn make">그룹 생성하러 가기</button>
+						<button type="button" class="btn make" onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹 생성하러 가기</button>
 					</div>
 				</div>
 			</div>
 			<div class="wrap-openlist">
 				<div class="tab-body">
-					<p>전체그룹</p>
+					<p class="all-txt">전체그룹</p>
 					<ul class="group-tab-nav">
 						<li><a href="#tab01">전체</a></li>
 						<li><a href="#tab02">추천 그룹</a></li>
@@ -146,66 +181,54 @@
 					<div class="group-tab-content">
 						<div id="tab01">
 							<ul class="group-box">
-								<c:if test="${not empty OpenGrouplist }">
+								<c:if test="${not empty OpenGrouplist }"> 
 									<c:forEach items="${OpenGrouplist}" var="groupDto">
 										<li>
 											<div class="box">
 												<img class="img_g"
-													src="${pageContext.request.contextPath }/files/${groupDto.groupImgPath}" alt="그룹 사진"
-													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.groupId}'">
+													src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}" alt="그룹 사진"
+													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
 												<div class="tag">
 													<p style="background-color: black; padding: 3px; font-size: var(--font5);">
-														<c:if test="${groupDto.groupOpen == '0'}">공개</c:if>
-														<c:if test="${groupDto.groupOpen == '1'}">비공개</c:if>
+														<c:if test="${groupDto.sgroupOpen == '0'}">공개</c:if>
+														<c:if test="${groupDto.sgroupOpen == '1'}">비공개</c:if>
 													</p>
 												</div>
 												<div class="description">
 													<a class="name"
-														style="font-size: var(--font4); font-weight: bold;">${groupDto.groupName}</a> 
-													<a class="name-sub" style="font-size: var(--font5);">${groupDto.groupEx}</a>
+														style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</a> 
+													<a class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</a>
 												</div>
 											</div>
 										</li>
 									</c:forEach>
-								</c:if>
+								 </c:if> 
 							</ul>
 						</div>
 						<div id="tab02">
 							<ul class="group-box">
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="box">
-										<img class="img_g"
-											src="http://via.placeholder.com/220X140.jpg/" alt="그룹 사진"
-											onClick="location.href='TODO상세페이지로 변경하기'">
-										<div class="tag">
-											<p
-												style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
-										</div>
-										<div class="description">
-											<a class="name"
-												style="font-size: var(--font4); font-weight: bold;">그룹명
-											</a> <a class="name-sub" style="font-size: var(--font5);">그룹
-												설명입니다</a>
-										</div>
-									</div>
-								</li>
+								<c:if test="${not empty RandGrouplist }"> 
+									<c:forEach items="${RandGrouplist}" var="randDto">
+										<li>
+											<div class="box">
+												<img class="img_g"
+													src="${pageContext.request.contextPath }/files/${randDto.sgroupImgPath}" alt="그룹 사진"
+													onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${randDto.sgroupId}'">
+												<div class="tag">
+													<p style="background-color: black; padding: 3px; font-size: var(--font5);">
+														<c:if test="${randDto.sgroupOpen == '0'}">공개</c:if>
+														<c:if test="${randDto.sgroupOpen == '1'}">비공개</c:if>
+													</p>
+												</div>
+												<div class="description">
+													<a class="name"
+														style="font-size: var(--font4); font-weight: bold;">${randDto.sgroupName}</a> 
+													<a class="name-sub" style="font-size: var(--font5);">${randDto.sgroupEx}</a>
+												</div>
+											</div>
+										</li>
+									</c:forEach>
+								 </c:if> 
 							</ul>
 						</div>
 					</div>

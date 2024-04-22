@@ -6,12 +6,13 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupInfoListDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordSumDto;
+import swithme.model.group.dto.GroupUpdateDto;
+import swithme.model.group.dto.GroupUpdateMinDto;
 
 public class GroupDao {
 
@@ -27,7 +28,7 @@ public class GroupDao {
 		return result;
 	}
 
-	// 공개 그룹 전체 범위 있음
+	// 공개 그룹 전체 (범위 있음)
 	public List<GroupDto> selectAllOpenList(SqlSession session, int start, int end) {
 		Map<String, Integer> param = new HashMap<String, Integer>();
 		param.put("startRounum", start);
@@ -37,42 +38,63 @@ public class GroupDao {
 		return result;
 	}
 
+	// 랜덤 추천 그룹 20개 가져오기
+	public List<GroupDto> selectRandList(SqlSession session) {
+		List<GroupDto> result = session.selectList("group.selectRandList");
+		return result;
+	}
+
+	// 그룹 찾기
+	public List<GroupDto> selectFindList(SqlSession session, String findName) {
+		List<GroupDto> result = session.selectList("group.selectFindList", findName);
+		return result;
+	}
+
 	// 그룹 전체
 	public List<GroupDto> selectAllList(SqlSession session) {
 		List<GroupDto> result = session.selectList("group.selectAllList");
 		return result;
 	}
-
+	
+	//그룹 추가
 	public int insert(SqlSession session, GroupCreateDto dto) {
-
 		int result = session.insert("group.insert", dto);
 		return result;
 	}
 
-	// 선택된 그룹 하나 전체 정보
-	public GroupInfoDto selectGroupInfo(SqlSession session, int groupId) {
-		GroupInfoDto result = session.selectOne("group.selectGroupInfo", groupId);
-		return result;
-	}
-	
-	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId){
-		List<GroupRecordSumDto> result =  session.selectList("group.selectGroupRecordSumList", groupId);
+	// 선택된 그룹 하나 전체 정보(그룹원 포함)
+	public List<GroupInfoListDto> selectGroupInfoList(SqlSession session, int groupId) {
+		List<GroupInfoListDto> result = session.selectList("group.selectGroupInfoList", groupId);
 		return result;
 	}
 
-	public int test(SqlSession session, String memId){
-		int result = session.selectOne("group.test", memId);
+	// 선택된 그룹 하나 전체 정보(그룹원 제외)
+	public GroupDto selectGroupInfoOne(SqlSession session, int groupId) {
+		GroupDto result = session.selectOne("group.selectGroupInfoOne", groupId);
 		return result;
 	}
+
+	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId) {
+		List<GroupRecordSumDto> result = session.selectList("group.selectGroupRecordSumList", groupId);
+		return result;
+	}
+
 	/*
-	 * public int update(SqlSession session, String newgroupId, String groupId) {
-	 * int result = 0; String sql = "UPDATE SGROUP SET MEM_ID=? WHERE SGROUP_ID=?";
-	 * PreparedStatement pstmt = null; try { pstmt = conn.prepareStatement(sql);
-	 * pstmt.setString(1, newgroupId); pstmt.setString(2, groupId);
-	 * 
-	 * result = pstmt.executeUpdate(); } catch (Exception e) { e.printStackTrace();
-	 * } close(pstmt); return result; }
-	 * 
+	 * public int test(SqlSession session, String memId) { int result =
+	 * session.selectOne("group.test", memId); return result; }
+	 */
+
+	public int update(SqlSession session, GroupUpdateDto dto) {
+		int result = session.update("group.update", dto);
+		return result;
+	}
+
+	public int updateMin(SqlSession session, GroupUpdateMinDto dto) {
+		int result = session.update("group.updateMin", dto);
+		return result;
+	}
+
+	/*
 	 * public int delete(SqlSession session, String groupId) { int result = 0;
 	 * String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?"; PreparedStatement pstmt
 	 * = null; try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,

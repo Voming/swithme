@@ -9,13 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.service.GroupService;
 
-/**
- * Servlet implementation class GroupInfoController
- */
 @WebServlet("/group/info")
 public class GroupInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,27 +32,15 @@ public class GroupInfoController extends HttpServlet {
 			response.getWriter().append("-1");
 			return;
 		}
-		GroupInfoDto groupInfo = service.selectGroupInfo(groupId);
+		GroupDto groupInfo = service.selectGroupInfoOne(groupId);
 		
 		System.out.println("groupId : "+ groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);
 	
-//		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
-//		request.getSession().setAttribute("groupSumList", groupSumList);
-//		System.out.println("groupSumList : " + groupSumList);
-//		
-//		int groupSum = service.test("song");
-//		System.out.println("groupSum" + groupSum);
-//		
+		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
+		request.getSession().setAttribute("groupSumList", groupSumList);
+		System.out.println("groupSumList : " + groupSumList);
+
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

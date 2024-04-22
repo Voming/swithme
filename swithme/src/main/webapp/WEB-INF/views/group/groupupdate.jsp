@@ -16,8 +16,21 @@
 $(loadedHandler);
 
 function loadedHandler() {
+	//원래 공개였는지 비공개였는지 체크
+	if(${groupInfo.sgroupOpen} == '1'){
+		$("input:radio[name='groupOpen']:radio[value='close']").prop('checked', true); // 선택하기
+		$("input:radio[name='groupOpen']:radio[value='open']").prop('checked', false); // 해제하기
+		var htmlVal = `<div class="dpwd"><p>비밀번호</p>
+			<input type="text" name="groupPwd" value="${groupInfo.sgroupPwd }" required /></div>`;
+		
+		$(".wrap-open").after(htmlVal);  
+	}else{
+		$("input:radio[name='groupOpen']:radio[value='close']").prop('checked', false);
+		$("input:radio[name='groupOpen']:radio[value='open']").prop('checked', true); 
+	}
+	
 	$(".btn.open").on("click", btnOpenClickHandler);
-	$(".btn.create").on("click", btnCreateClickHandler);
+	$(".btn.update").on("click", btnUpdateClickHandler);
 }
 function btnOpenClickHandler(){
 	if($(this).val() == "open"){
@@ -27,12 +40,10 @@ function btnOpenClickHandler(){
 			<input type="text" name="groupPwd" placeholder="숫자로 된 비밀번호를 입력하세요" required /></div>`;
 		
 		$(".wrap-open").after(htmlVal);  
-	}	
-	var isOpen = $('input[type=radio]:checked').val();
-	console.log(isOpen);
+	} 
 }
 
-function btnCreateClickHandler(){
+function btnUpdateClickHandler(){
 	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
@@ -51,7 +62,7 @@ function btnCreateClickHandler(){
 	console.log( new FormData($(".frm-create").get(0)) );
 	
 	$.ajax({
-		url:"${pageContext.request.contextPath }/group/create"
+		url:"${pageContext.request.contextPath }/group/update"
 		, method : "post"
 	// ajax - encType="multipart/form-data" 
 		, data : new FormData($(".frm-create").get(0)) 
@@ -60,12 +71,12 @@ function btnCreateClickHandler(){
 		, dataType:  'text'
 		, success : function(result){
 			console.log("ajax result : "+ result);
-			if(result == "-1"){
-				alert("그룹은 5개 이하로 생성 및 가입이 가능합니다.");
-			} else if(result == "0"){
-				alert("그룹 생성이 불가합니다");
+			if(result == "0"){
+				alert("그룹 수정이 불가합니다");
+			}else if(result == "-1"){
+				alert("그룹 수정중 오류 발생 다시 시도해주세요");
 			} else{
-				alert("그룹이 생성되었습니다.");
+				alert("그룹이 수정되었습니다.");
 				location.href="${pageContext.request.contextPath }/group";
 			}
 		}
@@ -93,19 +104,20 @@ function btnCreateClickHandler(){
 					</div>
 				</div>
 				<div class="hrline">
-					<hr>
+					<hr> 
 				</div>
 			</header>
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-create">
 				<div class="gname">
-					<P>그룹 만들기</P>
+					<P>그룹 수정하기</P>
 				</div>
 				<div>
+				<c:if test="${not empty groupInfo }">
 					<form class="frm-create">
 						<div><p>그룹명</p>
-							<input type="text" name="groupName" placeholder="그룹명을 입력하세요" required />
+							<input type="text" name="groupName" value="${groupInfo.sgroupName }" required />
 						</div>
 						<div class="wrap-open">
 							<label>공개</label> 
@@ -115,16 +127,17 @@ function btnCreateClickHandler(){
 						</div>
 						<div>
 							<p>그룹 설명</p>
-							<textarea rows="20" name="groupExp" placeholder="그룹 설명을 입력하세요(ex. 공부 목적, 규칙 등)"></textarea>
+							<textarea rows="20" name="groupExp">${groupInfo.sgroupEx }</textarea>
 						</div>
 						<div>
 							<p>그룹 대표 이미지</p>
-							<input type="file" name="uploadfile" required />
+							<input type="file" name="uploadfile"  />
 						</div>	
 						<div class="wbtn">
-							<button type="button" class="btn create">그룹 만들기</button>
+							<button type="button" class="btn update">그룹 수정하기</button>
 						</div>
 					</form>
+				</c:if>	
 				</div>
 			</div>
 		</div>

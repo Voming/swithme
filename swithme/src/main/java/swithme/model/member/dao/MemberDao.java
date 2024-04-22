@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static swithme.jdbc.common.JdbcTemplate.close;
+
+import swithme.model.member.dto.MemberBoardListDto;
 import swithme.model.member.dto.MemberDto;
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.member.dto.MemberLoginDto;
@@ -116,6 +118,32 @@ public class MemberDao {
 			
 			return result;
 		}
+		
+		public List<MemberBoardListDto> selectAllBoardList(Connection conn) {
+			List<MemberBoardListDto> result = null;
+			String sql="SELECT BOARD_ID, TITLE, BOARD_WRITER, WRITE_TIME, READ_COUNT FROM BOARD";
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					result=new ArrayList<MemberBoardListDto>();
+					do {
+						MemberBoardListDto dto = new MemberBoardListDto(rs.getInt("BOARD_ID"),rs.getString("TITLE"),rs.getString("BOARD_WRITER"), 
+								rs.getString("WRITE_TIME"),rs.getInt("READ_COUNT"));
+						result.add(dto);
+					}while(rs.next());	
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close(rs);
+			close(pstmt);
+			return result;
+		}
+		
 		
 		//select one
 		public MemberDto selectOne(Connection conn, String memId) {

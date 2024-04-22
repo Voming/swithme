@@ -41,10 +41,11 @@
 		20
 	</select>
 
-	<select id="selectFindList"  parameterType="string" resultType="GroupDto">
-	SELECT * FROM SGROUP WHERE SGROUP_NAME LIKE '%${findName}%' 
+	<select id="selectFindList" parameterType="string"
+		resultType="GroupDto">
+		SELECT * FROM SGROUP WHERE SGROUP_NAME LIKE '%${findName}%'
 	</select>
-	
+
 	<select id="selectAllList" resultType="GroupDto">
 		SELECT * FROM SGROUP
 	</select>
@@ -65,45 +66,34 @@
 		JOIN SGROUP_MEMBER USING (SGROUP_ID)
 		WHERE SGROUP_ID = ${groupId}
 	</select>
-	
+
 	<select id="selectGroupInfoOne" parameterType="_int"
 		resultType="GroupDto">
 		SELECT * FROM SGROUP
 		WHERE SGROUP_ID = ${groupId}
 	</select>
 
-	<resultMap id="recordSumResultMap"
-		type="GroupRecordSumDto">
-		<result property="SUM_MIN" column="sumMin" />
+	<resultMap id="recordSumResultMap" type="GroupRecordSumDto">
 		<result property="MEM_ID" column="memId" />
+		<result property="SUM_MIN" column="sumMin" />
 	</resultMap>
 
 	<select id="selectGroupRecordSumList" parameterType="_int"
 		resultMap="recordSumResultMap">
 		SELECT
-		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS'))
-		-
-		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100) AS "SUM_MIN",
-		RECORD_MEM_ID AS "MEM_ID"
-		FROM
-		RECORD
-		WHERE RECORD_START >= ( SYSDATE - 7 ) AND
-		RECORD_MEM_ID IN (SELECT
-		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE
-		SGROUP_ID = ${groupId})
-		GROUP BY RECORD_MEM_ID
+		S.SGROUP_MEM_ID AS "MEM_ID",
+		NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY') AS "SUM_MIN"
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START >= ( SYSDATE - 7 ) AND SGROUP_ID = #{GROUPID}
+		GROUP BY S.SGROUP_MEM_ID
 	</select>
 
-	<!-- <select id="test" parameterType="string" resultType="_int">
-		SELECT
-		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
-		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100)
-		FROM
-		RECORD
-		WHERE
-		RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID = #{memId}
-	</select> -->
-	
+	<!-- <select id="test" parameterType="string" resultType="_int"> SELECT 
+		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) - TO_NUMBER(TO_CHAR(RECORD_START, 
+		'HH24MISS'))) / 100) FROM RECORD WHERE RECORD_START >= ( SYSDATE - 7 ) AND 
+		RECORD_MEM_ID = #{memId} </select> -->
+
 	<update id="update" parameterType="GroupUpdateDto">
 		UPDATE SGROUP SET SGROUP_NAME
 		= #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =

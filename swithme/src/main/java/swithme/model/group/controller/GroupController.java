@@ -1,6 +1,7 @@
 package swithme.model.group.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
 @WebServlet("/group")
-public class GroupController extends HttpServlet {
+public class GroupController extends HttpServlet implements Serializable{
 	private static final long serialVersionUID = 1L;
 	GroupService service = new GroupService();
 

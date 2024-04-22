@@ -1,26 +1,26 @@
 package swithme.model.group.dto;
 
 public class GroupRecordSumDto {
-	private Integer sumMin;
 	private String memId;
+	private Integer sumMin;
 
-	public GroupRecordSumDto(Integer sumMin, String memId) {
+	public GroupRecordSumDto(String memId, Integer sumMin) {
 		super();
-		this.sumMin = sumMin;
 		this.memId = memId;
+		this.sumMin = sumMin;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupRecordSumDto [sumMin=" + sumMin + ", memId=" + memId + "]";
-	}
-
-	public Integer getSumMin() {
-		return sumMin;
+		return "GroupRecordSumDto [memId=" + memId + ", sumMin=" + sumMin + "]";
 	}
 
 	public String getMemId() {
 		return memId;
+	}
+
+	public Integer getSumMin() {
+		return sumMin;
 	}
 
 }

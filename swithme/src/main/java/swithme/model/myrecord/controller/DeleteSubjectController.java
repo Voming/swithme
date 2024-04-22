@@ -1,32 +1,27 @@
 package swithme.model.myrecord.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import swithme.model.member.dto.MemberInfoDto;
-import swithme.model.myrecord.dto.DayStudyTimeDto;
-import swithme.model.myrecord.dto.RecordTimeDto;
-import swithme.model.myrecord.service.RecordService;
+import swithme.model.myrecord.dto.SubjectDeleteDto;
+import swithme.model.myrecord.service.SubjectService;
 
 /**
  * Servlet implementation class RecoradStartTimeController
  */
-@WebServlet("/myrecord/todayrecord.ajax")
-public class DayStudyTimeController extends HttpServlet {
+@WebServlet("/myrecord/deletesubject.ajax")
+public class DeleteSubjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private RecordService service = new RecordService();
+	private SubjectService service = new SubjectService();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DayStudyTimeController() {
+	public DeleteSubjectController() {
 	}
 
 	/**
@@ -43,17 +38,13 @@ public class DayStudyTimeController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {		
-			String num = request.getParameter("numnum");
-			System.out.println("---------------- contoroller : "+num);
-			List<DayStudyTimeDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
-		System.out.println("\n\n 기록 : "+result);
-		response.getWriter().append(new Gson().toJson(result));
-		//이게 맞나..???
-		}catch(NumberFormatException e) {
-			response.sendRedirect(request.getContextPath()+"/myrecord");
-		}
-
+		String deleteTime = request.getParameter("deleteTime");
+		String subjectIdStr = request.getParameter("subjectId");
+		int subjectId = Integer.parseInt(subjectIdStr);
+		
+		int result = service.delete(new SubjectDeleteDto(subjectId,((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId(), deleteTime));
+		System.out.println(result);
+		response.getWriter().append(String.valueOf(result));
 	}
 
 }

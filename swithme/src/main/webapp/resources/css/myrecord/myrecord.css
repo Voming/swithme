@@ -28,7 +28,8 @@ a{
 	font-size: 20px;
 }
 /* 과목 추가 모달 css */
-.wrap-body .myrecord .add-sub {
+.wrap-body .myrecord .add-sub
+ {
 	position: absolute;
 	top: 20%;
 	left: 50%;
@@ -37,6 +38,13 @@ a{
 	
 	
 	/*모달창 위치*/
+}
+.wrap-body .myrecord .modify-sub{
+		position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+	text-align: center;
 }
 
 
@@ -210,6 +218,14 @@ a{
 }
 
 
-
+.wrap-body .wrap-main .subId{
+	caret-color: transparent;
+	border: 2px solid  var(--color_purple_1);
+	width:80px;
+	border-radius: 10px;
+	background-color: white;
+	text-align: center;
+		cursor: pointer;
+}
 
 

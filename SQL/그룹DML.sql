@@ -176,7 +176,7 @@ SELECT
 --그룹원 한명 일주일 통계 - 그룹 멤버 테이블 기준
 SELECT 
 		s.sgroup_mem_id AS "MEM_ID",
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') AS "SUM_MIN"
+        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
 		FROM SGROUP_MEMBER s
         join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
           WHERE  r.RECORD_START BETWEEN SYSDATE - 3 and SYSDATE - 2
@@ -198,10 +198,17 @@ SELECT SYSDATE 오늘
     ,TRUNC(sysdate,'d')-1 토
 FROM DUAL;
 
-
-SELECT a.sgroup_mem_id,
+select "aaa" mem_id, to_char(SYSDATE - 1, 'yyyy-mm-dd d') d1, to_char(SYSDATE - 2, 'yyyy-mm-dd d') d2,  to_char(SYSDATE - 3, 'yyyy-mm-dd day') d3,  to_char(SYSDATE - 4, 'yyyy-mm-dd day') d4, 
+ to_char(SYSDATE - 5, 'yyyy-mm-dd day') d5,  to_char(SYSDATE - 6, 'yyyy-mm-dd day') d6,  to_char(SYSDATE - 7, 'yyyy-mm-dd day') d7 
+ from dual
+; 
+select 'aaa' mem_id, to_char(SYSDATE - 1, 'yyyy-mm-dd dy') d1, to_char(SYSDATE - 2, 'yyyy-mm-dd dy') d2
+ from dual 
+union
+--;
+SELECT a.sgroup_mem_id mem_id,
     (SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute')
+        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
 		FROM SGROUP_MEMBER s
         join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
           WHERE  r.RECORD_START BETWEEN SYSDATE - 2 and SYSDATE - 1
@@ -209,47 +216,88 @@ SELECT a.sgroup_mem_id,
         )
     AS "d1"
     ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute')
+        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
 		FROM SGROUP_MEMBER s
         join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
           WHERE  r.RECORD_START BETWEEN SYSDATE - 3 and SYSDATE - 2
           and  s.sgroup_mem_id = a.sgroup_mem_id
        )
     AS "d2"
-    ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') 
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 4 and SYSDATE - 3
-          and  s.sgroup_mem_id = a.sgroup_mem_id)
-    AS "d3"
-    ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') 
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 5 and SYSDATE - 4
-          and  s.sgroup_mem_id = a.sgroup_mem_id)
-    AS "d4"
-    ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') 
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 6 and SYSDATE - 5
-          and  s.sgroup_mem_id = a.sgroup_mem_id)
-    AS "d5"
-    ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') 
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 7 and SYSDATE - 6
-          and  s.sgroup_mem_id = a.sgroup_mem_id)
-    AS "d6"
-    ,(SELECT 
-        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'minute') 
+--    (SELECT 
+--        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day')
+--		FROM SGROUP_MEMBER s
+--        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+--          WHERE  r.RECORD_START BETWEEN SYSDATE - 2 and SYSDATE - 1
+--          and  s.sgroup_mem_id = a.sgroup_mem_id
+--        )
+--    AS "d1"
+--    ,(SELECT 
+--        NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day')
+--		FROM SGROUP_MEMBER s
+--        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+--          WHERE  r.RECORD_START BETWEEN SYSDATE - 3 and SYSDATE - 2
+--          and  s.sgroup_mem_id = a.sgroup_mem_id
+--       )
+--    AS "d2"
+FROM SGROUP_MEMBER a
+ where a.sgroup_id = '53'
+  GROUP BY a.sgroup_mem_id
+ ;
+
+
+select '그룹원' mem_id, to_char(SYSDATE - 7, 'dy') d1, to_char(SYSDATE - 6, 'dy') d2, to_char(SYSDATE - 5, 'dy') d3, to_char(SYSDATE - 4, 'dy') d4
+, to_char(SYSDATE - 3, 'dy') d5, to_char(SYSDATE - 2, 'dy') d6, to_char(SYSDATE - 1, 'dy') d7
+ from dual 
+union
+SELECT a.sgroup_mem_id mem_id
+    ,substr((SELECT 
+        substr(to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss'), 12, 9)
 		FROM SGROUP_MEMBER s
         join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
           WHERE  r.RECORD_START BETWEEN SYSDATE - 8 and SYSDATE - 7
-          and  s.sgroup_mem_id = a.sgroup_mem_id)
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d1"
+    ,substr((SELECT 
+        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START BETWEEN SYSDATE - 7 and SYSDATE - 6
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d2"
+    ,substr((SELECT 
+        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START),'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START BETWEEN SYSDATE - 6 and SYSDATE - 5
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d3"
+    ,substr((SELECT 
+         to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START),'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START BETWEEN SYSDATE - 5 and SYSDATE - 4
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d4"
+    ,substr((SELECT 
+         to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START BETWEEN SYSDATE - 4 and SYSDATE - 3
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d5"
+    ,substr((SELECT 
+       to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START  BETWEEN SYSDATE - 3 and SYSDATE - 2
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
+    AS "d6"
+    ,substr((SELECT 
+        to_char( NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
+		FROM SGROUP_MEMBER s
+        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
+          WHERE  r.RECORD_START BETWEEN SYSDATE - 2 and SYSDATE - 1
+          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8)
     AS "d7"
 FROM SGROUP_MEMBER a
  where a.sgroup_id = '53'

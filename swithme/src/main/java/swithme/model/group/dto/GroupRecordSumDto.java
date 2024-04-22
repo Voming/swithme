@@ -2,9 +2,9 @@ package swithme.model.group.dto;
 
 public class GroupRecordSumDto {
 	private String memId;
-	private Integer sumMin;
+	private String sumMin;
 
-	public GroupRecordSumDto(String memId, Integer sumMin) {
+	public GroupRecordSumDto(String memId, String sumMin) {
 		super();
 		this.memId = memId;
 		this.sumMin = sumMin;
@@ -19,7 +19,7 @@ public class GroupRecordSumDto {
 		return memId;
 	}
 
-	public Integer getSumMin() {
+	public String getSumMin() {
 		return sumMin;
 	}
 

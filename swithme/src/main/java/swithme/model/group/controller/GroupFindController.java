@@ -14,9 +14,6 @@ import com.google.gson.Gson;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.service.GroupService;
 
-/**
- * Servlet implementation class GroupFindController
- */
 @WebServlet("/group/find.ajax")
 public class GroupFindController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,16 +24,12 @@ public class GroupFindController extends HttpServlet {
       
     }
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String findstr = request.getParameter("find");
-		System.out.println(findstr);
-		
+		String findstr = request.getParameter("find");	
 		//그룹 검색하기
 		List<GroupDto> findGrouplist = service.selectFindList(findstr);
 		//request.getSession().setAttribute("findGrouplist", findGrouplist);
 		Gson gson = new Gson();
-		System.out.println(gson.toJson(findGrouplist));
 		response.getWriter().append(gson.toJson(findGrouplist));
 	}
 

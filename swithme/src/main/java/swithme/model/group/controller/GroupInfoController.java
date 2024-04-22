@@ -13,9 +13,6 @@ import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.service.GroupService;
 
-/**
- * Servlet implementation class GroupInfoController
- */
 @WebServlet("/group/info")
 public class GroupInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,19 +40,7 @@ public class GroupInfoController extends HttpServlet {
 		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
 		request.getSession().setAttribute("groupSumList", groupSumList);
 		System.out.println("groupSumList : " + groupSumList);
-		
-		int groupSum = service.test("song");
-		System.out.println("groupSum" + groupSum);
 
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

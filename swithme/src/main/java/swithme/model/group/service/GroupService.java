@@ -44,8 +44,8 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-	
-	//랜덤 추천 그룹 20개 가져오기
+
+	// 랜덤 추천 그룹 20개 가져오기
 	public List<GroupDto> selectRandList() {
 		List<GroupDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -53,7 +53,8 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-	
+
+	// 그룹 찾기
 	public List<GroupDto> selectFindList(String findName) {
 		List<GroupDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -95,7 +96,7 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-	
+
 	// 선택된 그룹 하나 전체 정보
 	public GroupDto selectGroupInfoOne(int groupId) {
 		GroupDto result = null;
@@ -113,14 +114,12 @@ public class GroupService {
 		return result;
 	}
 
-	public int test(String memId) {
-		int result = 0;
-		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.test(session, memId);
-		session.close();
-		return result;
-	}
-
+	/*
+	 * public int test(String memId) { int result = 0; SqlSession session =
+	 * MybatisTemplate.getSqlSession(); result = dao.test(session, memId);
+	 * session.close(); return result; }
+	 */
+	
 	public int update(GroupUpdateDto dto) {
 		int result = 0;
 		System.out.println(dto);

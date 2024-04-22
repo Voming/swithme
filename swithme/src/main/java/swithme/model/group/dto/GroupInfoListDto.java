@@ -1,7 +1,7 @@
 package swithme.model.group.dto;
 
 public class GroupInfoListDto {
-	//그룹 멤버까지 가져옴
+	// 그룹 멤버까지 가져옴
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
 //	SGROUP_OPEN	CHAR(1 BYTE)

@@ -10,8 +10,7 @@
 	</settings>
 
 	<typeAliases>
-	
-	
+
 		<typeAlias type="swithme.model.group.dto.GroupDto" alias="GroupDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupCreateDto" alias="GroupCreateDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupMylistDto" alias="GroupMylistDto"/>
@@ -69,7 +68,6 @@
 		<mapper resource="mappers/record-mapper.xml"/>
 		<mapper resource="mappers/subject-mapper.xml"/>
 		<mapper resource="mappers/testcalendar-mapper.xml"/>
-		<!-- xxx-mapper.xml 생성 후 추가 -->
 	</mappers>
 </configuration>
 

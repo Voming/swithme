@@ -5,5 +5,3 @@
 <link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
-
-

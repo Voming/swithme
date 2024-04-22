@@ -87,15 +87,14 @@
 		RECORD_MEM_ID AS "MEM_ID"
 		FROM
 		RECORD
-		WHERE RECORD_START >= ( SYSDATE - 7
-		) AND
+		WHERE RECORD_START >= ( SYSDATE - 7 ) AND
 		RECORD_MEM_ID IN (SELECT
 		SGROUP_MEM_ID FROM SGROUP_MEMBER WHERE
 		SGROUP_ID = ${groupId})
 		GROUP BY RECORD_MEM_ID
 	</select>
 
-	<select id="test" parameterType="string" resultType="_int">
+	<!-- <select id="test" parameterType="string" resultType="_int">
 		SELECT
 		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS')) -
 		TO_NUMBER(TO_CHAR(RECORD_START, 'HH24MISS'))) / 100)
@@ -103,8 +102,8 @@
 		RECORD
 		WHERE
 		RECORD_START >= ( SYSDATE - 7 ) AND RECORD_MEM_ID = #{memId}
-	</select>
-
+	</select> -->
+	
 	<update id="update" parameterType="GroupUpdateDto">
 		UPDATE SGROUP SET SGROUP_NAME
 		= #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =

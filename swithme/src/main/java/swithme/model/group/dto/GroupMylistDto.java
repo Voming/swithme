@@ -1,6 +1,5 @@
 package swithme.model.group.dto;
 
-
 public class GroupMylistDto {
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
@@ -14,11 +13,13 @@ public class GroupMylistDto {
 	private String sgroupName;
 	private String sgroupImgPath;
 	private String sgroupImgName;
+
 	@Override
 	public String toString() {
 		return "GroupMylistDto [sgroupId=" + sgroupId + ", sgroupName=" + sgroupName + ", sgroupImgPath="
 				+ sgroupImgPath + ", sgroupImgName=" + sgroupImgName + "]";
 	}
+
 	public GroupMylistDto(Integer sgroupId, String sgroupName, String sgroupImgPath, String sgroupImgName) {
 		super();
 		this.sgroupId = sgroupId;
@@ -26,18 +27,21 @@ public class GroupMylistDto {
 		this.sgroupImgPath = sgroupImgPath;
 		this.sgroupImgName = sgroupImgName;
 	}
+
 	public Integer getSgroupId() {
 		return sgroupId;
 	}
+
 	public String getSgroupName() {
 		return sgroupName;
 	}
+
 	public String getSgroupImgPath() {
 		return sgroupImgPath;
 	}
+
 	public String getSgroupImgName() {
 		return sgroupImgName;
 	}
 
-	
 }

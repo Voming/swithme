@@ -14,9 +14,6 @@ import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class GroupController
- */
 @WebServlet("/group")
 public class GroupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,10 +43,4 @@ public class GroupController extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/views/group/grouphome.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

@@ -28,7 +28,7 @@ public class GroupDao {
 		return result;
 	}
 
-	// 공개 그룹 전체 범위 있음
+	// 공개 그룹 전체 (범위 있음)
 	public List<GroupDto> selectAllOpenList(SqlSession session, int start, int end) {
 		Map<String, Integer> param = new HashMap<String, Integer>();
 		param.put("startRounum", start);
@@ -79,10 +79,10 @@ public class GroupDao {
 		return result;
 	}
 
-	public int test(SqlSession session, String memId) {
-		int result = session.selectOne("group.test", memId);
-		return result;
-	}
+	/*
+	 * public int test(SqlSession session, String memId) { int result =
+	 * session.selectOne("group.test", memId); return result; }
+	 */
 
 	public int update(SqlSession session, GroupUpdateDto dto) {
 		int result = session.update("group.update", dto);

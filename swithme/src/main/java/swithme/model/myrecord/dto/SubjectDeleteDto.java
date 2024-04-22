@@ -9,22 +9,27 @@ public class SubjectDeleteDto {
 //	SUBJECT_COLOR    NOT NULL CHAR(1)    
 	
 	private Integer subjectId;
-	private String subjectMemId;
+	private String memId;
+	private String subjectDelDate;
 	@Override
 	public String toString() {
-		return "SubjectDeleteDto [subjectId=" + subjectId + ", subjectMemId=" + subjectMemId + "]";
+		return "SubjectDeleteDto [subjectId=" + subjectId + ", memId=" + memId + ", subjectDelDate=" + subjectDelDate
+				+ "]";
 	}
-	public SubjectDeleteDto(Integer subjectId, String subjectMemId) {
+	public SubjectDeleteDto(Integer subjectId, String memId, String subjectDelDate) {
 		super();
 		this.subjectId = subjectId;
-		this.subjectMemId = subjectMemId;
+		this.memId = memId;
+		this.subjectDelDate = subjectDelDate;
 	}
 	public Integer getSubjectId() {
 		return subjectId;
 	}
-	public String getSubjectMemId() {
-		return subjectMemId;
+	public String getMemId() {
+		return memId;
 	}
-	
+	public String getSubjectDelDate() {
+		return subjectDelDate;
+	}
 	
 }

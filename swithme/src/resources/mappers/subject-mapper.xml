@@ -16,8 +16,8 @@ INSERT INTO SUBJECT VALUES(SEQ_SUBJECT_ID.nextval,#{subjectMemId},#{subjectName}
 <update id="update" parameterType="SubjectAddDto">
 UPDATE SUBJECT SET SUBJECT_NAME = #{subjectName} , SUBJECT_COLOR = #{subjectColor}  WHERE SUBJECT_ID = #{TODO_EJKIM} AND MEM_ID = #{subjectMemId} 
 </update>
-<delete id="delete" parameterType="SubjectDeleteDto">
-UPDATE SUBJECT SET SUBJECT_NAME = #{subjectName} , SUBJECT_COLOR = #{subjectColor}  WHERE SUBJECT_ID = #{TODO_EJKIM} AND MEM_ID = #{subjectMemId} 
-</delete>
+<update id="delete" parameterType="SubjectDeleteDto">
+UPDATE SUBJECT SET SUBJECT_DEL_DATE = to_date(#{subjectDelDate}, 'yyyymmddhh24miss')  WHERE SUBJECT_ID = #{subjectId} AND MEM_ID = #{memId} 
+</update>
 
 </mapper>

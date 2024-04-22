@@ -53,6 +53,7 @@ public class SubjectDao {
 	/*후순위*/
 	//과목 삭제 delete DEL_DATE = default //조건 : 과목,맴버 아이디 
 	public int delete(SqlSession session, SubjectDeleteDto dto) {
+		System.out.println("************sbuject delete   "+dto);
 		return session.update("subject.delete", dto);
 	}
 	

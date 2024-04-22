@@ -2,25 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="record">
 
+<!-- 과목별 일일 공부시간 및 합계  -->
 <select id="subjectDifftime" parameterType="string" resultType="SubjectDifftimeDto">
 select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME    
-from (SELECT SUBJECT_ID, SUBJECT_NAME  FROM SUBJECT WHERE MEM_ID =#{memId} AND SUBJECT_DEL_DATE IS NULL) t1   
+from (SELECT SUBJECT_ID, SUBJECT_NAME,SUBJECT_DEL_DATE   FROM SUBJECT WHERE MEM_ID =#{memId}) t1   
 	FULL JOIN 
 	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
 	  FROM RECORD WHERE RECORD_MEM_ID = #{memId}  and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') 
 	  group by cube(RECORD_SUBJECT_ID) ) t2 
 	on (SUBJECT_ID = RECORD_SUBJECT_ID) 
+WHERE SUBJECT_DEL_DATE IS NULL
 ORDER BY SUBJECT_ID ASC NULLS FIRST
 </select>
 
+<!-- 과목별 일일 공부시간 -->
 <select id="dayStudyTime" parameterType="string" resultType="DayStudyTimeDto">
 select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME,SUBJECT_COLOR 
-from (SELECT SUBJECT_ID, SUBJECT_NAME ,SUBJECT_COLOR  FROM SUBJECT WHERE MEM_ID =#{memId} AND SUBJECT_DEL_DATE IS NULL) t1   
+from (SELECT SUBJECT_ID, SUBJECT_NAME  ,SUBJECT_COLOR ,SUBJECT_DEL_DATE  FROM SUBJECT WHERE MEM_ID =#{memId} ) t1   
 	FULL JOIN 
 	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
-	  FROM RECORD WHERE RECORD_MEM_ID = #{memId}  and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') 
+	  FROM RECORD WHERE RECORD_MEM_ID = #{memId}  and to_char(RECORD_START, 'yyyy-mm-dd') =  to_char(SYSDATE, 'yyyy-mm-dd') 
 	  group by RECORD_SUBJECT_ID ) t2 
 	on (SUBJECT_ID = RECORD_SUBJECT_ID) 
+WHERE SUBJECT_DEL_DATE IS NULL
 ORDER BY SUBJECT_ID ASC NULLS FIRST
 </select>
 

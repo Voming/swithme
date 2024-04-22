@@ -1,6 +1,7 @@
 package swithme.model.group.dto;
 
-public class GroupInfoDto {
+public class GroupInfoListDto {
+	//그룹 멤버까지 가져옴
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
 //	SGROUP_OPEN	CHAR(1 BYTE)
@@ -25,7 +26,7 @@ public class GroupInfoDto {
 				+ ", sgroupImgName=" + sgroupImgName + ", sgroupMemId=" + sgroupMemId + "]";
 	}
 
-	public GroupInfoDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupInfoListDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName, String sgroupMemId) {
 		super();
 		this.sgroupId = sgroupId;

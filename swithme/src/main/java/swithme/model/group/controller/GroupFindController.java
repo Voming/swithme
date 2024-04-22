@@ -36,7 +36,7 @@ public class GroupFindController extends HttpServlet {
 		System.out.println(findstr);
 		request.getSession().setAttribute("findstr", findstr);
 		
-		//내 그룹
+		//그룹 검색하기
 		List<GroupDto> findGrouplist = service.selectFindList(findstr);
 		request.getSession().setAttribute("findGrouplist", findGrouplist);
 	

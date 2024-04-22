@@ -45,6 +45,7 @@ public class BoardDao {
 
 	//게시글 하나 선택
 	public BoardContentDto selectOne(SqlSession session, Integer boardId) {
+		System.out.println(boardId);
 		BoardContentDto result = session.selectOne("board.selectOne", boardId);
 		
 		System.out.println("BoardContentDto : " + result);

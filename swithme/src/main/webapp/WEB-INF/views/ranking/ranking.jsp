@@ -34,10 +34,10 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-rank">
-				<ul class="rank-tab-nav">
-					<li><a href="#tab01">일간</a></li>
-					<li><a href="#tab02">월간</a></li>
-				</ul>
+				<div class="rank-tab-nav">
+					<button type="button" class="btn tab01">일간</button>
+					<button type="button" class="btn tab02">월간</button>
+				</div>
 			</div>
 			<div class="ranking-tab-content">
 				<div id="tab01">
@@ -56,5 +56,33 @@
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
+	
+	
+	
+
+<script>
+
+$(loadedHandler);
+
+function loadedHandler(){
+	$('.btn.tab01').on('click', btnDailyClickHandler);
+	$('.btn.tab02').on('click', btnMonthlyClickHandler);
+}
+
+function btnDailyClickHandler() {
+    $('.monthly').hide();
+    $('.daily').show();
+
+}
+
+function btnMonthlyClickHandler() {
+    $('.daily').hide();
+    $('.monthly').show();
+
+}
+
+</script>
+
+	
 </body>
 </html>

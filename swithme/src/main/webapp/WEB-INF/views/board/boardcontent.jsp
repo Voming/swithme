@@ -32,6 +32,7 @@
 				</div>
 			</header>
 		</div>
+		
 		<div class="wrap-body">
 			<div class="pgroup">
 				<p class="p-first">자유 게시판</p>
@@ -93,10 +94,9 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					
-					
-					<form class="frm-reply">
-						<div class="wrap-reply">
+								
+					<div class="wrap-reply">
+						<form class="frm-reply">
 							<div class="r-1">
 								<div>
 									작성자
@@ -104,20 +104,17 @@
 							</div>
 							<div class="r-2">
 								<div>
-									<textarea name="content" cols="136" rows="5" placeholder="내용을 입력하시오."></textarea>
+									<textarea name="content" cols="146" rows="5" placeholder="내용을 입력하시오."></textarea>
 								</div>
 							</div>
 							<div class="r-3">
 								<ul>
-									<li>날짜</li>
-									<li>댓글 달기</li>
 									<li class="replyreg" style="cursor: pointer;">등록</li>
 								</ul>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				
-	
 					<div class="wrap-reply2">
 						<form class="frm-reply2">
 							<div class="r-1">
@@ -127,14 +124,12 @@
 							</div>
 							<div class="r-2">
 								<div>
-									<textarea name="content" cols="122" rows="5" placeholder="내용을 입력하시오."></textarea>
+									<textarea name="content" cols="132" rows="5" placeholder="내용을 입력하시오."></textarea>
 								</div>
 							</div>
 							<div class="r-3">
 								<ul>
-									<li>날짜</li>
-									<li style="cursor: pointer;">댓글 달기</li>
-									<li>등록</li>
+									<li class="replyreg" style="cursor: pointer;">등록</li>
 								</ul>
 							</div>
 						</form>	
@@ -158,7 +153,7 @@
 $(loadedHandler);
 
 function loadedHandler(){
-	$("replyreg").on("click", boardReplyClickHandler);
+	$(".replyreg").on("click", boardReplyClickHandler);
 	$(".btn.write").on("click", boardWriteClickHandler);
 	$(".btn.board").on("click", boardClickHandler);
 	
@@ -167,8 +162,8 @@ function loadedHandler(){
 
 function boardReplyClickHandler(){
 	
-	if($("#frm-reply [name=content]").val().trim().length == 0) {
-		alert("입력된 글이 없습니다. 입력 후 글을 등록해주세요.");
+	if($(".frm-reply [name=content]").val().trim().length == 0) {
+		alert("등록하고 싶으면 입력해라");
 		return;
 	}
 
@@ -176,7 +171,7 @@ function boardReplyClickHandler(){
 	$.ajax({
 		url: "${pageContext.request.contextPath}/replywrite",
 		method: "post",
-		data: $("#frm-reply").serialize(),
+		data: $(".frm-reply").serialize(),
 		success: function(result){
 			console.log(result);
 			if(result == "-1") {
@@ -199,9 +194,52 @@ function boardReplyClickHandler(){
 		}
 		
 	});
+	
+	if($(this).text() == "등록") {		
+		$(this).text("삭제");		
+	
+	} else {
+		$(this).text("등록");
+	}
+	
+	//	$(this).parent().next().show();
+	/* this 를 기준으로 부모를 찾아서 보여지게 함 */
+	$(this).parent().next().toggle();
+	/* 한번 누르면 보이고 다시 누르면 사라짐 */
+	
 }
 
+function displayReplyWrap(datalist){
+	console.log("${dto.boardId }");
+	var htmlVal = '';
+	for(var idx in datalist){
+		var replydto = datalist[idx];
+		htmlVal += `
+			<form class="frm-reply">
+				<div class="r-1">
+					<div>
+						작성자
+					</div>
+				</div>
+				<div class="r-2">
+					<div>
+						<textarea name="content" cols="146" rows="5" placeholder="내용을 입력하시오."></textarea>
+					</div>
+				</div>
+				<div class="r-3">
+					<ul>
+						<li class="replyreg" style="cursor: pointer;">등록</li>
+					</ul>
+				</div>
+			</form>
+			
+		`;
+	}
+	$(".wrap-reply").html(htmlVal);
+	// html(새로운내용으로덮어쓰면기존event등록이사라짐)
+	// event 다시 등록
 
+}
 
 
 function boardWriteClickHandler(){

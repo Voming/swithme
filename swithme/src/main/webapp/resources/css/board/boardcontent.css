@@ -93,16 +93,19 @@
 	font-size: var(--font2);
 }
 
-.wrap-body > div.board-reply > form > div > div.r-1 > div{
+.wrap-body > div.board-reply > .wrap-reply> form > div.r-1 > div{
 	padding-bottom: 10px;
 	font-size: var(--font4);
 	
 }
 
-.wrap-body > div.board-reply > form > div > div.r-2 {
-	padding-bottom: 15px;
+.wrap-body > div.board-reply > form > div > div.r-1 > div {
+	padding-bottom: 10px;
 }
 
+body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply > form > div.r-2 {
+	padding-bottom: 10px;
+}
 
 .wrap-body > div.board-reply > form > div > div.r-2 > div > textarea {
 	font-family: "IM_Hyemin-Regular";
@@ -120,20 +123,20 @@ textarea:focus {
  	font-size: var(--font4);
  }
 
-.wrap-body > div.board-reply > form > div > div.r-3 > ul{
+.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul{
 	display:flex;
 	
 }
 
-.wrap-body > div.board-reply > form > div > div.r-3 > ul > li {
+.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li {
 	flex: 1 1 0;	
 }
 
-.wrap-body > div.board-reply > form > div > div.r-3 > ul > li:nth-child(2) {
+.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li:nth-child(2) {
 	flex: 2 0 0;
 }
 
-.wrap-body > div.board-reply > form > div > div.r-3 > ul > li:nth-child(3){
+.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li:nth-child(3){
 	text-align: end;
 }
 
@@ -149,11 +152,15 @@ textarea:focus {
  }
 
 .wrap-body > div.board-reply > .wrap-reply2 >  .frm-reply2  > div.r-1 > div {
-	padding-bottom: 15px;
+	padding-bottom: 10px;
 }
 
+body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-2 {
+	padding-bottom: 10px;
+	
+}
 
-.wrap-body > div.board-reply > .wrap-reply2 > .frm-reply2  > div.r-2 > div > textarea {
+.wrap-body > div.board-reply > div.wrap-reply > form > div.r-2 > div > textarea {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
 	border: none;
@@ -161,27 +168,26 @@ textarea:focus {
 	background: rgb(237, 237, 237);
 }
 
-
-
-.wrap-body > div.board-reply > .wrap-reply2 > .frm-reply2  > div.r-3 > ul{
-	display:flex;
-	
-}
-
-.wrap-body > div.board-reply > .wrap-reply2 > .frm-reply2 > div.r-3 > ul > li {
-	flex: 1 1 0;	
-}
-
-
-.wrap-body > div.board-reply > .wrap-reply2 > .frm-reply2 > div.r-3 > ul > li:nth-child(2) {
-	flex: 2 0 0;
-	cursor: pointer;
-}
-
-.wrap-body > div.board-reply >.wrap-reply2 > .frm-reply2  > div.r-3 > ul > li:nth-child(3) {
+.wrap-body > div.board-reply > div.wrap-reply > form > div.r-3 > ul > li {
 	text-align: end;
+	font-size: var(--font4);
 }
 
+
+
+/* 대댓글 입력 창*/
+.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-2 > div > textarea {
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	border: none;
+	resize: none;
+	background: rgb(237, 237, 237);
+}
+
+.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-3 > ul > li {
+	text-align: end;
+	font-size: var(--font4);
+}
 
 .wrap-body .btn {
 	display: flex;
@@ -258,6 +264,7 @@ textarea:focus {
 	margin-right: 40px;
 	cursor: pointer;
 }
+
 
 
 /* 댓글 창 css */

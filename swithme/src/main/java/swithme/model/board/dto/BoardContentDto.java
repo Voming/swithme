@@ -2,6 +2,7 @@ package swithme.model.board.dto;
 
 public class BoardContentDto {
 
+	private Integer boardId;
 	private String title;
 	private String boardWriter;
 	private String writeTime; //timeStamp
@@ -10,12 +11,13 @@ public class BoardContentDto {
 
 	@Override
 	public String toString() {
-		return "BoardContentDto [title=" + title + ", boardWriter=" + boardWriter + ", writeTime=" + writeTime
-				+ ", boardLike=" + boardLike + ", content=" + content + "]";
+		return "BoardContentDto [boardId=" + boardId + ", title=" + title + ", boardWriter=" + boardWriter
+				+ ", writeTime=" + writeTime + ", boardLike=" + boardLike + ", content=" + content + "]";
 	}
 
-	public BoardContentDto(String title, String boardWriter, String writeTime, Integer boardLike, String content) {
+	public BoardContentDto(Integer boardId, String title, String boardWriter, String writeTime, Integer boardLike, String content) {
 		super();
+		this.boardId = boardId;
 		this.title = title;
 		this.boardWriter = boardWriter;
 		this.writeTime = writeTime;
@@ -27,6 +29,9 @@ public class BoardContentDto {
 		//띄워쓰기를 html 코드로 변경 => database 꺼내오는 부분에 넣기
 	}
 
+	public Integer getBoardId() {
+		return boardId;
+	}
 
 	public String getTitle() {
 		return title;

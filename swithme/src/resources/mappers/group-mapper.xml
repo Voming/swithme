@@ -59,10 +59,16 @@
 		FROM DUAL
 	</insert>
 
-	<select id="selectGroupInfo" parameterType="_int"
-		resultType="GroupInfoDto">
+	<select id="selectGroupInfoList" parameterType="_int"
+		resultType="GroupInfoListDto">
 		SELECT * FROM SGROUP
 		JOIN SGROUP_MEMBER USING (SGROUP_ID)
+		WHERE SGROUP_ID = ${groupId}
+	</select>
+	
+	<select id="selectGroupInfoOne" parameterType="_int"
+		resultType="GroupDto">
+		SELECT * FROM SGROUP
 		WHERE SGROUP_ID = ${groupId}
 	</select>
 

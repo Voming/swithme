@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupUpdateDto;
 import swithme.model.group.dto.GroupUpdateMinDto;
 import swithme.model.group.service.GroupService;
@@ -38,7 +38,7 @@ public class GroupUpdateController extends HttpServlet {
 			response.getWriter().append("-1");
 			return;
 		}
-		GroupInfoDto groupInfo = service.selectGroupInfo(groupId);  //입력칸에 원래 있던 그룹 정보 넣음
+		GroupDto groupInfo = service.selectGroupInfoOne(groupId);  //입력칸에 원래 있던 그룹 정보 넣음
 
 		System.out.println("groupId : " + groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);

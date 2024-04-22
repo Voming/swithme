@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupInfoListDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.dto.GroupUpdateDto;
@@ -43,8 +43,8 @@ public class GroupDao {
 		List<GroupDto> result = session.selectList("group.selectRandList");
 		return result;
 	}
-	
-	//그룹 찾기
+
+	// 그룹 찾기
 	public List<GroupDto> selectFindList(SqlSession session, String findName) {
 		List<GroupDto> result = session.selectList("group.selectFindList", findName);
 		return result;
@@ -55,15 +55,22 @@ public class GroupDao {
 		List<GroupDto> result = session.selectList("group.selectAllList");
 		return result;
 	}
-
+	
+	//그룹 추가
 	public int insert(SqlSession session, GroupCreateDto dto) {
 		int result = session.insert("group.insert", dto);
 		return result;
 	}
 
-	// 선택된 그룹 하나 전체 정보
-	public GroupInfoDto selectGroupInfo(SqlSession session, int groupId) {
-		GroupInfoDto result = session.selectOne("group.selectGroupInfo", groupId);
+	// 선택된 그룹 하나 전체 정보(그룹원 포함)
+	public List<GroupInfoListDto> selectGroupInfoList(SqlSession session, int groupId) {
+		List<GroupInfoListDto> result = session.selectList("group.selectGroupInfoList", groupId);
+		return result;
+	}
+
+	// 선택된 그룹 하나 전체 정보(그룹원 제외)
+	public GroupDto selectGroupInfoOne(SqlSession session, int groupId) {
+		GroupDto result = session.selectOne("group.selectGroupInfoOne", groupId);
 		return result;
 	}
 

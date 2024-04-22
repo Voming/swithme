@@ -9,7 +9,7 @@ import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.group.dao.GroupDao;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupInfoListDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.dto.GroupUpdateDto;
@@ -72,10 +72,10 @@ public class GroupService {
 	}
 
 	// 그룹 생성
-	public int insert(GroupCreateDto dto, String memberId) {
+	public int insert(GroupCreateDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		int myGCount = dao.selectMyCount(session, memberId);
+		int myGCount = dao.selectMyCount(session, dto.getSgroupWriter());
 
 		if (myGCount >= 5) {
 			result = -1;
@@ -88,10 +88,19 @@ public class GroupService {
 	}
 
 	// 선택된 그룹 하나 전체 정보
-	public GroupInfoDto selectGroupInfo(int groupId) {
-		GroupInfoDto result = null;
+	public List<GroupInfoListDto> selectGroupInfoList(int groupId) {
+		List<GroupInfoListDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.selectGroupInfo(session, groupId);
+		result = dao.selectGroupInfoList(session, groupId);
+		session.close();
+		return result;
+	}
+	
+	// 선택된 그룹 하나 전체 정보
+	public GroupDto selectGroupInfoOne(int groupId) {
+		GroupDto result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectGroupInfoOne(session, groupId);
 		session.close();
 		return result;
 	}

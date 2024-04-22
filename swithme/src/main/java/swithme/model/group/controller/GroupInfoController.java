@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import swithme.model.group.dto.GroupInfoDto;
+import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.service.GroupService;
 
@@ -35,7 +35,7 @@ public class GroupInfoController extends HttpServlet {
 			response.getWriter().append("-1");
 			return;
 		}
-		GroupInfoDto groupInfo = service.selectGroupInfo(groupId);
+		GroupDto groupInfo = service.selectGroupInfoOne(groupId);
 		
 		System.out.println("groupId : "+ groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);

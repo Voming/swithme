@@ -28,6 +28,7 @@
 		<typeAlias type="swithme.model.board.dto.BoardReplyListDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
 		
+		<typeAlias type="swithme.model.ranking.dto.RankingDto"/>
 		
 		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>
 		<typeAlias type="swithme.model.testcalendar.dto.MastercraftsmentDto"/>

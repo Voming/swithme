@@ -31,16 +31,7 @@ public class BoardReplyContentController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String boardIdStr = request.getParameter("boardId");
-		
-		try {
-			int boardId = Integer.parseInt(boardIdStr);
-			response.getWriter().append(new Gson().toJson(service.selectBoardReplyList(boardId)));
 
-			}catch(NumberFormatException e) {
-				System.out.println("!!! NumberFormatException !!!!!!");
-				response.sendRedirect(request.getContextPath()+"board");
-		}
 	}
 
 }

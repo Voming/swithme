@@ -17,7 +17,7 @@ where RECORD_MEM_ID ='won'
 GROUP BY CUBE(RECORD_SUBJECT_ID)
 ;
 
-SELECT SUBJECT_ID, SUBJECT_NAME 
+SELECT SUBJECT_ID, SUBJECT_NAME,MEM_ID 
     -- 여기 시간
     , (
     SELECT SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) 
@@ -30,12 +30,13 @@ from SUBJECT
 where MEM_ID ='won'
 
 union
-SELECT null, null
+SELECT null, null,null
     -- 여기 시간
     , SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8)  as DIFFTIME
 from RECORD 
 where RECORD_MEM_ID = 'won'
         and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
+
 ;
 -----------당일 과목별 공부시간 합계--
 ---------------------------------- 방법 2 total 시간이 가장 위로
@@ -80,11 +81,50 @@ on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_DEL_DATE IS NULL
 ORDER BY SUBJECT_ID ASC NULLS FIRST
 ;
+------------30일간 당일 공부시간 합계 // chart //cube O---------------------------------------
+
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME ,STARTDATE
+from 
+(
+SELECT SUBJECT_ID, SUBJECT_NAME  ,SUBJECT_COLOR ,SUBJECT_DEL_DATE
+FROM SUBJECT 
+WHERE MEM_ID ='won'
+) t1 
+FULL JOIN
+(
+SELECT to_char(RECORD_START, 'yyyy-mm-dd')as STARTDATE,RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+FROM RECORD 
+WHERE RECORD_MEM_ID = 'won'
+            AND RECORD_START >= SYSDATE - 30 -- 30일 이전부터의 레코드를 고려
+            AND RECORD_START < SYSDATE -- SYSDATE를 포함하지 않음
+        GROUP BY
+            RECORD_SUBJECT_ID, TO_CHAR(RECORD_START, 'yyyy-mm-dd')--,to_char(RECORD_START, 'yyyy-mm-dd')
+) t2
+on (SUBJECT_ID = RECORD_SUBJECT_ID)
+WHERE SUBJECT_ID IS NULL
+;
 -------------------------------------------------------------------------------
+---수정 전
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME 
+from 
+(
+SELECT SUBJECT_ID, SUBJECT_NAME  ,SUBJECT_COLOR ,SUBJECT_DEL_DATE
+FROM SUBJECT 
+WHERE MEM_ID ='won'
+) t1 
+FULL JOIN
+(
+SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+FROM RECORD 
+WHERE RECORD_MEM_ID = 'won'
+        and to_char(RECORD_START, 'yyyy-mm-dd') =  to_char(SYSDATE, 'yyyy-mm-dd')
+group by cube(RECORD_SUBJECT_ID)--,to_char(RECORD_START, 'yyyy-mm-dd')
+) t2
+on (SUBJECT_ID = RECORD_SUBJECT_ID)
+WHERE SUBJECT_ID IS NULL
+;
 
-rollback;
-desc subject;
-
+-----------------------------------------------------
 
 
 

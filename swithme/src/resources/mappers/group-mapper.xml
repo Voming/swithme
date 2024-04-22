@@ -73,13 +73,13 @@
 	</select>
 
 	<resultMap id="recordSumResultMap"
-		type="swithme.model.group.dto.GroupRecordSumDto">
+		type="GroupRecordSumDto">
 		<result property="SUM_MIN" column="sumMin" />
 		<result property="MEM_ID" column="memId" />
 	</resultMap>
 
 	<select id="selectGroupRecordSumList" parameterType="_int"
-		resultType="GroupRecordSumDto">
+		resultMap="recordSumResultMap">
 		SELECT
 		ROUND(SUM(TO_NUMBER(TO_CHAR(RECORD_END, 'HH24MISS'))
 		-

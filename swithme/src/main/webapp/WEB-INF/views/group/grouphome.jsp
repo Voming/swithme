@@ -16,6 +16,7 @@
 <title>SWITH.ME</title>
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 </head>
 <body>
 	<script>
@@ -54,13 +55,52 @@
 				alert("빈문자열만 입력할 수 없습니다. 검색할 그룹명을 작성해주세요.");
 				return;
 			}
-			// 중요!
-			var frm = document.getElementById("frm-find");
-			
-			frm.method = "post"; // content 길이 길거라..
-			frm.action = "${pageContext.request.contextPath}/group/find";
-			frm.submit();
+
+			$.ajax({
+				url:"${pageContext.request.contextPath }/group/find.ajax"
+				, method : "post"
+				, data :  $("#frm-find").serialize()
+				, dataType : 'json'
+				, success: function(result){
+						console.log(result);
+						displayFindWrap(result);
+				}
+				,error : ajaxErrorHandler
+			});			
 		}
+		
+		function displayFindWrap(datalist){
+			var htmlVal = '';
+			for(var idx in datalist){
+				var findDto = datalist[idx];
+				console.log(findDto);
+				htmlVal+= `
+				<li>
+					<div class="box">
+						<img class="img_g"
+							src="${pageContext.request.contextPath}/files/\${findDto.sgroupImgPath}" alt="그룹 사진"
+							onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=\${findDto.sgroupId}'">
+						<div class="tag">
+							<p style="background-color: black; padding: 3px; font-size: var(--font5);">
+								<c:if test="\${findDto.sgroupOpen == '0'}">공개</c:if>
+								<c:if test="\${findDto.sgroupOpen == '1'}">비공개</c:if>
+							</p>
+						</div>
+						<div class="description">
+							<a class="name"
+								style="font-size: var(--font4); font-weight: bold;">\${findDto.sgroupName}</a> 
+							<a class="name-sub" style="font-size: var(--font5);">\${findDto.sgroupEx}</a>
+						</div>
+					</div>
+				</li>`;
+			}
+			$(".group-box").html(htmlVal);
+			$(".all-txt").hide();
+			$(".group-tab-nav").hide();
+			
+		}
+		
+		
 	</script>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -114,8 +154,7 @@
 					<div class="search">
 					<form id="frm-find">
 						<input type="text"  name="find" placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
-						<button type="button" class="btn find" 
-							onclick="location.href='${pageContext.request.contextPath}/group/find'">
+						<button type="button" class="btn find" >
 							<img class="search-btn"
 								src="${pageContext.request.contextPath}/resources/images/find.png"
 								alt="찾기">
@@ -134,7 +173,7 @@
 			</div>
 			<div class="wrap-openlist">
 				<div class="tab-body">
-					<p>전체그룹</p>
+					<p class="all-txt">전체그룹</p>
 					<ul class="group-tab-nav">
 						<li><a href="#tab01">전체</a></li>
 						<li><a href="#tab02">추천 그룹</a></li>

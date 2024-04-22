@@ -40,7 +40,7 @@ public class GroupController extends HttpServlet {
 		//전체 그룹
 		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 20);
 		request.getSession().setAttribute("OpenGrouplist", OpenGrouplist);
-		
+		//추천 그룹
 		List<GroupDto> RandGrouplist = service.selectRandList();
 		request.getSession().setAttribute("RandGrouplist", RandGrouplist);
 		

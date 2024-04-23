@@ -69,7 +69,7 @@
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
 									<tr class="tr-sec">
 										<td style="text-align: center;">${dto.boardId}</td>
-										<td><a href="${pageContext.request.contextPath }/boardcontent?id=${dto.boardId }">${dto.title }</a></td>
+										<td><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
 										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
 										<!-- url에 있는 parameter 값 가지고 와서 쓸 수 있기 때문에 여기 있는 id는
 										BoardContentController에에서 쓰임 -->

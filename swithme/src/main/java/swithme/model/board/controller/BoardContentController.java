@@ -12,7 +12,7 @@ import swithme.model.board.service.BoardService;
 /**
  * Servlet implementation class BoardContentController
  */
-@WebServlet("/boardcontent")
+@WebServlet("/board/content")
 public class BoardContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BoardService service = new BoardService();

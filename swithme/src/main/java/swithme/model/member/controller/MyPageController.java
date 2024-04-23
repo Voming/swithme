@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swithme.model.member.dto.MemberInfoDto;
+
 /**
  * Servlet implementation class MyPageController
  */
@@ -32,7 +34,13 @@ public class MyPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		
+		String memId = null;
+		if (loginInfo != null) { //로그인 했을 때
+			memId = loginInfo.getMemId();
+		}
+		request.getSession().setAttribute("memId", memId);
 	}
 
 }

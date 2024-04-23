@@ -28,6 +28,8 @@ WHERE SUBJECT_DEL_DATE IS NULL
 ORDER BY SUBJECT_ID ASC NULLS FIRST
 </select>
 
+
+
 <insert id="insertStartTime" parameterType="RecordTimeDto">
 INSERT INTO RECORD VALUES(SEQ_RECORD_ID.nextval, #{recordSubjectId}, #{recordMemId},
  	to_date(#{recordStart}, 'yyyymmddhh24miss'),NULL)

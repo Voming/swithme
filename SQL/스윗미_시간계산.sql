@@ -17,8 +17,28 @@ FROM (
             record_mem_id = 'hyuk' and RECORD_end >= ( SYSDATE - 30 )
     )
 );
-
-
+-----00:00:00으로 표현 
+SELECT 
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+FROM (
+    SELECT 
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+        FROM 
+            record
+        WHERE 
+            record_mem_id = 'b' 
+            and TRUNC(RECORD_END) = TRUNC(SYSDATE)
+            and RECORD_end >= ( SYSDATE - 30 )
+    )
+);
+select trunc(sysdate) from dual;
 -----------과목 시간 합계 리스트 사용불가 추후에 공부시간만 뽑아올 때 사용가능--
 SELECT RECORD_SUBJECT_ID
 ,(SELECT SUBJECT_NAME from SUBJECT where SUBJECT_ID=RECORD_SUBJECT_ID) AS SUBJECT_NAME
@@ -95,12 +115,11 @@ FULL JOIN
 SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
 FROM RECORD 
 WHERE RECORD_MEM_ID = 'won'
-        and to_char(RECORD_START, 'yyyy-mm-dd') =  to_char(SYSDATE, 'yyyy-mm-dd')
+        and TRUNC(RECORD_END)=TRUNC(SYSDATE-0)
 group by RECORD_SUBJECT_ID
 ) t2
 on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_DEL_DATE IS NULL
-ORDER BY SUBJECT_ID ASC NULLS FIRST
 ;
 ------------------------------------------------------------------------
 SELECT
@@ -113,6 +132,56 @@ SELECT
     (SYSDATE - (SYSDATE -1)) *24*60*60 "어제날짜 경과한 초단위 환산"-- 오늘날짜 - 어제날짜 경과한 시간 초단위 환산
 FROM DUAL;
 ------------30일간 당일 공부시간 합계 // chart //cube O---------------------------------------
+------방법1?? 과목 아이디,이름, 공부시간, 과목색깔.
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME  
+from 
+(
+SELECT SUBJECT_ID, SUBJECT_NAME
+FROM SUBJECT 
+WHERE MEM_ID ='won' 
+) t1 
+FULL JOIN
+(
+SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+FROM RECORD 
+WHERE RECORD_MEM_ID = 'won'
+        and TRUNC(RECORD_END)=TRUNC(SYSDATE-0)
+group by RECORD_SUBJECT_ID
+) t2
+
+on (SUBJECT_ID = RECORD_SUBJECT_ID)
+--WHERE SUBJECT_DEL_DATE IS NULL
+ORDER BY SUBJECT_ID ASC NULLS FIRST
+;
+------방법2???
+SELECT 
+    TO_CHAR(RECORD_MONTH, 'YYYY-MM') AS month,
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00') AS sum_min
+FROM (
+    SELECT 
+        TRUNC(RECORD_END, 'MM') AS RECORD_MONTH,
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime,
+            RECORD_END
+        FROM 
+            record
+        WHERE 
+            record_mem_id = 'b' 
+            --AND RECORD_end >= (SYSDATE - 30)
+              AND TRUNC(RECORD_END) = TRUNC(SYSDATE-0)
+        GROUP BY
+            RECORD_END
+    )
+    GROUP BY
+        TRUNC(RECORD_END, 'MM')
+);
+---
 SELECT 
 		s.sgroup_mem_id AS "MEM_ID",
         NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
@@ -121,7 +190,38 @@ SELECT
         WHERE  r.RECORD_START >= ( SYSDATE - 7 ) and sgroup_id = 53
         GROUP BY s.sgroup_mem_id
         ; 
---한 달 공부 시간 통계        
+--한 달 공부 시간 통계   
+
+-----월 공부시간 합 // 한달 총 공부시간 -- TODO 조건식 수정 
+SELECT 
+    TO_CHAR(RECORD_MONTH, 'YYYY-MM') AS month,
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00') AS sum_min
+FROM (
+    SELECT 
+        TRUNC(RECORD_END, 'MM') AS RECORD_MONTH,
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime,
+            RECORD_END
+        FROM 
+            record
+        WHERE 
+            record_mem_id = 'b' 
+            --AND RECORD_end >= (SYSDATE - 30)
+              AND TO_CHAR(RECORD_END, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM') -- 월이 동일한 경우만 선택
+            -- AND TRUNC(RECORD_END, 'MM') BETWEEN ADD_MONTHS(SYSDATE, -2) AND ADD_MONTHS(SYSDATE, -1) -- 두 달 전인 경우만 선택
+        GROUP BY
+            RECORD_END
+    )
+    GROUP BY
+        TRUNC(RECORD_END, 'MM')
+);
+--------------------------------------
 SELECT 
     j.mem_id AS "MEM_ID",
      NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
@@ -144,9 +244,9 @@ FROM
     record;
 ---chat 2차
 SELECT 
-     nvl(FLOOR(total_seconds / 3600),'00')  || ':' ||
-     nvl(FLOOR(MOD(total_seconds, 3600) / 60),'00')    || ':' ||
-     nvl(MOD(total_seconds, 60),'00')  as sum_min
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
 FROM (
     SELECT 
         SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
@@ -158,7 +258,7 @@ FROM (
         FROM 
             record
         WHERE 
-            record_mem_id = 'hyuk' and RECORD_end >= ( SYSDATE - 30 )
+            record_mem_id = 'won' and RECORD_end >= ( SYSDATE - 30 )
     )
 );
 

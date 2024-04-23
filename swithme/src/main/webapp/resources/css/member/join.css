@@ -15,7 +15,7 @@ width: 960px;
     
 }
 
-.wrap-body .wrap-join .btn.check{
+.wrap-body .wrap-join .btn.dcheck{
 	background-color:white;
 	border:none;
 }
@@ -51,7 +51,12 @@ width: 960px;
      border-radius: 10px;
      margin-bottom:40px;
 }
-.wrap-body .wrap-join label{
+.wrap-body .wrap-join .check{
+	margin-left:100px;
+	margin-bottom:20px;
+}
+
+.wrap-body .wrap-join label {
 	margin-right:30px;
 }
 

@@ -27,7 +27,7 @@
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a  href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
@@ -42,30 +42,31 @@
 		<div class="wrap-body">
 			<div class="wrap-mypage">
 				<form id="login-form"  action="${pageContext.request.contextPath}/login" method="post">
-					<div>
+					<div class="id">
 						아이디
-						<input type="text" name="id">
+						<span>${memId}</span>
 					</div>
-					<div>
+					<div class="pwd">
 						비밀번호
-						<input type="password" name="pwd" >
+					<span></span>	
 					</div>
 					<div>
-						<legend>각오</legend>
+						<span>각오</span>
 						<input type="text" name="fight">
 					</div>
 					<div>
-						<button type="button" class="btn change" id="change">수정완료</button>
+						<button type="button" class="btn change" id="change"><p>수정완료</p></button>
 					</div>
-					<div> 
-						<button class="btn logout" id="logout">로그아웃</button>
-					</div>
+					
 					<div class="myboard">
-					<a href="${pageContext.request.contextPath}/myboard">내가 쓴 게시글</a>
+						<a href="${pageContext.request.contextPath}/myboard">내가 쓴 게시글</a>
 					</div>
-					<div> 
-						<button class="btn out">탈퇴하기</button>
-					</div>
+					<span> 
+						<button class="btn logout" id="logout"><p>로그아웃</p></button>
+					</span>
+					<span> 
+						<button class="btn out"><p>탈퇴하기</p></button>
+					</span>
 				</form>
 			</div>
 		</div>

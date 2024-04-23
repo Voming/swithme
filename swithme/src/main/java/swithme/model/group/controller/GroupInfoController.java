@@ -44,9 +44,7 @@ public class GroupInfoController extends HttpServlet implements Serializable {
 		request.getSession().setAttribute("groupSumList", groupSumList);
 		System.out.println("groupSumList : " + groupSumList);
 		
-		//List<GroupRecordSumDto> groupSumListRank = groupSumList.sort(groupSumList, Collections.reverseOrder());
-		
-		
+				
 		List<GroupRecordDaySumDto> groupSumDayList = service.selectGroupRecordDaySumList(groupId);
 		request.getSession().setAttribute("groupSumDayList", groupSumDayList);
 		System.out.println(groupSumDayList);

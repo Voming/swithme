@@ -55,7 +55,7 @@
 						<span class="desc-pwd"></span>
 					</div>
 					<div>
-						<button type="button" class="btn submit" id="loginbtn">로그인</button>
+						<button type="button" class="btn submit" id="loginbtn"><p>로그인</p></button>
 					</div>
 					<div class="join-btn">
 					<a href="${pageContext.request.contextPath}/join">회원가입하기</a>

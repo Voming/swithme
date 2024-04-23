@@ -14,8 +14,7 @@ import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
-import swithme.model.board.dto.BoardReplyListDto;
-import swithme.model.board.dto.BoardReplyWriteDto;
+import swithme.model.board.dto.BoardReplyDto;
 
 public class BoardService {
 	
@@ -75,12 +74,11 @@ public class BoardService {
 		return result;
 	}
 	
-	public List<BoardReplyListDto> selectBoardReplyList(Integer boardId) {
-		List<BoardReplyListDto> result = null;
+	public List<BoardReplyDto> selectBoardReplyList(Integer boardId) {
+		List<BoardReplyDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectBoardReplyList(session, boardId);
 		
-		System.out.println("service :" + result.toString());
 		
 		session.close();
 		return result;
@@ -112,24 +110,15 @@ public class BoardService {
 	}
 	
 	//댓글 작성
-	public int insertReplyWrite(BoardReplyWriteDto dto) {
+	public int insertReplyWrite(BoardReplyDto replydto) {
 		int result = 0;
 		int resultUpdate = 0;
 		
 		SqlSession session = MybatisTemplate.getSqlSession();
-		
-		if(dto.getReplyId() != 0) {
-			resultUpdate = dao.updateReplyStep(session, dto.getReplyId());
-			
-			if(resultUpdate > -1 ) {
-				result = dao.insertReplyWriteAgain(session, dto);	
-			}
 						
-		} else {
-			result = dao.insertReplyWrite(session, dto);
-		}
 		
 		if(resultUpdate > -1 && result > 0) {
+			result = dao.insertReplyWrite(session, replydto);
 			session.commit();
 			//이러면 정상
 		} else {
@@ -137,11 +126,14 @@ public class BoardService {
 			//여기는 비정상
 		}
 
-		
-		result = dao.insertReplyWrite(session, dto);
+		result = dao.insertReplyWrite(session, replydto);
 		session.close();
+		
+		System.out.println("댓글작성 service : " + result);
+		
 		return result;
 	}
+	
 	
 	
 	//게시글 수정

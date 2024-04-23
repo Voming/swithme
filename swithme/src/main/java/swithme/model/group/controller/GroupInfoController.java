@@ -1,6 +1,7 @@
 package swithme.model.group.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.group.dto.GroupDto;
+import swithme.model.group.dto.GroupRecordDaySumDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.service.GroupService;
 
 @WebServlet("/group/info")
-public class GroupInfoController extends HttpServlet {
+public class GroupInfoController extends HttpServlet implements Serializable {
 	private static final long serialVersionUID = 1L;
 	GroupService service = new GroupService();
 	
@@ -40,6 +42,10 @@ public class GroupInfoController extends HttpServlet {
 		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
 		request.getSession().setAttribute("groupSumList", groupSumList);
 		System.out.println("groupSumList : " + groupSumList);
+		
+		List<GroupRecordDaySumDto> groupSumDayList = service.selectGroupRecordDaySumList(groupId);
+		request.getSession().setAttribute("groupSumDayList", groupSumDayList);
+		System.out.println(groupSumDayList);
 
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}

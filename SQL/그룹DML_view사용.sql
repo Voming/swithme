@@ -12,7 +12,8 @@ select s.sgroup_mem_id AS "MEM_ID"
 , NVL( SUBSTR(TO_CHAR(v.difftime , 'HH24:MI:SS'), 12, 8), '0') AS "SUM_MIN"
 from sgroup_member s
 left join v_record_week v on( v.record_mem_id = s.sgroup_mem_id )
-where s.sgroup_id = '1';
+where s.sgroup_id = '1'
+order by SUM_MIN desc;
 
 
 select * from V_RECORD_WO_SUBJECT_W_GROUP;
@@ -46,7 +47,6 @@ select sgroup_mem_id,
         , 12, 8), '0')  as "d7"
 from V_RECORD_WO_SUBJECT_W_GROUP a
 where a.sgroup_id = '1'
-group by sgroup_mem_id
 ;
 
 select * from record  where record_start BETWEEN trunc(SYSDATE - 7) AND trunc(SYSDATE) and record_mem_id ='song';

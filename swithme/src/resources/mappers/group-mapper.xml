@@ -141,6 +141,5 @@
 		        , 12, 8), '0')  AS "D7"
 		FROM V_RECORD_WO_SUBJECT_W_GROUP A
 		WHERE A.SGROUP_ID = #{groupId}
-		GROUP BY SGROUP_MEM_ID
 	</select>
 </mapper>

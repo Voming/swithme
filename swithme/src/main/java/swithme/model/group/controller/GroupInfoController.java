@@ -2,6 +2,7 @@ package swithme.model.group.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,9 @@ public class GroupInfoController extends HttpServlet implements Serializable {
 		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
 		request.getSession().setAttribute("groupSumList", groupSumList);
 		System.out.println("groupSumList : " + groupSumList);
+		
+		//List<GroupRecordSumDto> groupSumListRank = groupSumList.sort(groupSumList, Collections.reverseOrder());
+		
 		
 		List<GroupRecordDaySumDto> groupSumDayList = service.selectGroupRecordDaySumList(groupId);
 		request.getSession().setAttribute("groupSumDayList", groupSumDayList);

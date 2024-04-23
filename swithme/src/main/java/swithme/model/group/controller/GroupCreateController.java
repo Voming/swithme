@@ -73,17 +73,22 @@ public class GroupCreateController extends HttpServlet {
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
 		String groupExp = multiReq.getParameter("groupExp");
+		String groupPwdstr = multiReq.getParameter("groupPwd");
 		
-		int groupPwd = 0;
+		
+		int result = 0;
 		if(groupOpen.equals("open")) {
 			groupOpen = "0";
+			groupPwdstr = "";
 		}else {
 			groupOpen = "1";
-			String groupPwdstr = multiReq.getParameter("groupPwd");
 			if(groupPwdstr != null && !groupPwdstr.equals("")) {
 				try {
+					int groupPwd = 0;
 					groupPwd = Integer.parseInt(groupPwdstr);
 				} catch (NumberFormatException e) {
+					result = -1;
+					response.getWriter().append(String.valueOf(result));
 					e.printStackTrace();
 				}
 			}
@@ -96,8 +101,8 @@ public class GroupCreateController extends HttpServlet {
 		}
 		String groupWriter = loginInfo.getMemId();
 	
-		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
-		int result = service.insert(dto);
+		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwdstr, groupExp, fileName, orginFileName);
+		result = service.insert(dto);
 		//ajax에 result 
 		response.getWriter().append(String.valueOf(result));
 	}

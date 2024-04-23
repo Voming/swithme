@@ -13,7 +13,7 @@ public class GroupInfoListDto {
 	private Integer sgroupId;
 	private String sgroupName;
 	private String sgroupOpen;
-	private Integer sgroupPwd;
+	private String sgroupPwd;
 	private String sgroupEx;
 	private String sgroupImgPath;
 	private String sgroupImgName;
@@ -26,7 +26,7 @@ public class GroupInfoListDto {
 				+ ", sgroupImgName=" + sgroupImgName + ", sgroupMemId=" + sgroupMemId + "]";
 	}
 
-	public GroupInfoListDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupInfoListDto(Integer sgroupId, String sgroupName, String sgroupOpen, String sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName, String sgroupMemId) {
 		super();
 		this.sgroupId = sgroupId;
@@ -51,7 +51,7 @@ public class GroupInfoListDto {
 		return sgroupOpen;
 	}
 
-	public Integer getSgroupPwd() {
+	public String getSgroupPwd() {
 		return sgroupPwd;
 	}
 

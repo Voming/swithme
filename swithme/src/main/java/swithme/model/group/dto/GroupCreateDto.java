@@ -12,12 +12,12 @@ public class GroupCreateDto {
 	private String sgroupWriter;
 	private String sgroupName;
 	private String sgroupOpen;
-	private Integer sgroupPwd;
+	private String sgroupPwd;
 	private String sgroupEx;
 	private String sgroupImgPath;
 	private String sgroupImgName;
 
-	public GroupCreateDto(String sgroupWriter, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupCreateDto(String sgroupWriter, String sgroupName, String sgroupOpen, String sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName) {
 		super();
 		this.sgroupWriter = sgroupWriter;
@@ -48,7 +48,7 @@ public class GroupCreateDto {
 		return sgroupOpen;
 	}
 
-	public Integer getSgroupPwd() {
+	public String getSgroupPwd() {
 		return sgroupPwd;
 	}
 

@@ -15,7 +15,7 @@ public class GroupDto implements Serializable {
 	private Integer sgroupId;
 	private String sgroupName;
 	private String sgroupOpen;
-	private Integer sgroupPwd;
+	private String sgroupPwd;
 	private String sgroupEx;
 	private String sgroupImgPath;
 	private String sgroupImgName;
@@ -27,7 +27,7 @@ public class GroupDto implements Serializable {
 				+ ", sgroupImgName=" + sgroupImgName + "]";
 	}
 
-	public GroupDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupDto(Integer sgroupId, String sgroupName, String sgroupOpen, String sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName) {
 		super();
 		this.sgroupId = sgroupId;
@@ -51,7 +51,7 @@ public class GroupDto implements Serializable {
 		return sgroupOpen;
 	}
 
-	public Integer getSgroupPwd() {
+	public String getSgroupPwd() {
 		return sgroupPwd;
 	}
 

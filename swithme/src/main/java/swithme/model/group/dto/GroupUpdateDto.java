@@ -12,7 +12,7 @@ public class GroupUpdateDto {
 	private Integer sgroupId;
 	private String sgroupName;
 	private String sgroupOpen;
-	private Integer sgroupPwd;
+	private String sgroupPwd;
 	private String sgroupEx;
 	private String sgroupImgPath;
 	private String sgroupImgName;
@@ -24,7 +24,7 @@ public class GroupUpdateDto {
 				+ ", sgroupImgName=" + sgroupImgName + "]";
 	}
 
-	public GroupUpdateDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd, String sgroupEx,
+	public GroupUpdateDto(Integer sgroupId, String sgroupName, String sgroupOpen, String sgroupPwd, String sgroupEx,
 			String sgroupImgPath, String sgroupImgName) {
 		super();
 		this.sgroupId = sgroupId;
@@ -48,7 +48,7 @@ public class GroupUpdateDto {
 		return sgroupOpen;
 	}
 
-	public Integer getSgroupPwd() {
+	public String getSgroupPwd() {
 		return sgroupPwd;
 	}
 

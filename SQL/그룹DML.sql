@@ -257,61 +257,412 @@ FROM SGROUP_MEMBER a
  ;
 
 
+
 select '그룹원' mem_id, to_char(SYSDATE - 7, 'dy') d1, to_char(SYSDATE - 6, 'dy') d2, to_char(SYSDATE - 5, 'dy') d3, to_char(SYSDATE - 4, 'dy') d4
 , to_char(SYSDATE - 3, 'dy') d5, to_char(SYSDATE - 2, 'dy') d6, to_char(SYSDATE - 1, 'dy') d7
  from dual 
 union
 SELECT a.sgroup_mem_id mem_id
-    , nvl( substr((SELECT 
-        substr(to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss'), 12, 9)
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 8 and SYSDATE - 7
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
+    ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-7)
+                and record_mem_id =  a.sgroup_mem_id
+                )))
     AS "d1"
-    , nvl( substr((SELECT 
-        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 7 and SYSDATE - 6
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d2"
-    , nvl( substr((SELECT 
-        to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START),'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 6 and SYSDATE - 5
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d3"
-    , nvl( substr((SELECT 
-         to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START),'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 5 and SYSDATE - 4
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d4"
-    , nvl( substr((SELECT 
-         to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 4 and SYSDATE - 3
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d5"
-    , nvl( substr((SELECT 
-       to_char(NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START  BETWEEN SYSDATE - 3 and SYSDATE - 2
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d6"
-    , nvl( substr((SELECT 
-        to_char( NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day'), 'hh24:mi:ss')
-		FROM SGROUP_MEMBER s
-        join RECORD  r on (s.sgroup_mem_id = r.record_mem_id)
-          WHERE  r.RECORD_START BETWEEN SYSDATE - 2 and SYSDATE - 1
-          and  s.sgroup_mem_id = a.sgroup_mem_id), 12, 8), '0')
-    AS "d7"
+     ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-6)
+                and record_mem_id =  a.sgroup_mem_id
+                )))
+    AS "d1"  ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-5)
+                 and record_mem_id = a.sgroup_mem_id
+                )))
+    AS "d1"  ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-4)
+                 and record_mem_id =  a.sgroup_mem_id
+                )))
+    AS "d1"  ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-3)
+                and record_mem_id =  a.sgroup_mem_id
+                )))
+    AS "d1"  ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-2)
+                 and record_mem_id =  a.sgroup_mem_id
+                )))
+    AS "d1"  ,(SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        
+        FROM (
+            SELECT
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM record 
+                WHERE trunc(record_end) = trunc(sysdate-1)
+                and record_mem_id =  a.sgroup_mem_id
+                )))
+    AS "d1"
+FROM SGROUP_MEMBER a
+ where a.sgroup_id = '53'
+GROUP BY a.sgroup_mem_id
+ ;
+ 
+ --시간 합 올바르게 계산
+ SELECT 
+     nvl(FLOOR(total_seconds / 3600),'00')  || ':' ||
+     nvl(FLOOR(MOD(total_seconds, 3600) / 60),'00')    || ':' ||
+     nvl(MOD(total_seconds, 60),'00')  as sum_min
+FROM (
+    SELECT 
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+        FROM 
+            record
+        WHERE 
+            record_mem_id = 'hyuk' and RECORD_end >= ( SYSDATE - 30 )
+    )
+);
+
+select * from record;
+-- 00:00:00 으로 표시
+SELECT 
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+FROM (
+    SELECT 
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+        FROM 
+            record
+        WHERE 
+            record_mem_id = 'b' 
+            and trunc(record_end) = trunc(sysdate-1)
+            and RECORD_end >= ( SYSDATE - 30 ))
+        );
+        
+ -- 00:00:00 으로 표시
+SELECT 
+    nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+    nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+    nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+FROM (
+    SELECT 
+        SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+            (EXTRACT(MINUTE FROM difftime) * 60) + 
+            EXTRACT(SECOND FROM difftime)) AS total_seconds
+    FROM (
+        SELECT 
+            NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+        FROM 
+            record
+        WHERE trunc(record_end) = trunc(sysdate-1)
+        )
+        );
+               
+        
+select '그룹원' mem_id, to_char(SYSDATE - 7, 'dy') d1, to_char(SYSDATE - 6, 'dy') d2, to_char(SYSDATE - 5, 'dy') d3, to_char(SYSDATE - 4, 'dy') d4
+, to_char(SYSDATE - 3, 'dy') d5, to_char(SYSDATE - 2, 'dy') d6, to_char(SYSDATE - 1, 'dy') d7
+ from dual 
+union
+SELECT a.sgroup_mem_id "mem_id"
+    , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record r join SGROUP_MEMBER  s on (s.sgroup_mem_id = r.record_mem_id)
+                WHERE  trunc(record_end) = trunc(sysdate-1)
+               
+                    )
+                ) GROUP BY  r.record_mem_id
+        )AS "d1"
+   , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE 
+                    record_mem_id = 'b' 
+                    and trunc(record_end) = trunc(sysdate-1)
+                    and RECORD_end >= ( SYSDATE - 30 ))
+                )
+        )AS "d2"
+         , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE 
+                    record_mem_id = 'b' 
+                    and trunc(record_end) = trunc(sysdate-1)
+                    and RECORD_end >= ( SYSDATE - 30 ))
+                )
+        )AS "d3"
+         , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE 
+                    record_mem_id = 'b' 
+                    and trunc(record_end) = trunc(sysdate-1)
+                    and RECORD_end >= ( SYSDATE - 30 ))
+                )
+        )AS "d4"
+         , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE 
+                    record_mem_id = 'b' 
+                    and trunc(record_end) = trunc(sysdate-1)
+                    and RECORD_end >= ( SYSDATE - 30 ))
+                )
+        )AS "d5"
+         , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE 
+                    record_mem_id = 'b' 
+                    and trunc(record_end) = trunc(sysdate-1)
+                    and RECORD_end >= ( SYSDATE - 30 ))
+                )
+        )AS "d6"
+         , (SELECT 
+        nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
+        nvl2(FLOOR(MOD(total_seconds, 3600) / 60), LPAD(FLOOR(MOD(total_seconds, 3600) / 60), 2, '0'), '00') || ':' ||
+        nvl2(MOD(total_seconds, 60), LPAD(MOD(total_seconds, 60), 2, '0'), '00')  as sum_min
+        FROM (
+            SELECT 
+                SUM((EXTRACT(HOUR FROM difftime) * 3600) + 
+                    (EXTRACT(MINUTE FROM difftime) * 60) + 
+                    EXTRACT(SECOND FROM difftime)) AS total_seconds
+            FROM (
+                SELECT 
+                    NUMTODSINTERVAL(SUM((RECORD_END - RECORD_START)), 'day') AS difftime
+                FROM 
+                    record
+                WHERE trunc(record_end) = trunc(sysdate-1)
+                ))
+        )AS "d7"
 FROM SGROUP_MEMBER a
  where a.sgroup_id = '53'
   GROUP BY a.sgroup_mem_id
  ;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ------------------------------------------------------------------------
+ 
+ 
+ SELECT '그룹원' MEM_ID, 
+		TO_CHAR(SYSDATE - 7, 'DY') D1, TO_CHAR(SYSDATE - 6, 'DY') D2, TO_CHAR(SYSDATE - 5, 'DY') D3, TO_CHAR(SYSDATE - 4, 'DY') D4
+		, TO_CHAR(SYSDATE - 3, 'DY') D5, TO_CHAR(SYSDATE - 2, 'DY') D6, TO_CHAR(SYSDATE - 1, 'DY') D7
+		FROM DUAL
+		UNION
+		SELECT A.SGROUP_MEM_ID "MEM_ID"
+		, NVL( SUBSTR((SELECT
+		SUBSTR(TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY'), 'HH24:MI:SS'), 12, 9)
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 8 AND SYSDATE - 7
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D1"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY'), 'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 7 AND SYSDATE - 6
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D2"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START),'DAY'), 'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 6 AND SYSDATE - 5
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D3"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START),'DAY'), 'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 5 AND SYSDATE - 4
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D4"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY'), 'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 4 AND SYSDATE - 3
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D5"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR(NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY'), 'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 3 AND SYSDATE - 2
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D6"
+		, NVL( SUBSTR((SELECT
+		TO_CHAR( NUMTODSINTERVAL( SUM(R.RECORD_END - R.RECORD_START) ,'DAY'),
+		'HH24:MI:SS')
+		FROM SGROUP_MEMBER S
+		JOIN RECORD R ON (S.SGROUP_MEM_ID = R.RECORD_MEM_ID)
+		WHERE R.RECORD_START BETWEEN SYSDATE - 2 AND SYSDATE - 1
+		AND S.SGROUP_MEM_ID = A.SGROUP_MEM_ID), 12, 8), '0')
+		AS "D7"
+		FROM SGROUP_MEMBER A
+		WHERE A.SGROUP_ID = #{groupId}
+		GROUP BY A.SGROUP_MEM_ID

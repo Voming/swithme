@@ -140,25 +140,6 @@ textarea:focus {
 	text-align: end;
 }
 
-.wrap-body > div.board-reply  >  div.wrap-reply2 {
-	font-family: "IM_Hyemin-Regular";
- 	font-size: var(--font4);
-	resize: none;
-	border: none;
-	border-radius: 20px;
-	background: rgb(237, 237, 237);
- 	padding: 20px 20px;
- 	margin: 10px 40px 20px 120px;
- }
-
-.wrap-body > div.board-reply > .wrap-reply2 >  .frm-reply2  > div.r-1 > div {
-	padding-bottom: 10px;
-}
-
-body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-2 {
-	padding-bottom: 10px;
-	
-}
 
 .wrap-body > div.board-reply > div.wrap-reply > form > div.r-2 > div > textarea {
 	font-family: "IM_Hyemin-Regular";
@@ -173,21 +154,6 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > 
 	font-size: var(--font4);
 }
 
-
-
-/* 대댓글 입력 창*/
-.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-2 > div > textarea {
-	font-family: "IM_Hyemin-Regular";
-	font-size: var(--font4);
-	border: none;
-	resize: none;
-	background: rgb(237, 237, 237);
-}
-
-.wrap-body > div.board-reply > div.wrap-reply2 > form > div.r-3 > ul > li {
-	text-align: end;
-	font-size: var(--font4);
-}
 
 .wrap-body .btn {
 	display: flex;
@@ -306,4 +272,59 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > 
 
 .wrap-body > div.board-reply  > div.warp-reply-list > .replyresult > div.r-wrap > ul > li:nth-child(3) {
 	text-align: end;
+}
+
+
+
+
+/* 대댓글 입력 창*/
+
+.wrap-reply2{
+	font-family: "IM_Hyemin-Regular";
+ 	font-size: var(--font4);
+	resize: none;
+	border: none;
+	border-radius: 20px;
+	background: rgb(237, 237, 237);
+ 	padding: 20px 20px;
+ 	margin: 10px 40px 20px 120px;
+}
+
+.frm-reply2  > div.r-1 > div {
+	padding-bottom: 10px;
+}
+
+.wrap-reply2 > form > div.r-2 > div > textarea {
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	border: none;
+	resize: none;
+	background: rgb(237, 237, 237);
+}
+
+.wrap-reply2 > form > div.r-3 > ul > li {
+	text-align: end;
+	font-size: var(--font4);
+}
+
+
+.wrap-body > div.board-reply  >  div.wrap-reply2 {
+	font-family: "IM_Hyemin-Regular";
+ 	font-size: var(--font4);
+	resize: none;
+	border: none;
+	border-radius: 20px;
+	background: rgb(237, 237, 237);
+ 	padding: 20px 20px;
+ 	margin: 10px 40px 20px 120px;
+ }
+
+.wrap-reply2 > form > div.r-2 {
+	padding-bottom: 10px;
+	
+}
+
+.wrap-reply2 > form > div.r-3 > ul{
+	display: flex;
+	justify-content: space-between;
 }

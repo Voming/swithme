@@ -97,40 +97,27 @@
 				<div class="wrap-rank">
 					<p class="ct">그룹 내 랭킹</p>
 					<ul>
-						<li>
-							<div class="rank-txt">
-								<div class="rank"><p>1</p></div>
-								<div><p>스벅돌체</p></div>
-								<div class="mins"><p>300분</p></div>
-							</div>
-							<div class="wrap-bar">
-							
-							</div>
-						</li>
-						<li>
-							<div class="rank-txt">
-								<div class="rank"><p>1</p></div>
-								<div><p>스벅돌체</p></div>
-								<div class="mins"><p>300분</p></div>
-							</div>
-							<div class="wrap-bar">
-							
-							</div>
-						</li>
-						<li>
-							<div class="rank-txt">
-								<div class="rank"><p>1</p></div>
-								<div><p>스벅돌체</p></div>
-								<div class="mins"><p>300분</p></div>
-							</div>
-							<div class="wrap-bar">
-							
-							</div>
-						</li>
+					<c:if test="${not empty groupSumList }">
+							<c:forEach items="${groupSumList}" var="groupSumDto" varStatus="idx">
+								<li>
+									<div class="rank-txt">
+										<div class="rank">
+											<p>${idx.count }</p>
+										</div>
+										<div>
+											<p>${groupSumDto.memId}</p>
+										</div>
+										<div class="mins">
+											<p>${groupSumDto.sumMin}</p>
+										</div>
+									</div>
+									<div class="wrap-bar"></div>
+								</li>
+							</c:forEach>
+						</c:if>
 					</ul>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<div class="wrap-footer">

@@ -65,38 +65,40 @@ public class GroupUpdateController extends HttpServlet {
 		String groupName = multiReq.getParameter("groupName");
 		String groupOpen = multiReq.getParameter("groupOpen");
 		String groupExp = multiReq.getParameter("groupExp");
+		String groupPwdstr = multiReq.getParameter("groupPwd");
 
 		// jsp -> controller file 딱 1개일 경우
 		String filePath = multiReq.getFilesystemName("uploadfile");
 		String fileName = null;
 		String orginFileName = null;
 
-		int groupPwd = 0;
+		int result = 0;
+		
 		if (groupOpen.equals("open")) {
 			groupOpen = "0";
-			groupPwd = 0;
+			groupPwdstr = "";
 		} else {
 			groupOpen = "1";
-			String groupPwdstr = multiReq.getParameter("groupPwd");
-			if (groupPwdstr != null) {
+			if (groupPwdstr != null && !groupPwdstr.equals("")) {
 				try {
+					int groupPwd = 0;
 					groupPwd = Integer.parseInt(groupPwdstr);
 				} catch (NumberFormatException e) {
+					result = -1;
+					response.getWriter().append(String.valueOf(result));
 					e.printStackTrace();
 				}
 			}
 		}
 
-		int result = 0;
-		
 		System.out.println("update groupid : " + groupId);
 		if (filePath == null) {  //파일이 없는 경우 파일 제외하고 업데이트
 			System.out.println("첨부파일이 없었습니다.");
 
-			GroupUpdateMinDto dtomin = new GroupUpdateMinDto(groupId, groupName, groupOpen, groupPwd, groupExp);
+			GroupUpdateMinDto dtomin = new GroupUpdateMinDto(groupId, groupName, groupOpen, groupPwdstr, groupExp);
 			System.out.println(dtomin);
 			result = service.updateMin(dtomin);
-
+			
 		} else { //파일이 있는 경우 파일 포함해서 업데이트
 			System.out.println("첨부파일 정보는===");
 			System.err.println(filePath);
@@ -110,7 +112,7 @@ public class GroupUpdateController extends HttpServlet {
 				System.out.println(f1.length()); // 그 파일의 크기
 			}
 
-			GroupUpdateDto dto = new GroupUpdateDto(groupId, groupName, groupOpen, groupPwd, groupExp, fileName, orginFileName);
+			GroupUpdateDto dto = new GroupUpdateDto(groupId, groupName, groupOpen, groupPwdstr, groupExp, fileName, orginFileName);
 			result = service.update(dto);
 		}
 		System.out.println(result);

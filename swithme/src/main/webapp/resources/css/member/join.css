@@ -72,6 +72,7 @@
     box-sizing: border-box;
     border-radius: 10px;
     background-color:#DDCCFF;
+    border:none;
 }
 
 .wrap-body .wrap-join  #btnjoin{

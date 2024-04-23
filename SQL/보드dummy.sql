@@ -255,3 +255,14 @@ SELECT REPLY_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, 
 		FROM BOARD_REPLY
 		WHERE BOARD_ID = 62
 			ORDER BY REPLY_REF ASC, REPLY_STEP;
+            
+select * from board_reply;
+delete from board_reply 
+    where REPLY_ID = 4 
+    and  ( select reply_ref  from board_reply where REPLY_ID = 4 ) 
+    
+    ;
+ select * 
+ from ( select reply_ref, reply_step, reply_level  from board_reply where REPLY_ID = 4 ) t1
+ where reply_step any<(select 
+ ;

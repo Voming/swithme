@@ -12,7 +12,7 @@ public class GroupUpdateMinDto {
 	private Integer sgroupId;
 	private String sgroupName;
 	private String sgroupOpen;
-	private Integer sgroupPwd;
+	private String sgroupPwd;
 	private String sgroupEx;
 
 	@Override
@@ -21,7 +21,7 @@ public class GroupUpdateMinDto {
 				+ ", sgroupPwd=" + sgroupPwd + ", sgroupEx=" + sgroupEx + "]";
 	}
 
-	public GroupUpdateMinDto(Integer sgroupId, String sgroupName, String sgroupOpen, Integer sgroupPwd,
+	public GroupUpdateMinDto(Integer sgroupId, String sgroupName, String sgroupOpen, String sgroupPwd,
 			String sgroupEx) {
 		super();
 		this.sgroupId = sgroupId;
@@ -43,7 +43,7 @@ public class GroupUpdateMinDto {
 		return sgroupOpen;
 	}
 
-	public Integer getSgroupPwd() {
+	public String getSgroupPwd() {
 		return sgroupPwd;
 	}
 

@@ -81,8 +81,10 @@ public class BoardDao {
 	
 	//대댓글 작성
 	public int insertReplyWriteAgain(SqlSession session, BoardReplyDto replydto) {
-		
-		return session.insert("board.insertReplyWriteAgain", replydto);
+		int result = session.insert("board.insertReplyWriteAgain", replydto);
+		System.out.println("대댓글작성 dao: " + result);
+		return result;
+
 	}
 	
 

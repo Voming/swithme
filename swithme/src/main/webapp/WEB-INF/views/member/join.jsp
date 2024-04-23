@@ -44,28 +44,28 @@
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
 						<label>아이디</label><input type="text" name="id"  id="id" required>
-						<button type="button" class="btn check">중복확인</button>
+						<button type="button" class="btn dcheck"><p>중복확인</p></button>
 					</div>
 					<div>
 						<label>이메일</label><input type="email" name="email"  id="email" required>
-						<button type="button" class="btn code">인증코드</button>
+						<button type="button" class="btn code"><p>인증코드</p></button>
 					</div>
 					<div>
 						<label>이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 입력하세요" required>
+						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 5글자 이상 입력하세요" required>
 						<span class="desc-pwd"></span>
 					</div>
 					<div>
 						<label>비밀번호 확인</label><input type="password" name="pwdr" id="pwdr"  required>
 						<span class="desc-pwdr"></span>
 					</div>
-					<div>
-					<input type="checkbox" required> <label>(필수) 약관에 동의합니까</label>
+					<div class="check">
+					<input type="checkbox" required> <label >(필수) 약관에 동의합니까</label>
 					</div>
 					<div>
-						<button type="submit" class="btn join" id="btnjoin"> 회원가입</button> 
+						<button type="submit" class="btn join" id="btnjoin"> <p>회원가입</p></button> 
 					</div>
 					
 				</form>
@@ -81,7 +81,7 @@
 $(loadedHandler);
 
 function loadedHandler(){
-	$(".btn.check").on("click", btnCheckClickHandler);
+	$(".btn.dcheck").on("click", btnCheckClickHandler);
 }
 
 function btnCheckClickHandler(){
@@ -96,7 +96,7 @@ function btnCheckClickHandler(){
 			console.log(result);
 			if(result > 0){
 				alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
-			}if($("[name=id]").val().trim().length<1){
+			}else if($("[name=id]").val().trim().length<1){
 				alert('아이디를 입력해주세요.');
 			}else {
 				alert("사용가능");
@@ -125,6 +125,18 @@ function btnCheckClickHandler(){
 	
 <script>
 
+$("[name=pwd]").on("blur",function(){
+	var pwdleng = $("[name=pwd]").val().trim().length;
+	var pwd = $("[name=pwd]").val().trim();
+	var regExp = /^[A-Za-z0-9]{5,20}$/;
+	var msg = '';
+	if(regExp.test(pwd) == false && pwdleng>0){
+		msg ="영문자와 숫자로만 입력해주세요";
+	}else{
+		msg="";
+	}
+	$(".desc-pwd").html(msg).css('color', 'red').css('font-size', '13px');
+});
 
 $("input").keyup(function(){
 	var pwd1=$("[name=pwd]").val().trim();
@@ -137,6 +149,10 @@ $("input").keyup(function(){
 		}
 	}
 });
+	
+	
+
+	
 </script>
 
 

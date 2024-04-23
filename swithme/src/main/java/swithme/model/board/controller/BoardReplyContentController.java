@@ -14,7 +14,7 @@ import swithme.model.board.service.BoardService;
 /**
  * Servlet implementation class BoardReplyContentController
  */
-@WebServlet("/replycontent")
+@WebServlet("/reply/content")
 public class BoardReplyContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BoardService service = new BoardService();

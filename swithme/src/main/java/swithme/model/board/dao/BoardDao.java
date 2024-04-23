@@ -10,8 +10,7 @@ import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardListDto;
-import swithme.model.board.dto.BoardReplyListDto;
-import swithme.model.board.dto.BoardReplyWriteDto;
+import swithme.model.board.dto.BoardReplyDto;
 
 public class BoardDao {
 
@@ -55,7 +54,7 @@ public class BoardDao {
 	}
 	
 	//댓글 
-	public List<BoardReplyListDto> selectBoardReplyList(SqlSession session, Integer boardId) {
+	public List<BoardReplyDto> selectBoardReplyList(SqlSession session, Integer boardId) {
 		System.out.println("dao : " + session.selectList("board.selectBoardReplyList", boardId));
 		return session.selectList("board.selectBoardReplyList", boardId);
 		
@@ -71,15 +70,19 @@ public class BoardDao {
 	}
 	
 	//댓글 작성
-	public int insertReplyWrite(SqlSession session, BoardReplyWriteDto dto) {
-
-		return session.insert("board.insertReplyWrite", dto);
+	public int insertReplyWrite(SqlSession session, BoardReplyDto replydto) {
+		int result = session.insert("board.insertReplyWrite", replydto);
+		System.out.println("댓글작성 dao: " + result);
+		return result;
+		//return 값 뿌리고 싶으면 result 값에 담아준 다음에 뿌리기
+		// => session.insert("board.insertReplyWrite", replydto) 이거를 sysout에 뿌리면 
+		//		댓글이 화면에 두번 출력됨
 	}
 	
 	//대댓글 작성
-	public int insertReplyWriteAgain(SqlSession session, BoardReplyWriteDto dto) {
+	public int insertReplyWriteAgain(SqlSession session, BoardReplyDto replydto) {
 		
-		return session.insert("board.insertReplyWriteAgain", dto);
+		return session.insert("board.insertReplyWriteAgain", replydto);
 	}
 	
 

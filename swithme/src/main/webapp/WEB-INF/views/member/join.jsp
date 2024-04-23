@@ -28,7 +28,7 @@
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
@@ -43,26 +43,31 @@
 			<div class="wrap-join">
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
-						<label>아이디</label><input type="text" name="id" requried>
+						<label>아이디</label><input type="text" name="id"  id="id" required>
 						<button type="button" class="btn check">중복확인</button>
 					</div>
 					<div>
-						<label>이메일</label><input type="email" name="email" requried>
+						<label>이메일</label><input type="email" name="email"  id="email" required>
 						<button type="button" class="btn code">인증코드</button>
 					</div>
 					<div>
-						<label>이메일 확인</label><input type="text" name="emailr" placeholder="인증코드" requried>
+						<label>이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
 					</div>
 					<div>
-						<label>비밀번호</label><input type="password" name="pwd" placeholder="영문자와 숫자로만 입력하세요" requried>
-					</div>
-					<div>
-						<label>비밀번호 확인</label><input type="password" name="pwdr" requried>
+						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 입력하세요" required>
 						<span class="desc-pwd"></span>
 					</div>
 					<div>
-						<input type="submit" value="회원가입">
+						<label>비밀번호 확인</label><input type="password" name="pwdr" id="pwdr"  required>
+						<span class="desc-pwdr"></span>
 					</div>
+					<div>
+					<input type="checkbox" required> <label>(필수) 약관에 동의합니까</label>
+					</div>
+					<div>
+						<button type="submit" class="btn join" id="btnjoin"> 회원가입</button> 
+					</div>
+					
 				</form>
 			</div>
 		</div>
@@ -80,9 +85,9 @@ function loadedHandler(){
 }
 
 function btnCheckClickHandler(){
-	var idVal = $("[name=id]").val();
+	var idVal = $("[name=id]").val().trim();
 	console.log($("[name=id]").val());
-	
+
 	$.ajax({  
 		url : "${pageContext.request.contextPath }/checkid"
 		,method : "post"
@@ -91,6 +96,8 @@ function btnCheckClickHandler(){
 			console.log(result);
 			if(result > 0){
 				alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
+			}if($("[name=id]").val().trim().length<1){
+				alert('아이디를 입력해주세요.');
 			}else {
 				alert("사용가능");
 			}	
@@ -102,25 +109,37 @@ function btnCheckClickHandler(){
 		}
 	});
 }
+
+ $("[name=pwd]").on("blur", function(){
+	var pwdLength = $("[name=pwd]").val().trim().length;
+	if(pwdLength < 1  ) {
+		$(".desc-pwd").html("비밀번호를 입력하세요").css('color', 'red');
+	}else{
+		$(".desc-pwd").html("")
+	}
+});
  
+ 
+
 </script>
 	
 <script>
 
 
 $("input").keyup(function(){
-	var pwd1=$("[name=pwd]").val();
-	var pwd2=$("[name=pwdr]").val();
+	var pwd1=$("[name=pwd]").val().trim();
+	var pwd2=$("[name=pwdr]").val().trim();
 	if(pwd1 != "" || pwd2 != ""){
 		if(pwd1 == pwd2) {
-			$(".desc-pwd").html("일치").css('color', 'green');
-		} else {
-			$(".desc-pwd").html("불일치").css('color', 'red');
+			$(".desc-pwdr").html("일치").css('color', 'green');
+		} else{
+			$(".desc-pwdr").html("불일치").css('color', 'red');
 		}
 	}
 });
-	
-
 </script>
+
+
+	
 </body>
 </html>

@@ -31,7 +31,7 @@
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
@@ -47,11 +47,11 @@
 			<fieldset>
 				<form id="login-form"  action="${pageContext.request.contextPath }/login" method="post">
 					<div>
-						<input type="text" name="id"  id="id" placeholder="아이디">
+						<input type="text" name="id"  id="id" placeholder="아이디" required>
 						<span class="desc-id"></span>
 					</div>
 					<div>
-						<input type="password" name="pwd" id="pwd" placeholder="비밀번호">
+						<input type="password" name="pwd" id="pwd" placeholder="비밀번호" required>
 						<span class="desc-pwd"></span>
 					</div>
 					<div>

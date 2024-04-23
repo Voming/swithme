@@ -183,14 +183,16 @@ from record
 
 -- 일간 랭킹 시간 구하기
 select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME    
-from (SELECT SUBJECT_ID, SUBJECT_NAME  FROM SUBJECT WHERE MEM_ID ='won' AND SUBJECT_DEL_DATE IS NULL) t1   
+from (SELECT SUBJECT_ID, SUBJECT_NAME,SUBJECT_DEL_DATE  FROM SUBJECT WHERE MEM_ID ='won' ) t1   
 FULL JOIN 
 	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
 	  FROM RECORD WHERE RECORD_MEM_ID = 'won' and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
 	  group by cube(RECORD_SUBJECT_ID) ) t2 
 on (SUBJECT_ID = RECORD_SUBJECT_ID) 
-where subject_id is null
-ORDER BY SUBJECT_ID ASC NULLS FIRST;
+where subject_id is null;
+
+
+
 
 SELECT 
   record_mem_id,
@@ -205,3 +207,46 @@ GROUP BY
 
 
 --월간 랭킹
+
+SELECT TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = 62
+;
+
+select * from board;
+select * from board_reply;
+
+
+delete from board_reply;
+commit;
+
+
+--댓글 
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
+				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 1, 1);
+                
+--댓글 예시    
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'song','알겠습니다',
+				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 1, 1);
+                
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'kim','헤이헤이',
+				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 1, 1);                
+                
+                
+--대댓글
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'kim','헤이헤이',
+				default, #{reply_ref}, (SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id=#{reply_id}),  (SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY));
+
+--대댓글 예시
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'','헤이헤이',
+				default, 3, (SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id= ),  (SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY));
+
+SELECT REPLY_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
+		FROM BOARD_REPLY
+		WHERE BOARD_ID = 6 
+			ORDER BY REPLY_REF ASC, REPLY_STEP;
+            
+desc board_reply;

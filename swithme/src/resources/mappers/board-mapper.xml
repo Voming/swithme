@@ -17,12 +17,12 @@
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
-	<select id="selectOne" resultType="BoardContentDto" parameterType="_int">
+	<select id="selectOne" resultType="BoardContentDto" parameterType="int">
 		SELECT BOARD_ID, TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>
 	
-	<select id="selectBoardReplyList" resultType="BoardReplyListDto" parameterType="_int">
-		SELECT REPLY_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
+	<select id="selectBoardReplyList" resultType="BoardReplyListDto" parameterType="int">
+		SELECT REPLY_ID, BOARD_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
 		FROM BOARD_REPLY
 		WHERE BOARD_ID = #{boardId} 
 			ORDER BY REPLY_REF ASC, REPLY_STEP
@@ -37,15 +37,13 @@
 	<insert id="insertReplyWrite" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
 		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
-				default, default, (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), DEFAULT)
+				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 1, 1);
 	</insert>
 	
 	<insert id="insertReplyWriteAgain" parameterType="BoardReplyWriteDto">
 		INSERT INTO BOARD_REPLY 
-		VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), ${boardId}, ${replyWriterid}, ${replyContent}, default ,
-				(SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
-				(SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} )  , 
-				(SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ${replyId} ))
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
+				default, #{reply_ref}, (SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id=#{reply_id}),  (SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY))
 	</insert>
 
 	<update id="update" parameterType="BoardDto">

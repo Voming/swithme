@@ -36,6 +36,8 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("boardlistdto", service.selectAllList());
+		//setAttribute를 통해서 boardlistdto 라는 이름에 service에서 selectAllList()를 통해 값을 불러와서 넣어줌
+		
 		
 		//한 페이지 당 나오는 게시글 수
 		int boardNum = 15;

@@ -20,12 +20,12 @@
 		<typeAlias type="swithme.model.group.dto.GroupUpdateDto"  alias="GroupUpdateDto"/>
 		<typeAlias type="swithme.model.group.dto.GroupUpdateMinDto"  alias="GroupUpdateMinDto"/>
 		
-		<typeAlias type="swithme.model.board.dto.BoardDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardListDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardInsertDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardContentDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardReplyListDto"/>
-		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardDto" alias="BoardDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardListDto" alias="BoardListDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardInsertDto" alias="BoardInsertDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardContentDto" alias="BoardContentDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardReplyListDto" alias="BoardReplyListDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardReplyWriteDto" alias="BoardReplyWriteDto"/>
 		
 		<typeAlias type="swithme.model.ranking.dto.RankingDto"/>
 		

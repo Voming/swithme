@@ -49,13 +49,16 @@ public class BoardDao {
 		BoardContentDto result = session.selectOne("board.selectOne", boardId);
 		
 		System.out.println("BoardContentDto : " + result);
+		
 		return result;
 			
 	}
 	
 	//댓글 
 	public List<BoardReplyListDto> selectBoardReplyList(SqlSession session, Integer boardId) {
+		System.out.println("dao : " + session.selectList("board.selectBoardReplyList", boardId));
 		return session.selectList("board.selectBoardReplyList", boardId);
+		
 		
 	}
 

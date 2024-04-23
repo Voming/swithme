@@ -44,7 +44,7 @@
 				<form id="login-form"  action="${pageContext.request.contextPath}/login" method="post">
 					<div class="id">
 						아이디
-						<span>${memId}</span>
+						<span class="memid">${loginInfo.memId}</span>
 					</div>
 					<div class="pwd">
 						비밀번호
@@ -82,6 +82,9 @@ function loadHandler() {
 	$(".btn.logout").on("click",btnLogoutClickHandler);
 }
 
+function loadHandler(){
+	$(".btn.out").on("click",btnOutClickHandler);
+}
 
 function btnLogoutClickHandler(){
 
@@ -91,6 +94,18 @@ function btnLogoutClickHandler(){
 	logout.action = "${pageContext.request.contextPath}/logout";
 	logout.method = "post";
 	logout.submit();
+	
+	
+}
+
+function btnOutClickHandler(){
+
+	alert("탈퇴되었습니다.");
+	
+	var out = document.getElementById("login-form");
+	out.action = "${pageContext.request.contextPath}/out";
+	out.method = "post";
+	out.submit();
 	
 	
 }

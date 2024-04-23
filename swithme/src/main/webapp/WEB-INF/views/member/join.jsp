@@ -44,11 +44,11 @@
 				<form action="${pageContext.request.contextPath }/join" method="post">
 					<div>
 						<label>아이디</label><input type="text" name="id"  id="id" required>
-						<button type="button" class="btn dcheck">중복확인</button>
+						<button type="button" class="btn dcheck"><p>중복확인</p></button>
 					</div>
 					<div>
 						<label>이메일</label><input type="email" name="email"  id="email" required>
-						<button type="button" class="btn code">인증코드</button>
+						<button type="button" class="btn code"><p>인증코드</p></button>
 					</div>
 					<div>
 						<label>이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
@@ -65,7 +65,7 @@
 					<input type="checkbox" required> <label >(필수) 약관에 동의합니까</label>
 					</div>
 					<div>
-						<button type="submit" class="btn join" id="btnjoin"> 회원가입</button> 
+						<button type="submit" class="btn join" id="btnjoin"> <p>회원가입</p></button> 
 					</div>
 					
 				</form>

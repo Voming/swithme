@@ -2,15 +2,16 @@
 .wrap-body{
     padding:0;
     margin:0;
-    border: none;
     display: flex;
     justify-content: center;
+
 }
 
 .wrap-body .wrap-login{
+	margin:auto;
+	margin-top:70px;
     display: block;
     width: 400px;
-    height: 500px;
     padding: 40px;
     box-sizing: border-box;
 }
@@ -42,23 +43,21 @@
     background-color:#DDCCFF;
 }
 
-.wrap-body .wrap-login fieldset{
-	position: absolute;
-    top:50%;
-    left:50%;
-    transform : translate(-50%,-60%);
-}
 
 .wrap-body .wrap-login .join-btn{
 	text-align: center;
 	margin-top: 40px;
 }
 
-.wrap-body .wrap-login .wrap-login{
+.wrap-body .wrap-login {
 	font-size: var(--font3);
     font-family: "IM_Hyemin-Regular";
 }
 
+.wrap-body .wrap-login p{
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+}
 .wrap-body .wrap-login .desc-id {
 	color:red;
 }

@@ -62,7 +62,7 @@
 
 .wrap-body > hr {
 	background: #8066FF;
-	height: 0.5px;
+	height: 2px;
 	border: 0;	
 }
 
@@ -77,7 +77,7 @@
  	margin: 10px 40px 20px 40px;
 }
 
-.wrap-body > div.board-reply > div.replynone {
+.wrap-body > div.board-reply > div.warp-reply-list > div.replynone {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font3);
  	padding: 20px 20px;
@@ -99,7 +99,7 @@
 	
 }
 
-.wrap-body > div.board-reply > form > div > div.r-1 > div {
+.wrap-body > div.board-reply  > div.warp-reply-list > form > div > div.r-1 > div {
 	padding-bottom: 10px;
 }
 
@@ -107,7 +107,7 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply > form > d
 	padding-bottom: 10px;
 }
 
-.wrap-body > div.board-reply > form > div > div.r-2 > div > textarea {
+.wrap-body > div.board-reply  > div.warp-reply-list > form > div > div.r-2 > div > textarea {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
 	border: none;
@@ -119,28 +119,28 @@ textarea:focus {
   outline: none;
 }
 
-.wrap-body > div.board-reply > form > div > div.r-3 {
+.wrap-body > div.board-reply  > div.warp-reply-list > form > div > div.r-3 {
  	font-size: var(--font4);
  }
 
-.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul{
+.wrap-body > div.board-reply > div.wrap-reply> form > div.r-3 > ul{
 	display:flex;
 	
 }
 
-.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li {
+.wrap-body > div.board-reply > div.wrap-reply> form > div.r-3 > ul > li {
 	flex: 1 1 0;	
 }
 
-.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li:nth-child(2) {
+.wrap-body > div.board-reply > div.wrap-reply> form > div.r-3 > ul > li:nth-child(2) {
 	flex: 2 0 0;
 }
 
-.wrap-body > div.board-reply > .wrap-reply> form > div.r-3 > ul > li:nth-child(3){
+.wrap-body > div.board-reply > div.wrap-reply> form > div.r-3 > ul > li:nth-child(3){
 	text-align: end;
 }
 
-.wrap-body > div.board-reply > div.wrap-reply2 {
+.wrap-body > div.board-reply  >  div.wrap-reply2 {
 	font-family: "IM_Hyemin-Regular";
  	font-size: var(--font4);
 	resize: none;
@@ -268,7 +268,7 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > 
 
 
 /* 댓글 창 css */
-.wrap-body > div.board-reply > .replyresult{
+.wrap-body > div.board-reply  > div.warp-reply-list > .replyresult{
 	    font-family: "IM_Hyemin-Regular";
     font-size: var(--font3);
     resize: none;
@@ -279,7 +279,7 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > 
     margin: 10px 40px 20px 40px;
 }
 
-.wrap-body > div.board-reply >.replyresult > div.r-content > div{
+.wrap-body > div.board-reply  > div.warp-reply-list >.replyresult > div.r-content > div{
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
 	background: rgb(237, 237, 237);
@@ -287,23 +287,23 @@ body > div.wrapper > div.wrap-body > div.board-reply > div.wrap-reply2 > form > 
 }
 
 
-.wrap-body > div.board-reply > .replyresult > div.r-wrap > ul{
+.wrap-body > div.board-reply  > div.warp-reply-list > .replyresult > div.r-wrap > ul{
 	display:flex;
 	font-family: "IM_Hyemin-Regular";
  	font-size: var(--font4);
 	
 }
 
-.wrap-body > div.board-reply > .replyresult > div.r-wrap > ul > li {
+.wrap-body > div.board-reply  > div.warp-reply-list > .replyresult > div.r-wrap > ul > li {
 	flex: 1 1 0;	
 }
 
 
-.wrap-body > div.board-reply > .replyresult > div.r-wrap > ul > li:nth-child(2) {
+.wrap-body > div.board-reply  > div.warp-reply-list > .replyresult > div.r-wrap > ul > li:nth-child(2) {
 	flex: 2 0 0;
 	cursor: pointer;
 }
 
-.wrap-body > div.board-reply > .replyresult > div.r-wrap > ul > li:nth-child(3) {
+.wrap-body > div.board-reply  > div.warp-reply-list > .replyresult > div.r-wrap > ul > li:nth-child(3) {
 	text-align: end;
 }

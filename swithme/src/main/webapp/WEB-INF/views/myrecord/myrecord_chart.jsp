@@ -127,36 +127,36 @@ for(let i = 0 ; i < result.length;i++){
 	type : 'doughnut',
 	data : data,
 	//TODO옵션 강사님께 물어보기
-	/*
+
 	options:{
 		plugins:{
 			tooltip:{
-				callbacks:{
+				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
 					label: function(context){
-						console.log(">>>>> context      "+context);
-						console.log("Context data:"+ context.dataset.data);
-						var chartLabel=context.dataset.label || '';
+						console.log(">>>>> context      ");
+						console.log(context);
+						console.log(">>>>> label      ");
+						console.log(context.label);
+						
+						var chartLabel=context.label || '';
 						if (chartLabel) {
-							chartLabel +=':';
+							chartLabel +=' : ';
 						}
 						//TODO 강사님께 물어보기
-						console.log("-----y! if 박!!     "+context.parsed.y);
-						if (context.parsed.y !== null) {
-							console.log("-----y!         "+context.parsed.y);
-                             var charthours = parseInt(context.parsed.y/(60*60));
-                             var chartminutes = parseInt(context.parsed.y/60-charthours*60);
-                             var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
-                             chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
-						}
+						console.log("-----y! if 박!!     ");
+						console.log(context.parsed);
+                        var charthours = parseInt(context.parsed/(60*60));
+                        var chartminutes = parseInt(context.parsed/60-charthours*60);
+                        var chartseconds = parseInt(context.parsed-chartminutes*60-charthours*60*60);
+                        chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
 						return chartLabel
 					}
 				}
 			}
 		}
 	}//options
-	*/
-	});
 
+	});
 }
 });
 }	

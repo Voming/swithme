@@ -34,14 +34,30 @@ exec PRO_RECORD_INSERT_MORNING('won','D_3','22');
 exec PRO_RECORD_INSERT_LUNCH('won','SQL','22');
 exec PRO_RECORD_INSERT_DINNER('won','D_1','22');
 
+exec PRO_RECORD_INSERT_MORNING('b','자바','22');
+exec PRO_RECORD_INSERT_LUNCH('b','파이썬','22');
+
+
+--23일
+exec PRO_RECORD_INSERT_MORNING('won','D_3','23');
+exec PRO_RECORD_INSERT_LUNCH('won','D_5','23');
+exec PRO_RECORD_INSERT_DINNER('won','D_1','23');
+
+exec PRO_RECORD_INSERT_MORNING('b','자바','23');
+exec PRO_RECORD_INSERT_LUNCH('b','파이썬','23');
+exec PRO_RECORD_INSERT_DINNER('b','q','23');
+
+select * from record where record_mem_id ='b';
+
 --delete from record;
 select * from subject -- where --record_mem_id='won' order by record_end desc
 ;
 select * from record --where record_mem_id='song'
 ;
 --delete from record ;
-select *from subject  WHERE SUBJECT_ID = 173 AND MEM_ID = 'a';
+--select *from subject  WHERE SUBJECT_ID = 173 AND MEM_ID = 'a';
 UPDATE SUBJECT SET SUBJECT_DEL_DATE = sysdate  WHERE SUBJECT_ID = 173 AND MEM_ID = 'a';
 rollback;
 desc subject;
 commit;
+delete record where record_mem_id='won'and  to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd') and record_subject_id=48; 

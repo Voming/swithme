@@ -34,6 +34,11 @@ exec PRO_RECORD_INSERT_MORNING('won','D_3','22');
 exec PRO_RECORD_INSERT_LUNCH('won','SQL','22');
 exec PRO_RECORD_INSERT_DINNER('won','D_1','22');
 
+--23일
+exec PRO_RECORD_INSERT_MORNING('won','D_3','23');
+exec PRO_RECORD_INSERT_LUNCH('won','D_5','23');
+exec PRO_RECORD_INSERT_DINNER('won','D_1','23');
+
 --delete from record;
 select * from subject -- where --record_mem_id='won' order by record_end desc
 ;

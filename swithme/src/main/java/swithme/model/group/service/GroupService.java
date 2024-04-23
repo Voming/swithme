@@ -1,7 +1,6 @@
 package swithme.model.group.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -11,6 +10,7 @@ import swithme.model.group.dao.GroupDao;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoListDto;
+import swithme.model.group.dto.GroupMemberDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordDaySumDto;
 import swithme.model.group.dto.GroupRecordSumDto;
@@ -107,7 +107,8 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-
+	
+	//그룹 멤버 일주일 공부량
 	public List<GroupRecordSumDto> selectGroupRecordSumList(int groupId) {
 		List<GroupRecordSumDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -116,6 +117,7 @@ public class GroupService {
 		return result;
 	}
 
+	//그룹 멤버 하루 공부량
 	public List<GroupRecordDaySumDto> selectGroupRecordDaySumList(int groupId) {
 		List<GroupRecordDaySumDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -124,29 +126,22 @@ public class GroupService {
 		return result;
 	}
 	
-	/*
-	 * public int test(String memId) { int result = 0; SqlSession session =
-	 * MybatisTemplate.getSqlSession(); result = dao.test(session, memId);
-	 * session.close(); return result; }
-	 */
-	
+	//사진 포함 업데이트
 	public int update(GroupUpdateDto dto) {
 		int result = 0;
 		System.out.println(dto);
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.update(session, dto);
-
 		if (result > 0) {
 			session.commit();
 		} else {
 			session.rollback();
 		}
-
 		session.close();
 		return result;
-
 	}
 
+	//사진 제외 업데이트
 	public int updateMin(GroupUpdateMinDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -159,11 +154,14 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-
-	/*
-	 * public int delete(String groupId) { int result = 0; SqlSession session =
-	 * MybatisTemplate.getSqlSession(); result = dao.delete(session, groupId);
-	 * session.close(); return result; }
-	 */
+	//그룹 나가기
+	public int deletMemberGroup(GroupMemberDto dto) {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.deletMemberGroup(session, dto);
+		session.close();
+		return result;
+	}
+	
 
 }

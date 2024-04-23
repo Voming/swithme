@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoListDto;
+import swithme.model.group.dto.GroupMemberDto;
 import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.dto.GroupRecordDaySumDto;
 import swithme.model.group.dto.GroupRecordSumDto;
@@ -75,39 +76,36 @@ public class GroupDao {
 		return result;
 	}
 
+	//일주일당 공부량
 	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId) {
 		List<GroupRecordSumDto> result = session.selectList("group.selectGroupRecordSumList", groupId);
 		return result;
 	}
 	
+	//하루당 공부량
 	public List<GroupRecordDaySumDto> selectGroupRecordDaySumList(SqlSession session, int groupId) {
 		List<GroupRecordDaySumDto> result = session.selectList("group.selectGroupRecordDaySumList", groupId);
 		return result;
 	}
 
-	/*
-	 * public int test(SqlSession session, String memId) { int result =
-	 * session.selectOne("group.test", memId); return result; }
-	 */
-
+	//사진 포함 업데이트
 	public int update(SqlSession session, GroupUpdateDto dto) {
 		int result = session.update("group.update", dto);
 		return result;
 	}
 
+	//사진 제외 업데이트
 	public int updateMin(SqlSession session, GroupUpdateMinDto dto) {
 		int result = session.update("group.updateMin", dto);
 		return result;
 	}
 
-	/*
-	 * public int delete(SqlSession session, String groupId) { int result = 0;
-	 * String sql = "DELETE FROM SGROUP WHERE SGROUP_ID=?"; PreparedStatement pstmt
-	 * = null; try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,
-	 * groupId);
-	 * 
-	 * result = pstmt.executeUpdate(); } catch (Exception e) { e.printStackTrace();
-	 * } close(pstmt); return result; }
-	 */
+	//그룹 나가기
+	public int deletMemberGroup(SqlSession session,GroupMemberDto dto) {
+		int result = session.delete("group.deletMemberGroup", dto);
+		return result;
+	}
+	
+
 
 }

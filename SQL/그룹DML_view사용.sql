@@ -88,3 +88,16 @@ SELECT '그룹원' MEM_ID,
 		FROM V_RECORD_WO_SUBJECT_W_GROUP A
 		WHERE A.SGROUP_ID = 1
         ;
+        
+        
+select * from sgroup_member;
+
+insert into sgroup_member VALUES (1, 'hyuk');
+insert into sgroup_member VALUES (1, 'b');
+commit;
+
+delete from sgroup_member where sgroup_id = 1 and sgroup_mem_id = 'hyuk';
+
+SELECT
+    *
+FROM member;

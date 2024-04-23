@@ -14,10 +14,37 @@
 
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
 </head>
 <body>
+<script>
+$(loadedHandler);
+
+function loadedHandler() {
+	$(".btn.exit").on("click", btnExitClickHandler);
+}
+
+function btnExitClickHandler() {
+	$.ajax({
+		url:"${pageContext.request.contextPath }/group/exit.ajax"
+		, method : "post"
+		, data :  {"groupId" : ${groupInfo.sgroupId}}
+		, success: function(result){
+			console.log(result);
+			if(result > 0){
+				alert("그룹을 나가기 성공!");
+				location.href='${pageContext.request.contextPath}/group'
+			}else{
+				alert("그룹을 나가지 못했습니다.");
+			}
+		}
+		,error : ajaxErrorHandler
+	});	
+	
+}
+</script>
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -46,9 +73,13 @@
 							<div class="myGName">${groupInfo.sgroupName }</div>
 							<div class="myGExp">${groupInfo.sgroupEx }</div>
 							<!-- <p>활동중</p> -->
-							<button type="button" 
-								onclick="location.href='${pageContext.request.contextPath}/group/update?groupId=${groupInfo.sgroupId}'">그룹
-								수정하기</button>
+							<div class="wrap-btn">
+								<button type="button" class="btn update" 
+									onclick="location.href='${pageContext.request.contextPath}/group/update?groupId=${groupInfo.sgroupId}'">그룹
+									수정하기
+								</button>
+								<button type="button" class="btn exit">그룹 나가기</button>
+							</div>
 						</div>
 						<div class="myGImg">
 							<img
@@ -72,7 +103,7 @@
 						</c:if>
 					</ul>
 				</div>
-				<hr style="margin: 50px 0; color: var(--color_gray_1);">
+				<hr>
 			</div>
 			<div class="wrap-calc">
 				<div class="wrap-calendar">

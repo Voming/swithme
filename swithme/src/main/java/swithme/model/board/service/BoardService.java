@@ -135,6 +135,31 @@ public class BoardService {
 	}
 	
 	
+	//대댓글
+	public int insertReplyWriteAgain(BoardReplyDto replydto) {
+		int result = 0;
+		int resultUpdate = 0;
+		
+		SqlSession session = MybatisTemplate.getSqlSession();
+						
+		
+		if(resultUpdate > -1 && result > 0) {
+			result = dao.insertReplyWrite(session, replydto);
+			session.commit();
+			//이러면 정상
+		} else {
+			session.rollback();
+			//여기는 비정상
+		}
+
+		result = dao.insertReplyWrite(session, replydto);
+		session.close();
+		
+		System.out.println("댓글작성 service : " + result);
+		
+		return result;
+	}
+	
 	
 	//게시글 수정
 	public int update(BoardDto dto) {

@@ -35,7 +35,8 @@ public class BoardReplyWriteController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String returnToAjaxSuccess = null;
+		String replyAjaxSuccess = null;
+		
 		
 		String replyIdStr = request.getParameter("replyId");
 		int replyId = 0;
@@ -104,25 +105,50 @@ public class BoardReplyWriteController extends HttpServlet {
 		
 		System.out.println("댓글 순서 : " + replyRef + " " + replyStep + " " +replyLevel);
 		
+		//댓글달기
 		
 		BoardReplyDto replydto = new BoardReplyDto(replyId, boardId, replyWriterid, replyContent, "", replyRef, replyStep, replyLevel);
 		//writeTime은 query문 자체에 default 로 들어가서 null로 써줘도 상관없음(자리채우는 느낌) 
 		System.out.println(replydto);
 		
 		 int result = service.insertReplyWrite(replydto);
-		 System.out.println( "result" + result);
+		 System.out.println( "댓글 달기 : " + result);
 		 
 		 if(result>0) {
 			 //db에서 갔다 올때 insert값이랑 select값(댓글 등록된 값) jsp로 전달 
 			 //-> return AJAX  SUCCESS로 전달함 
 			 List<BoardReplyDto> replyList = service.selectBoardReplyList(boardId);
 			 Gson gson = new Gson();
-			 returnToAjaxSuccess = gson.toJson(replyList);
-			 System.out.println("replyList" + returnToAjaxSuccess);
+			 replyAjaxSuccess = gson.toJson(replyList);
+			 System.out.println("replyList : " + replyAjaxSuccess);
 		 } else {
 			 //0보다 작아도 INSERT 실패 success 로 가는데 무슨 값을 전달할것인가? null
-			 returnToAjaxSuccess = null;
+			 replyAjaxSuccess = null;
 		 }	 
-		 response.getWriter().append(returnToAjaxSuccess);
+		 response.getWriter().append(replyAjaxSuccess);
+		 
+		 
+//		 
+//		 //대댓글 달기
+//		 String replyAgainAjaxSuccess = null;
+//		 
+//		 BoardReplyDto replyAagaindto = new BoardReplyDto(replyId, boardId, replyWriterid, replyContent, "", replyRef, replyStep, replyLevel);
+//		 int resultAgain = service.insertReplyWriteAgain(replyAagaindto);
+//		 System.out.println( "대댓글 달기: " + resultAgain);
+//		 
+//		 if(result>0) {
+//			 //db에서 갔다 올때 insert값이랑 select값(댓글 등록된 값) jsp로 전달 
+//			 //-> return AJAX  SUCCESS로 전달함 
+//			 List<BoardReplyDto> replyAgainList = service.selectBoardReplyList(boardId);
+//			 Gson gson = new Gson();
+//			 replyAgainAjaxSuccess = gson.toJson(replyAgainList);
+//			 System.out.println("replyAgainList : " + replyAgainAjaxSuccess);
+//		 } else {
+//			 //0보다 작아도 INSERT 실패 success 로 가는데 무슨 값을 전달할것인가? null
+//			 replyAgainAjaxSuccess = null;
+//		 }	 
+//		 response.getWriter().append(replyAgainAjaxSuccess);
+		 
+		 
 	}
 }

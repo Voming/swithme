@@ -5,12 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/groupinfo.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/group/groupmembers.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/groupinfo.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/group/groupmembers.css" rel="stylesheet">
 
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -82,11 +78,10 @@ function btnExitClickHandler() {
 							</div>
 						</div>
 						<div class="myGImg">
-							<img
-								src="${pageContext.request.contextPath }/files/${groupInfo.sgroupImgPath}"
-								alt="그룹 이미지"/>
+							<img src="${pageContext.request.contextPath }/files/${groupInfo.sgroupImgPath}" alt="그룹 이미지"/>
 						</div>
 					</c:if>
+					<hr>
 				</div>
 			</div>
 			<div class="group-mem">

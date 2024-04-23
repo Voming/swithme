@@ -13,6 +13,13 @@
 	margin: 50px 0;
 }
 
+.wrap-body  .group-mem hr {
+	background: var(--color_purple_1);
+	height: 1px;
+	border: 0;
+	margin: 50px 0;
+}
+
 .group-box ul {
 	display: flex;
 	justify-content: center;
@@ -79,7 +86,6 @@
 	font-family: "IM_Hyemin-Bold";
 }
 
-
 .wrap-calc .wrap-rank .rank-txt div {
 	/*그룹 내 랭킹*/
 	display: inline-block;
@@ -91,7 +97,6 @@
 	position: relative;
 	margin: 20px 0;
 }
-
 
 .wrap-calc .wrap-rank .rank-txt .mins{
 	position: absolute;
@@ -110,3 +115,5 @@
 .wrap-calc .wrap-rank .rank-txt .rank p {
 	padding-top: 8px;
 }
+
+

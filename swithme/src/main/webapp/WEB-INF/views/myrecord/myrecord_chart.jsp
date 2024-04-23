@@ -39,11 +39,14 @@ const data = {
     
 <script>
 $(document).ready(function(){
-	todayStudyTime();
+	//todayStudyTime();
+	//fourdayStudyTime();
 });
 let subejctNameList =[];
 let recordTimeList=[];
 let subjectColorList=[];
+let datePre = new Date().getDate();
+
 var colorNum; //세미콜론
 var numnum;
 function chooseColor(colorNum){
@@ -77,15 +80,10 @@ url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
 ,data : {numnum : numnum} //data없인 안되는걸까??
 ,dataType:"json"
 ,success: function(result){
-//console.log("-------------------   "+result[0].subjectName);
 for(let i = 0 ; i < result.length;i++){	
 	subejctNameList.push(result[i].subjectName);
- 	//if (result[i].difftime !== null && result[i].difftime === undefined) {
-    //console.log(result[i].difftime);
-  	//} 
   
-  	if ( result[i].difftime === undefined ) {//null은 아니고 undefined상황
-	   // recordTimeList.push(moment('00:00:00', 'HH:mm:ss').format('HH:mm:ss'); //오류
+  	if ( result[i].difftime === undefined ) {
 	   	var nullChangeDate=moment('00:00:00', 'HH:mm:ss').format('HH:mm:ss');
 	   	nullChangeDate= moment.duration(nullChangeDate).asSeconds();
 	   
@@ -93,29 +91,20 @@ for(let i = 0 ; i < result.length;i++){
 	    console.log("recordTimeList    -> "+recordTimeList[i]);
 	} else {
 		var changeDate;
-		//changeDate= moment(result[i].difftime, 'HH:mm:ss').format('HH:mm:ss'); 
 		changeDate = moment.duration(result[i].difftime).asSeconds();
 		//콘솔확인
 		console.log("changeDate    -> "+changeDate);
 	    recordTimeList.push(changeDate);
 	}
-	subjectColorList.push(chooseColor(result[i].subjectColor));
+	subjectColorList.push(chooseColor(result[i].color));
 	
-	//확인용
-	//console.log("result[i].subjectName   :"+result[i].subjectName);
-	//console.log("result[i].subjectColor : "+chooseColor(result[i].subjectColor));
-	//console.log("coloNum"+chooseColor(colorNum));
-	//console.log(chooseColor(result[i].subjectColor));
 }
-//console.log("+++++++++++++subejctNameList "+subejctNameList);
-//console.log("+++++++++++++recordTimeList "+recordTimeList);
-//console.log("+++++++++++++subjectColorList "+subjectColorList);
 	var data = {
 		 	labels:  subejctNameList,
 			datasets: [{
 			    label: '오늘의 공부시간',
 			    data:recordTimeList ,
-			    backgroundColor:subjectColorList,    //subjectColorList, '#FFE16F','#AED581','#99BBFF','#BF80FF'
+			    backgroundColor:subjectColorList,   
 			    hoverOffset: 4
 			  }]
 			};
@@ -133,17 +122,12 @@ for(let i = 0 ; i < result.length;i++){
 			tooltip:{
 				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
 					label: function(context){
-						console.log(">>>>> context      ");
-						console.log(context);
-						console.log(">>>>> label      ");
-						console.log(context.label);
 						
 						var chartLabel=context.label || '';
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						//TODO 강사님께 물어보기
-						console.log("-----y! if 박!!     ");
+						console.log("----- parsed !!     ");
 						console.log(context.parsed);
                         var charthours = parseInt(context.parsed/(60*60));
                         var chartminutes = parseInt(context.parsed/60-charthours*60);
@@ -161,8 +145,134 @@ for(let i = 0 ; i < result.length;i++){
 });
 }	
 
-/**********************************************/
+/**** myChart2 ******************************************/
 
+let foursubejctNameList =[];
+let fourrecordTimeList=[];
+let foursubjectColorList=[];
+let recordDateList=[]; 
+let count //?
+function fourdayStudyTime(){
+$.ajax({
+url: "${pageContext.request.contextPath }/myrecord/todayrecord/four.ajax"
+,method:"post"
+,error : ajaxErrorHandler
+,data : {numnum : numnum} //data없인 안되는걸까??
+,dataType:"json"
+,success: function(result){
+//console.log("-------------------   "+result[0].subjectName);
+	//subejctNameList=[];
+	//recordTimeList=[];
+	//subjectColorList=[];
+for(let i = 0 ; i < result.length;i++){	
+	foursubejctNameList.push(result[i].subjectName);
+  
+  	if ( result[i].difftime === undefined ) {//null은 아니고 undefined상황
+	   	var nullChangeDate=moment('00:00:00', 'HH:mm:ss').format('HH:mm:ss');
+	   	nullChangeDate= moment.duration(nullChangeDate).asSeconds();
+	   
+	   	fourrecordTimeList.push(nullChangeDate);
+	    console.log("recordTimeList    -> "+recordTimeList[i]);
+	} else {
+		var changeDate;
+		changeDate = moment.duration(result[i].difftime).asSeconds();
+		//콘솔확인
+		console.log("changeDate    -> "+changeDate);
+		fourrecordTimeList.push(changeDate);
+	}
+  	foursubjectColorList.push(chooseColor(result[i].color));
+	recordDateList.push(result[i].onlyDate);
+	//확인용
+
+	
+}
+console.log("4일치 데이터 뽑아옴");
+console.log(foursubejctNameList);
+console.log(fourrecordTimeList);
+console.log(foursubjectColorList);
+console.log(recordDateList);
+/* 	var data = {
+		 	labels:  subejctNameList,
+			datasets: [{
+			    label: '오늘의 공부시간',
+			    data:recordTimeList ,
+			    backgroundColor:subjectColorList,    //subjectColorList, '#FFE16F','#AED581','#99BBFF','#BF80FF'
+			    hoverOffset: 4
+			  }]
+			}; */
+	//과목별로 const가 생성되어야한다.	day가 아님	
+	const sub0 = {
+	        label:foursubejctNameList[0],
+	        data:[2,1,5],
+	        backgroundColor:foursubjectColorList[0],
+	        borderColor:'#CBCE91',
+	        borderWidth:1
+	}
+	const sub1 = {
+	        label:foursubejctNameList[1],
+	        data:[3,2,4],
+	        backgroundColor:foursubjectColorList[1],
+	        borderColor:'#CBCE91',
+	        borderWidth:1
+	}
+	const sub2 = {
+	        label:foursubejctNameList[3],
+	        data:[4,3,3],
+	        backgroundColor:foursubjectColorList[3],
+	        borderColor:'#CBCE91',
+	        borderWidth:1
+	}
+
+	
+	//그래프 생성
+	var ctx = document.getElementById('myChart2').getContext('2d');
+	var myChart = new Chart(ctx, {
+	type : 'bar',
+    data:{
+    	//라벨에 날짜 넣기
+        labels:[datePre-3,datePre-2,datePre-1,datePre], //라벨에 날짜 
+        datasets:[
+        	sub0,
+        	sub1,
+        	sub2
+        ]
+    },
+	options:{            
+		scales:{
+        	x:{ //x축값 누적
+            	stacked:true
+        	},
+        	y:{ //y축값 누적
+            	stacked:true
+        	}
+    	},
+		plugins:{
+			tooltip:{
+				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
+					label: function(context){
+						
+						var chartLabel=context.label || '';
+						if (chartLabel) {
+							chartLabel +=' : ';
+						}
+						//TODO 강사님께 물어보기
+						console.log("----- parsed !!     ");
+						console.log(context.parsed);
+                        var charthours = parseInt(context.parsed/(60*60));
+                        var chartminutes = parseInt(context.parsed/60-charthours*60);
+                        var chartseconds = parseInt(context.parsed-chartminutes*60-charthours*60*60);
+                        chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
+						return chartLabel
+					}
+				}
+			}
+		}
+	}//options
+
+	});
+}
+});
+}	
 
 	
 </script>

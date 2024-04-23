@@ -42,13 +42,11 @@ public class MyrecordController extends HttpServlet {
 				String memId = null;
 				if (loginInfo != null) { //로그인 했을 때
 					memId = loginInfo.getMemId();
+					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
+					request.setAttribute("sublist", sublist);
+					
+					request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
 				}
-				
-				// null일 때 : []
-				List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
-				request.setAttribute("sublist", sublist);
-				
-				request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
 	}
 
 	/**

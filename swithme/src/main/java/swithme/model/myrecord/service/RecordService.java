@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.myrecord.dao.RecordDao;
+import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
@@ -28,12 +29,24 @@ public class RecordService {
 
 	}
 	// 오늘의 과목 학습 시간 chart
-	public List<DayStudyTimeDto> dayStudyTime(String memId){
+	public List<DayStudyTimeBySubjectDto> dayStudyTime(String memId){
 		System.out.println(">>>>>>rec dao dayStudyTime  memId : " + memId);
-		List<DayStudyTimeDto> result = null;
+		List<DayStudyTimeBySubjectDto> result = null;
 		SqlSession session = getSqlSession();
 		result = dao.dayStudyTime(session,memId);
 		System.out.println(">>>>>>rec dayStudyTime  result : " + result);
+		session.close();
+		return result;
+		
+	}
+	
+	//4일치 과목별 학습 시간 chart
+	public List<DayStudyTimeDto> fourdayStudyTime(String memId){
+		System.out.println(">>>>>>rec dao fourdayStudyTime  memId : " + memId);
+		List<DayStudyTimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.fourdayStudyTime(session,memId);
+		System.out.println("\n\n>>>>>>rec fourdayStudyTime  result : \n" + result);
 		session.close();
 		return result;
 		

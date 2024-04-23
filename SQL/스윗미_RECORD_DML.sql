@@ -9,8 +9,14 @@ desc subject;
 exec PRO_RECORD_INSERT_MORNING('won','D_1','02');
 exec PRO_RECORD_INSERT_LUNCH('won','D_2','02');
 exec PRO_RECORD_INSERT_DINNER('won','D_3','02');
+--16일
+exec PRO_RECORD_INSERT_MORNING('won','D_1','16');
+exec PRO_RECORD_INSERT_LUNCH('won','D_2','16');
+exec PRO_RECORD_INSERT_DINNER('won','D_3','16');
 --17일
 exec PRO_RECORD_INSERT_DINNER('won','D_1','17');
+exec PRO_RECORD_INSERT_LUNCH('won','D_1','17');
+exec PRO_RECORD_INSERT_DINNER('won','D_3','17');
 --18일
 exec PRO_RECORD_INSERT_MORNING('won','D_1','18');
 exec PRO_RECORD_INSERT_LUNCH('won','D_2','18');
@@ -24,6 +30,11 @@ exec PRO_RECORD_INSERT_DINNER('won','D_1','19');
 exec PRO_RECORD_INSERT_MORNING('song','JAVA','19');
 exec PRO_RECORD_INSERT_LUNCH('song','spring','19');
 exec PRO_RECORD_INSERT_DINNER('song','C#','19');
+--21일
+exec PRO_RECORD_INSERT_MORNING('won','D_3','21');
+exec PRO_RECORD_INSERT_LUNCH('won','D_2','21');
+exec PRO_RECORD_INSERT_DINNER('won','D_1','21');
+
 
 --22일
 exec PRO_RECORD_INSERT_MORNING('song','JAVA','22');

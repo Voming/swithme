@@ -16,19 +16,30 @@ ORDER BY SUBJECT_ID ASC NULLS FIRST
 </select>
 
 <!-- 과목별 일일 공부시간 -->
-<select id="dayStudyTime" parameterType="string" resultType="DayStudyTimeDto">
-select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME,SUBJECT_COLOR 
-from (SELECT SUBJECT_ID, SUBJECT_NAME  ,SUBJECT_COLOR ,SUBJECT_DEL_DATE  FROM SUBJECT WHERE MEM_ID =#{memId} ) t1   
-	FULL JOIN 
-	( SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME 
-	  FROM RECORD WHERE RECORD_MEM_ID = #{memId}  and to_char(RECORD_START, 'yyyy-mm-dd') =  to_char(SYSDATE, 'yyyy-mm-dd') 
-	  group by RECORD_SUBJECT_ID ) t2 
-	on (SUBJECT_ID = RECORD_SUBJECT_ID) 
-WHERE SUBJECT_DEL_DATE IS NULL
-ORDER BY SUBJECT_ID ASC NULLS FIRST
+<select id="dayStudyTime" parameterType="string" resultType="DayStudyTimeBySubjectDto">
+select SUBJECT_NAME
+, (select SUBJECT_COLOR from subject where SUBJECT.SUBJECT_NAME = V_RECORD.SUBJECT_NAME  ) as "COLOR"
+, SUBSTR(DIFFTIME,12,8) DIFFTIME, SUBSTR(RECORD_DATE,7,2) as ONLY_DATE    
+from V_RECORD where RECORD_MEM_ID =#{memId} and TRUNC(RECORD_DATE) = TRUNC(SYSDATE)
 </select>
 
-
+<!-- 현재 일자 기준 최근 4일 이내 과목별 학습시간 -->
+<resultMap type="DayStudyTimeDto" id="DayStudyTimeDtoMap">
+	<id column="SUBJECT_NAME"  property="subjectName"/>
+	<result column="COLOR" property="color" />
+	<collection property="diffTimeByDayList" javaType="DateDifftimeDto" >
+		<result column="DIFFTIME" property="difftime" />
+		<result column="ONLY_DATE" property="onlyDate" />
+	</collection>
+</resultMap>
+<select id="fourdayStudyTime" parameterType="string" resultMap="DayStudyTimeDtoMap">
+select SUBJECT_NAME
+,(select SUBJECT_COLOR from subject where SUBJECT.SUBJECT_NAME = V_RECORD_SEC.SUBJECT_NAME  ) as "COLOR"
+, to_char(DIFFTIME) DIFFTIME
+, substr(RECORD_DATE,7,2) as ONLY_DATE
+from V_RECORD_SEC where RECORD_MEM_ID = #{memId} and TRUNC(RECORD_DATE) >= TRUNC(SYSDATE-3)
+order by subject_name asc, only_date asc
+</select>
 
 <insert id="insertStartTime" parameterType="RecordTimeDto">
 INSERT INTO RECORD VALUES(SEQ_RECORD_ID.nextval, #{recordSubjectId}, #{recordMemId},

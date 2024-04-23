@@ -8,11 +8,15 @@
 }
 
 .wrap-body .wrap-join{
-width: 960px;
+	width: 960px;
 	margin: 80px 0;
     font-size: var(--font3);
     font-family: "IM_Hyemin-Regular";
-    
+}
+
+.wrap-body .wrap-join p{
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
 }
 
 .wrap-body .wrap-join .btn.dcheck{

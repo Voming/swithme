@@ -10,6 +10,7 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoListDto;
 import swithme.model.group.dto.GroupMylistDto;
+import swithme.model.group.dto.GroupRecordDaySumDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.dto.GroupUpdateDto;
 import swithme.model.group.dto.GroupUpdateMinDto;
@@ -76,6 +77,11 @@ public class GroupDao {
 
 	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId) {
 		List<GroupRecordSumDto> result = session.selectList("group.selectGroupRecordSumList", groupId);
+		return result;
+	}
+	
+	public List<GroupRecordDaySumDto> selectGroupRecordDaySumList(SqlSession session, int groupId) {
+		List<GroupRecordDaySumDto> result = session.selectList("group.selectGroupRecordDaySumList", groupId);
 		return result;
 	}
 

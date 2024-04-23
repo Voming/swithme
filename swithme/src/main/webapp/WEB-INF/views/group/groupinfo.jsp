@@ -62,18 +62,14 @@
 				<p class="now">공부현황</p>
 				<div class="group-box">
 					<ul>
-						<li class="mem-box"><img alt="기본 아이콘"
-							src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
-							<p>스벅돌체라떼</p>
-							<p>390분</p></li>
-						<li class="mem-box"><img alt="기본 아이콘"
-							src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
-							<p>스벅돌체라떼</p>
-							<p>390분</p></li>
-						<li class="mem-box"><img alt="기본 아이콘"
-							src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
-							<p>스벅돌체라떼</p>
-							<p>390분</p></li>
+						<c:if test="${not empty groupSumList }">
+							<c:forEach items="${groupSumList}" var="groupSumDto">
+								<li class="mem-box"><img alt="기본 아이콘"
+									src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
+									<p>${groupSumDto.memId}</p>
+									<p>${groupSumDto.sumMin}</p></li>
+							</c:forEach>
+						</c:if>
 					</ul>
 				</div>
 				<hr style="margin: 50px 0; color: var(--color_gray_1);">
@@ -82,57 +78,20 @@
 				<div class="wrap-calendar">
 					<p class="ct">출석부</p>
 					<table>
-						<tr>
-							<th width="25%">가입순</th>
-							<td>월</td>
-							<td>화</td>
-							<td>수</td>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-						</tr>
-						<tr>
-							<th>가입순</th>
-							<td>월</td>
-							<td>화</td>
-							<td>수</td>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-						</tr>
-						<tr>
-							<th>가입순</th>
-							<td>월</td>
-							<td>화</td>
-							<td>수</td>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-						</tr>
-						<tr>
-							<th>가입순</th>
-							<td>월</td>
-							<td>화</td>
-							<td>수</td>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-						</tr>
-						<tr>
-							<th>가입순</th>
-							<td>월</td>
-							<td>화</td>
-							<td>수</td>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-						</tr>
-						
+						<c:if test="${not empty groupSumDayList }">
+							<c:forEach items="${groupSumDayList}" var="DayDto">
+								<tr>
+									<th>${DayDto.memId }</th>
+									<td>${DayDto.d1 }</td>
+									<td>${DayDto.d2 }</td>
+									<td>${DayDto.d3 }</td>
+									<td>${DayDto.d4 }</td>
+									<td>${DayDto.d5 }</td>
+									<td>${DayDto.d6 }</td>
+									<td>${DayDto.d7 }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</table>
 				</div>
 				<div class="wrap-rank">

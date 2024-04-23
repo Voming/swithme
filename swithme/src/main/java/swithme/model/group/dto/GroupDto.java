@@ -1,6 +1,9 @@
 package swithme.model.group.dto;
 
-public class GroupDto {
+import java.io.Serializable;
+
+public class GroupDto implements Serializable {
+	private static final long serialVersionUID = 378294325641500667L;
 //	SGROUP_ID	NUMBER
 //	SGROUP_NAME	VARCHAR2(30 BYTE)
 //	SGROUP_OPEN	CHAR(1 BYTE)

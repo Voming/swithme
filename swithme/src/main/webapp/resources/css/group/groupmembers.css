@@ -44,12 +44,13 @@
 }
 
 .wrap-calc .wrap-calendar {
-	width: 480px;
+	width: 550x;
 	height: 500px;
+	margin-right: 40px; 
 }
 
 .wrap-calc .wrap-rank {
-	width: 480px;
+	width: 420px;
 	height: 500px;
 }
 
@@ -61,14 +62,14 @@
 
 .wrap-calc  .wrap-calendar table {
 	/*출석부*/
-	width: 450px;
-	margin-right: 30px;
+	width: 500px;
 	font-family: "IM_Hyemin-Regular";
-	font-size: var(--font3);
+	font-size: var(--font4);
+	table-layout: fixed;
 }
 
 .wrap-calc  .wrap-calendar th, td {
-	padding: 20px 0;
+	padding: 20px 3px;
 	text-align: center;
 	border: 1px solid gray;
 	border-collapse: collapse;
@@ -77,6 +78,7 @@
 .wrap-calc  .wrap-calendar th {
 	font-family: "IM_Hyemin-Bold";
 }
+
 
 .wrap-calc .wrap-rank .rank-txt div {
 	/*그룹 내 랭킹*/

@@ -1,6 +1,7 @@
 package swithme.model.group.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -11,6 +12,7 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupInfoListDto;
 import swithme.model.group.dto.GroupMylistDto;
+import swithme.model.group.dto.GroupRecordDaySumDto;
 import swithme.model.group.dto.GroupRecordSumDto;
 import swithme.model.group.dto.GroupUpdateDto;
 import swithme.model.group.dto.GroupUpdateMinDto;
@@ -114,6 +116,14 @@ public class GroupService {
 		return result;
 	}
 
+	public List<GroupRecordDaySumDto> selectGroupRecordDaySumList(int groupId) {
+		List<GroupRecordDaySumDto> result = null;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectGroupRecordDaySumList(session, groupId);
+		session.close();
+		return result;
+	}
+	
 	/*
 	 * public int test(String memId) { int result = 0; SqlSession session =
 	 * MybatisTemplate.getSqlSession(); result = dao.test(session, memId);

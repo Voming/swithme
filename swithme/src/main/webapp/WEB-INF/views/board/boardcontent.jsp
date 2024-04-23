@@ -69,7 +69,7 @@
 					밑에서 ajax로 결과 가지고 왔을때 버튼이나 이런것들 숨지 않고 나타남  -->
 					<c:choose>
 						<c:when test="${empty replydtolist}">
-							<div class="replynone">게시글이 존재하지 않습니다.</div>
+							<div class="replynone">댓글이 존재하지 않습니다.</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${replydtolist}" var="replydto">
@@ -88,7 +88,7 @@
 									<div class="r-wrap">
 										<ul>
 											<li>${replydto.replyWritetime}</li>
-											<li>댓글 달기</li>
+											<li class="replyMore">댓글 달기</li>
 											<li class="replydel" style="cursor: pointer;">삭제</li>
 										</ul>
 									</div>
@@ -102,10 +102,39 @@
 								<!-- setAttribute 값으로 값을 불러오려먼 el태그 써야함 -->
 								<!-- getSession에서 setAttribute를 주니까 session에 등록하는거고
 								이것은 서버가 연결되어 있는 한 모든 jsp에서 값 불러오기 가능 - 광역변수라 생각하자 -->
-							</c:forEach> 
+							
+							</c:forEach>
+							 
 						</c:otherwise>
 					</c:choose>
 				</div>
+
+<%-- 대댓글 창				
+				<div class="wrap-reply2">
+ 					<form class="frm-reply2">
+						<div class="r-1">
+							<div>
+								작성자
+							</div>
+						</div>
+						<div class="r-2">
+							<div>
+								<textarea name="content" cols="132" rows="5" placeholder="내용을 입력하시오."></textarea>
+							</div>
+						</div>
+						<div class="r-3">
+							<ul>
+								<li class="replyreg2" style="cursor: pointer;">등록</li>
+							</ul>
+						</div>
+					</form>	
+					<input type="hidden" name="boardId" value="${dto.boardId }">
+					<input type="hidden" name="replyId" value="\${replydto.replyId }">
+					<input type="hidden" name="replyLevel" value="\${replydto.replyLevel }">
+					<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
+					<input type="hidden" name="replyRef" value="\${replydto.replyRef }"> 			
+				</div>
+ --%>				
 				<div class="wrap-reply">
 					<form class="frm-reply">
 						<div class="r-1">
@@ -115,7 +144,7 @@
 						</div>
 						<div class="r-2">
 							<div>
-								<textarea name="replyContent" cols="146" rows="5" placeholder="내용을 입력하시오."></textarea>
+								<textarea name="replyContent" cols="136" rows="5" placeholder="내용을 입력하시오."></textarea>
 							</div>
 						</div>
 						<div class="r-3">
@@ -129,28 +158,8 @@
 						<!-- boardId 가지고 와야 그 해당 Id에 댓글 달림-->
 					</form>
 				</div>
+
 				
-<!--
-				<div class="wrap-reply2">
-					<form class="frm-reply2">
-						<div class="r-1">
-							<div>
-								작성자
-							</div>
-						</div>
-						<div class="r-2">
-							<div>
-								<textarea name="content" cols="132" rows="5" placeholder="내용을 입력하시오."></textarea>
-							</div>
-						</div>
-						<div class="r-3">
-							<ul>
-								<li class="replyreg" style="cursor: pointer;">등록</li>
-							</ul>
-						</div>
-					</form>	
-				</div>	 
--->		
 				<div class="btn">
 					<button type="button" class="btn write">글쓰기</button>
 					<button type="button" class="btn rewrite">수정</button>
@@ -170,13 +179,35 @@
 $(loadedHandler);
 
 function loadedHandler(){
+	/*댓글 달기  */
 	$(".replyreg").on("click", boardReplyClickHandler);
+	
+	/* 대댓글창 띄우기 */
+	$(".replyMore").each(function(index, element){
+		/* replyMore - forEach로 인해 element 개수가 여러개인데 그중 하나의 그 element들 중 하나에 클릭이벤트 걸기*/
+		/* forEach 를 걸면서 댓글이 달린 개수만큼 반복이 되서 이벤트 클릭했을때 그때그때 위치를 찾아줘야함 */
+		$(element).click(ReplyMoreClickHandler);
+		/* 그중 하나에 클릭이벤트 건게 이 친구!! */
+	});
+	
+	/* 대댓글창 숨기기 */
+	$(".replyesc").on("click", ReplyEscClickHandler);
+	
+	/* 대댓글 삭제 */
+	$(".replydel").each(function(index, element){
+		// 투두 ~~~ ReplyMoreClickHandler 처럼  ReplydelClickHandler 만들어주기
+		//$(element).click(ReplydelClickHandler);
+	});
+
+	
+	
 	$(".btn.write").on("click", boardWriteClickHandler);
 	$(".btn.board").on("click", boardClickHandler);
 	
 
 }
 
+/* 댓글 등록하기 */
 function boardReplyClickHandler(){
 	
 	if($(".frm-reply [name=replyContent]").val().trim().length == 0) {
@@ -218,13 +249,13 @@ function boardReplyClickHandler(){
 	
 }
 
+/* 댓글 */
 function displayReplyWrap(datalist){
 	console.log("${dto.boardId }");
 
 	var htmlVal = '';
 	for(var idx in datalist){
 		var replydto = datalist[idx];
-	
 		htmlVal += `
 			<div class="replyresult">
 				<div class="r-write">
@@ -240,7 +271,7 @@ function displayReplyWrap(datalist){
 				<div class="r-wrap">
 					<ul>
 						<li>\${replydto.replyWritetime}</li>
-						<li>댓글 달기</li>
+						<li class="replyMore">댓글 달기</li>
 						<li class="replydel" style="cursor: pointer;">삭제</li>
 					</ul>
 				</div>
@@ -251,13 +282,80 @@ function displayReplyWrap(datalist){
 			<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
 			<input type="hidden" name="replyRef" value="\${replydto.replyRef }">
 		`;
-		
+			
+
 	}
 	$(".warp-reply-list").html(htmlVal);
-	// html(새로운내용으로덮어쓰면기존event등록이사라짐)
-	// event 다시 등록
+	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창 띄우기 이벤트가 사라짐으로
+ 	   밑에 다시 걸어야함 */
+	
+	
+	/* 대댓글창 띄우기 - 이벤트 등록 다시하기 */
+	$(".replyMore").each(function(index, element){
+		/* replyMore - forEach로 인해 element 개수가 여러개인데 그중 하나의 그 element들 중 하나에 클릭이벤트 걸기*/
+		/* forEach 를 걸면서 댓글이 달린 개수만큼 반복이 되서 이벤트 클릭했을때 그때그때 위치를 찾아줘야함 */
+		$(element).click(ReplyMoreClickHandler);
+		/* 그중 하나에 클릭이벤트 건게 이 친구!! */
+	});
 
+}		
+
+
+/* 대댓글 창 띄우기 */
+function ReplyMoreClickHandler(){
+ 	
+	console.log(this);
+ 	
+	var htmlVal = '';
+	 	htmlVal += `
+	 		<div class="wrap-reply2">
+				<form class="frm-reply2">
+					<div class="r-1">
+						<div>
+							작성자
+						</div>
+					</div>
+					<div class="r-2">
+						<div>
+							<textarea name="content" cols="124" rows="5" placeholder="내용을 입력하시오."></textarea>
+						</div>
+					</div>
+					<div class="r-3">
+						<ul>
+							<li class="replyesc" style="cursor: pointer;">취소</li>
+							<li class="replyreg2" style="cursor: pointer;">등록</li>
+						</ul>
+					</div>
+				</form>	
+			</div>	
+	`;
+ 
+ 	$(this).parents(".replyresult").after(htmlVal);
+ 	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창이 사라지는
+ 		이벤트가 사라짐으로 밑에 다시 걸어야함 */
+
+ 	$(".replyesc").off("click");
+ 	$(".replyesc").on("click", ReplyEscClickHandler);
+ 	/* 대댓글 창에서 취소를 누르는 event를 먼저 off 시킨 다음 이벤트 다시 등록
+ 	   -> off 안시키면 on 해서 이벤트 걸었을때 대댓글창이 열린 개수만큼 취소에 걸리기 때문에
+ 	      off를 먼저 시켜줘야함
+ 	    ex. 대댓글창이 2개 열려있으면 취소를 2번 눌러야 대댓글창이 사라짐 */
+
+ 	
+ 	 /* this- 클릭한거
+ 		parents() 뒤에 next() 5개 쓰면 input 5개 뒤에 붙음*/
+	/* 	$(".wrap-reply2").toggle(); - 누르면 나타나고 다시 누르면 사라짐 */
+	
 }
+
+function ReplyEscClickHandler(){
+	$(this).parents(".wrap-reply2").remove();
+}
+
+
+/* function boardReplyAgainClickHandler(){
+	
+} */
 
 
 function boardWriteClickHandler(){

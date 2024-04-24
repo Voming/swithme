@@ -158,7 +158,21 @@ public class GroupService {
 	public int deletMemberGroup(GroupMemberDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.deletMemberGroup(session, dto);
+		
+		//그룹에 마지막으로 남은 사용자가 그룹 탈퇴시 그룹 삭제됨
+		int  memCount = dao.selectMemCount(session, dto.getSgroupId());
+		
+		if(memCount <= 1) {	
+			int deleteMR = 0;
+			deleteMR =  dao.deletMemberGroup(session, dto);
+			if(deleteMR > 0) {
+				result = dao.deleteGroup(session, dto.getSgroupId());
+			}else {
+				result = -1;
+			}
+		} else {
+			result =  dao.deletMemberGroup(session, dto);
+		}
 		session.close();
 		return result;
 	}

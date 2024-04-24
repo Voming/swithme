@@ -117,4 +117,10 @@ public class GroupDao {
 		int result = session.delete("group.deleteGroup", groupId);
 		return result;
 	}
+	
+	// 가입하려는 그룹 비밀번호 체크
+	public String selectJoinPwd(SqlSession session, int groupId) {
+		String result = session.selectOne("group.selectJoinPwd", groupId);
+		return result;
+	}
 }

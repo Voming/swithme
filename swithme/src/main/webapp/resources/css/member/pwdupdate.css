@@ -1,0 +1,41 @@
+.wrap-body {
+	/* 중앙 배치 */
+	width: 960px;
+	margin: 80px auto;
+	align-items: center;
+	display:flex;
+	justify-content: center;
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+}
+
+
+.wrap-body .wrap-update p{
+	font-size: var(--font3);
+    font-family: "IM_Hyemin-Regular";
+}
+
+.wrap-body .wrap-update input{
+	width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom:40px;
+    border: 1.5px solid var(--color_purple_1);
+    outline: none;
+}
+
+.wrap-body .wrap-update .btn.update{
+	text-align: center;
+	width: 40%;
+    height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
+	 border-radius: 10px;
+    background-color:#DDCCFF;
+	border:none;
+	margin:auto;
+	display:block;
+	
+}

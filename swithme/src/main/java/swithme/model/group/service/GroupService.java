@@ -194,4 +194,13 @@ public class GroupService {
 		session.close();
 		return result;
 	}
+	
+	// 가입하려는 그룹 비밀번호 체크
+	public String selectJoinPwd( int groupId) {
+		String result = "";
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectJoinPwd(session, groupId);
+		session.close();
+		return result;
+	}
 }

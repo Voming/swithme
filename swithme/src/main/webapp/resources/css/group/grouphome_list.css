@@ -43,6 +43,7 @@
 .group-tab-content{
 	display: flex;
 	justify-content: center;
+	margin-bottom: 150px;
 }
 
 .group-tab-content .group-box {
@@ -84,11 +85,11 @@
     top: 0;
 }
 
-.group-tab-content .modal_btn .description a {
+.group-tab-content .modal_btn .description p {
     display: block;
-    padding: 3px 0;
+    padding-top: 6px;
 }
 
 .group-tab-content .modal_btn .description .name-sub{
-    height: 40px;
+    height: 35px;
 }

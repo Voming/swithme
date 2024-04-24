@@ -32,6 +32,24 @@ public class GroupCreateController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/group/create doPost()");
 		
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		if(loginInfo == null) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return;
+		}
+		String groupWriter = loginInfo.getMemId();
+		int result = 0;
+		
+		int mGroupCount = service.selectMyCount(groupWriter);
+		
+		//TODO 입력하기 전에 체크하도록
+		//만약 가입한 그룹이 5개라면 더이상 그룹 생성 불가능
+		if(mGroupCount > 5) {
+			result = -1;
+			response.getWriter().append(String.valueOf(result));
+			return;
+		}
+		
 		String uploadPath = request.getServletContext().getRealPath("files");
 		//uploadPath:C:\workspace\Java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\31_web_project\files
 		System.out.println("uploadPath : " + uploadPath ); 
@@ -76,7 +94,7 @@ public class GroupCreateController extends HttpServlet {
 		String groupPwdstr = multiReq.getParameter("groupPwd");
 		
 		
-		int result = 0;
+		
 		if(groupOpen.equals("open")) {
 			groupOpen = "0";
 			groupPwdstr = "";
@@ -94,12 +112,7 @@ public class GroupCreateController extends HttpServlet {
 			}
 		}
 		
-		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-		if(loginInfo == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
-		String groupWriter = loginInfo.getMemId();
+		
 	
 		GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwdstr, groupExp, fileName, orginFileName);
 		result = service.insert(dto);

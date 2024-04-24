@@ -134,4 +134,12 @@
 	<delete id="deleteGroup" parameterType="_int">
 		DELETE FROM SGROUP WHERE SGROUP_ID = #{groupId}
 	</delete>
+	
+	<select id="selectJoinPwd" parameterType="_int" resultType="string">
+		SELECT SGROUP_PWD FROM SGROUP WHERE SGROUP_ID = #{groupId}
+	</select>
+	
+	<insert id="insertJoinMember" parameterType="GroupMemberDto">
+		INSERT INTO SGROUP_MEMBER VALUES (#{sgroupId}, #{sgroupMemId})
+	</insert>
 </mapper>

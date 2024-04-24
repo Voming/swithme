@@ -56,24 +56,63 @@
 		//모달 열기
 		function btnOpenClickHandler() {
 			console.log('open clicked!');
+			var m_groupid = $(this).find(".for-modal").text().trim();
 			var m_open = $(this).find("div.tag > p").text().trim();
 			var m_img = jQuery('.img_g').attr("src").trim();
 			var m_name = $(this).find(".description>.name").text().trim();
 			var m_name_sub = $(this).find(".description>.name-sub").text().trim();
-			console.log(m_open);
-			console.log(m_img);
-			console.log(m_name);
-			console.log(m_name_sub);
-			// ajax after success 
-			//$(".modal > .modal_popup > p").html(a1);
+	
+			console.log(m_groupid);
 			
 			var htmlMval= '';
-			htmlMval += 
+			htmlMval += `
+				<form>
+				<img class="modal_img" src="${pageContext.request.contextPath }/files/${randDto.sgroupImgPath}" alt="그룹 사진">
+				<div class="modal_description">
+					<p class="m_group_id" style="display:none;">\${m_groupid}</p>
+					<p class="name" style="font-size: var(--font1); font-weight: bold;">\${m_name}</p>
+					<p class="m_open" style="font-size: var(--font3); font-weight: bold;">\${m_open}</p>
+					<p class="name-sub" style="font-size: var(--font3);">\${m_name_sub}</p> 
+			`;
+			if(m_open == "비공개"){
+				htmlMval += `
+					<input type="text" name="m_pwd" placeholder="비밀번호를 입력하세요">
+				`;
+			}
+			htmlMval += `
+				</div>
+				<button type="button" class="close_btn">취소</button>
+				<button type="button" class="join_btn">가입하기</button>
+			</form>
+			`;
 			
-			
+			$(".modal > .modal_popup > div").html(htmlMval);
 			
 			$(".modal").show();
-			
+			$(".close_btn").on("click", btnCloseClickHandler);
+			$(".join_btn").on("click", btnJoinClickHandler);
+		}
+		
+		//그룹 가입하기
+		function btnJoinClickHandler() {
+			console.log('join clicked!');
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/group/join.ajax"
+				,method : "post"
+				,data : { 
+					m_group_id : $(this).parent().find(".m_group_id").text(),
+					m_pwd : $(this).parent().find("input[name=m_pwd]").val()
+				}
+				,success : function(result){ 
+					console.log(result);
+					/*  if(result > 0){
+						alert("사용불가!! 다른아이디를 사용해주세요.");
+					}else {
+						alert("사용가능");
+					}	 */ 
+				}
+				,error : ajaxErrorHandler
+			} ); 
 		}
 		
 		//모달 닫기
@@ -119,8 +158,9 @@
 				htmlVal+= `	</p>
 							</div>
 						<div class="description">
-							<a class="name" style="font-size: var(--font4); font-weight: bold;">\${findDto.sgroupName}</a> 
-							<a class="name-sub" style="font-size: var(--font5);">\${findDto.sgroupEx}</a>
+							<p class="for-modal" style="display:none;">${findDto.sgroupId}</p>
+							<p class="name" style="font-size: var(--font4); font-weight: bold;">\${findDto.sgroupName}</p> 
+							<p class="name-sub" style="font-size: var(--font5);">\${findDto.sgroupEx}</p>
 					</div>
 				</div>
 			</li>`;
@@ -157,17 +197,7 @@
 		<!--모달 팝업-->
 		<div class="modal">
 			<div class="modal_popup">
-			<form>
-				<img class="modal_img" src="${pageContext.request.contextPath }/files/${randDto.sgroupImgPath}" alt="그룹 사진">
-				<div class="modal_description">
-					<a class="name" style="font-size: var(--font1); font-weight: bold;">열품타레츠고</a>
-					<a class="m_open" style="font-size: var(--font3); font-weight: bold;">비공개</a>
-					<a class="name-sub" style="font-size: var(--font3);">설명입니다 설명입니다</a>
-					<input type="text" name="m_pwd" placeholder="비밀번호를 입력하세요">
-				</div>
-				<button type="button" class="close_btn">취소</button>
-				<button type="button" class="join_btn">가입하기</button>
-			</form>
+			 <div></div>
 			</div>
 		</div>
 		<div class="wrap-body">
@@ -226,7 +256,7 @@
 					<div class="tab-body">
 						<p class="all-txt">전체그룹</p>
 						<ul class="group-tab-nav">
-							<li><a href="#tab01">전체</a></li>
+							<li><a href="#tab01">공개 그룹</a></li>
 							<li><a href="#tab02">추천 그룹</a></li>
 						</ul>
 						<div class="group-tab-content">
@@ -247,9 +277,10 @@
 														</p>
 													</div>
 													<div class="description">
-														<a class="name"
-															style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</a>
-														<a class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</a>
+														<p class="for-modal" style="display:none;">${groupDto.sgroupId}</p>
+														<p class="name"
+															style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
+														<p class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</p>
 													</div>
 												</div>
 											</li>
@@ -274,9 +305,10 @@
 														</p>
 													</div>
 													<div class="description">
-														<a class="name"
-															style="font-size: var(--font4); font-weight: bold;">${randDto.sgroupName}</a>
-														<a class="name-sub" style="font-size: var(--font5);">${randDto.sgroupEx}</a>
+														<p class="for-modal" style="display:none;">${randDto.sgroupId}</p>
+														<p class="name"
+															style="font-size: var(--font4); font-weight: bold;">${randDto.sgroupName}</p>
+														<p class="name-sub" style="font-size: var(--font5);">${randDto.sgroupEx}</p>
 													</div>
 												</div>
 											</li>

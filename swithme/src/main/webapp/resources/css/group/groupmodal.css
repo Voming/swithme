@@ -48,7 +48,7 @@
 	height: 230px;
 }
 
-.modal .modal_description a, input{
+.modal .modal_description p, input{
 	font-family: "IM_Hyemin-Regular";
 	margin: 10px 0;
 }

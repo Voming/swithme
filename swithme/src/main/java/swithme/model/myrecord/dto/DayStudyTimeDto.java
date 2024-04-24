@@ -13,12 +13,7 @@ public class DayStudyTimeDto {
 		return "DayStudyTimeDto [subjectName=" + subjectName + ", color=" + color + ", diffTimeByDayList="
 				+ diffTimeByDayList + "]";
 	}
-	public DayStudyTimeDto(String subjectName, String color, List<DateDifftimeDto> diffTimeByDayList) {
-		super();
-		this.subjectName = subjectName;
-		this.color = color;
-		this.diffTimeByDayList = diffTimeByDayList;
-	}
+
 	public String getSubjectName() {
 		return subjectName;
 	}
@@ -28,7 +23,7 @@ public class DayStudyTimeDto {
 	public List<DateDifftimeDto> getDiffTimeByDayList() {
 		return diffTimeByDayList;
 	}
-//////
+///// 
 	public DayStudyTimeDto() {
 		super();
 	}

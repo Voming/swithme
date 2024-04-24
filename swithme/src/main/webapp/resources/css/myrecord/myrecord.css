@@ -225,7 +225,6 @@ a{
 }
 .wrap-body .wrap-main .myrecord .statistics-part{
 	display : grid;
-	display : inline-grid;
 	/* 컬럼(열) 너비 1:1설정 */
 	grid-template-columns:  1fr 1fr ;
 	grid-template-rows: 70px 400px 400px 400px 400px 400px 400px; 

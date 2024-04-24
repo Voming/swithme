@@ -47,16 +47,16 @@ public class DayStudyTimeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {		
-			String num = request.getParameter("numnum");
-			System.out.println("---------------- contoroller : "+num);
+			System.out.println("----------------daystudytime contoroller : ");
 			List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			System.out.println("\n\n 기록 : "+result);
 			List<DayStudyTimeDto> result2 = service.fourdayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 		System.out.println("\n\n 기록2 : "+result2);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("dayStudyTimeList", result);
-		resultMap.put("fourdayStudyTimeList", result2);
-		
+		resultMap.put("fourdayStudyTimeList", result2); 
+		System.out.println("-------- resultMap의 map내용을 보시라!! -- \n");
+		System.out.println(resultMap);
 		response.getWriter().append(new Gson().toJson(resultMap));
 		//이게 맞나..???
 		}catch(NumberFormatException e) {

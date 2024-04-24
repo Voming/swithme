@@ -36,6 +36,8 @@
     box-sizing: border-box;
     border-radius: 10px;
     margin-bottom:40px;
+    border: 1.5px solid var(--color_purple_1);
+    outline: none;
 }
 
 .wrap-body .wrap-join input[type=email]{
@@ -45,6 +47,8 @@
     box-sizing: border-box;
      border-radius: 10px;
      margin-bottom:40px;
+     border: 1.5px solid var(--color_purple_1);
+     outline: none;
 }
 
 .wrap-body .wrap-join input[type=password]{
@@ -54,15 +58,26 @@
     box-sizing: border-box;
      border-radius: 10px;
      margin-bottom:40px;
+     border: 1.5px solid var(--color_purple_1);
+     outline: none;
 }
 .wrap-body .wrap-join .check{
-	margin-left:100px;
+	margin-left:150px;
 	margin-bottom:20px;
 }
 
 .wrap-body .wrap-join label {
-	margin-right:30px;
+	margin-right:100px;
 }
+
+.wrap-body .wrap-join .emailcheck{
+	margin-right:80px;
+}
+
+.wrap-body .wrap-join .pwdcheck{
+	margin-right:70px;
+}
+
 
 .wrap-body .wrap-join .btn.join{
 	text-align: center;

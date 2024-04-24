@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import swithme.model.member.dto.MemberInfoDto;
-
 /**
- * Servlet implementation class MyPageController
+ * Servlet implementation class PwdChangeController
  */
-@WebServlet("/mypage")
-public class MyPageController extends HttpServlet {
+@WebServlet("/update")
+public class PwdUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public PwdUpdateController() {
         super();
     }
 
@@ -27,23 +25,14 @@ public class MyPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/pwdupdate.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-		
-		String memId = null;
-		String memPwd=null;
-		if (loginInfo != null) { //로그인 했을 때
-			memId = loginInfo.getMemId();
-			memPwd = loginInfo.getMemPwd();
-		}
-		request.getSession().setAttribute("memId", memId);
-		request.getSession().setAttribute("memPwd", memPwd);
+		doGet(request, response);
 	}
 
 }

@@ -100,12 +100,21 @@ public class GroupDao {
 		return result;
 	}
 
-	//그룹 나가기
+	//그룹 탈퇴
 	public int deletMemberGroup(SqlSession session,GroupMemberDto dto) {
 		int result = session.delete("group.deletMemberGroup", dto);
 		return result;
 	}
 	
-
-
+	// 그룹 안 그룹원 수 
+	public int selectMemCount(SqlSession session, int groupId) {
+		int result = session.selectOne("group.selectMemCount", groupId);
+		return result;
+	}
+	
+	//그룹 삭제하기
+	public int deleteGroup(SqlSession session, int groupId) {
+		int result = session.delete("group.deleteGroup", groupId);
+		return result;
+	}
 }

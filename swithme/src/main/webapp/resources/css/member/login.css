@@ -30,7 +30,9 @@
     margin-bottom: 5px;
     margin-top: 25px;
     border-radius: 10px;
-    background-color: #F8F8F8;
+    background-color:white;
+    border: 2px solid var(--color_purple_1);
+    outline: none;
 }
 
 .wrap-body .wrap-login .btn.submit{

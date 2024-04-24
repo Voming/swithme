@@ -22,7 +22,7 @@ public class MemberDao {
 	//select one login
 		public MemberInfoDto loginGetInfo(Connection conn, MemberLoginDto dto) {
 			MemberInfoDto result=null;
-			String sql = "SELECT MEM_ID,MEM_EMAIL  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
+			String sql = "SELECT MEM_ID,MEM_EMAIL,MEM_PWD  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
@@ -32,7 +32,7 @@ public class MemberDao {
 				pstmt.setString(2, dto.getMemPwd());
 				rs = pstmt.executeQuery();	
 				if(rs.next()) {
-					result = new MemberInfoDto(rs.getString("MEM_ID"),rs.getString("MEM_EMAIL"));
+					result = new MemberInfoDto(rs.getString("MEM_ID"),rs.getString("MEM_EMAIL"),rs.getString("MEM_PWD"));
 					System.out.println(result);
 				}		
 				

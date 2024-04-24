@@ -39,7 +39,6 @@ public class GroupExitController extends HttpServlet {
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memberId);
 		int result = service.deletMemberGroup(dto);
-		System.out.println(dto);
 		
 		response.getWriter().append(String.valueOf(result));
 	}

@@ -228,6 +228,7 @@ function boardReplyClickHandler(){
 				
 			} else {
 				displayReplyWrap(result);
+				/* 함수를 정의한 것이기 때문에 밑에서 값 넣어줘야함 */
 			}
 		},
 		error: function(request, status, error){
@@ -288,8 +289,8 @@ function displayReplyWrap(datalist){
 	$(".warp-reply-list").html(htmlVal);
 	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창 띄우기 이벤트가 사라짐으로
  	   밑에 다시 걸어야함 */
-	
-	
+		
+ 	   
 	/* 대댓글창 띄우기 - 이벤트 등록 다시하기 */
 	$(".replyMore").each(function(index, element){
 		/* replyMore - forEach로 인해 element 개수가 여러개인데 그중 하나의 그 element들 중 하나에 클릭이벤트 걸기*/
@@ -304,6 +305,16 @@ function displayReplyWrap(datalist){
 /* 대댓글 창 띄우기 */
 function ReplyMoreClickHandler(){
  	
+	var $nextEle = $(this).parents(".replyresult").next();
+	/* parents(".replyresult") - 댓글창 */
+	/* next - 댓글창의 다음 요소를 찾아달라라는 뜻으로 대댓글창이 밑에 있으니 대댓글 창을 찾아달라
+			=> 객체 탐색은 요소를 찾아서 꺼내는 기능을 함 */
+	if( $nextEle.hasClass("wrap-reply2")) {
+		return;
+		/*대댓글 창이 있으면 return 해서 이 밑으로 실행하지 않게 해줘 */
+	}
+	
+	
 	console.log(this);
  	
 	var htmlVal = '';
@@ -333,8 +344,11 @@ function ReplyMoreClickHandler(){
  	$(this).parents(".replyresult").after(htmlVal);
  	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창이 사라지는
  		이벤트가 사라짐으로 밑에 다시 걸어야함 */
-
- 	$(".replyesc").off("click");
+	/* after - 조작 개념이라서 어느 위치에 넣어달라는 의미 
+	    => 조작 개념은 어느 위치에 넣고 빼고 추가하고 이런것들을 의미함*/
+	
+ 		
+	$(".replyesc").off("click");
  	$(".replyesc").on("click", ReplyEscClickHandler);
  	/* 대댓글 창에서 취소를 누르는 event를 먼저 off 시킨 다음 이벤트 다시 등록
  	   -> off 안시키면 on 해서 이벤트 걸었을때 대댓글창이 열린 개수만큼 취소에 걸리기 때문에
@@ -345,17 +359,12 @@ function ReplyMoreClickHandler(){
  	 /* this- 클릭한거
  		parents() 뒤에 next() 5개 쓰면 input 5개 뒤에 붙음*/
 	/* 	$(".wrap-reply2").toggle(); - 누르면 나타나고 다시 누르면 사라짐 */
-	
+
 }
 
 function ReplyEscClickHandler(){
 	$(this).parents(".wrap-reply2").remove();
 }
-
-
-/* function boardReplyAgainClickHandler(){
-	
-} */
 
 
 function boardWriteClickHandler(){

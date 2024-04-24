@@ -94,12 +94,6 @@ public class BoardDao {
 		
 		return result;
 	}
-
-	public int updateReplyStep(SqlSession session, Integer boardReplyid) {
-			return session.update("updateReplyStep", boardReplyid);
-			
-	}
-	
 	
 	
 	//게시글 삭제

@@ -139,7 +139,7 @@ $("[name=pwd]").on("blur",function(){
 
 $("input").keyup(function(){
 	var pwd1=$("[name=pwd]").val().trim();
-	var pwd2=$("[name=pwdr]").val().trim();
+	var pwd2=$("[name=pwdr]").val().trim(); 
 	if(pwd1 != "" || pwd2 != ""){
 		if(pwd1 == pwd2) {
 			$(".desc-pwdr").html("일치").css('color', 'green');
@@ -149,9 +149,22 @@ $("input").keyup(function(){
 	}
 });
 	
-	
 
+$("input").keyup(function(){
+	var id=$("#id").val().trim();
+	var email=$("#email").val().trim();
+	var emailr=$("#emailr").val().trim();
+	var pwd=$("#pwd").val().trim();
+	var pwdr=$("#pwdr").val().trim();
 	
+	if(id != "" && email != ""  && emailr != "" && pwd != "" && pwdr != ""){
+		$('#btnjoin').css('background','#8066FF').css('color','white');
+	}else{
+		$('#btnjoin').css('background','#DDCCFF');
+	}
+});
+
+
 </script>
 
 

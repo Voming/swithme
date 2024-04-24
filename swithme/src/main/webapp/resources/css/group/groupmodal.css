@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.modal_btn:hover {
+    box-shadow: 3px 4px 11px 0px #00000040;
+    cursor: pointer;
+}
+
+/*모달 팝업 영역 스타일링*/
+.modal {
+/*팝업 배경*/
+	display:hide;/*평소에는 보이지 않도록*/
+    position: relative;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    position: fixed;
+}
+
+
+.modal .modal_popup {
+/*팝업*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    width: 380px;
+    height: 500px;
+    justify-content: center;
+}
+
+.modal .modal_img {
+	width: 380px;
+	height: 250px;
+	object-fit: cover;
+	margin: 0 auto;
+}
+
+.modal .modal_description {
+	display: flex;
+	flex-direction: column;
+	height: 230px;
+}
+
+.modal .modal_description a, input{
+	font-family: "IM_Hyemin-Regular";
+	margin: 10px 0;
+}
+
+.modal .modal_description input{
+	height: 35px;
+	border-radius: 10px;
+	background-color: var(--color_gray_1);
+	border: none;
+}
+
+.modal .modal_description input:focus {outline: none;}
+
+.modal .modal_popup .close_btn, .join_btn {
+    padding: 10px 20px;
+   	background-color: var(--color_purple_3);
+	font-family: "IM_Hyemin-Bold";
+	color: black;
+	height: 35px;
+	width: 180px;
+	border-radius: 10px;
+    border: none;
+    transition: box-shadow 0.2s;
+}
+.modal .modal_popup .close_btn:hover, .join_btn:hover{
+	background: var(--color_purple_1);
+	color: white;
+	cursor: pointer;
+}

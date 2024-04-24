@@ -42,6 +42,31 @@ from V_RECORD where RECORD_MEM_ID =#{memId} and TRUNC(RECORD_DATE) = TRUNC(SYSDA
 	order by t1.subject_name ASC, DDAY ASC
 </select>
 
+<!-- 일일 최대학습시간 30일-->
+<!--
+ <resultMap type="DateDifftimeDto" id="DateDifftimeDtoMap">
+	<result column="DIFFTIME" property="difftime" />
+	<result column="ONLY_DATE" property="onlyDate" />
+</resultMap> 
+-->
+<select id="thirtydayStudyTime" parameterType="string" resultType="DateDifftimeDto">
+select NVL(ROUND(DIFFTIME), 0) DIFFTIME, TO_CHAR(DDAY,'MM-DD') ONLY_DATE
+from V_DDAY30 
+left join (select TRUNC(record_date) RDAY, sum(DIFFTIME) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID= #{memId} group by TRUNC(record_date)) 
+on DDAY = RDAY order by DDAY ASC
+</select>
+
+<!-- 과목별 하루 학습시간 30일-->
+<select id="thirtydayStudyTimeBySubject" parameterType="string" resultMap="DayStudyTimeDtoMap">
+select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME
+	from 
+		(select * from (select SUBJECT_NAME, SUBJECT_COLOR from subject where mem_id= #{memId}) t1 cross join v_dday30 ) t1
+		left join 
+		(select SUBJECT_NAME, RECORD_DATE, DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID =  #{memId}) t2
+		on t1.SUBJECT_NAME = t2.SUBJECT_NAME and DDAY = TRUNC(t2.RECORD_DATE)
+	order by t1.subject_name ASC, ONLY_DATE ASC
+</select>
+
 <insert id="insertStartTime" parameterType="RecordTimeDto">
 INSERT INTO RECORD VALUES(SEQ_RECORD_ID.nextval, #{recordSubjectId}, #{recordMemId},
  	to_date(#{recordStart}, 'yyyymmddhh24miss'),NULL)

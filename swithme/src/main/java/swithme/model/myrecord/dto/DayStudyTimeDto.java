@@ -23,10 +23,16 @@ public class DayStudyTimeDto {
 	public List<DateDifftimeDto> getDiffTimeByDayList() {
 		return diffTimeByDayList;
 	}
-///// 
+/////
+	//collection을 사용하려면 FULL생성자는 사용할 수 없다.
+	//처리과정에서 오류발생 list안에 있는 필드를 먼저 채우고 채워진 리스트를 여기서 넣는 것이기 때문이다.
+	//따라서 기본생성자와 setter가 있어야한다.
+	
+	
 	public DayStudyTimeDto() {
 		super();
 	}
+	
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}

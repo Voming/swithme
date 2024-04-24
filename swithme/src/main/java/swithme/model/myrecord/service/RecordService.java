@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import swithme.model.myrecord.dao.RecordDao;
+import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordDto;
@@ -30,7 +31,7 @@ public class RecordService {
 	}
 	// 오늘의 과목 학습 시간 chart
 	public List<DayStudyTimeBySubjectDto> dayStudyTime(String memId){
-		System.out.println(">>>>>>rec dao dayStudyTime  memId : " + memId);
+		System.out.println(">>>>>>rec service dayStudyTime  memId : " + memId);
 		List<DayStudyTimeBySubjectDto> result = null;
 		SqlSession session = getSqlSession();
 		result = dao.dayStudyTime(session,memId);
@@ -42,11 +43,30 @@ public class RecordService {
 	
 	//4일치 과목별 학습 시간 chart
 	public List<DayStudyTimeDto> fourdayStudyTime(String memId){
-		System.out.println(">>>>>>rec dao fourdayStudyTime  memId : " + memId);
 		List<DayStudyTimeDto> result = null;
 		SqlSession session = getSqlSession();
 		result = dao.fourdayStudyTime(session,memId);
-		System.out.println("\n\n>>>>>>rec fourdayStudyTime  result : \n" + result);
+		session.close();
+		return result;
+		
+	}
+	// 하루 학습시간 30일치
+	public List<DateDifftimeDto> thirtydayStudyTime(String memId){
+		System.out.println(">>>>>>rec service 30일치!!!  memId : " + memId);
+		List<DateDifftimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.thirtydayStudyTime(session,memId);
+		System.out.println(">>>>>>rec 30일치!!!  result : " + result);
+		session.close();
+		return result;
+	}
+	// 과목별 하루 학습시간 30일치
+	public List<DayStudyTimeDto> thirtydayStudyTimeBySubject(String memId){
+		System.out.println(">>>>>>rec service 30일치 과목별!!!  memId : " + memId);
+		List<DayStudyTimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.thirtydayStudyTimeBySubject(session,memId);
+		System.out.println(">>>>>>rec 30일치 과목별!!!  result : " + result);
 		session.close();
 		return result;
 		

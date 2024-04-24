@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordDto;
@@ -33,10 +34,18 @@ public class RecordDao {
 	public List<DayStudyTimeBySubjectDto> dayStudyTime(SqlSession session,String memId){
 			return session.selectList("record.dayStudyTime", memId);
 		}	
- // 과목별 학습 시간 4일치		
+// 과목별 학습 시간 4일치		
 	public List<DayStudyTimeDto> fourdayStudyTime(SqlSession session,String memId){
 			return session.selectList("record.fourdayStudyTime", memId);
 		}
+// 하루 학습시간 30일치
+	public List<DateDifftimeDto> thirtydayStudyTime(SqlSession session,String memId){
+		return session.selectList("record.thirtydayStudyTime", memId);
+	}
+// 과목별 하루 학습시간 30일치	
+	public List<DayStudyTimeDto> thirtydayStudyTimeBySubject(SqlSession session,String memId){
+		return session.selectList("record.thirtydayStudyTimeBySubject", memId);
+	}
 	
 // insert 공부시작 시간
 	public int insertStartTime(SqlSession session, RecordTimeDto dto) {

@@ -5,6 +5,75 @@ ALTER TABLE RECORD MODIFY(RECORD_END DATE);
 ALTER TABLE SUBJECT MODIFY(SUBJECT_ADD_DATE DATE);
 ALTER TABLE SUBJECT MODIFY(SUBJECT_DEL_DATE DATE);
 desc subject;
+select * from record order by record_start asc;
+------ 2월
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,1);
+exec PRO_RECORD_MMDD_LUNCH('won','D_5',2,1);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',2,1);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,2);
+exec PRO_RECORD_MMDD_LUNCH('won','D_5',2,2);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',2,2);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,5);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',2,5);
+exec PRO_RECORD_MMDD_DINNER('won','D_1',2,5);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_2',2,10);
+exec PRO_RECORD_MMDD_LUNCH('won','D_5',2,10);
+exec PRO_RECORD_MMDD_DINNER('won','D_4',2,10);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,11);
+exec PRO_RECORD_MMDD_LUNCH('won','D_1',2,11);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',2,11);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,12);
+exec PRO_RECORD_MMDD_LUNCH('won','D_3',2,12);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',2,12);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',2,22);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',2,22);
+exec PRO_RECORD_MMDD_DINNER('won','D_5',2,22);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_4',2,25);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',2,25);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',2,25);
+------ 3월
+exec PRO_RECORD_MMDD_MORNING('won','D_1',3,2);
+exec PRO_RECORD_MMDD_LUNCH('won','D_5',3,2);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',3,2);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',3,5);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',3,5);
+exec PRO_RECORD_MMDD_DINNER('won','D_1',3,5);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',3,11);
+exec PRO_RECORD_MMDD_LUNCH('won','D_1',3,11);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',3,11);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',3,12);
+exec PRO_RECORD_MMDD_LUNCH('won','D_3',3,12);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',3,12);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_1',3,22);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',3,22);
+exec PRO_RECORD_MMDD_DINNER('won','D_5',3,22);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_4',3,25);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',3,25);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',3,25);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_4',3,26);
+exec PRO_RECORD_MMDD_LUNCH('won','D_2',3,26);
+exec PRO_RECORD_MMDD_DINNER('won','D_1',3,26);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_4',3,27);
+exec PRO_RECORD_MMDD_LUNCH('won','D_1',3,27);
+exec PRO_RECORD_MMDD_DINNER('won','D_5',3,27);
+
+exec PRO_RECORD_MMDD_MORNING('won','D_3',3,28);
+exec PRO_RECORD_MMDD_LUNCH('won','D_5',3,28);
+exec PRO_RECORD_MMDD_DINNER('won','D_3',3,28);
 --아이디, 과목이름, 날짜 / 4월로 지정됨
 exec PRO_RECORD_INSERT_MORNING('won','D_1','02');
 exec PRO_RECORD_INSERT_LUNCH('won','D_2','02');

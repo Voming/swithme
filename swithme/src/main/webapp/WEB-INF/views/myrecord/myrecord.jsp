@@ -233,6 +233,18 @@
 								<p>과목별 공부시간</p>
 								<canvas id="myChart2" ></canvas>
 							</div>
+							<div class="grid-item">
+								<p>공부시간 누적 ▼</p>
+								<canvas id="myChart10" ></canvas>
+							</div>
+							<div class="grid-item">
+								<p>일간 최대학습시간 ▼ </p>
+								<canvas id="myChart3" ></canvas>
+							</div>
+							<div class="grid-item">
+								<p>일간 과목별 학습시간 ▼ = item6번입니다</p>
+								<canvas id="myChart4" ></canvas>
+							</div>
 
 							<jsp:include page="/WEB-INF/views/myrecord/myrecord_chart.jsp"></jsp:include>
 						</div>

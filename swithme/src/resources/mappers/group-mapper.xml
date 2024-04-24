@@ -4,21 +4,15 @@
 
 	<select id="selectMyList" parameterType="string"
 		resultType="GroupMylistDto">
-		SELECT SGROUP_ID, SGROUP_NAME, SGROUP_IMG_PATH,
-		SGROUP_IMG_NAME FROM SGROUP
-		WHERE SGROUP_ID IN
-		(SELECT SGROUP_ID
-		FROM
-		SGROUP_MEMBER
-		WHERE
-		SGROUP_MEM_ID = #{memberId})
+		SELECT SGROUP_ID, SGROUP_NAME, SGROUP_IMG_PATH, SGROUP_IMG_NAME 
+		FROM SGROUP
+		WHERE SGROUP_ID IN (SELECT SGROUP_ID FROM SGROUP_MEMBER
+			WHERE SGROUP_MEM_ID = #{memberId})
 	</select>
 
-	<select id="selectMyCount" parameterType="string"
-		resultType="_int">
+	<select id="selectMyCount" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM SGROUP_MEMBER
-		WHERE SGROUP_MEM_ID =
-		#{memberId}
+		WHERE SGROUP_MEM_ID = #{memberId}
 	</select>
 
 	<select id="selectAllOpenList" parameterType="map"
@@ -26,19 +20,14 @@
 		SELECT S.SGROUP_ID, S.SGROUP_NAME, S.SGROUP_OPEN,
 		S.SGROUP_PWD, S.SGROUP_EXPLAIN, S.SGROUP_IMG_PATH, S.SGROUP_IMG_NAME
 		FROM (SELECT ROWNUM, SGROUP.* FROM SGROUP WHERE
-		SGROUP_OPEN = '0')
-		S
+		SGROUP_OPEN = '0') S
 		WHERE ROWNUM BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
 	<select id="selectRandList" resultType="GroupDto">
-		SELECT * FROM (
-		SELECT
-		* FROM SGROUP ORDER BY DBMS_RANDOM.RANDOM
-		)
-		WHERE
-		ROWNUM <![CDATA[<=]]>
-		20
+		SELECT * FROM (SELECT * FROM SGROUP
+			ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE ROWNUM <![CDATA[<=]]> 20
 	</select>
 
 	<select id="selectFindList" parameterType="string"
@@ -53,17 +42,16 @@
 	<insert id="insert" parameterType="GroupCreateDto">
 		INSERT ALL
 		INTO SGROUP VALUES
-		(SEQ_SGROUP_ID.nextval, #{sgroupName},
-		#{sgroupOpen},#{sgroupPwd},#{sgroupEx},#{sgroupImgPath},#{sgroupImgName})
-		INTO SGROUP_MEMBER VALUES (SEQ_SGROUP_ID.nextval, #{sgroupWriter})
-		SELECT *
-		FROM DUAL
+			(SEQ_SGROUP_ID.nextval, #{sgroupName}, #{sgroupOpen},#{sgroupPwd},#{sgroupEx},#{sgroupImgPath},#{sgroupImgName})
+		INTO SGROUP_MEMBER VALUES 
+			(SEQ_SGROUP_ID.nextval, #{sgroupWriter})
+		SELECT * FROM DUAL
 	</insert>
 
 	<select id="selectGroupInfoList" parameterType="_int"
 		resultType="GroupInfoListDto">
 		SELECT * FROM SGROUP
-		JOIN SGROUP_MEMBER USING (SGROUP_ID)
+			JOIN SGROUP_MEMBER USING (SGROUP_ID)
 		WHERE SGROUP_ID = ${groupId}
 	</select>
 
@@ -78,31 +66,27 @@
 		<result property="sumMin" column="SUM_MIN" />
 	</resultMap>
 
-	<select id="selectGroupRecordSumList" parameterType="_int"
-		resultMap="recordSumResultMap">
+	<select id="selectGroupRecordSumList" parameterType="_int" resultMap="recordSumResultMap">
 		select s.sgroup_mem_id AS "MEM_ID"
 		, NVL( SUBSTR(TO_CHAR(v.difftime , 'HH24:MI:SS'), 12, 8), '0') AS "SUM_MIN"
 		from sgroup_member s
-		left join v_record_week v on( v.record_mem_id = s.sgroup_mem_id )
+			left join v_record_week v on( v.record_mem_id = s.sgroup_mem_id )
 		where s.sgroup_id = #{groupId}
 		ORDER BY SUM_MIN DESC
 	</select>
 
 	<update id="update" parameterType="GroupUpdateDto">
-		UPDATE SGROUP SET SGROUP_NAME
-		= #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =
-		#{sgroupPwd},
-		SGROUP_EXPLAIN = #{sgroupEx}, SGROUP_IMG_PATH =
-		#{sgroupImgPath}, SGROUP_IMG_NAME= #{sgroupImgName}
-		WHERE SGROUP_ID =
-		#{sgroupId}
+		UPDATE SGROUP SET 
+			SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, 
+			SGROUP_PWD = #{sgroupPwd}, SGROUP_EXPLAIN = #{sgroupEx}, 
+			SGROUP_IMG_PATH = #{sgroupImgPath}, SGROUP_IMG_NAME= #{sgroupImgName}
+		WHERE SGROUP_ID = #{sgroupId}
 	</update>
 
 	<update id="updateMin" parameterType="GroupUpdateMinDto">
 		UPDATE SGROUP SET
-		SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, SGROUP_PWD =
-		#{sgroupPwd},
-		SGROUP_EXPLAIN = #{sgroupEx}
+			SGROUP_NAME = #{sgroupName}, SGROUP_OPEN = #{sgroupOpen}, 
+			SGROUP_PWD = #{sgroupPwd}, SGROUP_EXPLAIN = #{sgroupEx}
 		WHERE SGROUP_ID = #{sgroupId}
 	</update>
 
@@ -141,5 +125,13 @@
 	
 	<delete id="deletMemberGroup" parameterType="GroupMemberDto">
 		DELETE FROM SGROUP_MEMBER WHERE SGROUP_ID = #{sgroupId} AND SGROUP_MEM_ID = #{sgroupMemId}
+	</delete>
+	
+	<select id="selectMemCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM SGROUP_MEMBER  WHERE SGROUP_ID = #{groupId}
+	</select>
+	
+	<delete id="deleteGroup" parameterType="_int">
+		DELETE FROM SGROUP WHERE SGROUP_ID = #{groupId}
 	</delete>
 </mapper>

@@ -35,7 +35,6 @@ public class GroupInfoController extends HttpServlet implements Serializable {
 			return;
 		}
 		GroupDto groupInfo = service.selectGroupInfoOne(groupId);
-		
 		request.getSession().setAttribute("groupInfo", groupInfo);
 	
 		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);

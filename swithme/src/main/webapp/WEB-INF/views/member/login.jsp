@@ -78,7 +78,7 @@
 	}
 
 	function frmClickHandler(){
-		let preUrl = "${param.url }";
+		let preUrl = "${param.url}";  
 		preUrl = (preUrl) ? "?url="+preUrl : "";
 		console.log("preUrl : "+preUrl);
 		$.ajax({
@@ -106,8 +106,6 @@
 		
 	}
 
-	
-	
 	</script>
 	
 	<script>
@@ -142,7 +140,7 @@ const inputid = document.getElementById('id');
 const inputpwd = document.getElementById('pwd');
 
 function btnColorHandler(){
-	$(".btn.submit").css('background','#BF80FF');
+	$(".btn.submit").css('background','#8066FF');
 } 
 
 function btnGreyHandler(){

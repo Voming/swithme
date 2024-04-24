@@ -4,17 +4,23 @@ public class MemberInfoDto {
 
 	private String memId;
 	private String memEmail;
+	private String memPwd;
 	
 	
 	@Override
 	public String toString() {
-		return "LoginInfoDto [memId=" + memId + ", memEmail=" + memEmail + "]";
+		return "MemberInfoDto [memId=" + memId + ", memEmail=" + memEmail + ", memPwd=" + memPwd + "]";
 	}
 
-	public MemberInfoDto(String memId,  String memEmail) {
+	public MemberInfoDto(String memId, String memEmail, String memPwd) {
 		super();
 		this.memId = memId;
 		this.memEmail = memEmail;
+		this.memPwd = memPwd;
+	}
+
+	public String getMemPwd() {
+		return memPwd;
 	}
 
 	public String getMemId() {

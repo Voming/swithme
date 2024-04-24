@@ -47,7 +47,7 @@
 						<span class="memid">${loginInfo.memId}</span>
 					</div>
 					<div class="pwd">
-					비밀번호
+					비밀번호 <span class="mempwd">${loginInfo.memPwd}</span>
 					<a href="${pageContext.request.contextPath}/update">수정하기</a>	
 					</div>
 					<div>

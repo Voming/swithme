@@ -63,4 +63,13 @@
 }
 .wrap-body .wrap-mypage .memid{
 	margin-left:20px;
+	background-color:#F1F1F1;
+	font-size: var(--font2);
+}
+
+.wrap-body .wrap-mypage .mempwd{
+	margin-left:20px;
+	margin-right:130px;
+	background-color:#F1F1F1;
+	font-size: var(--font2);
 }

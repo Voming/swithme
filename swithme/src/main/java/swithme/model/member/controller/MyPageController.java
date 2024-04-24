@@ -37,10 +37,13 @@ public class MyPageController extends HttpServlet {
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		
 		String memId = null;
+		String memPwd=null;
 		if (loginInfo != null) { //로그인 했을 때
 			memId = loginInfo.getMemId();
+			memPwd = loginInfo.getMemPwd();
 		}
 		request.getSession().setAttribute("memId", memId);
+		request.getSession().setAttribute("memPwd", memPwd);
 	}
 
 }

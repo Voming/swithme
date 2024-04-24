@@ -154,7 +154,7 @@ public class GroupService {
 		session.close();
 		return result;
 	}
-	//그룹 나가기
+	//그룹 탈퇴
 	public int deletMemberGroup(GroupMemberDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
@@ -163,5 +163,21 @@ public class GroupService {
 		return result;
 	}
 	
+	// 그룹 안 그룹원 수
+	public int selectMemCount(int groupId) {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectMemCount(session, groupId);
+		session.close();
+		return result;
+	}
 
+	//그룹 삭제하기
+	public int deleteGroup(int groupId) {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.deleteGroup(session, groupId);
+		session.close();
+		return result;
+	}
 }

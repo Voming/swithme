@@ -30,7 +30,7 @@ function btnExitClickHandler() {
 		, success: function(result){
 			console.log(result);
 			if(result > 0){
-				alert("그룹을 나가기 성공!");
+				alert("그룹을 탈퇴 성공! \n마지막 멤버라면 그룹이 사라집니다.");
 				location.href='${pageContext.request.contextPath}/group'
 			}else{
 				alert("그룹을 나가지 못했습니다.");
@@ -74,7 +74,7 @@ function btnExitClickHandler() {
 									onclick="location.href='${pageContext.request.contextPath}/group/update?groupId=${groupInfo.sgroupId}'">그룹
 									수정하기
 								</button>
-								<button type="button" class="btn exit">그룹 나가기</button>
+								<button type="button" class="btn exit">그룹 탈퇴하기</button>
 							</div>
 						</div>
 						<div class="myGImg">

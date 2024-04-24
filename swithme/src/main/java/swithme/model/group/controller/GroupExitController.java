@@ -38,8 +38,22 @@ public class GroupExitController extends HttpServlet {
 		}
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memberId);
-		int result = service.deletMemberGroup(dto);
-		System.out.println(dto);
+		int result = 0;
+		
+		//그룹에 마지막으로 남은 사용자가 그룹 탈퇴시 그룹 삭제됨
+		int  memCount = service.selectMemCount(groupId);
+		if(memCount > 1) {
+			result = service.deletMemberGroup(dto);
+			System.out.println(dto);
+			//그룹 유지
+		} else {
+			service.deletMemberGroup(dto);
+			System.out.println(dto);
+			//그룹 삭제
+			result = service.deleteGroup(groupId);
+		}
+		
+		
 		
 		response.getWriter().append(String.valueOf(result));
 	}

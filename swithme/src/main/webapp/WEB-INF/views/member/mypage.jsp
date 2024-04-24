@@ -47,8 +47,8 @@
 						<span class="memid">${loginInfo.memId}</span>
 					</div>
 					<div class="pwd">
-						비밀번호
-					<span></span>	
+					비밀번호
+					<a href="${pageContext.request.contextPath}/update">수정하기</a>	
 					</div>
 					<div>
 						<span>각오</span>
@@ -80,11 +80,9 @@
 $(loadHandler);
 function loadHandler() {
 	$(".btn.logout").on("click",btnLogoutClickHandler);
-}
-
-function loadHandler(){
 	$(".btn.out").on("click",btnOutClickHandler);
 }
+
 
 function btnLogoutClickHandler(){
 

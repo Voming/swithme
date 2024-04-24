@@ -51,23 +51,22 @@
 						<button type="button" class="btn code"><p>인증코드</p></button>
 					</div>
 					<div>
-						<label>이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
+						<label class="emailcheck">이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
 					</div>
 					<div>
 						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 5글자 이상 입력하세요" required>
 						<span class="desc-pwd"></span>
 					</div>
 					<div>
-						<label>비밀번호 확인</label><input type="password" name="pwdr" id="pwdr"  required>
+						<label class="pwdcheck">비밀번호 확인</label><input type="password" name="pwdr" id="pwdr"  required>
 						<span class="desc-pwdr"></span>
 					</div>
 					<div class="check">
-					<input type="checkbox" required> <label >(필수) 약관에 동의합니까</label>
+					<input type="checkbox" required> <label> (필수) 약관에 동의합니까</label>
 					</div>
 					<div>
 						<button type="submit" class="btn join" id="btnjoin"> <p>회원가입</p></button> 
 					</div>
-					
 				</form>
 			</div>
 		</div>
@@ -131,7 +130,7 @@ $("[name=pwd]").on("blur",function(){
 	var regExp = /^[A-Za-z0-9]{5,20}$/;
 	var msg = '';
 	if(regExp.test(pwd) == false && pwdleng>0){
-		msg ="영문자와 숫자로만 입력해주세요";
+		msg ="영문자와 숫자만 입력가능";
 	}else{
 		msg="";
 	}

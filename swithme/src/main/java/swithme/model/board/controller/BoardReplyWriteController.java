@@ -19,6 +19,8 @@ import swithme.model.member.dto.MemberInfoDto;
  * Servlet implementation class BoardReplyWriteController
  */
 @WebServlet("/board/reply/write")
+//LoginFilter 에서 urlPatterns에 url에 /board/라고 써진 모든 것들을 로그아웃 하기 전까지
+// login 상태 유지시키겠다고 조건 걸어놔서 로그인 유지를 위해 게시글 관련된 url 은 앞에 /board/ 붙여주기
 public class BoardReplyWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService service = new BoardService();
@@ -37,26 +39,22 @@ public class BoardReplyWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String replyAjaxSuccess = null;
 		
-		
-		String replyIdStr = request.getParameter("replyId");
-		int replyId = 0;
 		String boardIdStr = request.getParameter("boardId");
 		int boardId = 0;
 		String replyContent = request.getParameter("replyContent");
 		
+		String replyIdStr = request.getParameter("replyId");
+		int replyId = 0;
+		String replyAgainContent = request.getParameter("replyAgainContent");
+
+		System.out.println("boardIdStr : " + boardIdStr);
+		System.out.println("댓글 내용 : " + replyContent);
+		System.out.println("replyIdStr : " + replyIdStr);
+		System.out.println("대댓글 내용 : " + replyAgainContent);
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-		//getAttribute에서 loginInfo 값을 가져옴 -> MemberInfoDto에서 가져옴
-		//(MemberInfoDto) 를 붙인 이유는 이 형태로 변환하기 위해서
-		if(loginInfo == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
-		
 		String replyWriterid = loginInfo.getMemId();
-
 		System.out.println("댓글아이디 : " + replyWriterid);
-		System.out.println("댓글 내용 : " + replyContent);
 		
 		if(boardIdStr != null && !boardIdStr.equals("")) {
 			try {
@@ -70,7 +68,6 @@ public class BoardReplyWriteController extends HttpServlet {
 		if(replyIdStr != null && !replyIdStr.equals("")) {
 			try {
 				replyId = Integer.parseInt(replyIdStr);
-				
 			} catch (NumberFormatException e) {
 				response.getWriter().append("replyId 안들어옴");
 				return;
@@ -106,8 +103,8 @@ public class BoardReplyWriteController extends HttpServlet {
 		System.out.println("댓글 순서 : " + replyRef + " " + replyStep + " " +replyLevel);
 		
 		//댓글달기
-		
-		BoardReplyDto replydto = new BoardReplyDto(replyId, boardId, replyWriterid, replyContent, "", replyRef, replyStep, replyLevel);
+		String content = (replyAgainContent != null) ? replyAgainContent : replyContent;
+		BoardReplyDto replydto = new BoardReplyDto(replyId, boardId, replyWriterid, content, "", replyRef, replyStep, replyLevel);
 		//writeTime은 query문 자체에 default 로 들어가서 null로 써줘도 상관없음(자리채우는 느낌) 
 		System.out.println(replydto);
 		
@@ -126,28 +123,6 @@ public class BoardReplyWriteController extends HttpServlet {
 			 replyAjaxSuccess = null;
 		 }	 
 		 response.getWriter().append(replyAjaxSuccess);
-		 
-		 
-//		 
-//		 //대댓글 달기
-//		 String replyAgainAjaxSuccess = null;
-//		 
-//		 BoardReplyDto replyAagaindto = new BoardReplyDto(replyId, boardId, replyWriterid, replyContent, "", replyRef, replyStep, replyLevel);
-//		 int resultAgain = service.insertReplyWriteAgain(replyAagaindto);
-//		 System.out.println( "대댓글 달기: " + resultAgain);
-//		 
-//		 if(result>0) {
-//			 //db에서 갔다 올때 insert값이랑 select값(댓글 등록된 값) jsp로 전달 
-//			 //-> return AJAX  SUCCESS로 전달함 
-//			 List<BoardReplyDto> replyAgainList = service.selectBoardReplyList(boardId);
-//			 Gson gson = new Gson();
-//			 replyAgainAjaxSuccess = gson.toJson(replyAgainList);
-//			 System.out.println("replyAgainList : " + replyAgainAjaxSuccess);
-//		 } else {
-//			 //0보다 작아도 INSERT 실패 success 로 가는데 무슨 값을 전달할것인가? null
-//			 replyAgainAjaxSuccess = null;
-//		 }	 
-//		 response.getWriter().append(replyAgainAjaxSuccess);
 		 
 		 
 	}

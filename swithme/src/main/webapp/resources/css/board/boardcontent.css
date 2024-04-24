@@ -275,6 +275,51 @@ textarea:focus {
 }
 
 
+/* 대댓글 달린거 css */
+wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 {
+	    font-family: "IM_Hyemin-Regular";
+    font-size: var(--font3);
+    resize: none;
+    border: none;
+    border-radius: 20px;
+    background: rgb(237, 237, 237);
+    padding: 20px 20px;
+    margin: 10px 40px 20px 40px;
+}
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-write > div{
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	margin-bottom: 10px;
+}
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-content > div {
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	margin: 20px;
+}
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-wrap > ul{
+	display:flex;
+	font-family: "IM_Hyemin-Regular";
+ 	font-size: var(--font4);
+	
+}
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-wrap > ul > li {
+	flex: 1 1 0;	
+}
+
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-wrap > ul > li:nth-child(2) {
+	flex: 2 0 0;
+	display: none;
+}
+
+.wrap-body > div.board-reply > div.warp-reply-list > div.wrap-reply2 > div.r-wrap > ul > li:nth-child(3) {
+	text-align: end;
+}
+
 
 
 /* 대댓글 입력 창*/
@@ -285,7 +330,7 @@ textarea:focus {
 	resize: none;
 	border: none;
 	border-radius: 20px;
-	background: rgb(237, 237, 237);
+	background: var(--color_gray_2);
  	padding: 20px 20px;
  	margin: 10px 40px 20px 120px;
 }

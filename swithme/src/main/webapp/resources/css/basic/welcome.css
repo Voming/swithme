@@ -20,4 +20,5 @@
 .wrap-welcome .btn:hover{
 	background: var(--color_purple_1);
 	color: white;
+	cursor: pointer;
 }

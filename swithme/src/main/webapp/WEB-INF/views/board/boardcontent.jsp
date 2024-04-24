@@ -74,7 +74,12 @@
 						<c:otherwise>
 							<c:forEach items="${replydtolist}" var="replydto">
 							<!-- boardcontentcontroller에 있는 setAttribute값 -->
+								<c:if test="${replydto.replyLevel == 1 }">
 								<div class="replyresult">
+								</c:if>
+								<c:if test="${replydto.replyLevel != 1 }">
+								<div class="wrap-reply2">
+								</c:if>
 									<div class="r-write">
 										<div>
 											${replydto.replyWriterid}
@@ -92,19 +97,22 @@
 											<li class="replydel" style="cursor: pointer;">삭제</li>
 										</ul>
 									</div>
+										<input type="hidden" name="boardId" value="${dto.boardId }">
+										<input type="hidden" name="replyId" value="${replydto.replyId }">
+										<input type="hidden" name="replyLevel" value="${replydto.replyLevel }">
+										<input type="hidden" name="replyStep" value="${replydto.replyStep }">
+										<input type="hidden" name="replyRef" value="${replydto.replyRef }">
+								<c:if test="${replydto.replyLevel == 1 }">
 								</div>
-								<input type="hidden" name="boardId" value="${dto.boardId }">
-								<input type="hidden" name="replyId" value="\${replydto.replyId }">
-								<input type="hidden" name="replyLevel" value="\${replydto.replyLevel }">
-								<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
-								<input type="hidden" name="replyRef" value="\${replydto.replyRef }">
+								</c:if>
+								<c:if test="${replydto.replyLevel != 1 }">
+								</div>
+								</c:if>
 								<!-- list 값 하나씩 뽑아내기 위해서 foreach문 사용 -->
 								<!-- setAttribute 값으로 값을 불러오려먼 el태그 써야함 -->
 								<!-- getSession에서 setAttribute를 주니까 session에 등록하는거고
 								이것은 서버가 연결되어 있는 한 모든 jsp에서 값 불러오기 가능 - 광역변수라 생각하자 -->
-							
 							</c:forEach>
-							 
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -135,7 +143,7 @@
 					<input type="hidden" name="replyRef" value="\${replydto.replyRef }"> 			
 				</div>
  --%>				
-				<div class="wrap-reply">
+				<div class="wrap-reply-write1">
 					<form class="frm-reply">
 						<div class="r-1">
 							<div>
@@ -193,13 +201,16 @@ function loadedHandler(){
 	/* 대댓글창 숨기기 */
 	$(".replyesc").on("click", ReplyEscClickHandler);
 	
+	
+	/* 대댓글 등록 */
+	$(".replyreg2").on("click", boardReplyAgainClickHandler)
+	
 	/* 대댓글 삭제 */
 	$(".replydel").each(function(index, element){
 		// 투두 ~~~ ReplyMoreClickHandler 처럼  ReplydelClickHandler 만들어주기
 		//$(element).click(ReplydelClickHandler);
 	});
 
-	
 	
 	$(".btn.write").on("click", boardWriteClickHandler);
 	$(".btn.board").on("click", boardClickHandler);
@@ -276,16 +287,15 @@ function displayReplyWrap(datalist){
 						<li class="replydel" style="cursor: pointer;">삭제</li>
 					</ul>
 				</div>
+				<input type="hidden" name="boardId" value="${dto.boardId }">
+				<input type="hidden" name="replyId" value="\${replydto.replyId }">
+				<input type="hidden" name="replyLevel" value="\${replydto.replyLevel }">
+				<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
+				<input type="hidden" name="replyRef" value="\${replydto.replyRef }">
 			</div>
-			<input type="hidden" name="boardId" value="${dto.boardId }">
-			<input type="hidden" name="replyId" value="\${replydto.replyId }">
-			<input type="hidden" name="replyLevel" value="\${replydto.replyLevel }">
-			<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
-			<input type="hidden" name="replyRef" value="\${replydto.replyRef }">
 		`;
-			
-
 	}
+	
 	$(".warp-reply-list").html(htmlVal);
 	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창 띄우기 이벤트가 사라짐으로
  	   밑에 다시 걸어야함 */
@@ -305,30 +315,33 @@ function displayReplyWrap(datalist){
 /* 대댓글 창 띄우기 */
 function ReplyMoreClickHandler(){
  	
-	var $nextEle = $(this).parents(".replyresult").next();
+	var $nextEle = $(this).parents(".replyresult").next().next();
 	/* parents(".replyresult") - 댓글창 */
 	/* next - 댓글창의 다음 요소를 찾아달라라는 뜻으로 대댓글창이 밑에 있으니 대댓글 창을 찾아달라
 			=> 객체 탐색은 요소를 찾아서 꺼내는 기능을 함 */
-	if( $nextEle.hasClass("wrap-reply2")) {
+	if( $nextEle.hasClass("wrap-reply-write2")) {
 		return;
 		/*대댓글 창이 있으면 return 해서 이 밑으로 실행하지 않게 해줘 */
 	}
 	
-	
+	var replyId = $nextEle.next().val();
+	var replyLevel = $nextEle.next().next().val();
+	var replyStep = $nextEle.next().next().next().val();
+	var replyRef = $nextEle.next().next().next().val();
 	console.log(this);
  	
 	var htmlVal = '';
 	 	htmlVal += `
-	 		<div class="wrap-reply2">
+	 		<div class="wrap-reply-write2">
 				<form class="frm-reply2">
 					<div class="r-1">
 						<div>
-							작성자
+							${loginInfo.memId }
 						</div>
 					</div>
 					<div class="r-2">
 						<div>
-							<textarea name="content" cols="124" rows="5" placeholder="내용을 입력하시오."></textarea>
+							<textarea name="replyAgainContent" cols="124" rows="5" placeholder="내용을 입력하시오."></textarea>
 						</div>
 					</div>
 					<div class="r-3">
@@ -337,11 +350,16 @@ function ReplyMoreClickHandler(){
 							<li class="replyreg2" style="cursor: pointer;">등록</li>
 						</ul>
 					</div>
+					<input type="hidden" name="boardId" value="${dto.boardId }">
+					<input type="hidden" name="replyId" value="\${replyId }">
+					<input type="hidden" name="replyLevel" value="\${replyLevel }">
+					<input type="hidden" name="replyStep" value="\${replyStep }">
+					<input type="hidden" name="replyRef" value="\${replyRef }"> 
 				</form>	
 			</div>	
 	`;
  
- 	$(this).parents(".replyresult").after(htmlVal);
+ 	$(this).parents(".replyresult").next().after(htmlVal);
  	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창이 사라지는
  		이벤트가 사라짐으로 밑에 다시 걸어야함 */
 	/* after - 조작 개념이라서 어느 위치에 넣어달라는 의미 
@@ -356,6 +374,9 @@ function ReplyMoreClickHandler(){
  	    ex. 대댓글창이 2개 열려있으면 취소를 2번 눌러야 대댓글창이 사라짐 */
 
  	
+ 	$(".replyreg2").off("click");
+ 	$(".replyreg2").on("click", boardReplyAgainClickHandler);    
+ 	    
  	 /* this- 클릭한거
  		parents() 뒤에 next() 5개 쓰면 input 5개 뒤에 붙음*/
 	/* 	$(".wrap-reply2").toggle(); - 누르면 나타나고 다시 누르면 사라짐 */
@@ -363,8 +384,89 @@ function ReplyMoreClickHandler(){
 }
 
 function ReplyEscClickHandler(){
-	$(this).parents(".wrap-reply2").remove();
+	$(this).parents(".wrap-reply-write2").remove();
 }
+
+
+/* 대댓글 등록하기 */
+function boardReplyAgainClickHandler(){
+	
+	console.log("${dto.boardId }");
+	var $thisEle = $(this);
+	if($(".frm-reply2 [name=replyAgainContent]").val().trim().length == 0) {
+		alert("등록하고 싶으면 입력해라");
+		return;
+	}
+
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/board/reply/write",
+		method: "post",
+		data: $(".frm-reply2").serialize(),
+		dataType: 'json',
+		success: function(result){
+			console.log(result);
+			if(result == null) {
+				alert("오류났어요~");
+				
+			} else {
+				displayReplyAgainWrap(result, $thisEle);
+				/* 함수를 정의한 것이기 때문에 밑에서 값 넣어줘야함 */
+			}
+		},
+		error: function(request, status, error){
+			//controller에서 전달해준 값 여기서 호출
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+		
+	});
+
+}
+
+
+/* 대댓글 */
+function displayReplyAgainWrap(result, thisEle){
+	console.log(thisEle);
+	var htmlVal = '';
+	for(var idx in datalist){
+		var replydto = datalist[idx];
+		 	htmlVal += `
+		 		<div class="wrap-reply2">
+					<div class="r-1">
+						<div>
+							\${replydto.replyWriterid}
+						</div>
+					</div>
+					<div class="r-2">
+						<div>
+							\${replydto.replyContent}
+						</div>
+					</div>
+					<div class="r-3">
+						<ul>
+							<li>\${replydto.replyWritetime}</li>
+							<li class="replyesc" style="cursor: pointer;">삭제</li>
+						</ul>
+					</div>
+					<input type="hidden" name="boardId" value="${dto.boardId }">
+					<input type="hidden" name="replyId" value="\${replydto.replyId }">
+					<input type="hidden" name="replyLevel" value="\${replydto.replyLevel }">
+					<input type="hidden" name="replyStep" value="\${replydto.replyStep }">
+					<input type="hidden" name="replyRef" value="\${replydto.replyRef }">
+				</div>
+				
+			`;
+	}
+	
+	$(this).parents(".replyresult").next().next().next().next().next().next().after(htmlVal);
+ 
+	
+}
+
+
+
 
 
 function boardWriteClickHandler(){

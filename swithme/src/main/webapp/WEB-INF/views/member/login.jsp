@@ -140,7 +140,8 @@ const inputid = document.getElementById('id');
 const inputpwd = document.getElementById('pwd');
 
 function btnColorHandler(){
-	$(".btn.submit").css('background','#8066FF');
+	$(".btn.submit").css('background','#8066FF').css('color','white').css('cursor', 'pointer');
+	
 } 
 
 function btnGreyHandler(){

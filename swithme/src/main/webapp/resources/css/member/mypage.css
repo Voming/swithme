@@ -38,20 +38,29 @@
 
 .wrap-body .wrap-mypage input[type=text]{
 	margin-bottom:20px;
-	border-radius: 10px;
+	border-radius: 20px;
 	border:none;
 	background-color:white;
 	border: 1.5px solid var(--color_purple_1);
 	 width:300px;
 	  height: 30px;
 	  outline: none;
+	   font-family: "IM_Hyemin-Regular";
 }
 
 .wrap-body .wrap-mypage .btn.logout{
 	margin-right:45px;
 }
+
+.wrap-body .wrap-mypage .btn.logout:hover{
+	color:white;
+}
+
 .wrap-body .wrap-mypage .btn.out{
 	margin-left:100px;
+}
+.wrap-body .wrap-mypage .btn.out:hover{
+	color:white;
 }
 .wrap-body .wrap-mypage .myboard{
 	margin-top:30px;

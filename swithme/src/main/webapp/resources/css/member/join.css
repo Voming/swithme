@@ -29,6 +29,12 @@
 	border:none;
 }
 
+.wrap-body .wrap-join .checkcode{
+	background-color:white;
+	border:none;
+}
+
+
 .wrap-body .wrap-join input[type=text]{
 	width: 70%;
     height: 30px;
@@ -71,7 +77,7 @@
 }
 
 .wrap-body .wrap-join .emailcheck{
-	margin-right:80px;
+	margin-right:70px;
 }
 
 .wrap-body .wrap-join .pwdcheck{
@@ -89,6 +95,7 @@
     background-color:#DDCCFF;
     border:none;
 }
+
 
 .wrap-body .wrap-join  #btnjoin{
 	display:block;

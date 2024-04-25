@@ -57,8 +57,8 @@ public class GroupDao {
 		List<GroupDto> result = session.selectList("group.selectAllList");
 		return result;
 	}
-	
-	//그룹 추가
+
+	// 그룹 추가
 	public int insert(SqlSession session, GroupCreateDto dto) {
 		int result = session.insert("group.insert", dto);
 		return result;
@@ -76,51 +76,63 @@ public class GroupDao {
 		return result;
 	}
 
-	//일주일당 공부량
+	// 일주일당 공부량
 	public List<GroupRecordSumDto> selectGroupRecordSumList(SqlSession session, int groupId) {
 		List<GroupRecordSumDto> result = session.selectList("group.selectGroupRecordSumList", groupId);
 		return result;
 	}
-	
-	//하루당 공부량
+
+	// 하루당 공부량
 	public List<GroupRecordDaySumDto> selectGroupRecordDaySumList(SqlSession session, int groupId) {
 		List<GroupRecordDaySumDto> result = session.selectList("group.selectGroupRecordDaySumList", groupId);
 		return result;
 	}
 
-	//사진 포함 업데이트
+	// 사진 포함 업데이트
 	public int update(SqlSession session, GroupUpdateDto dto) {
 		int result = session.update("group.update", dto);
 		return result;
 	}
 
-	//사진 제외 업데이트
+	// 사진 제외 업데이트
 	public int updateMin(SqlSession session, GroupUpdateMinDto dto) {
 		int result = session.update("group.updateMin", dto);
 		return result;
 	}
 
-	//그룹 탈퇴
-	public int deletMemberGroup(SqlSession session,GroupMemberDto dto) {
+	// 그룹 탈퇴
+	public int deletMemberGroup(SqlSession session, GroupMemberDto dto) {
 		int result = session.delete("group.deletMemberGroup", dto);
 		return result;
 	}
-	
-	// 그룹 안 그룹원 수 
+
+	// 그룹 안 그룹원 수
 	public int selectMemCount(SqlSession session, int groupId) {
 		int result = session.selectOne("group.selectMemCount", groupId);
 		return result;
 	}
-	
-	//그룹 삭제하기
+
+	// 그룹 삭제하기
 	public int deleteGroup(SqlSession session, int groupId) {
 		int result = session.delete("group.deleteGroup", groupId);
 		return result;
 	}
-	
+
 	// 가입하려는 그룹 비밀번호 체크
 	public String selectJoinPwd(SqlSession session, int groupId) {
 		String result = session.selectOne("group.selectJoinPwd", groupId);
+		return result;
+	}
+
+	// 그룹 가입
+	public int insertJoinMember(SqlSession session, GroupMemberDto dto) {
+		int result = session.insert("group.insertJoinMember", dto);
+		return result;
+	}
+	
+	// 가입된 그룹인지 체크
+	public int selectJoinCheck(SqlSession session, GroupMemberDto dto) {
+		int result = session.selectOne("group.selectJoinCheck", dto);
 		return result;
 	}
 }

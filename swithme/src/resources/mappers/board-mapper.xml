@@ -12,20 +12,20 @@
 	<select id="selectPage" resultType="BoardListDto" parameterType="map">
 		SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
-		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME,
+		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME,
 		BOARD_WRITER, READ_COUNT FROM BOARD ORDER BY BOARD_ID DESC) T1 ) T2
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
 	<select id="selectOne" resultType="BoardContentDto" parameterType="int">
-		SELECT BOARD_ID, TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
+		SELECT BOARD_ID, TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>
 	
 	<select id="selectBoardReplyList" resultType="BoardReplyDto" parameterType="int">
-		SELECT REPLY_ID, BOARD_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
+		SELECT REPLY_ID, BOARD_ID, REPLY_WRITER_ID ,REPLY_CONTENT, to_char(REPLY_WRITE_TIME, 'yyyy-mm-dd  hh24:mi') REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
 		FROM BOARD_REPLY
 		WHERE BOARD_ID = #{boardId} 
-			ORDER BY REPLY_REF ASC, REPLY_STEP
+			ORDER BY REPLY_REF ASC, REPLY_STEP ASC
 	</select>
 	
 	<insert id="insert" parameterType="BoardInsertDto">
@@ -46,8 +46,8 @@
 				 #{boardId}, #{replyWriterid}, #{replyContent},
 				default,
 				#{replyRef}, 
-				(SELECT reply_step+1 FROM BOARD_REPLY where reply_id=#{replyId}),
-				(SELECT reply_level+1 FROM BOARD_REPLY where reply_id=#{replyId}))
+				(SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_ref=(select reply_ref from board_reply where reply_id=#{replyId})),
+				(SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY where reply_id=#{replyId}))
 	</insert>
 
 	<update id="update" parameterType="BoardDto">

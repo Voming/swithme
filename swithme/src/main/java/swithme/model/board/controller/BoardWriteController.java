@@ -50,6 +50,10 @@ public class BoardWriteController extends HttpServlet {
 		String title = request.getParameter("title"); // form 태그 안에 있는 name 따라감
 		String content = request.getParameter("content");
 		
+		
+		System.out.println("게시글 작성 : " + title + " " + content);
+		
+		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		if(loginInfo == null) {
 			response.sendRedirect(request.getContextPath()+"/login");

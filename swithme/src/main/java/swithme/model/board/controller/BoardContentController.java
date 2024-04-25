@@ -1,12 +1,17 @@
 package swithme.model.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import swithme.model.board.dto.BoardReplyDto;
 import swithme.model.board.service.BoardService;
 
 /**
@@ -32,7 +37,6 @@ public class BoardContentController extends HttpServlet {
 	 *
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String boardIdStr = request.getParameter("id");
 		//getParameters는 return type이 string이라서 사용자 입력값이 다 string 형태로 인식
 		//=> string 형태에 넣어준 다음에 밑에서 형변환 하기
@@ -47,9 +51,9 @@ public class BoardContentController extends HttpServlet {
 			
 			System.out.println("controller : " + boardIdStr);
 			
-			//댓글꺼까지 여기 있음
-			request.setAttribute("replydtolist", service.selectBoardReplyList(boardId));
-			System.out.println("replycontroller :" + service.selectBoardReplyList(boardId).toString());
+//			//댓글꺼까지 여기 있음
+//			request.setAttribute("replydtolist", service.selectBoardReplyList(boardId));
+//			System.out.println("replycontroller :" + service.selectBoardReplyList(boardId).toString());
 			
 			request.getRequestDispatcher("/WEB-INF/views/board/boardcontent.jsp").forward(request, response);
 			
@@ -60,5 +64,8 @@ public class BoardContentController extends HttpServlet {
 		}
 	}
 
-
+	// ajax
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("/board/content doPost - ajax로 reply list 읽어오기");
+	}
 }

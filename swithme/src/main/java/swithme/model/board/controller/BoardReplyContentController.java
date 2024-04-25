@@ -36,6 +36,7 @@ public class BoardReplyContentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("loadedHandler 안에 있는 ajax에서 댓글, 대댓글 정보 받아오기");
 		String boardIdStr = request.getParameter("id");
+		//url 에서 id 값을 꺼냄 => http://127.0.0.1:8080/swithme/board/content?id=1 
 		
 		try {
 			int boardId = Integer.parseInt(boardIdStr);

@@ -55,7 +55,7 @@ public class BoardDao {
 	
 	//댓글 
 	public List<BoardReplyDto> selectBoardReplyList(SqlSession session, Integer boardId) {
-		System.out.println("dao : " + session.selectList("board.selectBoardReplyList", boardId));
+		
 		return session.selectList("board.selectBoardReplyList", boardId);
 		
 		
@@ -65,6 +65,7 @@ public class BoardDao {
 	public int insert(SqlSession session, BoardInsertDto dto) {
 	
 		int result = session.insert("board.insert", dto);
+		System.out.println("게시글 추가 dao : " + result);
 		return result;
 
 	}

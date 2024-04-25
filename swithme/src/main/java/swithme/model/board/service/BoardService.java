@@ -111,6 +111,7 @@ public class BoardService {
 		int result = 0;
 		
 		SqlSession session = MybatisTemplate.getSqlSession(false);
+		//autocommit - false 시켜야 commit, rollback 의미있음
 		
 		if(replydto.getReplyId() == 0) {
 			//댓글이 입력된 값을 가져가는 중이라서 아직 몇번째 댓글인지 모름

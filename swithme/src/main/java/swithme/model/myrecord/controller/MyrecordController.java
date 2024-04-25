@@ -44,6 +44,7 @@ public class MyrecordController extends HttpServlet {
 					memId = loginInfo.getMemId();
 					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 					request.setAttribute("sublist", sublist);
+					request.setAttribute("memId", memId);
 					
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
 				}

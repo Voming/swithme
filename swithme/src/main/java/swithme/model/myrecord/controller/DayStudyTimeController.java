@@ -56,12 +56,17 @@ public class DayStudyTimeController extends HttpServlet {
 			//30일치
 			List<DateDifftimeDto> result3=service.thirtydayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result4 = service.thirtydayStudyTimeBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			//누적
+			List<DateDifftimeDto> result5=service.accStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("dayStudyTimeList", result);				//오늘의 과목별 학습 시간
 			resultMap.put("fourdayStudyTimeList", result2); 		//과목별 학습 4일치
 			resultMap.put("thirtydayStudyTime", result3); 			//하루 학습시간 30일치
 			resultMap.put("thirtydayStudyTimeBySubject", result4); 	//하루 과목별 학습시간 30일치
+			resultMap.put("accStudyTime", result5); 	//누적학습시간
+			
+			
 			
 			System.out.println("-------- resultMap의 map내용을 보시라!! -- \n");
 			System.out.println(resultMap);

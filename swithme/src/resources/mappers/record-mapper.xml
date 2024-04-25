@@ -67,6 +67,21 @@ select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, 
 	order by t1.subject_name ASC, ONLY_DATE ASC
 </select>
 
+<select id="accStudyTime" parameterType="string" resultType="DateDifftimeDto">
+SELECT 
+    TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
+    SUM(NVL(ROUND(DIFFTIME), 0)) OVER (ORDER BY DDAY ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS DIFFTIME
+FROM V_DDAY30 
+LEFT JOIN (
+    SELECT TRUNC(record_date) AS RDAY, 
+           SUM(DIFFTIME) AS DIFFTIME 
+    FROM V_RECORD_SEC 
+    WHERE RECORD_MEM_ID = #{memId}
+    GROUP BY TRUNC(record_date)
+) ON DDAY = RDAY
+ORDER BY DDAY ASC
+</select>
+
 <insert id="insertStartTime" parameterType="RecordTimeDto">
 INSERT INTO RECORD VALUES(SEQ_RECORD_ID.nextval, #{recordSubjectId}, #{recordMemId},
  	to_date(#{recordStart}, 'yyyymmddhh24miss'),NULL)

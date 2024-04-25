@@ -107,77 +107,76 @@ select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, 
 		on t1.SUBJECT_NAME = t2.SUBJECT_NAME and DDAY = TRUNC(t2.RECORD_DATE)
 	order by t1.subject_name ASC, ONLY_DATE ASC;
 ----------------------------------
+--과목별 누적그래프 생성
+---실패1
+with acc_data as(
+select TO_CHAR(DDAY,'MM-DD') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME,lag( NVL(ROUND(DIFFTIME), 0),1,0) over(order by TO_CHAR(DDAY,'MM-DD')) as demi
+from V_DDAY30 
+left join (select trunc(record_date) rday, sum(DIFFTIME) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID='won'group by trunc(record_date)) 
+on dday = rday order by DDAY ASC)
+select ONLY_DATE,DIFFTIME,demi,lag(demi,1,0) over(order by only_date) demi2, (DIFFTIME+demi+lag(demi,1,0) over(order by only_date)) as IWANTTHIS from acc_data
+;
+---실패2
+WITH joined_data AS (
+    SELECT 
+        TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
+        NVL(ROUND(DIFFTIME), 0) AS DIFFTIME
+    FROM V_DDAY30 
+    LEFT JOIN (
+        SELECT TRUNC(record_date) AS rday, 
+               SUM(DIFFTIME) AS DIFFTIME 
+        FROM V_RECORD_SEC 
+        WHERE RECORD_MEM_ID = 'won'
+        GROUP BY TRUNC(record_date)
+    ) ON DDAY = rday
+    ORDER BY DDAY ASC
+),
+merged_data AS (
+    SELECT 
+        ONLY_DATE,
+        DIFFTIME,
+        LAG(DIFFTIME, 1, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME,
+        LAG(DIFFTIME, 2, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME2,
+         LAG(DIFFTIME, 1, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME3
+    FROM joined_data
+)
+SELECT 
+    ONLY_DATE,
+    -- LAG 함수를 사용하여 이전 행의 DIFFTIME 값을 가져옵니다.
+    -- 이전 값이 없는 경우 기본값 0을 사용합니다.
+    -- 현재 행의 DIFFTIME과 이전 행의 DIFFTIME을 더하여 누적 DIFFTIME을 계산합니다.
+    (DIFFTIME + PREV_DIFFTIME),
+     (DIFFTIME + PREV_DIFFTIME+PREV_DIFFTIME2) as "22",
+     (DIFFTIME + PREV_DIFFTIME+PREV_DIFFTIME2+PREV_DIFFTIME3) as "33"
+FROM merged_data
+ORDER BY ONLY_DATE ASC;
+-- 과목 구분없는 누적값-----------------------------------------------------
+SELECT 
+    TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
+    -- 1행부터 현재 행까지의 DIFFTIME 값을 누적해서 구합니다.
+    SUM(NVL(ROUND(DIFFTIME), 0)) OVER (ORDER BY DDAY ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS DIFFTIME
+FROM V_DDAY30 
+LEFT JOIN (
+    SELECT TRUNC(record_date) AS rday, 
+           SUM(DIFFTIME) AS DIFFTIME 
+    FROM V_RECORD_SEC 
+    WHERE RECORD_MEM_ID = 'won'
+    GROUP BY TRUNC(record_date)
+) ON DDAY = rday
+ORDER BY DDAY ASC;
 ----한 달 누적시간 생성 ------------------------------
-SELECT SYSDATE AS current_date,
-       ADD_MONTHS(SYSDATE, -1) AS month
+SELECT TRUNC(SYSDATE,'month') AS this_month,
+       TRUNC(ADD_MONTHS(SYSDATE, -1),'month') AS month
 FROM dual;
 
+select to_CHAR(trunc(record_date,'month'),'MM') ONLY_DATE,round(sum(difftime)) DIFFTIME from V_RECORD_SEC where record_mem_id='won' and trunc(record_date,'month')=trunc(sysdate,'month') group by to_CHAR(trunc(record_date,'month'),'MM');
 
-
---단순노가다...?
+--30일 날짜 프로시저 성공...!
+exec PRO_DDAY_CREATE('V_DDAY30',30);
 select * from V_DDAY30;
-CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SWITHME"."V_DDAY30" ("DDAY") AS 
-select TRUNC(SYSDATE-30) dday from dual
-union
-select TRUNC(SYSDATE-29) dday from dual
-union
-select TRUNC(SYSDATE-28) dday from dual
-union
-select TRUNC(SYSDATE-27) dday from dual
-union
-select TRUNC(SYSDATE-26) dday from dual
-union
-select TRUNC(SYSDATE-25) dday from dual
-union
-select TRUNC(SYSDATE-24) dday from dual
-union
-select TRUNC(SYSDATE-23) dday from dual
-union
-select TRUNC(SYSDATE-22) dday from dual
-union
-select TRUNC(SYSDATE-21) dday from dual
-union
-select TRUNC(SYSDATE-20) dday from dual
-union
-select TRUNC(SYSDATE-19) dday from dual
-union
-select TRUNC(SYSDATE-18) dday from dual
-union
-select TRUNC(SYSDATE-17) dday from dual
-union
-select TRUNC(SYSDATE-16) dday from dual
-union
-select TRUNC(SYSDATE-15) dday from dual
-union
-select TRUNC(SYSDATE-14) dday from dual
-union
-select TRUNC(SYSDATE-13) dday from dual
-union
-select TRUNC(SYSDATE-12) dday from dual
-union
-select TRUNC(SYSDATE-11) dday from dual
-union
-select TRUNC(SYSDATE-10) dday from dual
-union
-select TRUNC(SYSDATE-9) dday from dual
-union
-select TRUNC(SYSDATE-8) dday from dual
-union
-select TRUNC(SYSDATE-7) dday from dual
-union
-select TRUNC(SYSDATE-6) dday from dual
-union
-select TRUNC(SYSDATE-5) dday from dual
-union
-select TRUNC(SYSDATE-4) dday from dual
-union
-select TRUNC(SYSDATE-3) dday from dual
-union
-select TRUNC(SYSDATE-2) dday from dual
-union
-select TRUNC(SYSDATE-1) dday from dual
-union
-select TRUNC(SYSDATE-0) dday from dual;
+--달 별 프로시저 성공아님...
+exec PRO_MONTH_CREATE('V_MMONTH12',11);
+select * from V_MMONTH12;
 
 
 

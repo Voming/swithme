@@ -110,6 +110,7 @@ url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
 	displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
 	displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
 	displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
+	displayAccStudyTime(resultMap.accStudyTime);
 	
 	}  // successcbf
 });  // ajax
@@ -372,7 +373,79 @@ options:{
 
 });	
 }
-/**** myChart4 ****30일간 과목별로******************************************/
+/**** myChart10 누적 그래프******************************************/
+ function displayAccStudyTime(result){
+ let accDifftimeList =[];
+ let accRecordDateList=[]; 
+	for (var i = 0; i < result.length; i++) {
+		var resultItem =  result[i];
+		accDifftimeList[i]=resultItem.difftime
+		accRecordDateList[i]=resultItem.onlyDate;
+	}
+	
+	//그래프 생성
+	// 여기
+var ctx = document.getElementById('myChart10').getContext('2d');
+var myChart10 = new Chart(ctx, {
+type : 'line',
+data:{
+	//라벨에 날짜 넣기
+    labels: accRecordDateList, //라벨에 날짜 
+    datasets: [{
+	    data:accDifftimeList ,
+	    borderColor:'rgba(255,179,229,1)',  
+	    pointBackgroundColor:'rgba(255,179,229,1)',
+	    pointBorderColor:'rgba(255,179,229,1)',
+	    pointRadius:0,
+	    hoverOffset: 4
+	  }]
+},
+options:{
+	scales:{
+		//x,y축의 그리드 선 안보이게 설정
+		x:{
+			grid:{
+				display:false
+			}
+		},
+		y:{
+			grid:{
+				display:false
+			},
+			axis:'y',
+			display:false
+		}
+	},
+	plugins:{
+		//차트 위에 해당그래프가 뭔지 뜨는 것 display none
+	  	legend: {
+		    display: false,
+		  },
+		tooltip:{
+			callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
+				label: function(context){
+					var chartLabel=context.dataset.label || '';
+					if (chartLabel) {
+						chartLabel +=' : ';
+					}
+					console.log("----- parsed !!     ");
+					console.log(context.parsed.y);
+                    var charthours = parseInt(context.parsed.y/(60*60));
+                    var chartminutes = parseInt(context.parsed.y/60-charthours*60);
+                    var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
+                    chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
+					return chartLabel
+				}
+			}
+		}
+	}
+}//options
+
+});	
+ 
+}
+ 
+/**** myChart5 ****30일간 과목별로******************************************/
  
 let thirySubejctNameList =[]; 
 let thiryDifftimeBySubjectList=[]; //학습시간
@@ -404,13 +477,11 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 		        borderWidth:2
 		};
 	}
-
-
 		
 		//그래프 생성
 		// 여기
-	var ctx = document.getElementById('myChart4').getContext('2d');
-	var myChart4 = new Chart(ctx, {
+	var ctx = document.getElementById('myChart5').getContext('2d');
+	var myChart5 = new Chart(ctx, {
 	type : 'bar',
     data:{
     	//라벨에 날짜 넣기
@@ -461,7 +532,6 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 			}
 		}
 	}//options
-
 	});
 	}
 </script>

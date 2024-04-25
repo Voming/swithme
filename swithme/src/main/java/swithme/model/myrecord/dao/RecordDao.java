@@ -33,11 +33,11 @@ public class RecordDao {
 // 오늘의 과목 학습 시간 chart
 	public List<DayStudyTimeBySubjectDto> dayStudyTime(SqlSession session,String memId){
 			return session.selectList("record.dayStudyTime", memId);
-		}	
+	}	
 // 과목별 학습 시간 4일치		
 	public List<DayStudyTimeDto> fourdayStudyTime(SqlSession session,String memId){
 			return session.selectList("record.fourdayStudyTime", memId);
-		}
+	}
 // 하루 학습시간 30일치
 	public List<DateDifftimeDto> thirtydayStudyTime(SqlSession session,String memId){
 		return session.selectList("record.thirtydayStudyTime", memId);
@@ -46,7 +46,20 @@ public class RecordDao {
 	public List<DayStudyTimeDto> thirtydayStudyTimeBySubject(SqlSession session,String memId){
 		return session.selectList("record.thirtydayStudyTimeBySubject", memId);
 	}
-	
+// 누적학습시간 
+	public List<DateDifftimeDto> accStudyTime(SqlSession session,String memId){
+		return session.selectList("record.accStudyTime", memId);
+	}
+	//TODO	
+// 달 별 총 학습시간
+	public List<DateDifftimeDto> monthStudyTime(SqlSession session,String memId){
+		return session.selectList("record.monthStudyTime", memId);
+}
+// 달 별 과목 총 학습시간	
+	public List<DayStudyTimeDto> monthBySubject(SqlSession session,String memId){
+		return session.selectList("record.monthBySubject", memId);
+	}
+	//--------	
 // insert 공부시작 시간
 	public int insertStartTime(SqlSession session, RecordTimeDto dto) {
 		return session.insert("record.insertStartTime", dto);

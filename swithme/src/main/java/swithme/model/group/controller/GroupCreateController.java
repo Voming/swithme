@@ -18,7 +18,8 @@ import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-import com.cloudinary.*;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.EagerTransformation;
 import com.cloudinary.utils.ObjectUtils;
 
 @WebServlet("/group/create")

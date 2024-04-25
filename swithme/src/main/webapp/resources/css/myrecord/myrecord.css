@@ -148,8 +148,11 @@ a{
 }
 
 .wrap-body .myrecord .mem-id {
-	font-size: 17px;
 	background-color: var(--color_purple_2);
+}
+.wrap-body .myrecord .mem-id .mem {
+	font-family: IM_Hyemin-Bold;
+	font-size: 20px;
 }
 
 .wrap-body .myrecord .timer.box .study-countdown-box {
@@ -267,6 +270,10 @@ a{
 .wrap-main .myrecord .statistics-part .grid-item:nth-child(6){
 	grid-column:1/3;
 	grid-row:5/6;
+}
+.wrap-main .myrecord .statistics-part .grid-item:nth-child(7){
+	grid-column:1/3;
+	grid-row:6/7;
 }
 /*왜 적용이 안 되는 거죵?!*/
 .wrap-main .myrecord .statistics-part .grid-item p{

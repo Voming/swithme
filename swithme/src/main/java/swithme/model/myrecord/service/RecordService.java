@@ -27,7 +27,6 @@ public class RecordService {
 		result = dao.subjectDifftime(session,memId);
 		session.close();
 		return result;
-
 	}
 	// 오늘의 과목 학습 시간 chart
 	public List<DayStudyTimeBySubjectDto> dayStudyTime(String memId){
@@ -38,7 +37,6 @@ public class RecordService {
 		System.out.println(">>>>>>rec dayStudyTime  result : " + result);
 		session.close();
 		return result;
-		
 	}
 	
 	//4일치 과목별 학습 시간 chart
@@ -48,7 +46,6 @@ public class RecordService {
 		result = dao.fourdayStudyTime(session,memId);
 		session.close();
 		return result;
-		
 	}
 	// 하루 학습시간 30일치
 	public List<DateDifftimeDto> thirtydayStudyTime(String memId){
@@ -69,9 +66,39 @@ public class RecordService {
 		System.out.println(">>>>>>rec 30일치 과목별!!!  result : " + result);
 		session.close();
 		return result;
-		
 	}
-
+	//누적학습시간 accStudyTime
+	public List<DateDifftimeDto> accStudyTime(String memId){
+		System.out.println(">>>>>>rec service 30일치!!!  memId : " + memId);
+		List<DateDifftimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.accStudyTime(session,memId);
+		System.out.println(">>>>>>rec 30일치!!!  result : " + result);
+		session.close();
+		return result;
+	}
+//TODO
+	// 달 별 총 학습시간
+	public List<DateDifftimeDto> monthStudyTime(String memId){
+		System.out.println(">>>>>>rec service 30일치!!!  memId : " + memId);
+		List<DateDifftimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.monthStudyTime(session,memId);
+		System.out.println(">>>>>>rec 30일치!!!  result : " + result);
+		session.close();
+		return result;
+	}
+	// 달 별 과목 총 학습시간	
+	public List<DayStudyTimeDto> monthBySubject(String memId){
+		System.out.println(">>>>>>rec service 30일치 과목별!!!  memId : " + memId);
+		List<DayStudyTimeDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.monthBySubject(session,memId);
+		System.out.println(">>>>>>rec 30일치 과목별!!!  result : " + result);
+		session.close();
+		return result;
+	}
+//--------
 	// insert
 	public int insertStartTime(RecordTimeDto dto) {
 		System.out.println(">>>>>>rec insert  dto : " + dto);
@@ -115,7 +142,6 @@ public class RecordService {
 		session.close();
 		return result;
 	}
-
 	// rec은 delete,update없음
 
 }

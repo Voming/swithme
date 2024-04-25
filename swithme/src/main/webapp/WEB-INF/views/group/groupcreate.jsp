@@ -32,6 +32,10 @@ function btnOpenClickHandler(){
 	console.log(isOpen);
 }
 
+
+
+
+
 function btnCreateClickHandler(){
 	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
@@ -119,10 +123,10 @@ function btnCreateClickHandler(){
 						</div>
 						<div>
 							<p>그룹 대표 이미지</p>
-							<input type="file" name="uploadfile" required />
+							<input id="upload_widget" class="cloudinary-button" type="file" name="uploadfile" required />
 						</div>	
 						<div class="wbtn">
-							<button type="button" class="btn create">그룹 만들기</button>
+							<button  type="button" class="btn create">그룹 만들기</button>
 						</div>
 					</form>
 				</div>

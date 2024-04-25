@@ -101,21 +101,27 @@ public class BoardService {
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.insert(session, dto);
 		session.close();
+		
+		System.out.println("boardservice: " + result);
 		return result;
 	}
 
-	// 댓글 작성
+	// 댓글, 대댓글 작성 (여기서 나누기 - 각자 해당하는 dao로 이동)
 	public int insertReplyWrite(BoardReplyDto replydto) {
-		int result = 0; // 
-
-		SqlSession session = MybatisTemplate.getSqlSession();
-
-		if (replydto.getReplyId() != 0) {
-			// 대댓글로 간주
-			result = dao.insertReplyWriteAgain(session, replydto);
-		} else {
-			// 댓글로 간주
+		int result = 0;
+		
+		SqlSession session = MybatisTemplate.getSqlSession(false);
+		
+		if(replydto.getReplyId() == 0) {
+			//댓글이 입력된 값을 가져가는 중이라서 아직 몇번째 댓글인지 모름
+			
 			result = dao.insertReplyWrite(session, replydto);
+			//댓글
+			
+		} else {
+			result = dao.insertReplyWriteAgain(session, replydto);
+			//대댓글은 댓글Id를 들고와서 댓글Id 무조건 가지고있음
+			// - 가지고 있어야 해당 댓글에 대댓글이 달릴 수 있음
 		}
 
 		if (result > 0) {
@@ -126,39 +132,12 @@ public class BoardService {
 			// 여기는 비정상
 		}
 
-
-
 		session.close();
-
 		System.out.println("댓글작성 service : " + result);
 
 		return result;
 
 	}
-
-//	//대댓글 작성
-//	public int insertReplyWriteAgain(BoardReplyDto replydto) {
-//		int resultAgain = 0; //대댓글
-//
-//		SqlSession session = MybatisTemplate.getSqlSession();
-//
-//		if(replydto.getReplyId() != 0) {
-//			if(resultAgain > 0) {
-//				resultAgain = dao.insertReplyWriteAgain(session, replydto);
-//				session.commit();
-//				//이러면 정상
-//			} else {
-//				session.rollback();
-//				//여기는 비정상
-//			}
-//		}
-//		
-//		session.close();
-//		
-//		System.out.println("댓글작성 service : " + resultAgain);
-//		
-//		return resultAgain;
-//	}
 
 	// 게시글 수정
 	public int update(BoardDto dto) {

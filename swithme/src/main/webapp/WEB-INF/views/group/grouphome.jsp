@@ -168,7 +168,7 @@
 				htmlVal+= `
 					<li>
 						<div class="modal_btn">
-							<img class="img_g" src="${pageContext.request.contextPath}/files/\${findDto.sgroupImgPath}" alt="그룹 사진">
+							<img class="img_g" src="${findDto.sgroupImgPath}" alt="그룹 사진">
 							<div class="tag">
 								<p style="background-color: black; padding: 3px; font-size: var(--font5);">`;
 				if(findDto.sgroupOpen == '0'){  //공개 비공개 판별
@@ -232,8 +232,7 @@
 										<figure>
 											<button type="button"
 												onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
-												<img
-													src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}">
+												<img src="${groupDto.sgroupImgPath}">
 											</button>
 											<figcaption>${groupDto.sgroupName }</figcaption>
 										</figure>
@@ -253,9 +252,7 @@
 								<input type="text" name="find"
 									placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
 								<button type="button" class="btn find">
-									<img class="search-btn"
-										src="${pageContext.request.contextPath}/resources/images/find.png"
-										alt="찾기">
+									<img class="search-btn" src="${pageContext.request.contextPath}/resources/images/find.png" alt="찾기">
 								</button>
 							</form>
 						</div>
@@ -285,9 +282,7 @@
 										<c:forEach items="${OpenGrouplist}" var="groupDto">
 											<li>
 												<div class="modal_btn">
-													<img class="img_g"
-														src="${pageContext.request.contextPath }/files/${groupDto.sgroupImgPath}"
-														alt="그룹 사진">
+													<img class="img_g" src="${groupDto.sgroupImgPath}" alt="그룹 사진">
 													<div class="tag">
 														<p
 															style="background-color: black; padding: 3px; font-size: var(--font5);">
@@ -313,9 +308,7 @@
 										<c:forEach items="${RandGrouplist}" var="randDto">
 											<li>
 												<div class=modal_btn>
-													<img class="btn-open-modal img_g"
-														src="${pageContext.request.contextPath }/files/${randDto.sgroupImgPath}"
-														alt="그룹 사진">
+													<img class="btn-open-modal img_g" src="${randDto.sgroupImgPath}" alt="그룹 사진">
 													<div class="tag">
 														<p
 															style="background-color: black; padding: 3px; font-size: var(--font5);">

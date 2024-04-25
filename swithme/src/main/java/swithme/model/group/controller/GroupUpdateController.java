@@ -83,6 +83,7 @@ public class GroupUpdateController extends HttpServlet {
 				try {
 					int groupPwd = 0;
 					groupPwd = Integer.parseInt(groupPwdstr);
+					System.out.println("비밀번호 : " + groupPwd);
 				} catch (NumberFormatException e) {
 					result = -1;
 					response.getWriter().append(String.valueOf(result));

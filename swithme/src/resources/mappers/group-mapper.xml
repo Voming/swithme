@@ -142,4 +142,8 @@
 	<insert id="insertJoinMember" parameterType="GroupMemberDto">
 		INSERT INTO SGROUP_MEMBER VALUES (#{sgroupId}, #{sgroupMemId})
 	</insert>
+	
+	<select id="selectJoinCheck" parameterType="GroupMemberDto" resultType="_int">
+		SELECT COUNT(*) FROM SGROUP_MEMBER WHERE SGROUP_ID = #{sgroupId} AND SGROUP_MEM_ID = #{sgroupMemId}
+	</select>
 </mapper>

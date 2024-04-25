@@ -11,46 +11,30 @@ import swithme.model.group.dto.GroupMemberDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-@WebServlet("/group/join.ajax")
-public class GroupJoinController extends HttpServlet {
+@WebServlet("/group/join/check.ajax")
+public class GroupJoinCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	GroupService service = new GroupService();
-	
-    public GroupJoinController() {
+  
+    public GroupJoinCheckController() {
         super();
-      
+        // TODO Auto-generated constructor stub
     }
-
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/group/join.ajax post");
-		
+		System.out.println("/group/join/chehck.ajax");
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String memId = loginInfo.getMemId();
 		
 		String groupIdstr = request.getParameter("m_group_id");
-		String pwdstr = request.getParameter("m_pwd");
-		System.out.println("m_group_id : " + groupIdstr + " m_pwd : " + pwdstr);
-		
-		int result = 0;
-		int inResult = 0;
-		
 		int groupId = Integer.parseInt(groupIdstr);
-	
-		// 그룹 가입
-		if(pwdstr != null && !pwdstr.equals("")) { //비밀번호를 입력했다면
-			String rPwd = service.selectJoinPwd(groupId); //실제 비밀번호 체크
-			System.out.println("rPwd : " + rPwd);
-			
-			if(!pwdstr.equals(rPwd)) { //비밀번호 일치하지않으면 리턴
-				result = -1;
-				response.getWriter().append(String.valueOf(result));
-			}
-		}
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);
-		System.out.println(dto);
-		inResult = service.insertJoinMember(dto);
-		response.getWriter().append(String.valueOf(inResult));
+	
+		int result = service.selectJoinCheck(dto);
+	
+		
+		response.getWriter().append(String.valueOf(result));
 	}
 
 }

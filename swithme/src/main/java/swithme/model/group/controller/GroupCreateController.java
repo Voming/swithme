@@ -30,13 +30,7 @@ public class GroupCreateController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/group/create doPost()");
-		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-		if(loginInfo == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		String groupWriter = loginInfo.getMemId();
 		int result = 0;
 		
@@ -97,13 +91,14 @@ public class GroupCreateController extends HttpServlet {
 		
 		if(groupOpen.equals("open")) {
 			groupOpen = "0";
-			groupPwdstr = "";
+			groupPwdstr = "0";
 		}else {
 			groupOpen = "1";
 			if(groupPwdstr != null && !groupPwdstr.equals("")) {
 				try {
 					int groupPwd = 0;
 					groupPwd = Integer.parseInt(groupPwdstr);
+					System.out.println("비밀번호 : " + groupPwd);
 				} catch (NumberFormatException e) {
 					result = -1;
 					response.getWriter().append(String.valueOf(result));

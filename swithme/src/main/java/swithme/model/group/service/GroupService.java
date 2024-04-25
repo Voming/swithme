@@ -203,4 +203,22 @@ public class GroupService {
 		session.close();
 		return result;
 	}
+	
+	// 그룹 가입
+	public int insertJoinMember(GroupMemberDto dto) {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.insertJoinMember(session, dto);
+		session.close();
+		return result;
+	}
+	
+	// 가입된 그룹인지 체크
+	public int selectJoinCheck(GroupMemberDto dto) {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.selectJoinCheck(session, dto);
+		session.close();
+		return result;
+	}
 }

@@ -21,7 +21,48 @@ function loadedHandler() {
 	$(".btn.exit").on("click", btnExitClickHandler);
 }
 function displaySetColor() {
-	
+	$(".d1.setcolor").each(function(){
+		var d1Data = $(this).data("d1").toString();
+		if(d1Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d1Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d1Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d1Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d1Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
+	$(".d2.setcolor").each(function(){
+		var d2Data = $(this).data("d2").toString();
+		if(d2Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d2Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d2Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d2Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d2Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
+	$(".d3.setcolor").each(function(){
+		var d3Data = $(this).data("d3").toString();
+		if(d3Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d3Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d3Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d3Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d3Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
 	$(".d4.setcolor").each(function(){
 		var d4Data = $(this).data("d4").toString();
 		if(d4Data.indexOf(6) == 1){ // 만약 6시 있다면
@@ -36,7 +77,6 @@ function displaySetColor() {
 			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
 		}
 	});
-	
 	$(".d5.setcolor").each(function(){
 		var d5Data = $(this).data("d5").toString();
 		if(d5Data.indexOf(6) == 1){ // 만약 6시 있다면
@@ -48,6 +88,34 @@ function displaySetColor() {
 		} else if(d5Data.indexOf(1) == 1){ // 만약 1시 있다면
 			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
 		} else if(d5Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
+	$(".d6.setcolor").each(function(){
+		var d4Data = $(this).data("d6").toString();
+		if(d6Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d6Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d6Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d6Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d6Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
+	$(".d7.setcolor").each(function(){
+		var d7Data = $(this).data("d7").toString();
+		if(d7Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d7Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d7Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d7Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d7Data != "0" ){ // 만약 분 있다면
 			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
 		}
 	});

@@ -14,10 +14,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import swithme.jdbc.common.JdbcTemplate;
 import swithme.model.testcalendar.dto.IndengineerDto;
 import swithme.model.testcalendar.dto.MastercraftsmentDto;
 import swithme.model.testcalendar.dto.ProengineerDto;
+import swithme.server.common.ServerTemplate;
 
 public class TestCalService {
 	public static String getTagValue(String tag, Element eElement) {
@@ -30,10 +30,10 @@ public class TestCalService {
 
 	public void testCalApiCall(int tabNum) {
 		Properties prop = new Properties();
-		String currentPath = JdbcTemplate.class.getResource("./").getPath();
+		String currentPath = ServerTemplate.class.getResource("./").getPath();
 		try {
 
-			prop.load(new FileReader(currentPath + "driver.properties"));
+			prop.load(new FileReader(currentPath + "calendarApi.properties"));
 			String key = prop.getProperty("jdbc.swithme.servicekey");
 			String url = "";
 			//1 : 기술사 2: 기능장 3: 기사 산업기사

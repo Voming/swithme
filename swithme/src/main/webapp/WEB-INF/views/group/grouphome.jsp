@@ -38,7 +38,6 @@
 			//그룹 탭
 			// $('.prd-tab-content > div').hide();
             $('.group-tab-nav a').click(function () {
-                console.log(this);
                 $('.group-tab-content > div').hide().filter(this.hash).fadeIn();
                 $('.group-tab-nav a').removeClass('active');
                 console.log(this);
@@ -140,7 +139,7 @@
 			$(".modal").hide();	
 		}
 		
-		
+		//그룹 검색
 		function btnFindClickHandler() {
 			if ($("[name=find]").val().trim().length == 0) {
 				alert("빈문자열만 입력할 수 없습니다. 검색할 그룹명을 작성해주세요.");
@@ -160,6 +159,7 @@
 			});			
 		}
 		
+		//그룹 검색 결과
 		function displayFindWrap(datalist){
 			var htmlVal = '';
 			for(var idx in datalist){

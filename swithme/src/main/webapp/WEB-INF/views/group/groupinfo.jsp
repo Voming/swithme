@@ -92,7 +92,7 @@ function displaySetColor() {
 		}
 	});
 	$(".d6.setcolor").each(function(){
-		var d4Data = $(this).data("d6").toString();
+		var d6Data = $(this).data("d6").toString();
 		if(d6Data.indexOf(6) == 1){ // 만약 6시 있다면
 			$(this).css("background-color", "rgba(128, 102, 255, 1)");
 		} else if(d6Data.indexOf(4) == 1){ // 만약 4시 있다면

@@ -39,6 +39,10 @@ public class GroupCreateController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int result = 0;
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		String groupWriter = loginInfo.getMemId();
+		
 		Properties prop = new Properties();
 		String currentPath = ServerTemplate.class.getResource("./").getPath();
 		System.out.println("currentPath : "+ currentPath);
@@ -54,11 +58,6 @@ public class GroupCreateController extends HttpServlet {
 			  "api_key", api_key,
 			  "api_secret", api_secret, 
 			  "secure", true));
-
-			
-			MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-			String groupWriter = loginInfo.getMemId();
-			int result = 0;
 			
 //			//TODO 입력하기 전에 체크하도록
 //			//만약 가입한 그룹이 5개라면 더이상 그룹 생성 불가능
@@ -85,32 +84,19 @@ public class GroupCreateController extends HttpServlet {
 					"UTF-8",
 					new DefaultFileRenamePolicy() //was서버에 저장할 디렉토리에 동일 이름이 존재할 때 새로운 이름 부여 방식
 					);		
-			
-//			//jsp -> controller file 딱 1개일 경우
-//			String filePath = multiReq.getFilesystemName("uploadfile");
-//			String orginFileName = null;
-//			if(filePath == null) {
-//				System.out.println("첨부파일이 없었습니다.");
-//			}else {
-//				System.out.println("첨부파일 정보는===");
-//				System.err.println(filePath);
-//				orginFileName = multiReq.getOriginalFileName("uploadfile");
-//			}
-			
+
 			//Cloudinary
 			@SuppressWarnings("unchecked")
 			Map<String, Object> uploadResult  = cloudinary.uploader().upload(
 					multiReq.getFile("uploadfile")
 					, ObjectUtils.asMap(
 						    "eager", Arrays.asList(
-						    	      new EagerTransformation().width(290).height(180).crop("pad"),
-						    	      new EagerTransformation().width(290).height(180).crop("crop").gravity("north"))));
+						    	      new EagerTransformation().width(290).height(180).crop("fill").gravity("north"))));
 			
 			System.out.println(uploadResult.get("url"));
-			System.out.println("uploadResult ---->" + uploadResult);
-			
 			String imgPath = (String) uploadResult.get("url");
 			String imgName = (String) uploadResult.get("original_filename");
+			
 			if(imgPath==null) {// 서버에 올리지 못했다면
 				System.out.println("파일 업로드 실패");
 				result = -1;

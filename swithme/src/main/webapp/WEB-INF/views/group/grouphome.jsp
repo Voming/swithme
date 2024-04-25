@@ -28,7 +28,7 @@
 			$('.wrap-group .owl-carousel').owlCarousel({
 				items : 3,
 				margin : 10,
-				loop : true,
+				loop : false,
 				dots : true,
 				autoplay: true,
 				autoplayTimeout : 3000,
@@ -58,39 +58,55 @@
 			console.log('open clicked!');
 			var m_groupid = $(this).find(".for-modal").text().trim();
 			var m_open = $(this).find("div.tag > p").text().trim();
-			var m_img = jQuery('.img_g').attr("src").trim();
+			var m_img = $('.img_g').attr("src").trim();
 			var m_name = $(this).find(".description>.name").text().trim();
 			var m_name_sub = $(this).find(".description>.name-sub").text().trim();
-	
-			console.log(m_groupid);
 			
-			var htmlMval= '';
-			htmlMval += `
-				<form>
-				<img class="modal_img" src="${pageContext.request.contextPath }/files/${randDto.sgroupImgPath}" alt="그룹 사진">
-				<div class="modal_description">
-					<p class="m_group_id" style="display:none;">\${m_groupid}</p>
-					<p class="name" style="font-size: var(--font1); font-weight: bold;">\${m_name}</p>
-					<p class="m_open" style="font-size: var(--font3); font-weight: bold;">\${m_open}</p>
-					<p class="name-sub" style="font-size: var(--font3);">\${m_name_sub}</p> 
-			`;
-			if(m_open == "비공개"){
-				htmlMval += `
-					<input type="text" name="m_pwd" placeholder="비밀번호를 입력하세요">
-				`;
-			}
-			htmlMval += `
-				</div>
-				<button type="button" class="close_btn">취소</button>
-				<button type="button" class="join_btn">가입하기</button>
-			</form>
-			`;
-			
-			$(".modal > .modal_popup > div").html(htmlMval);
-			
-			$(".modal").show();
-			$(".close_btn").on("click", btnCloseClickHandler);
-			$(".join_btn").on("click", btnJoinClickHandler);
+			//만약 이미 가입한 그룹이라면 그룹 정보 페이지로 이동
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/group/join/check.ajax"
+				,method : "post"
+				,data : { 
+					m_group_id : m_groupid
+				}
+				,success : function(result){ 
+					console.log(result);
+					if(result > 0){
+						alert("해당 그룹으로 이동합니다");
+						$(".modal").hide();	
+						location.href="${pageContext.request.contextPath}/group/info?groupId=" + m_groupid;
+					}else{
+						var htmlMval= '';
+						htmlMval += `
+							<form>
+							<img class="modal_img" src="\${m_img}" alt="그룹 사진">
+							<div class="modal_description">
+								<p class="m_group_id" style="display:none;">\${m_groupid}</p>
+								<p class="name" style="font-size: var(--font1); font-weight: bold;">\${m_name}</p>
+								<p class="m_open" style="font-size: var(--font3); font-weight: bold;">\${m_open}</p>
+								<p class="name-sub" style="font-size: var(--font3);">\${m_name_sub}</p> 
+						`;
+						if(m_open == "비공개"){
+							htmlMval += `
+								<input type="text" name="m_pwd" placeholder="비밀번호를 입력하세요">
+							`;
+						}
+						htmlMval += `
+							</div>
+							<button type="button" class="close_btn">취소</button>
+							<button type="button" class="join_btn">가입하기</button>
+						</form>
+						`;
+						
+						$(".modal > .modal_popup > div").html(htmlMval);
+						
+						$(".modal").show();
+						$(".close_btn").on("click", btnCloseClickHandler);
+						$(".join_btn").on("click", btnJoinClickHandler);
+					}
+				}
+				,error : ajaxErrorHandler
+			} ); 
 		}
 		
 		//그룹 가입하기
@@ -105,11 +121,14 @@
 				}
 				,success : function(result){ 
 					console.log(result);
-					/*  if(result > 0){
-						alert("사용불가!! 다른아이디를 사용해주세요.");
-					}else {
-						alert("사용가능");
-					}	 */ 
+					if(result > 0){
+						alert("그룹 가입 성공!!");
+						$(".modal").hide();	
+					} else if(result == -1){
+						alert("비밀번호가 틀렸습니다");
+					} else if(result == -2){
+						alert("죄송합니다. 그룹 정원이 차있으므로 가입이 불가합니다.");
+					} 
 				}
 				,error : ajaxErrorHandler
 			} ); 
@@ -158,7 +177,7 @@
 				htmlVal+= `	</p>
 							</div>
 						<div class="description">
-							<p class="for-modal" style="display:none;">${findDto.sgroupId}</p>
+							<p class="for-modal" style="display:none;">\${findDto.sgroupId}</p>
 							<p class="name" style="font-size: var(--font4); font-weight: bold;">\${findDto.sgroupName}</p> 
 							<p class="name-sub" style="font-size: var(--font5);">\${findDto.sgroupEx}</p>
 					</div>

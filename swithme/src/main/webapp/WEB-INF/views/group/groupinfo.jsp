@@ -20,8 +20,16 @@ $(loadedHandler);
 
 function loadedHandler() {
 	$(".btn.exit").on("click", btnExitClickHandler);
+	displaySetColor();
 }
-
+function displaySetColor() {
+	$(".d2.setcolor").each(function(){
+		var d2Data = $(this).data("d2");
+		if(d2Data == "0"){
+			$(this).css("backgroundColor", "red");
+		}
+	});
+}
 function btnExitClickHandler() {
 	$.ajax({
 		url:"${pageContext.request.contextPath }/group/exit.ajax"
@@ -105,11 +113,11 @@ function btnExitClickHandler() {
 					<p class="ct">출석부</p>
 					<table>
 						<c:if test="${not empty groupSumDayList }">
-							<c:forEach items="${groupSumDayList}" var="DayDto">
+							<c:forEach items="${groupSumDayList}" var="DayDto" >
 								<tr>
 									<th>${DayDto.memId }</th>
-									<td>${DayDto.d1 }</td>
-									<td>${DayDto.d2 }</td>
+									<td bgcolor="#F2ECFF">${DayDto.d1 }</td>
+									<td class="d2 setcolor" data-d2="${DayDto.d2 }">${DayDto.d2 }</td>
 									<td>${DayDto.d3 }</td>
 									<td>${DayDto.d4 }</td>
 									<td>${DayDto.d5 }</td>
@@ -127,7 +135,7 @@ function btnExitClickHandler() {
 							<c:forEach items="${groupSumList}" var="groupSumDto" varStatus="idx">
 								<li>
 									<div class="rank-txt">
-										<div class="rank">
+										<div class="rank rank-${idx.count }">
 											<p>${idx.count }</p>
 										</div>
 										<div>

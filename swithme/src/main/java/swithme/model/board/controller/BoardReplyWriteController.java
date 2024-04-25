@@ -39,32 +39,28 @@ public class BoardReplyWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String replyAjaxSuccess = null;
 		
-		String boardIdStr = request.getParameter("boardId");
-		int boardId = 0;
-		String replyContent = request.getParameter("replyContent");
-		
 		String replyIdStr = request.getParameter("replyId");
 		int replyId = 0;
-		String replyAgainContent = request.getParameter("replyAgainContent");
-
-		System.out.println("boardIdStr : " + boardIdStr);
-		System.out.println("댓글 내용 : " + replyContent);
-		System.out.println("replyIdStr : " + replyIdStr);
-		System.out.println("대댓글 내용 : " + replyAgainContent);
+		String boardIdStr = request.getParameter("boardId");
+		int boardId = 0;
+			if(boardIdStr != null && !boardIdStr.equals("")) {
+				try {
+					boardId = Integer.parseInt(boardIdStr);
+				}catch (NumberFormatException e) {
+					response.getWriter().append("boardId 안들어옴");
+					return;
+				}
+			}
+		
+		String replyContent = request.getParameter("replyContent");
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String replyWriterid = loginInfo.getMemId();
+
 		System.out.println("댓글아이디 : " + replyWriterid);
-		
-		if(boardIdStr != null && !boardIdStr.equals("")) {
-			try {
-				boardId = Integer.parseInt(boardIdStr);
-			}catch (NumberFormatException e) {
-				response.getWriter().append("boardId 안들어옴");
-				return;
-			}
-		}
-		
+		System.out.println("댓글 내용 : " + replyContent);
+
+
 		if(replyIdStr != null && !replyIdStr.equals("")) {
 			try {
 				replyId = Integer.parseInt(replyIdStr);
@@ -102,9 +98,8 @@ public class BoardReplyWriteController extends HttpServlet {
 		
 		System.out.println("댓글 순서 : " + replyRef + " " + replyStep + " " +replyLevel);
 		
-		//댓글달기
-		String content = (replyAgainContent != null) ? replyAgainContent : replyContent;
-		BoardReplyDto replydto = new BoardReplyDto(replyId, boardId, replyWriterid, content, "", replyRef, replyStep, replyLevel);
+		//댓글, 대댓글 달기
+		BoardReplyDto replydto = new BoardReplyDto(replyId, boardId, replyWriterid, replyContent, "", replyRef, replyStep, replyLevel);
 		//writeTime은 query문 자체에 default 로 들어가서 null로 써줘도 상관없음(자리채우는 느낌) 
 		System.out.println(replydto);
 		
@@ -123,6 +118,9 @@ public class BoardReplyWriteController extends HttpServlet {
 			 replyAjaxSuccess = null;
 		 }	 
 		 response.getWriter().append(replyAjaxSuccess);
+		 
+
+
 		 
 		 
 	}

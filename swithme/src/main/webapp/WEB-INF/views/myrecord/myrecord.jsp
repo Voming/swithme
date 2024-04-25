@@ -234,7 +234,7 @@
 								<canvas id="myChart2" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>공부시간 누적 ▼ item4번</p>
+								<p>공부시간 누적 ▼</p>
 								<canvas id="myChart10" ></canvas>
 							</div>
 							<div class="grid-item">
@@ -242,12 +242,16 @@
 								<canvas id="myChart3" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>월별 총 학습시간 ▼ = item6번입니다</p>
+								<p>월별 총 학습시간 ▼ </p>
 								<canvas id="myChart4" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>일간 과목별 학습시간 ▼ = item7번입니다</p>
+								<p>일간 과목별 학습시간 ▼ </p>
 								<canvas id="myChart5" ></canvas>
+							</div>
+							<div class="grid-item">
+								<p>월간 과목별 학습시간 ▼</p>
+								<canvas id="myChart6" ></canvas>
 							</div>
 
 							<jsp:include page="/WEB-INF/views/myrecord/myrecord_chart.jsp"></jsp:include>

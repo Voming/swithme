@@ -67,6 +67,7 @@ select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, 
 	order by t1.subject_name ASC, ONLY_DATE ASC
 </select>
 
+<!-- 누적 학습 시간 30일-->
 <select id="accStudyTime" parameterType="string" resultType="DateDifftimeDto">
 SELECT 
     TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
@@ -80,6 +81,27 @@ LEFT JOIN (
     GROUP BY TRUNC(record_date)
 ) ON DDAY = RDAY
 ORDER BY DDAY ASC
+</select>
+
+<!--월별 총 학습 시간  -->
+<select id="monthStudyTime" parameterType="string" resultType="DateDifftimeDto">
+select TO_CHAR(MMONTH,'mm') ONLY_DATE, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+left join
+(select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID= #{memId} group by to_char(record_date,'yy-mm')) 
+on TO_CHAR(MMONTH,'yy-mm') = RDAY
+order by MMONTH
+</select>
+
+<!--월별 과목별 학습시간-->
+<select id="monthBySubject" parameterType="string" resultMap="DayStudyTimeDtoMap">
+select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(mmonth,'mm') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME
+from 
+	(select * from (select SUBJECT_NAME, SUBJECT_COLOR from subject where mem_id= #{memId}) t1 cross join V_MMONTH12 ) t1
+	left join 
+	(select SUBJECT_NAME, to_char((RECORD_DATE),'yy-mm') as RDAY, round(sum(DIFFTIME),0) DIFFTIME 
+		from V_RECORD_SEC where RECORD_MEM_ID =  #{memId} group by SUBJECT_NAME, to_char((RECORD_DATE),'yy-mm') order by rday) t2
+	on t1.SUBJECT_NAME = t2.SUBJECT_NAME and TO_CHAR( t1.MMONTH,'yy-mm') = RDAY
+order by t1.subject_name ASC, mmonth ASC
 </select>
 
 <insert id="insertStartTime" parameterType="RecordTimeDto">

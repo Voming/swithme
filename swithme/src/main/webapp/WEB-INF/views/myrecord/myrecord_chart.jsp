@@ -111,6 +111,8 @@ url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
 	displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
 	displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
 	displayAccStudyTime(resultMap.accStudyTime);
+	displayMonthStudyTime(resultMap.monthStudyTime);
+	displayMonthBySubject(resultMap.monthBySubject);
 	
 	}  // successcbf
 });  // ajax
@@ -308,8 +310,6 @@ function displayFourdayStudyTimeChart (result){
 let thiryDifftimeList =[];
 let thirtyRecordDateList=[]; 
 function displayThirtydayStudyTime(result){
-	console.log("-----------------------  30일치");
-	console.log(result);
 	for (var i = 0; i < result.length; i++) {
 		var resultItem =  result[i];
 		thiryDifftimeList[i]=resultItem.difftime
@@ -326,7 +326,7 @@ data:{
     labels: thirtyRecordDateList, //라벨에 날짜 
     datasets: [{
 	    data:thiryDifftimeList ,
-	    backgroundColor:chooseColor(5),   
+	    backgroundColor:'rgba(174,213,129,0.5)',   
 	    hoverOffset: 4
 	  }]
 },
@@ -444,6 +444,74 @@ options:{
 });	
  
 }
+/**** myChart4 ****월별 학습시간******************************************/
+let monthDifftimeList =[];
+let monthRecordDateList=[]; 
+function displayMonthStudyTime(result){
+	for (var i = 0; i < result.length; i++) {
+		var resultItem =  result[i];
+		monthDifftimeList[i]=resultItem.difftime
+		monthRecordDateList[i]=resultItem.onlyDate;
+	}
+	
+	//그래프 생성
+	// 여기
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart4 = new Chart(ctx, {
+type : 'bar',
+data:{
+	//라벨에 날짜 넣기
+    labels: monthRecordDateList, //라벨에 날짜 
+    datasets: [{
+    	//
+	    data:monthDifftimeList ,
+	    backgroundColor:'rgba(255,225,111,0.5)',   
+	    hoverOffset: 4
+	  }]
+},
+options:{
+	scales:{
+		//x,y축의 그리드 선 안보이게 설정
+		x:{
+			grid:{
+				display:false
+			}
+		},
+		y:{
+			grid:{
+				display:false
+			},
+			axis:'y',
+			display:false
+		}
+	},
+	plugins:{
+		//차트 위에 해당그래프가 뭔지 뜨는 것 display none
+	  	legend: {
+		    display: false,
+		  },
+		tooltip:{
+			callbacks:{//함수가 끝나고 난 뒤 실행되는 함수
+				label: function(context){
+					var chartLabel=context.dataset.label || '';
+					if (chartLabel) {
+						chartLabel +=' : ';
+					}
+					console.log("----- parsed !!     ");
+					console.log(context.parsed.y);
+                    var charthours = parseInt(context.parsed.y/(60*60));
+                    var chartminutes = parseInt(context.parsed.y/60-charthours*60);
+                    var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
+                    chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
+					return chartLabel
+				}
+			}
+		}
+	}
+}//options
+
+});	
+}
  
 /**** myChart5 ****30일간 과목별로******************************************/
  
@@ -534,4 +602,92 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 	}//options
 	});
 	}
+/**** myChart6 ***월별 과목별로******************************************/
+
+let monthSubejctNameList =[]; 
+let monthDifftimeBySubjectList=[]; //학습시간
+let monthSubjectColorList=[];
+let monthSubjectColorBorderList=[];
+let monthRecordDateBySubjectList=[]; //학습날짜	
+function displayMonthBySubject(result){
+	const sub = new Array();
+
+	for(let i = 0 ; i < result.length;i++){	
+		var resultItem = result[i];
+		monthSubejctNameList[i] = result[i].subjectName;//과목명
+		monthSubjectColorList[i] = chooseColor(result[i].color);
+		monthSubjectColorBorderList[i] = chooseBorderColor(result[i].color);
+		var diffTimeByDayList = result[i].diffTimeByDayList;
+		var subData = new Array();
+		for(let j=0; j<result[i].diffTimeByDayList.length; j++){
+			subData[j] = diffTimeByDayList[j].difftime;
+			if(i==0) {
+				monthRecordDateBySubjectList[j] = diffTimeByDayList[j].onlyDate;
+			}
+		}
+		monthDifftimeBySubjectList[i] = {
+		        label: result[i].subjectName,
+		        data:subData,
+		        backgroundColor: chooseColor(result[i].color),
+		        borderColor:chooseBorderColor(result[i].color),
+		        borderWidth:2
+		};
+	}
+		
+		//그래프 생성
+		// 여기
+	var ctx = document.getElementById('myChart6').getContext('2d');
+	var myChart6 = new Chart(ctx, {
+	type : 'bar',
+    data:{
+    	//라벨에 날짜 넣기
+        labels: monthRecordDateBySubjectList, //라벨에 날짜 
+        datasets: monthDifftimeBySubjectList
+    },
+	options:{            
+		scales:{
+
+        	x:{ //x축값 누적
+            	stacked:true,
+            	grid:{
+    				display:false
+    			}
+        	},
+        	y:{ //y축값 누적
+            	stacked:true,
+    			grid:{
+    				display:false
+    			},
+    			axis:'y',
+    			display:false
+        	}
+    	},
+    	//호버동작과 관련된 설정, 호버를 하는 순간 툴팁창이 뜸
+    	//그 툴팁에 대한 스타일링
+		plugins:{
+		  	legend: {
+			    display: false,
+			  },
+			tooltip:{
+				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수 //호버했을 때 뜨는 것 콜백
+					label: function(context){
+						console.log(context);
+						var chartLabel=context.dataset.label || '';
+						if (chartLabel) {
+							chartLabel +=' : ';
+						}
+						console.log("----- parsed !!     ");
+						console.log(context.parsed.y);
+                        var charthours = parseInt(context.parsed.y/(60*60));
+                        var chartminutes = parseInt(context.parsed.y/60-charthours*60);
+                        var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
+                        chartLabel += charthours+'시 '+chartminutes+'분 '+chartseconds +'초';// 시간 값을 시:분:초 형식으로 표시
+						return chartLabel
+					}
+				}
+			}
+		}
+	}//options
+	});
+}	
 </script>

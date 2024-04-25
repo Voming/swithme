@@ -77,7 +77,6 @@ public class RecordService {
 		session.close();
 		return result;
 	}
-//TODO
 	// 달 별 총 학습시간
 	public List<DateDifftimeDto> monthStudyTime(String memId){
 		System.out.println(">>>>>>rec service 30일치!!!  memId : " + memId);
@@ -98,7 +97,6 @@ public class RecordService {
 		session.close();
 		return result;
 	}
-//--------
 	// insert
 	public int insertStartTime(RecordTimeDto dto) {
 		System.out.println(">>>>>>rec insert  dto : " + dto);

@@ -6,7 +6,10 @@ on(a.RECORD_MEM_ID=s.MEM_ID)
 where TRUNC(a.RECORD_DATE)=TRUNC(SYSDATE) and s.mem_id='won'
 ;
 
-select * from v_record;
+
+
+
+
 -- 당일 과목별 학습시간
 select SUBJECT_NAME, substr(difftime,12,8) DIFFTIME, substr(RECORD_DATE,7,2) as ONLY_DATE,
     (select SUBJECT_COLOR from subject where SUBJECT.SUBJECT_NAME = V_RECORD.SUBJECT_NAME  ) as "COLOR"
@@ -69,28 +72,16 @@ select * from V_RECORD_WO_SUBJECT;
 --, SUM(RECORD_END - RECORD_START) *24*60*60 DIFFTIME
 --FROM RECORD 
 --GROUP BY RECORD_SUBJECT_ID, RECORD_MEM_ID, TRUNC(RECORD_START);
-
-  CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SWITHME"."V_RECORD_WO_SUBJECT" ("RECORD_MEM_ID", "RECORD_DATE", "DIFFTIME") AS 
-  SELECT RECORD_MEM_ID
-    , TRUNC(RECORD_START) RECORD_DATE
-    , NUMTODSINTERVAL( SUM(RECORD_END - RECORD_START) ,'DAY') DIFFTIME
-FROM RECORD 
-GROUP BY RECORD_MEM_ID, TRUNC(RECORD_START);
-
-
-
 --/
 --select 62500/60/60 a from dual;
---view 생성코드------------------------------------------------------------------------------------------
-  CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "SWITHME"."V_RECORD" ("RECORD_SUBJECT_ID", "SUBJECT_NAME", "RECORD_MEM_ID", "RECORD_DATE", "DIFFTIME") AS 
-  SELECT RECORD_SUBJECT_ID
-, (SELECT SUBJECT_NAME FROM SUBJECT WHERE RECORD_SUBJECT_ID = SUBJECT_ID) AS SUBJECT_NAME
-, RECORD_MEM_ID
-    , TRUNC(RECORD_START) RECORD_DATE
-    , NUMTODSINTERVAL( SUM(RECORD_END - RECORD_START) ,'DAY') DIFFTIME
-FROM RECORD 
-GROUP BY RECORD_SUBJECT_ID, RECORD_MEM_ID, TRUNC(RECORD_START);
-----
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--30일 날짜 프로시저 성공...!
+--exec PRO_DDAY_CREATE('V_TEST',2);
+--select * from v_test;
+--drop view V_test;
 --30일간 일별 학습시간 ONLY_DATE,DIFFTIME-----------------------------------------------------------------------------------------------------------------------
 
 select TO_CHAR(DDAY,'MM-DD') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME
@@ -107,50 +98,7 @@ select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, 
 		on t1.SUBJECT_NAME = t2.SUBJECT_NAME and DDAY = TRUNC(t2.RECORD_DATE)
 	order by t1.subject_name ASC, ONLY_DATE ASC;
 ----------------------------------
---과목별 누적그래프 생성
----실패1
-with acc_data as(
-select TO_CHAR(DDAY,'MM-DD') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME,lag( NVL(ROUND(DIFFTIME), 0),1,0) over(order by TO_CHAR(DDAY,'MM-DD')) as demi
-from V_DDAY30 
-left join (select trunc(record_date) rday, sum(DIFFTIME) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID='won'group by trunc(record_date)) 
-on dday = rday order by DDAY ASC)
-select ONLY_DATE,DIFFTIME,demi,lag(demi,1,0) over(order by only_date) demi2, (DIFFTIME+demi+lag(demi,1,0) over(order by only_date)) as IWANTTHIS from acc_data
-;
----실패2
-WITH joined_data AS (
-    SELECT 
-        TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
-        NVL(ROUND(DIFFTIME), 0) AS DIFFTIME
-    FROM V_DDAY30 
-    LEFT JOIN (
-        SELECT TRUNC(record_date) AS rday, 
-               SUM(DIFFTIME) AS DIFFTIME 
-        FROM V_RECORD_SEC 
-        WHERE RECORD_MEM_ID = 'won'
-        GROUP BY TRUNC(record_date)
-    ) ON DDAY = rday
-    ORDER BY DDAY ASC
-),
-merged_data AS (
-    SELECT 
-        ONLY_DATE,
-        DIFFTIME,
-        LAG(DIFFTIME, 1, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME,
-        LAG(DIFFTIME, 2, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME2,
-         LAG(DIFFTIME, 1, 0) OVER (ORDER BY ONLY_DATE) AS PREV_DIFFTIME3
-    FROM joined_data
-)
-SELECT 
-    ONLY_DATE,
-    -- LAG 함수를 사용하여 이전 행의 DIFFTIME 값을 가져옵니다.
-    -- 이전 값이 없는 경우 기본값 0을 사용합니다.
-    -- 현재 행의 DIFFTIME과 이전 행의 DIFFTIME을 더하여 누적 DIFFTIME을 계산합니다.
-    (DIFFTIME + PREV_DIFFTIME),
-     (DIFFTIME + PREV_DIFFTIME+PREV_DIFFTIME2) as "22",
-     (DIFFTIME + PREV_DIFFTIME+PREV_DIFFTIME2+PREV_DIFFTIME3) as "33"
-FROM merged_data
-ORDER BY ONLY_DATE ASC;
--- 과목 구분없는 누적값-----------------------------------------------------
+----한 달 누적시간 생성 // 과목 구분 X------------------------------
 SELECT 
     TO_CHAR(DDAY,'MM-DD') AS ONLY_DATE, 
     -- 1행부터 현재 행까지의 DIFFTIME 값을 누적해서 구합니다.
@@ -164,19 +112,43 @@ LEFT JOIN (
     GROUP BY TRUNC(record_date)
 ) ON DDAY = rday
 ORDER BY DDAY ASC;
-----한 달 누적시간 생성 ------------------------------
-SELECT TRUNC(SYSDATE,'month') AS this_month,
-       TRUNC(ADD_MONTHS(SYSDATE, -1),'month') AS month
-FROM dual;
 
-select to_CHAR(trunc(record_date,'month'),'MM') ONLY_DATE,round(sum(difftime)) DIFFTIME from V_RECORD_SEC where record_mem_id='won' and trunc(record_date,'month')=trunc(sysdate,'month') group by to_CHAR(trunc(record_date,'month'),'MM');
+--SELECT TRUNC(SYSDATE,'month') AS this_month,
+--       TRUNC(ADD_MONTHS(SYSDATE, -1),'month') AS month
+--FROM dual;
 
---30일 날짜 프로시저 성공...!
-exec PRO_DDAY_CREATE('V_DDAY30',30);
-select * from V_DDAY30;
---달 별 프로시저 성공아님...
-exec PRO_MONTH_CREATE('V_MMONTH12',11);
-select * from V_MMONTH12;
+
+--달 별 프로시저 성공!!!
+--exec PRO_MONTH_CREATE('V_MMONTH12',12);
+--월 별 총 학습시간 -------------------------------------------------
+select TO_CHAR(MMONTH,'mm') ONLY_DATE, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+left join
+(select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID='won'group by to_char(record_date,'yy-mm')) 
+on TO_CHAR(MMONTH,'yy-mm') = RDAY
+order by mmonth;
+
+select to_char(record_date,'mm') from V_RECORD_SEC;
+--월 별 과목별 총 학습시간-----------------------------------------------------
+
+select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(mmonth,'mm') ONLY_DATE, NVL(ROUND(DIFFTIME), 0) DIFFTIME
+	from 
+		(select * from (select SUBJECT_NAME, SUBJECT_COLOR from subject where mem_id= 'won') t1 cross join V_MMONTH12 ) t1
+		left join 
+		(select SUBJECT_NAME, to_char((RECORD_DATE),'yy-mm') as RDAY, round(sum(DIFFTIME),0) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID =  'won' group by SUBJECT_NAME, to_char((RECORD_DATE),'yy-mm') order by rday) t2
+		on t1.SUBJECT_NAME = t2.SUBJECT_NAME and TO_CHAR( t1.MMONTH,'yy-mm') = RDAY
+	order by t1.subject_name ASC, mmonth ASC;
+--
+----DONE---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 

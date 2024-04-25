@@ -48,16 +48,20 @@ public class DayStudyTimeController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {		
-			System.out.println("----------------daystudytime contoroller : ");
-			List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
-			System.out.println("\n\n 기록 : "+result);
-			List<DayStudyTimeDto> result2 = service.fourdayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			
+			
+			List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			List<DayStudyTimeDto> result2 = service.fourdayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			//30일치
 			List<DateDifftimeDto> result3=service.thirtydayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result4 = service.thirtydayStudyTimeBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			//누적
 			List<DateDifftimeDto> result5=service.accStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			//월별 
+			List<DateDifftimeDto> result6=service.monthStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			List<DayStudyTimeDto> result7 = service.monthBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			
+			
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("dayStudyTimeList", result);				//오늘의 과목별 학습 시간
@@ -65,11 +69,9 @@ public class DayStudyTimeController extends HttpServlet {
 			resultMap.put("thirtydayStudyTime", result3); 			//하루 학습시간 30일치
 			resultMap.put("thirtydayStudyTimeBySubject", result4); 	//하루 과목별 학습시간 30일치
 			resultMap.put("accStudyTime", result5); 	//누적학습시간
+			resultMap.put("monthStudyTime", result6); 	//월별 총 학습 시간
+			resultMap.put("monthBySubject", result7); 	//월별 과목별 학습시간
 			
-			
-			
-			System.out.println("-------- resultMap의 map내용을 보시라!! -- \n");
-			System.out.println(resultMap);
 			response.getWriter().append(new Gson().toJson(resultMap));
 		//이게 맞나..???
 		}catch(NumberFormatException e) {

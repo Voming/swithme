@@ -50,7 +50,6 @@ public class RecordDao {
 	public List<DateDifftimeDto> accStudyTime(SqlSession session,String memId){
 		return session.selectList("record.accStudyTime", memId);
 	}
-	//TODO	
 // 달 별 총 학습시간
 	public List<DateDifftimeDto> monthStudyTime(SqlSession session,String memId){
 		return session.selectList("record.monthStudyTime", memId);
@@ -59,7 +58,6 @@ public class RecordDao {
 	public List<DayStudyTimeDto> monthBySubject(SqlSession session,String memId){
 		return session.selectList("record.monthBySubject", memId);
 	}
-	//--------	
 // insert 공부시작 시간
 	public int insertStartTime(SqlSession session, RecordTimeDto dto) {
 		return session.insert("record.insertStartTime", dto);

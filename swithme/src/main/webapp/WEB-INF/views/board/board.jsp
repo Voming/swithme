@@ -105,10 +105,16 @@
 					<c:forEach begin="${mapboardlist.startPageNum }"
 						end="${mapboardlist.endPageNum }" var="page">
 						<c:if test="${mapboardlist.currentPage == page }">
-							<li>${page }</li>
+							<li class="page">
+								${page }
+							</li>
 						</c:if>
 						<c:if test="${mapboardlist.currentPage != page }">
-							<li class="page"><a href="${pageContext.request.contextPath }/board?page=${page }" class="apage">${page }</a></li>
+							<li class="page">
+								<a href="${pageContext.request.contextPath }/board?page=${page }">
+									${page }
+								</a>
+							</li>
 							<input type="hidden" class="pageHidden" value="${page }">
 							<!-- hidden은 화면에 안보이는거라 관리자꺼긴한데 화면상에 육안으로 안보이지만 값은 존재함 -->
 							<!-- 여기에 위에 있는 a 태그 안에 있는 el태그{page} 이 값을 불러오면서
@@ -140,6 +146,7 @@ function loadedHandler() {
 	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
 	$(".page").on("mouseenter", pageMouseEnterHandler);
 	$(".page").on("mouseleave", pageMouseLeaveHandler);
+
 }
 
 function pageChangeHandler(){
@@ -152,15 +159,18 @@ function btnWriteClickHandler() {
 
 }
 
-/* a태그에 마우스 올렸을 때 색 변환 */
+
+/*마우스 올렸을 때 색 변환 */
 function pageMouseEnterHandler(){
-	$(".apage").css('color', 'white');
+	console.error($(this).text());
+	$(this).children().css('color', 'white');
 }
 
-/* a태그에 마우스 뗐을 때 다시 원래색 변환 */
+/*마우스 뗐을 때 다시 원래색 변환 */
 function pageMouseLeaveHandler(){
-	$(".apage").css('color', 'black');
+	$(this).children().css('color', 'black');
 }
+
 
 
 </script>

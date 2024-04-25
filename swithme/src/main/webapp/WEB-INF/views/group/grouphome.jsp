@@ -28,7 +28,7 @@
 			$('.wrap-group .owl-carousel').owlCarousel({
 				items : 3,
 				margin : 10,
-				loop : true,
+				loop : false,
 				dots : true,
 				autoplay: true,
 				autoplayTimeout : 3000,

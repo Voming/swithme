@@ -44,10 +44,10 @@
 		INSERT INTO BOARD_REPLY 
 		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) ,
 				 #{boardId}, #{replyWriterid}, #{replyContent},
-				default, 
+				default,
 				#{replyRef}, 
-				(SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id=#{replyId}),
-				(SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY where reply_id=#{replyId}))
+				(SELECT reply_step+1 FROM BOARD_REPLY where reply_id=#{replyId}),
+				(SELECT reply_level+1 FROM BOARD_REPLY where reply_id=#{replyId}))
 	</insert>
 
 	<update id="update" parameterType="BoardDto">

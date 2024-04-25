@@ -103,7 +103,6 @@
 						$(".modal").show();
 						$(".close_btn").on("click", btnCloseClickHandler);
 						$(".join_btn").on("click", btnJoinClickHandler);
-						
 					}
 				}
 				,error : ajaxErrorHandler
@@ -125,8 +124,10 @@
 					if(result > 0){
 						alert("그룹 가입 성공!!");
 						$(".modal").hide();	
-					}else if(result == "-1"){
+					} else if(result == -1){
 						alert("비밀번호가 틀렸습니다");
+					} else if(result == -2){
+						alert("죄송합니다. 그룹 정원이 차있으므로 가입이 불가합니다.");
 					} 
 				}
 				,error : ajaxErrorHandler

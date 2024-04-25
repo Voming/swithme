@@ -84,12 +84,23 @@
     left: 0;
     top: 0;
 }
+.group-tab-content .modal_btn {
+	height: 200px;	
+}
 
 .group-tab-content .modal_btn .description p {
     display: block;
     padding-top: 6px;
 }
 
-.group-tab-content .modal_btn .description .name-sub{
-    height: 35px;
+.group-tab-content .modal_btn .description .name-sub {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1;
+	text-align: left;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3 ;
 }

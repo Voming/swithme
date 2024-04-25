@@ -196,7 +196,7 @@ public class GroupService {
 	}
 	
 	// 가입하려는 그룹 비밀번호 체크
-	public String selectJoinPwd( int groupId) {
+	public String selectJoinPwd(int groupId) {
 		String result = "";
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectJoinPwd(session, groupId);
@@ -208,7 +208,15 @@ public class GroupService {
 	public int insertJoinMember(GroupMemberDto dto) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.insertJoinMember(session, dto);
+		
+		//그룹 멤버가 5명이 아니라면 가입 시킴
+		int  memCount = dao.selectMemCount(session, dto.getSgroupId());
+		if(memCount < 5) {	
+			result =  dao.insertJoinMember(session, dto);
+		} else {
+			result = -2;
+		}
+		
 		session.close();
 		return result;
 	}

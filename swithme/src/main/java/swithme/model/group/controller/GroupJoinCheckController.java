@@ -30,9 +30,9 @@ public class GroupJoinCheckController extends HttpServlet {
 		int groupId = Integer.parseInt(groupIdstr);
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);
-	
+		System.out.println("dto : " + dto);
 		int result = service.selectJoinCheck(dto);
-	
+		System.out.println(result);
 		
 		response.getWriter().append(String.valueOf(result));
 	}

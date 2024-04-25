@@ -35,16 +35,17 @@ public class GroupJoinController extends HttpServlet {
 		int inResult = 0;
 		
 		int groupId = Integer.parseInt(groupIdstr);
-	
-		// 그룹 가입
-		if(pwdstr != null && !pwdstr.equals("")) { //비밀번호를 입력했다면
-			String rPwd = service.selectJoinPwd(groupId); //실제 비밀번호 체크
-			System.out.println("rPwd : " + rPwd);
-			
-			if(!pwdstr.equals(rPwd)) { //비밀번호 일치하지않으면 리턴
-				result = -1;
-				response.getWriter().append(String.valueOf(result));
-			}
+		
+		if(pwdstr == null) {
+			pwdstr = "0";
+		}
+		
+		String rPwd = service.selectJoinPwd(groupId); //실제 비밀번호 체크
+		System.out.println("rPwd : " + rPwd);
+		
+		if(!pwdstr.equals(rPwd)) { //비밀번호 일치하지않으면 오류 발생
+			result = -1;
+			response.getWriter().append(String.valueOf(result));
 		}
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);

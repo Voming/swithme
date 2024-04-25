@@ -168,7 +168,7 @@
 				htmlVal+= `
 					<li>
 						<div class="modal_btn">
-							<img class="img_g" src="${findDto.sgroupImgPath}" alt="그룹 사진">
+							<img class="img_g" src="\${findDto.sgroupImgPath}" alt="그룹 사진">
 							<div class="tag">
 								<p style="background-color: black; padding: 3px; font-size: var(--font5);">`;
 				if(findDto.sgroupOpen == '0'){  //공개 비공개 판별

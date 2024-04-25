@@ -1,13 +1,11 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="${pageContext.request.contextPath}/resources/css/group/groupinfo.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/group/groupmembers.css" rel="stylesheet">
-
 <!-- jQuery 선언 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
@@ -17,18 +15,45 @@
 <body>
 <script>
 $(loadedHandler);
+$(window).on('load', displaySetColor);
 
 function loadedHandler() {
 	$(".btn.exit").on("click", btnExitClickHandler);
-	displaySetColor();
 }
 function displaySetColor() {
-	$(".d2.setcolor").each(function(){
-		var d2Data = $(this).data("d2");
-		if(d2Data == "0"){
-			$(this).css("backgroundColor", "red");
+	
+	$(".d4.setcolor").each(function(){
+		var d4Data = $(this).data("d4").toString();
+		if(d4Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d4Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d4Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d4Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d4Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
 		}
 	});
+	
+	$(".d5.setcolor").each(function(){
+		var d5Data = $(this).data("d5").toString();
+		if(d5Data.indexOf(6) == 1){ // 만약 6시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 1)");
+		} else if(d5Data.indexOf(4) == 1){ // 만약 4시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.8)");
+		} else if(d5Data.indexOf(2) == 1){ // 만약 2시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.6)");
+		} else if(d5Data.indexOf(1) == 1){ // 만약 1시 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.4)");
+		} else if(d5Data != "0" ){ // 만약 분 있다면
+			$(this).css("background-color", "rgba(128, 102, 255, 0.2)");
+		}
+	});
+	
+	$(".setcolor.n1").css("font-family", "IM_Hyemin-Bold");
+	$(".setcolor.n1").css("background-color", "white");
 }
 function btnExitClickHandler() {
 	$.ajax({
@@ -86,7 +111,7 @@ function btnExitClickHandler() {
 							</div>
 						</div>
 						<div class="myGImg">
-							<img src="${pageContext.request.contextPath }/files/${groupInfo.sgroupImgPath}" alt="그룹 이미지"/>
+							<img src="${groupInfo.sgroupImgPath}" alt="그룹 이미지"/>
 						</div>
 					</c:if>
 					<hr>
@@ -113,16 +138,17 @@ function btnExitClickHandler() {
 					<p class="ct">출석부</p>
 					<table>
 						<c:if test="${not empty groupSumDayList }">
-							<c:forEach items="${groupSumDayList}" var="DayDto" >
+							<c:forEach items="${groupSumDayList}" var="DayDto" varStatus="idx" >
 								<tr>
 									<th>${DayDto.memId }</th>
-									<td bgcolor="#F2ECFF">${DayDto.d1 }</td>
-									<td class="d2 setcolor" data-d2="${DayDto.d2 }">${DayDto.d2 }</td>
-									<td>${DayDto.d3 }</td>
-									<td>${DayDto.d4 }</td>
-									<td>${DayDto.d5 }</td>
-									<td>${DayDto.d6 }</td>
-									<td>${DayDto.d7 }</td>
+									<td bgcolor="#CCDDFF" 
+										class="d1 setcolor n${idx.count }" data-d1="${DayDto.d1 }">${DayDto.d1 }</td>
+									<td class="d2 setcolor n${idx.count }" data-d2="${DayDto.d2 }">${DayDto.d2 }</td>
+									<td class="d3 setcolor n${idx.count }" data-d3="${DayDto.d3 }">${DayDto.d3 }</td>
+									<td class="d4 setcolor n${idx.count }" data-d4="${DayDto.d4 }">${DayDto.d4 }</td>
+									<td class="d5 setcolor n${idx.count }" data-d5="${DayDto.d5 }">${DayDto.d5 }</td>
+									<td class="d6 setcolor n${idx.count }" data-d6="${DayDto.d6 }">${DayDto.d6 }</td>
+									<td class="d7 setcolor n${idx.count }" data-d7="${DayDto.d7 }">${DayDto.d7 }</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -138,7 +164,7 @@ function btnExitClickHandler() {
 										<div class="rank rank-${idx.count }">
 											<p>${idx.count }</p>
 										</div>
-										<div>
+										<div style="margin-left: 10px; ">
 											<p>${groupSumDto.memId}</p>
 										</div>
 										<div class="mins">

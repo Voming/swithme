@@ -66,17 +66,11 @@ a {
     --color_green_3: #C5E1A5;
     
     --color_gray_1: #F1F1F1;
-    --color_gray_2:  rgb(197, 197, 197);
+    --color_gray_2:  #c5c5c5;
 
     --font1: 20px;
     --font2: 17px;
     --font3: 15px;
     --font4: 13px;
     --font5: 11px;
-    /*  사용
-    #a {
-    color : var(--color1);
-    font-size: var(--font1);
-    }
-    */
   }

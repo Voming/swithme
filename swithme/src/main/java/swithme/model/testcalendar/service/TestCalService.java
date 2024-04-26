@@ -34,7 +34,7 @@ public class TestCalService {
 		try {
 
 			prop.load(new FileReader(currentPath + "calendarApi.properties"));
-			String key = prop.getProperty("jdbc.swithme.servicekey");
+			String key = prop.getProperty("calendar.api.swithme.servicekey");
 			String url = "";
 			//1 : 기술사 2: 기능장 3: 기사 산업기사
 			if(tabNum == 1) {

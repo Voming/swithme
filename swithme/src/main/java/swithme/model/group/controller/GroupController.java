@@ -25,16 +25,6 @@ public class GroupController extends HttpServlet implements Serializable{
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-		if(loginInfo == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
-		String memberId = loginInfo.getMemId();
-		//내 그룹
-		List<GroupMylistDto> myGrouplist = service.selectMyList(memberId);
-		request.getSession().setAttribute("myGrouplist", myGrouplist);
-		
 		//전체 그룹
 		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 20);
 		request.getSession().setAttribute("OpenGrouplist", OpenGrouplist);

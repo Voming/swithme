@@ -5,7 +5,7 @@
 	<!-- 최상단 네비(로고 및 회원가입, 로그인) -->
 	<div class="nav1-wrap">
 		<div class="logo-side">
-			<a href="#"> <img
+			<a href="${pageContext.request.contextPath}/myrecord"> <img
 				src="${pageContext.request.contextPath}/resources/images/logo.jpg"
 				alt="로고">
 			</a>

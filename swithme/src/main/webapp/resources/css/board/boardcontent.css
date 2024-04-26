@@ -163,11 +163,14 @@ textarea:focus {
 }
 
 
-.wrap-body .btn {
-	display: flex;
-	margin: 10px 0;
+.wrapper > div.wrap-body > div.btn {
+	
+	display: grid;
+ 	grid-template-columns: repeat(8, 1fr); 
+ 	grid-template-rows: 40px; 
+	margin: 10px 40px;
+	column-gap: 20px;
 }
-
 .wrap-body > div.btn > button.btn.write {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
@@ -175,9 +178,6 @@ textarea:focus {
 	border: none;
 	border-radius: 20px;
 	background: #DDCCFF;
-	padding: 10px 30px;
-	margin-left: 40px;
-	text-align: right;
 
 }
 
@@ -186,32 +186,24 @@ textarea:focus {
 	border-radius: 20px;
 	background: #8066FF;
 	color: white;
-	padding: 10px 30px;
-	margin-left: 40px;
 	cursor: pointer;
 }
 
-.wrap-body > div.btn > button.btn.rewrite {
+.wrap-body > div.btn > button.btn.update {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 	font-weight: bolder;
 	border: none;
 	border-radius: 20px;
 	background: #DDCCFF;
-	padding: 10px 30px;
-	margin-left: 40px;
-	text-align: right;
-	padding-left: 30px;
 
 }
 
-.wrap-body > div.btn > button.btn.rewrite:hover {
+.wrap-body > div.btn > button.btn.update:hover {
 	border: none;
 	border-radius: 20px;
 	background: #8066FF;
 	color: white;
-	padding: 10px 30px;
-	margin-left: 40px;
 	cursor: pointer;
 }
 
@@ -222,9 +214,8 @@ textarea:focus {
 	border: none;
 	border-radius: 20px;
 	background: #DDCCFF;
-	padding: 10px 30px;
-	margin-left: 560px;
-	text-align: right;
+	grid-column: 8/9;
+	grid-row: 1 / 2;
 
 }
 
@@ -233,8 +224,6 @@ textarea:focus {
 	border-radius: 20px;
 	background: #8066FF;
 	color: white;
-	padding: 10px 30px;
-	margin-right: 40px;
 	cursor: pointer;
 }
 

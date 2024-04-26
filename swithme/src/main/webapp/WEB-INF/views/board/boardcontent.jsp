@@ -64,9 +64,17 @@
 			
 			<div class="board-reply">
 				<p>댓글</p>
-				<div class="replylist">
-					<!-- 여기에 ajax를 통해 댓글, 대댓글 들어옴 (반복문 돌림) -->
-				</div>
+				<c:choose>
+					<c:when test="${empty replyList.replydto}">
+						<div class="empty">댓글이 없습니다.</div>
+					</c:when>
+					<c:when test="${not empty replyList.replydto }">
+						<div class="replylist">
+							<!-- 여기에 ajax를 통해 댓글, 대댓글 들어옴 (반복문 돌림) -->
+						</div>
+					</c:when>
+				</c:choose>
+
 
 				<div class="reply">
 					<form class="frm-reply">
@@ -95,7 +103,9 @@
 			
 			<div class="btn">
 				<button type="button" class="btn write">글쓰기</button>
-				<button type="button" class="btn rewrite">수정</button>
+			<c:if test="${dto.boardWriter == loginInfo.memId}">
+				<button type="button" class="btn update">수정</button>
+			</c:if>
 				<button type="button" class="btn board">목록</button>
 			</div>
 		</div>
@@ -150,6 +160,7 @@ function loadedHandler(){
 	$(".replydel").on("click", ReplydelClickHandler)
 	
 	$(".btn.write").on("click", boardWriteClickHandler);
+ 	$(".btn.update").on("click", boardUpdateClickHandler);
 	$(".btn.board").on("click", boardClickHandler);
 	
 }
@@ -254,6 +265,7 @@ function displayReplyWrap(datalist){
 		$(element).click(ReplyMoreClickHandler);
 		/* 그중 하나에 클릭이벤트 건게 이 친구!! */
 	});
+	
 	
 
 }		
@@ -374,9 +386,16 @@ function ReplydelClickHandler(){
 	console.log("삭제할 replyId-----"+replyId );
 }
 
+/* 게시글 작성 */
 function boardWriteClickHandler(){
-	location.href = "${pageContext.request.contextPath}/boardwrite";
+	location.href = "${pageContext.request.contextPath}/board/write";
 }
+
+/* 게시글 수정 */
+function boardUpdateClickHandler(){
+	location.href = "${pageContext.request.contextPath}/board/update";
+}
+
 
 function boardClickHandler(){
 	location.href = "${pageContext.request.contextPath}/board";

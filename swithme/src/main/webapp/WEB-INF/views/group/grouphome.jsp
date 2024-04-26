@@ -25,24 +25,12 @@
 
 		function loadedHandler() {
 			$(getGroupMylist);
-			
-			//캐러셀 호출
-			$('.wrap-group .owl-carousel').owlCarousel({
-				items : 3,
-				margin : 10,
-				loop : false,
-				dots : true,
-				autoplay: true,
-				autoplayTimeout : 3000,
-				autoplayHoverPause : true
-			});
-			
+
 			//그룹 탭
 			// $('.prd-tab-content > div').hide();
             $('.group-tab-nav a').click(function () {
                 $('.group-tab-content > div').hide().filter(this.hash).fadeIn();
                 $('.group-tab-nav a').removeClass('active');
-                console.log(this);
                 $(this).addClass('active');
                 return false;
             }).filter(':eq(0)').click();
@@ -61,7 +49,6 @@
 				, method : "post"
 				, dataType : 'json'
 				, success : function(result){ 
-					console.log(result);
 					if(result != null){
 						displayGroupMylist(result);
 					}
@@ -84,6 +71,17 @@
 				`;
 			}
 			$(".owl-carousel").html(htmlVal);
+			
+			//캐러셀 호출
+			$('.wrap-group .owl-carousel').owlCarousel({
+				items : 3,
+				margin : 10,
+				loop : true,
+				dots : true,
+				autoplay: true,
+				autoplayTimeout : 3000,
+				autoplayHoverPause : true
+			});
 		}
 		
 		
@@ -104,7 +102,6 @@
 					m_group_id : m_groupid
 				}
 				,success : function(result){ 
-					console.log(result);
 					if(result > 0){
 						alert("해당 그룹으로 이동합니다");
 						$(".modal").hide();	
@@ -155,7 +152,6 @@
 					m_pwd : $(this).parent().find("input[name=m_pwd]").val()
 				}
 				,success : function(result){ 
-					console.log(result);
 					if(result > 0){
 						alert("그룹 가입 성공!! 그룹 입장합니다.");
 						$(".modal").hide();	
@@ -189,7 +185,6 @@
 				, data :  $("#frm-find").serialize()
 				, dataType : 'json'
 				, success: function(result){
-						console.log(result);
 						displayFindWrap(result);
 				}
 				,error : ajaxErrorHandler
@@ -201,7 +196,6 @@
 			var htmlVal = '';
 			for(var idx in datalist){
 				var findDto = datalist[idx];
-				console.log(findDto);
 				htmlVal+= `
 					<li>
 						<div class="modal_btn">

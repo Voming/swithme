@@ -64,16 +64,9 @@
 			
 			<div class="board-reply">
 				<p>댓글</p>
-				<c:choose>
-					<c:when test="${empty replyList.replydto}">
-						<div class="empty">댓글이 없습니다.</div>
-					</c:when>
-					<c:when test="${not empty replyList.replydto }">
-						<div class="replylist">
-							<!-- 여기에 ajax를 통해 댓글, 대댓글 들어옴 (반복문 돌림) -->
-						</div>
-					</c:when>
-				</c:choose>
+				<div class="replylist">
+					<!-- 여기에 ajax를 통해 댓글, 대댓글 들어옴 (반복문 돌림) -->
+				</div>
 
 
 				<div class="reply">
@@ -206,51 +199,54 @@ function displayReplyWrap(datalist){
 	console.log("${dto.boardId }");
 
 	var htmlVal = '';
-	for(var idx in datalist){
-		var replydto = datalist[idx];
-		
-		/* 댓글, 대댓글을 레벨로 구분해주기 */
-		if(replydto.replyLevel == 1){
-			htmlVal += `<div class="replyresult level1">`;
-			/* 댓글 */
-		
-		} else {
-			htmlVal += `<div class="replyresult level2">`;
-			/* 대댓글 */
-		}
-		htmlVal += `
-				<div class="r-write">
-					<div>
-						\${replydto.replyWriterid}
-					</div>
-				</div>
-				<div class="r-content">
-					<div>
-						\${replydto.replyContent}
-					</div>
-				</div>
-				<div class="r-wrap">
-					<ul>
-						<li>\${replydto.replyWritetime}</li>
-		`;
-		if(replydto.replyLevel == 1){
-			htmlVal += `<li class="replyMore" data-replyid="\${replydto.replyId}" data-replylevel="\${replydto.replyLevel}" data-replystep="\${replydto.replyStep}" data-replyref="\${replydto.replyRef}">댓글 달기</li>`;
-				/*  dat는 소문자만 사용 가능 - 이걸로 원한는 값 끌고오기 가능한데
-												값 꺼내쓸 때 변수에 담아야 함*/
-		} else {
-			htmlVal += `<li></li>`;
-		}
-
-			/* 대댓글은 댓글Id를 알아야 찾아갈 수 있음 */
-			/* 댓글id는 boardId를 알고 있기 때문에(boardId 데이터를 가지고 있음) 대댓글에서까지 boardId 알 필요 없음 */
+	if(datalist.length == 0) {
+		htmlVal += `<div><p>댓글이 없습니다.</p> </div>`;
+	} else  {
+		for(var idx in datalist){
+			var replydto = datalist[idx];
+			
+			/* 댓글, 대댓글을 레벨로 구분해주기 */
+			if(replydto.replyLevel == 1){
+				htmlVal += `<div class="replyresult level1">`;
+				/* 댓글 */
+			
+			} else {
+				htmlVal += `<div class="replyresult level2">`;
+				/* 대댓글 */
+			}
 			htmlVal += `
-							<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>
-						</ul>
+					<div class="r-write">
+						<div>
+							\${replydto.replyWriterid}
+						</div>
 					</div>
-				</div>
+					<div class="r-content">
+						<div>
+							\${replydto.replyContent}
+						</div>
+					</div>
+					<div class="r-wrap">
+						<ul>
+							<li>\${replydto.replyWritetime}</li>
 			`;
-	}
+			if(replydto.replyLevel == 1){
+				htmlVal += `<li class="replyMore" data-replyid="\${replydto.replyId}" data-replylevel="\${replydto.replyLevel}" data-replystep="\${replydto.replyStep}" data-replyref="\${replydto.replyRef}">댓글 달기</li>`;
+					/*  dat는 소문자만 사용 가능 - 이걸로 원한는 값 끌고오기 가능한데
+													값 꺼내쓸 때 변수에 담아야 함*/
+			} else {
+				htmlVal += `<li></li>`;
+			}
 	
+				/* 대댓글은 댓글Id를 알아야 찾아갈 수 있음 */
+				/* 댓글id는 boardId를 알고 있기 때문에(boardId 데이터를 가지고 있음) 대댓글에서까지 boardId 알 필요 없음 */
+				htmlVal += `
+								<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>
+							</ul>
+						</div>
+					</div>
+				`;
+		} // for
+	}  // else 
 	$(".replylist").html(htmlVal);
 	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창 띄우기 이벤트가 사라짐으로
  	   밑에 다시 걸어야함 */

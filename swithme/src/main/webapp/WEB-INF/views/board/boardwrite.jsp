@@ -1,17 +1,11 @@
-<link href="<%=request.getContextPath()%>/resources/css/basic/reset.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/core.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/layout.css" rel="stylesheet">
-
-<link href="<%=request.getContextPath()%>/resources/css/basic/header.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/resources/css/basic/footer.css" rel="stylesheet">
-
-<link href="<%=request.getContextPath()%>/resources/css/board/boardwrite.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="<%=request.getContextPath()%>/resources/css/board/boardwrite.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -57,7 +51,7 @@
 							<p>내용</p>
 						</div>
 						<div class="ta-content">
-							<textarea name="content" cols="80" rows="25"
+							<textarea name="content"
 								placeholder="내용을 입력하시오." required></textarea>
 						</div>
 					</li>
@@ -109,7 +103,7 @@ function btnWriteClickHandler(){
 	
 	var frm = document.getElementById("form-write");
 	frm.method="post";
-	frm.action="${pageContext.request.contextPath}/boardwrite";
+	frm.action="${pageContext.request.contextPath}/board/write";
 	frm.submit();
 }
 

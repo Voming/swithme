@@ -393,7 +393,8 @@ function boardWriteClickHandler(){
 
 /* 게시글 수정 */
 function boardUpdateClickHandler(){
-	location.href = "${pageContext.request.contextPath}/board/update";
+	/* 어느 게시판인지 query string 으로 정보 보내야함 */
+	location.href = "${pageContext.request.contextPath}/board/update?id=${dto.boardId }";
 }
 
 

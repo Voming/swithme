@@ -14,7 +14,7 @@ import swithme.model.member.dto.MemberInfoDto;
 /**
  * Servlet implementation class BoardWriteController
  */
-@WebServlet("/boardwrite")
+@WebServlet("/board/write")
 public class BoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

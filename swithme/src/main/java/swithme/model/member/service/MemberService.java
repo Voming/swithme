@@ -87,7 +87,7 @@ public class MemberService {
 	// delete
 	public int delete(String memId) {
 		int result = 0;
-		Connection conn = null;
+		Connection conn = getConnection(false);
 		result = dao.delete(conn, memId);
 		close(conn);
 		return result;

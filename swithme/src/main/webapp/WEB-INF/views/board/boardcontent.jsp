@@ -68,6 +68,7 @@
 					<!-- 여기에 ajax를 통해 댓글, 대댓글 들어옴 (반복문 돌림) -->
 				</div>
 
+
 				<div class="reply">
 					<form class="frm-reply">
 						<div class="r-1">
@@ -95,7 +96,9 @@
 			
 			<div class="btn">
 				<button type="button" class="btn write">글쓰기</button>
-				<button type="button" class="btn rewrite">수정</button>
+			<c:if test="${dto.boardWriter == loginInfo.memId}">
+				<button type="button" class="btn update">수정</button>
+			</c:if>
 				<button type="button" class="btn board">목록</button>
 			</div>
 		</div>
@@ -150,6 +153,7 @@ function loadedHandler(){
 	$(".replydel").on("click", ReplydelClickHandler)
 	
 	$(".btn.write").on("click", boardWriteClickHandler);
+ 	$(".btn.update").on("click", boardUpdateClickHandler);
 	$(".btn.board").on("click", boardClickHandler);
 	
 }
@@ -195,51 +199,54 @@ function displayReplyWrap(datalist){
 	console.log("${dto.boardId }");
 
 	var htmlVal = '';
-	for(var idx in datalist){
-		var replydto = datalist[idx];
-		
-		/* 댓글, 대댓글을 레벨로 구분해주기 */
-		if(replydto.replyLevel == 1){
-			htmlVal += `<div class="replyresult level1">`;
-			/* 댓글 */
-		
-		} else {
-			htmlVal += `<div class="replyresult level2">`;
-			/* 대댓글 */
-		}
-		htmlVal += `
-				<div class="r-write">
-					<div>
-						\${replydto.replyWriterid}
-					</div>
-				</div>
-				<div class="r-content">
-					<div>
-						\${replydto.replyContent}
-					</div>
-				</div>
-				<div class="r-wrap">
-					<ul>
-						<li>\${replydto.replyWritetime}</li>
-		`;
-		if(replydto.replyLevel == 1){
-			htmlVal += `<li class="replyMore" data-replyid="\${replydto.replyId}" data-replylevel="\${replydto.replyLevel}" data-replystep="\${replydto.replyStep}" data-replyref="\${replydto.replyRef}">댓글 달기</li>`;
-				/*  dat는 소문자만 사용 가능 - 이걸로 원한는 값 끌고오기 가능한데
-												값 꺼내쓸 때 변수에 담아야 함*/
-		} else {
-			htmlVal += `<li></li>`;
-		}
-
-			/* 대댓글은 댓글Id를 알아야 찾아갈 수 있음 */
-			/* 댓글id는 boardId를 알고 있기 때문에(boardId 데이터를 가지고 있음) 대댓글에서까지 boardId 알 필요 없음 */
+	if(datalist.length == 0) {
+		htmlVal += `<div><p>댓글이 없습니다.</p> </div>`;
+	} else  {
+		for(var idx in datalist){
+			var replydto = datalist[idx];
+			
+			/* 댓글, 대댓글을 레벨로 구분해주기 */
+			if(replydto.replyLevel == 1){
+				htmlVal += `<div class="replyresult level1">`;
+				/* 댓글 */
+			
+			} else {
+				htmlVal += `<div class="replyresult level2">`;
+				/* 대댓글 */
+			}
 			htmlVal += `
-							<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>
-						</ul>
+					<div class="r-write">
+						<div>
+							\${replydto.replyWriterid}
+						</div>
 					</div>
-				</div>
+					<div class="r-content">
+						<div>
+							\${replydto.replyContent}
+						</div>
+					</div>
+					<div class="r-wrap">
+						<ul>
+							<li>\${replydto.replyWritetime}</li>
 			`;
-	}
+			if(replydto.replyLevel == 1){
+				htmlVal += `<li class="replyMore" data-replyid="\${replydto.replyId}" data-replylevel="\${replydto.replyLevel}" data-replystep="\${replydto.replyStep}" data-replyref="\${replydto.replyRef}">댓글 달기</li>`;
+					/*  dat는 소문자만 사용 가능 - 이걸로 원한는 값 끌고오기 가능한데
+													값 꺼내쓸 때 변수에 담아야 함*/
+			} else {
+				htmlVal += `<li></li>`;
+			}
 	
+				/* 대댓글은 댓글Id를 알아야 찾아갈 수 있음 */
+				/* 댓글id는 boardId를 알고 있기 때문에(boardId 데이터를 가지고 있음) 대댓글에서까지 boardId 알 필요 없음 */
+				htmlVal += `
+								<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>
+							</ul>
+						</div>
+					</div>
+				`;
+		} // for
+	}  // else 
 	$(".replylist").html(htmlVal);
 	/*  이렇게 하면 여기 출력되는 자리가 htmlVal로 인해 새롭게 overwrite 되면서 위에 걸려있던 대댓글창 띄우기 이벤트가 사라짐으로
  	   밑에 다시 걸어야함 */
@@ -254,6 +261,7 @@ function displayReplyWrap(datalist){
 		$(element).click(ReplyMoreClickHandler);
 		/* 그중 하나에 클릭이벤트 건게 이 친구!! */
 	});
+	
 	
 
 }		
@@ -374,9 +382,17 @@ function ReplydelClickHandler(){
 	console.log("삭제할 replyId-----"+replyId );
 }
 
+/* 게시글 작성 */
 function boardWriteClickHandler(){
-	location.href = "${pageContext.request.contextPath}/boardwrite";
+	location.href = "${pageContext.request.contextPath}/board/write";
 }
+
+/* 게시글 수정 */
+function boardUpdateClickHandler(){
+	/* 어느 게시판인지 query string 으로 정보 보내야함 */
+	location.href = "${pageContext.request.contextPath}/board/update?id=${dto.boardId }";
+}
+
 
 function boardClickHandler(){
 	location.href = "${pageContext.request.contextPath}/board";

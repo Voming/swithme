@@ -65,7 +65,7 @@
 						<button class="btn logout" id="logout"><p>로그아웃</p></button>
 					</span>
 					<span> 
-						<button class="btn out"><p>탈퇴하기</p></button>
+						<button class="btn out" id="out" onclick="return btnOutClickHandler();"><p>탈퇴하기</p></button>
 					</span>
 				</form>
 			</div>
@@ -80,7 +80,7 @@
 $(loadHandler);
 function loadHandler() {
 	$(".btn.logout").on("click",btnLogoutClickHandler);
-	$(".btn.out").on("click",btnOutClickHandler);
+	//$(".btn.out").on("click",btnOutClickHandler);
 }
 
 

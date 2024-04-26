@@ -1,80 +1,78 @@
 package swithme.model.testcalendar.dto;
 
 public class MastercraftsmentDto {
-	private String descriptString;
-	private String docRegStart;
-	private String docRegEnd;
-	private String docExam;
-	private String docPass;
-	private String pracRegStart;
-	private String pracRegEnd;
-	private String pracExamStart;
-	private String pracExamEnd;
-	private String pracPass;
-
-	
-
-	public MastercraftsmentDto(String descriptString, String docRegStart, String docRegEnd, String docExam, String docPass,
-			String pracRegStart, String pracRegEnd, String pracExamStart, String pracExamEnd, String pracPass) {
-		super();
-		this.descriptString = descriptString;
-		this.docRegStart = docRegStart;
-		this.docRegEnd = docRegEnd;
-		this.docExam = docExam;
-		this.docPass = docPass;
-		this.pracRegStart = pracRegStart;
-		this.pracRegEnd = pracRegEnd;
-		this.pracExamStart = pracExamStart;
-		this.pracExamEnd = pracExamEnd;
-		this.pracPass = pracPass;
-	}
+	private String description;
+	private String docregstartdt;
+	private String docregenddt;
+	private String docexamdt;
+	private String docpassdt;
+	private String pracregstartdt;
+	private String pracregenddt;
+	private String pracexamstartdt;
+	private String pracexamenddt;
+	private String pracpassdt;
 
 	@Override
 	public String toString() {
-		return "ProengineerDto [descriptString=" + descriptString + ", docRegStart=" + docRegStart + ", docRegEnd="
-				+ docRegEnd + ", docExam=" + docExam + ", docPass=" + docPass + ", pracRegStart=" + pracRegStart
-				+ ", pracRegEnd=" + pracRegEnd + ", pracExamStart=" + pracExamStart + ", pracExamEnd=" + pracExamEnd
-				+ ", pracPass=" + pracPass + "]";
+		return "IndengineerDto [description=" + description + ", docregstartdt=" + docregstartdt
+				+ ", docregenddt=" + docregenddt + ", docexamdt=" + docexamdt + ", docpassdt=" + docpassdt
+				+ ", pracregstartdt=" + pracregstartdt + ", pracregenddt=" + pracregenddt + ", pracexamstartdt="
+				+ pracexamstartdt + ", pracexamenddt=" + pracexamenddt + ", pracpassdt=" + pracpassdt + "]";
 	}
 
-	public String getDescriptString() {
-		return descriptString;
+	public MastercraftsmentDto(String description, String docregstartdt, String docregenddt, String docexamdt,
+			String docpassdt, String pracregstartdt, String pracregenddt, String pracexamstartdt, String pracexamenddt,
+			String pracpassdt) {
+		super();
+		this.description = description;
+		this.docregstartdt = docregstartdt;
+		this.docregenddt = docregenddt;
+		this.docexamdt = docexamdt;
+		this.docpassdt = docpassdt;
+		this.pracregstartdt = pracregstartdt;
+		this.pracregenddt = pracregenddt;
+		this.pracexamstartdt = pracexamstartdt;
+		this.pracexamenddt = pracexamenddt;
+		this.pracpassdt = pracpassdt;
 	}
 
-	public String getDocRegStart() {
-		return docRegStart;
+	public String getdescription() {
+		return description;
 	}
 
-	public String getDocRegEnd() {
-		return docRegEnd;
+	public String getDocregstartdt() {
+		return docregstartdt;
 	}
 
-	public String getDocExam() {
-		return docExam;
+	public String getDocregenddt() {
+		return docregenddt;
 	}
 
-	public String getDocPass() {
-		return docPass;
+	public String getDocexamdt() {
+		return docexamdt;
 	}
 
-	public String getPracRegStart() {
-		return pracRegStart;
+	public String getDocpassdt() {
+		return docpassdt;
 	}
 
-	public String getPracRegEnd() {
-		return pracRegEnd;
+	public String getPracregstartdt() {
+		return pracregstartdt;
 	}
 
-	public String getPracExamStart() {
-		return pracExamStart;
+	public String getPracregenddt() {
+		return pracregenddt;
 	}
 
-	public String getPracExamEnd() {
-		return pracExamEnd;
+	public String getPracexamstartdt() {
+		return pracexamstartdt;
 	}
 
-	public String getPracPass() {
-		return pracPass;
+	public String getPracexamenddt() {
+		return pracexamenddt;
 	}
 
+	public String getPracpassdt() {
+		return pracpassdt;
+	}
 }

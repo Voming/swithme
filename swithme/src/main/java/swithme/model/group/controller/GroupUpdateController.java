@@ -1,6 +1,5 @@
 package swithme.model.group.controller;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -19,12 +18,10 @@ import com.cloudinary.utils.ObjectUtils;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import swithme.model.group.dto.GroupCreateDto;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.dto.GroupUpdateDto;
 import swithme.model.group.dto.GroupUpdateMinDto;
 import swithme.model.group.service.GroupService;
-import swithme.model.member.dto.MemberInfoDto;
 import swithme.server.common.ServerTemplate;
 
 @WebServlet("/group/update")

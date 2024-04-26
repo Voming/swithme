@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.group.dto.GroupDto;
-import swithme.model.group.dto.GroupMylistDto;
 import swithme.model.group.service.GroupService;
-import swithme.model.member.dto.MemberInfoDto;
 
 @WebServlet("/group")
 public class GroupController extends HttpServlet implements Serializable{

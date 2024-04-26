@@ -155,7 +155,7 @@ function pageChangeHandler(){
 }
 
 function btnWriteClickHandler() {
-	location.href = "${pageContext.request.contextPath}/boardwrite";
+	location.href = "${pageContext.request.contextPath}/board/write";
 
 }
 

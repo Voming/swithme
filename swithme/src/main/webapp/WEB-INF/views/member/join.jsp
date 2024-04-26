@@ -49,9 +49,12 @@
 					<div>
 						<label>이메일</label><input type="email" name="email"  id="email" required>
 						<button type="button" class="btn code"><p>인증코드</p></button>
+						<span class="desc-email"></span>
 					</div>
 					<div>
-						<label class="emailcheck">이메일 확인</label><input type="text" name="emailr" id="emailr" placeholder="인증코드" required>
+						<label class="emailcheck">이메일 확인</label>
+						<input onclick="emailsendHanler" type="text" name="emailr" id="emailr" placeholder="인증코드" disabled="disabled" required>
+						<button disabled="disabled"  class="checkcode"><p>인증</p></button>
 					</div>
 					<div>
 						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 5글자 이상 입력하세요" required>
@@ -157,15 +160,34 @@ $("input").keyup(function(){
 	var pwd=$("#pwd").val().trim();
 	var pwdr=$("#pwdr").val().trim();
 	
-	if(id != "" && email != ""  && emailr != "" && pwd != "" && pwdr != ""){
-		$('#btnjoin').css('background','#8066FF').css('color','white');
+	if(id != "" && email != ""  && emailr != "" && pwd !="" && pwdr==pwd){
+		$('#btnjoin').css('background','#8066FF').css('color','white').css('cursor', 'pointer');
 	}else{
 		$('#btnjoin').css('background','#DDCCFF');
 	}
 });
 
 
+
+
 </script>
+
+<script>
+//이메일 유효성 검사
+$('[name=email]').on('blur', function(){   
+	var email=$("[name=email]").val().trim();
+	var msg = '';
+	var regExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+	if(regExp.test(email) == false ){ 
+		msg ="이메일형식아님";
+	}else{
+		msg ="";
+	}
+	$(".desc-email").html(msg).css('color', 'red').css('font-size', '13px');
+});
+
+</script>
+
 
 
 	

@@ -46,6 +46,7 @@ public class GroupJoinController extends HttpServlet {
 		if(!pwdstr.equals(rPwd)) { //비밀번호 일치하지않으면 오류 발생
 			result = -1;
 			response.getWriter().append(String.valueOf(result));
+			return;
 		}
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);

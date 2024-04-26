@@ -24,6 +24,8 @@
 		$(loadedHandler);
 
 		function loadedHandler() {
+			$(getGroupMylist);
+			
 			//캐러셀 호출
 			$('.wrap-group .owl-carousel').owlCarousel({
 				items : 3,
@@ -51,6 +53,39 @@
 			$(".close_btn").on("click", btnCloseClickHandler);
 			$(".modal").hide();	
         }
+		
+		//나의 리스트 가져오기
+		function getGroupMylist(){
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/group/mylist.ajax"
+				, method : "post"
+				, dataType : 'json'
+				, success : function(result){ 
+					console.log(result);
+					if(result != null){
+						displayGroupMylist(result);
+					}
+				}
+				,error : ajaxErrorHandler
+			} ); 
+		}
+		//나의 리스트 출력
+		function displayGroupMylist(datalist){
+			var htmlVal = '';
+			for(var idx in datalist){
+				var myDto = datalist[idx];
+				htmlVal+= `
+					<div class="item">
+						<button type="button" onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=\${myDto.sgroupId}'">
+							<img src="\${myDto.sgroupImgPath}">
+						</button>
+						<figcaption>\${myDto.sgroupName }</figcaption>
+					</div>
+				`;
+			}
+			$(".owl-carousel").html(htmlVal);
+		}
+		
 		
 		//모달 열기
 		function btnOpenClickHandler() {
@@ -110,6 +145,7 @@
 		
 		//그룹 가입하기
 		function btnJoinClickHandler() {
+			var m_groupid = $(this).parent().find(".m_group_id").text();
 			console.log('join clicked!');
 			$.ajax( { 
 				url : "${pageContext.request.contextPath}/group/join.ajax"
@@ -121,11 +157,12 @@
 				,success : function(result){ 
 					console.log(result);
 					if(result > 0){
-						alert("그룹 가입 성공!!");
+						alert("그룹 가입 성공!! 그룹 입장합니다.");
 						$(".modal").hide();	
-					} else if(result == -1){
+						location.href="${pageContext.request.contextPath}/group/info?groupId=" + m_groupid;
+					} else if(result == "-1"){
 						alert("비밀번호가 틀렸습니다");
-					} else if(result == -2){
+					} else if(result == "-2"){
 						alert("죄송합니다. 그룹 정원이 차있으므로 가입이 불가합니다.");
 					} 
 				}
@@ -226,19 +263,7 @@
 							<p>내 그룹</p>
 						</div>
 						<div class="owl-carousel">
-							<c:if test="${not empty myGrouplist }">
-								<c:forEach items="${myGrouplist}" var="groupDto">
-									<div class="item">
-										<figure>
-											<button type="button"
-												onclick="location.href='${pageContext.request.contextPath}/group/info?groupId=${groupDto.sgroupId}'">
-												<img src="${groupDto.sgroupImgPath}">
-											</button>
-											<figcaption>${groupDto.sgroupName }</figcaption>
-										</figure>
-									</div>
-								</c:forEach>
-							</c:if>
+							<!-- 나의 그룹 리스트 ajax -->
 						</div>
 					</div>
 				</div>

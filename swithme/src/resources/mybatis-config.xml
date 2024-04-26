@@ -29,15 +29,9 @@
 		
 		<typeAlias type="swithme.model.ranking.dto.RankingDto"/>
 		
-		<typeAlias type="swithme.model.testcalendar.dto.IndengineerDto"/>
-		<typeAlias type="swithme.model.testcalendar.dto.MastercraftsmentDto"/>
-		<typeAlias type="swithme.model.testcalendar.dto.ProengineerDto"/>
-		
-		<typeAlias type="java.util.Map"/>
-		<typeAlias type="java.util.HashMap"/>
-		<typeAlias type="java.util.List"/>
-		
 		<package name="swithme.model.myrecord.dto"/>
+		
+		<package name="swithme.model.testcalendar.dto"/>
 	</typeAliases>
 
 	<environments default="dbserverSwithme">

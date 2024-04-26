@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="testcalendar">
+
+<insert id="insertDescrInd" parameterType="IndengineerDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+		select SEQ_DESCR_IDN.nextval descr_Id from dual
+	</selectKey>
+	insert into descr_ind values (#{descrId}, #{description})
+</insert>
+<insert id="insertIndEngineer" parameterType="IndengineerDto">
+	insert 	into ind_engineer (DESCR_ID, DOCREGSTARTDT, DOCREGENDDT, DOCEXAMDT, DOCPASSDT, PRACREGSTARTDT, PRACREGENDDT, PRACEXAMSTARTDT, PRACEXAMENDDT, PRACPASSDT) 
+    values (#{descrId}, #{docregstartdt}, #{docregenddt}, #{docexamdt}, #{docpassdt}, #{pracregstartdt}, #{pracregenddt}, #{pracexamstartdt}, #{pracexamenddt}, #{pracpassdt}) 
+</insert>
+<update id="updateIndEngineer" parameterType="IndengineerDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+	select DESCR_ID from descr_ind where description = #{description}
+	</selectKey>
+	update ind_engineer set  
+		docregstartdt_ex = #{docregstartdt},
+		docregenddt_ex = #{docregenddt},
+		pracregstartdt_ex = #{pracregstartdt},
+		pracregenddt_ex = #{pracregenddt}
+	where descr_id = #{descrId}
+</update>
 </mapper>

@@ -14,12 +14,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import swithme.model.testcalendar.dao.TestCalDao;
 import swithme.model.testcalendar.dto.IndengineerDto;
 import swithme.model.testcalendar.dto.MastercraftsmentDto;
 import swithme.model.testcalendar.dto.ProengineerDto;
 import swithme.server.common.ServerTemplate;
 
 public class TestCalService {
+	private TestCalDao dao = new TestCalDao();
 	public static String getTagValue(String tag, Element eElement) {
 		// 결과를 저장할 result 변수 선언
 		String result = "";
@@ -117,11 +119,13 @@ public class TestCalService {
 					String pracexamenddt = getTagValue("pracexamenddt", eElement);
 					String pracpassdt = getTagValue("pracpassdt", eElement);
 
-					IndengineerDto dto = new IndengineerDto(description, docregstartdt, docregenddt, docexamdt, docpassdt,
+					IndengineerDto dto = new IndengineerDto(0, description, docregstartdt, docregenddt, docexamdt, docpassdt,
 							pracregstartdt, pracregenddt, pracexamstartdt, pracexamenddt, pracpassdt);
 					dtolist.add(dto);
 				}
 				System.out.println("기사 산업기사 : " + dtolist);
+				int result = dao.insert(dtolist);
+				System.out.println(result);
 			}
 	
 		} catch (Exception e) {

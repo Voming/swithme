@@ -172,6 +172,7 @@ a{
 }
 .wrap-body .myrecord .timer.box .study-countdown #selSub {
 	font-family: IM_Hyemin-Bold;
+	font-size:30px;
 	color: white;
 	padding-bottom : 5px;
 }

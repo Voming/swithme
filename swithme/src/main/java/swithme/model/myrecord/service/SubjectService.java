@@ -3,7 +3,6 @@ package swithme.model.myrecord.service;
 
 import static swithme.jdbc.common.MybatisTemplate.*;
 
-import java.sql.Connection;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +13,7 @@ import swithme.model.myrecord.dto.SubjectAddDto;
 import swithme.model.myrecord.dto.SubjectDeleteDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.dto.SubjectDto;
+import swithme.model.myrecord.dto.SubjectModifyDto;
 
 public class SubjectService {
 	private SubjectDao dao = new SubjectDao();
@@ -42,16 +42,16 @@ public class SubjectService {
 	}
 	
 	
-	//과목 추가 insert - 후 결과화면 조화 한번에 하기 (ajax)
+	//과목 추가 insert - 후 결과화면 조회 한번에 하기 (ajax)
 	public List<SubjectDifftimeDto> insertSubjectAndSelectRecord( SubjectAddDto dto) {
 		System.out.println(">>>>>>serv insertSubjectAndSelectRecord  dto : "+dto);
 		
 		List<SubjectDifftimeDto> result = null;
-		int insertResult = -1;
+		//int insertResult = -1;
 		SqlSession session = getSqlSession();
 
 		// insert subject
-		insertResult = dao.insert(session, dto);
+		//insertResult = dao.insert(session, dto);
 		
 		// select record
 		// 과목추가에 성공 여부와 상관없이 화면을 다시 display 해야 하므로 정보를 조회해 옴
@@ -80,7 +80,7 @@ public class SubjectService {
 	
 
 	//과목 수정 update
-	public int update(SubjectAddDto dto) {
+	public int update(SubjectModifyDto dto) {
 		//과목,맴버 ID를 조건으로 하는 행의 과목이름과 컬러 변경
 		System.out.println(">>>>>>update  SubjectDto : "+dto);
 		int result = -1;

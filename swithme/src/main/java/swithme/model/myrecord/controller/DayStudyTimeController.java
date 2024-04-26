@@ -17,7 +17,6 @@ import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
-import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.service.RecordService;
 
 /**

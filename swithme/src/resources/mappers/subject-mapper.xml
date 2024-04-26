@@ -13,8 +13,8 @@ SELECT * FROM SUBJECT WHERE MEM_ID = #{memid}
 <insert id="insert" parameterType="SubjectAddDto">
 INSERT INTO SUBJECT VALUES(SEQ_SUBJECT_ID.nextval,#{subjectMemId},#{subjectName},DEFAULT,NULL,#{subjectColor})
 </insert>
-<update id="update" parameterType="SubjectAddDto">
-UPDATE SUBJECT SET SUBJECT_NAME = #{subjectName} , SUBJECT_COLOR = #{subjectColor}  WHERE SUBJECT_ID = #{TODO_EJKIM} AND MEM_ID = #{subjectMemId} 
+<update id="update" parameterType="SubjectModifyDto">
+UPDATE SUBJECT SET SUBJECT_NAME = #{modifySubName} , SUBJECT_COLOR = #{modifySubColor}  WHERE SUBJECT_NAME = #{subjectName} AND MEM_ID = #{memId} AND SUBJECT_DEL_DATE IS NULL 
 </update>
 <update id="delete" parameterType="SubjectDeleteDto">
 UPDATE SUBJECT SET SUBJECT_DEL_DATE = to_date(#{subjectDelDate}, 'yyyymmddhh24miss')  WHERE SUBJECT_ID = #{subjectId} AND MEM_ID = #{memId} 

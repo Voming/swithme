@@ -18,24 +18,9 @@ import swithme.model.myrecord.service.RecordService;
 public class RecoradEndTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public RecoradEndTimeController() {
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String subjectIdStr = request.getParameter("subjectId");
@@ -45,5 +30,4 @@ public class RecoradEndTimeController extends HttpServlet {
 		System.out.println(result);
 		response.getWriter().append(String.valueOf(result));
 	}
-
 }

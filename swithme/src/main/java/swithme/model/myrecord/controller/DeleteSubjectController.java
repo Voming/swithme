@@ -18,24 +18,9 @@ import swithme.model.myrecord.service.SubjectService;
 public class DeleteSubjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SubjectService service = new SubjectService();
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public DeleteSubjectController() {
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String deleteTime = request.getParameter("deleteTime");

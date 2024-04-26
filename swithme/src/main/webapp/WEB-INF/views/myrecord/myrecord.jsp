@@ -145,7 +145,7 @@
 											<!-- controller 추가 -->
 											<form id="frm-modify">
 												<div class="subject ">
-													<p class="title">수정할 과목 이름</p>
+													<p class="title"id="bfore-title">수정할 과목 이름</p>
 												</div>
 												<div class="modify-name">
 													<input type="text" name="subNameM"
@@ -161,6 +161,7 @@
 														<option value="5">보라</option>
 													</select>
 												</div>
+												<div><p>변경할 색상을 선택하지 않으면 핑크가 기본 색깔로 지정됩니다</p></div>
 												<button class="btn remove-sub" type="button" data-bs-dismiss="modal">
 													<p>삭제</p>
 												</button>
@@ -315,7 +316,26 @@ function subIdClickHandler(){
 }
 // 과목 수정하기
 function btnModifyDoneSubjectClickHandler(){
-//TODO
+	
+	var subNameModi =$(this).parent().children().find('input[name="subNameM"]').val();
+	var colorModi =$(this).parent().children().find('select[name="selectColorM"]').val();
+	
+	$.ajax({
+		type : "post",
+		url : "${pageContext.request.contextPath}/myrecord/modify.ajax",
+		data : {subjectName : subjectName, subNameModi: subNameModi,colorModi:colorModi },
+		error : ajaxErrorHandler,
+		success : function(result) {
+			console.log("-------- ajax result");
+			console.log(result);
+			if(result != -1){			
+				alert("수정이 완료되었습니다.");
+			}else{
+				alert("수정 실패애앩!!!");
+			}
+			location.reload(true);
+		}
+	});
 }
 // 과목 추가하기  
 function btnAddSubjectClickHandler() {
@@ -327,12 +347,17 @@ function btnAddSubjectClickHandler() {
 }
 //과목 수정하기초입
 function btnReSubClickHandler(){
-	console.log("아아아아아아앍   "+subjectName);
+	console.log("아아아아아아앍   ");
+
 	if(subjectName == null){
 		alert("수정할 과목을 먼저 선택해주세요");
+		location.reload(true);
+		//history.go(0);
+		
 		//이벤트 전 화면으로 이동
-		history.back();
+		//history.back();
 	}
+	$("#bfore-title").text(subjectName);
 }
 //과목 삭제하기
 function btnRemoveSubjectClickHandler(){
@@ -352,7 +377,6 @@ function btnRemoveSubjectClickHandler(){
 			location.reload(true);
 		}
 	});
-	
 }
 let intervalCountdownID;
 let startTime;
@@ -361,7 +385,7 @@ let diffMSec;
 let diffMin;
 let diffHour;
 let diffTime;
-
+//시간계산
 /* 	
 // 10보다 작은 값에 0을 붙임
 function addZero(n) {

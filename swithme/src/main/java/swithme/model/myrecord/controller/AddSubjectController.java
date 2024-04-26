@@ -1,7 +1,6 @@
 package swithme.model.myrecord.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.SubjectAddDto;
-import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.service.SubjectService;
 
 /**
@@ -49,8 +47,12 @@ public class AddSubjectController extends HttpServlet {
 //		to Json getWrite....
 		
 		int result = service.insert(dto);
-		response.sendRedirect(request.getContextPath()+"/myrecord");
-		
+		//TODO ajax
+		if(result >0) {
+			response.sendRedirect(request.getContextPath()+"/myrecord");
+		}else {
+			
+		}
+		//
 	}
-
 }

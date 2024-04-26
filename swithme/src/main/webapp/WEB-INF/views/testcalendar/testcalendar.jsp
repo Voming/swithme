@@ -18,7 +18,11 @@
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+          initialView: 'dayGridMonth',
+          titleFormat: function (date) {
+        	  year = date.date.year;
+              return year + " 시험 일정";
+            }
         });
         calendar.render();
       });
@@ -31,12 +35,11 @@
 				<div class="bn">
 					<div class="nav2-wrap">
 						<ul>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a
+							<li><a class="active"
 								href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
 						</ul>
 					</div>

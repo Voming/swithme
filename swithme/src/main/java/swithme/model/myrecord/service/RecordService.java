@@ -10,6 +10,7 @@ import swithme.model.myrecord.dao.RecordDao;
 import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
+import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.RecordDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
@@ -102,6 +103,14 @@ public class RecordService {
 		session.close();
 		return result;
 	}
+	// 캘린더에 출력할 학습기록 list
+	public List<RecordCalendarDto> studyTimeByCalList(String memId) {
+		List<RecordCalendarDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.studyTimeByCalList(session,memId);
+		session.close();
+		return result;
+	}
 	
 	// selectOne
 	public RecordDto selectOne(int recordSubjectId) {
@@ -112,15 +121,7 @@ public class RecordService {
 		return vo;
 	}
 
-	// select all
-	public List<RecordDto> select() {
 
-		List<RecordDto> result = null;
-		SqlSession session = getSqlSession();
-		result = dao.select(session);
-		session.close();
-		return result;
-	}
 	// rec은 delete,update없음
 
 }

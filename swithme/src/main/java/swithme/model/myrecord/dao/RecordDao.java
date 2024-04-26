@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
+import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.RecordDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
@@ -62,11 +63,15 @@ public class RecordDao {
 		return session.insert("record.insertStartTime", dto);
 	}
 	
-//update 공부종료시간
+// update 공부종료시간
 	public int insertEndTime(SqlSession session, RecordTimeDto dto) {
 		return session.update("record.insertEndTime", dto);
 	}
-	
+
+// 캘린더에 출력할 학습기록 list
+	public List<RecordCalendarDto> studyTimeByCalList(SqlSession session,String memId) {
+		return session.selectList("record.studyTimeByCalList",memId);
+	}
 
 
 //	-----------------------------------------------------
@@ -75,11 +80,4 @@ public class RecordDao {
 		return session.selectOne("record.selectOne", recordId);
 	}
 
-	// select
-	public List<RecordDto> select(SqlSession session) {
-		return session.selectList("record.select");
-	}
-
-
-	// update,delete...???
 }

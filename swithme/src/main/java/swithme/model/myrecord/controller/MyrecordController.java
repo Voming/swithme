@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.member.dto.MemberInfoDto;
+import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.service.RecordService;
 
@@ -32,7 +33,7 @@ public class MyrecordController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String subjectName = request.getParameter("subjectName");
-				
+    	List<RecordCalendarDto> calendarList = null;
 				// memId 세션확인
 				MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 //				if(loginInfo == null) {
@@ -45,15 +46,13 @@ public class MyrecordController extends HttpServlet {
 					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 					request.setAttribute("sublist", sublist);
 					request.setAttribute("memId", memId);
-					
+
+			
+		    		calendarList = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+		    		System.out.println("\n\n"+calendarList);
+		    		request.setAttribute("calendarList", calendarList);
+		    		
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
 				}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

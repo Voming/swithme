@@ -114,14 +114,15 @@ UPDATE RECORD SET RECORD_END = to_date(#{recordStart}, 'yyyymmddhh24miss')
  where RECORD_SUBJECT_ID =#{recordSubjectId} and RECORD_MEM_ID=#{recordMemId} and RECORD_END IS NULL
 </update>
 
+<!-- 캘린더에 출력할 DB 과목명,시작,종료시간-->
+<select id="studyTimeByCalList" parameterType="string" resultType="RecordCalendarDto">
+select SUBJECT_NAME, RECORD_START , RECORD_END ,SUBJECT_COLOR  
+from record join SUBJECT on RECORD_SUBJECT_ID=SUBJECT_ID WHERE RECORD_MEM_ID= #{memId} order by RECORD_START
+</select>
+
+
 <select id="selectOne" parameterType="int" resultType="RecordDto">
 SELECT * FROM RECORD WHERE RECORD_ID=#{recordId}
 </select>
-
-<select id="select" resultType="RecordDto">
-SELECT * FROM RECORD
-</select>
-
-
 
 </mapper>

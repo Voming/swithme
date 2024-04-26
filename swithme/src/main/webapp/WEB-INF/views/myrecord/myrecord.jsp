@@ -1,4 +1,6 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
+<%@page import="java.util.List"%>
+<%@page import="swithme.model.myrecord.dto.RecordCalendarDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,12 +28,33 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth'
+			initialView : 'dayGridMonth',
+			headerToolbar:{
+				left:'dayGridMonth,timeGridDay,timeGridWeek' ,
+				center:'title' ,
+				right:'today prev,next' 				
+			},
+			selectable : true,
+			droppable : true,
+			editable : true,
+			events:[
+				<%List<RecordCalendarDto> calendarList = (List<RecordCalendarDto>)request.getAttribute("calendarList");%>
+				<%if (calendarList != null) {%>
+	            <%for (RecordCalendarDto vo : calendarList) {%>
+	            {
+	            	title : '<%=vo.getSubjectName()%>',
+	                start : '<%=vo.getRecordStart()%>',
+	                end : '<%=vo.getRecordEnd()%>',
+	           		color : chooseColor('<%=vo.getSubjectColor() %>')
+	             },
+				<%}  // for
+				} // if %>
+			]
 		});
 		calendar.render();
 	});
+	
 </script>
-
 
 
 <title>SWITH.ME</title>

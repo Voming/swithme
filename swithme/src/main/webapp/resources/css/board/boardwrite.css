@@ -59,6 +59,17 @@ textarea:focus {
 	position: absolute;
 	top: 55px;
 }
+.wrap-body > #form-write > ul > li:nth-child(2) > div.ta-content {
+	margin-top: 10px;
+	width: 500px;
+	height: 350px;
+}
+
+.wrap-body > #form-write > ul > li:nth-child(2) > div.ta-content > textarea {
+	width: 80%;
+	height:100%;
+
+}
 
 .wrap-body input {
 	width: 100%;
@@ -76,7 +87,7 @@ input:focus {
 
 .wrap-body .wrap-btn {
 	position:absolute;
-	left: 300px;
+	left: 450px;
 	top: 500px;
 }
 

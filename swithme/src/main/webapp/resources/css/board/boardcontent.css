@@ -77,6 +77,13 @@
  	margin: 10px 40px 20px 40px;
 }
 
+.wrap-body > div.board-reply > div:nth-child(2) {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	text-align: center;
+	margin: 10px 10px 30px; 
+}
+
 .wrap-body > div.board-reply > div.replylist > div.replynone {
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font3);
@@ -158,11 +165,10 @@ textarea:focus {
 
 .wrap-body .btn {
 	display: flex;
-	justify-content: space-between;
 	margin: 10px 0;
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.write {
+.wrap-body > div.btn > button.btn.write {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 	font-weight: bolder;
@@ -175,7 +181,7 @@ textarea:focus {
 
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.write:hover {
+.wrap-body > div.btn > button.btn.write:hover {
 	border: none;
 	border-radius: 20px;
 	background: #8066FF;
@@ -185,7 +191,7 @@ textarea:focus {
 	cursor: pointer;
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.rewrite {
+.wrap-body > div.btn > button.btn.rewrite {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 	font-weight: bolder;
@@ -199,7 +205,7 @@ textarea:focus {
 
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.rewrite:hover {
+.wrap-body > div.btn > button.btn.rewrite:hover {
 	border: none;
 	border-radius: 20px;
 	background: #8066FF;
@@ -209,7 +215,7 @@ textarea:focus {
 	cursor: pointer;
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.board {
+.wrap-body > div.btn > button.btn.board {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 	font-weight: bolder;
@@ -217,12 +223,12 @@ textarea:focus {
 	border-radius: 20px;
 	background: #DDCCFF;
 	padding: 10px 30px;
-	margin-right: 40px;
+	margin-left: 560px;
 	text-align: right;
 
 }
 
-.wrap-body > div.board-reply > div.btn > button.btn.board:hover {
+.wrap-body > div.btn > button.btn.board:hover {
 	border: none;
 	border-radius: 20px;
 	background: #8066FF;

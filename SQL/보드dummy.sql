@@ -6,25 +6,42 @@ CREATE SEQUENCE  "SWITHME"."SEQ_BOARD_ID"  MINVALUE 1 MAXVALUE 99999999999999999
 
 
 SELECT * FROM BOARD;
+
 desc board;
+desc board_reply;
+select * from board_reply;
+select * from board_reply order by reply_ref;
+     
+ 		INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) ,
+				 #{boardId}, #{replyWriterid}, #{replyContent},
+				default,
+				#{replyRef}, 
+				(SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_ref=(select reply_ref from board_reply where reply_id=1)),
+				(SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY where reply_id=1))  ;  
+        
+delete from board_reply;
+delete from board;
+commit;
+
 
 insert into board values(1, 'song', '안녕하세요', '반가워요', default, default, default);
 insert into board values(2, 'oh', '안녕', '반가워요', default, default, default);
 insert into board values(3, 'kim', '코딩 공부중', '반가워요', default, default, default);
-insert into board values(4, 'song', '안녕하세요', '반가워요', default, default, default);
-insert into board values(5, 'oh', '안녕', '반가워요', default, default, default);
-insert into board values(6, 'kim', '코딩 공부중', '반가워요', default, default, default);
-insert into board values(7, 'song', '안녕하세요', '반가워요', default, default, default);
-insert into board values(8, 'oh', '안녕', '반가워요', default, default, default);
+insert into board values(4, 'seo', '안녕하세요', '반가워요', default, default, default);
+insert into board values(5, 'song', '안녕', '반가워요', default, default, default);
+insert into board values(6, 'seo', '코딩 공부중', '반가워요', default, default, default);
+insert into board values(7, 'oh', '안녕하세요', '반가워요', default, default, default);
+insert into board values(8, 'hyo', '안녕', '반가워요', default, default, default);
 insert into board values(9, 'kim', '코딩 공부중', '반가워요', default, default, default);
-insert into board values(10, 'song', '안녕하세요', '반가워요', default, default, default);
+insert into board values(10, 'won', '안녕하세요', '반가워요', default, default, default);
 insert into board values(11, 'oh', '안녕', '반가워요', default, default, default);
-insert into board values(12, 'kim', '코딩 공부중', '반가워요', default, default, default);
+insert into board values(12, 'song', '코딩 공부중', '반가워요', default, default, default);
 insert into board values(13, 'song', '안녕하세요', '반가워요', default, default, default);
-insert into board values(14, 'oh', '안녕', '반가워요', default, default, default);
-insert into board values(15, 'kim', '코딩 공부중', '반가워요', default, default, default);
-insert into board values(16, 'song', '안녕하세요', '반가워요', default, default, default);
-insert into board values(17, 'oh', '안녕', '반가워요', default, default, default);
+insert into board values(14, 'kim', '안녕', '반가워요', default, default, default);
+insert into board values(15, 'seo', '코딩 공부중', '반가워요', default, default, default);
+insert into board values(16, 'seo', '안녕하세요', '반가워요', default, default, default);
+insert into board values(17, 'song', '안녕', '반가워요', default, default, default);
 insert into board values(18, 'kim', '코딩 공부중', '반가워요', default, default, default);
 
 
@@ -46,12 +63,20 @@ insert into board values(33, 'kim', '코딩 공부중', '반가워요', default,
 insert into board values(34, 'song', '안녕하세요', '반가워요', default, default, default);
 insert into board values(35, 'oh', '안녕', '반가워요', default, default, default);
 insert into board values(36, 'kim', '코딩 공부중', '반가워요', default, default, default);
+insert into board values(37, 'kim', '코딩 공부중', '반가워요', default, default, default);
 
 INSERT INTO BOARD(BOARD_ID, BOARD_WRITER, TITLE, CONTENT, WRITE_TIME, READ_COUNT, BOARD_LIKE)
 VALUES(SEQ_BOARD_ID.nextval, 'oh', '코딩어려워요 ㅠㅠ', '이렇게 어려운데 어떻게 취업하죠 ㅎ', default, default, default);
 
+--seq값이 올라감
+select SEQ_BOARD_ID.nextval from dual;
 
+--현재 seq값 순서 확인
+select SEQ_BOARD_ID.currval from dual;
+ALTER sequence SEQ_BOARD_ID increment by  -38;
+ALTER SEQUENCE SEQ_BOARD_ID INCREMENT BY 1;
 
+rollback;
 commit;
 
 delete from board;
@@ -106,6 +131,7 @@ INSERT INTO BOARD_REPLY VALUES ( (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY
 (SELECT REPLY_LEVEL+1 FROM BOARD_REPLY WHERE REPLY_ID = ? )  , 
 (SELECT REPLY_REF     FROM BOARD_REPLY WHERE REPLY_ID = ? )  , 
 (SELECT REPLY_STEP+1  FROM BOARD_REPLY WHERE REPLY_ID = ? )  );
+
 
 --boardId, replyWriterid, replyContent, dafault, 
 
@@ -236,9 +262,11 @@ INSERT INTO BOARD_REPLY
                 
 --대댓글
 INSERT INTO BOARD_REPLY 
-		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'kim','헤이헤이',
-				default, #{reply_ref}, (SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id=#{reply_id}),  (SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY));
-
+VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
+default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 
+            (select NVL(MAX(reply_level),0)+1  from board_reply where reply_id = 4), 
+            (select NVL(MAX(reply_step),0)+1  from board_reply where reply_id = 4))
+            
 --대댓글 예시
 INSERT INTO BOARD_REPLY 
 		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , 62,'','헤이헤이',
@@ -266,3 +294,46 @@ delete from board_reply
  from ( select reply_ref, reply_step, reply_level  from board_reply where REPLY_ID = 4 ) t1
  where reply_step any<(select 
  ;
+
+
+delete from board where board_id = 17;
+
+commit;
+
+select * from board_reply where board_id = 17;
+
+INSERT INTO BOARD_REPLY 
+    VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) ,
+             18, 'song', 'ㅎㅇ',
+            default, 
+            9, 
+            (SELECT NVL(MAX(reply_step),0)+1 FROM BOARD_REPLY where reply_id=13),
+            (SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY where reply_id=13));
+            commit;
+         
+            
+            
+INSERT INTO BOARD_REPLY 
+VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
+default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 
+            (select reply_ref from board_reply where reply_id = 4), 
+            (select NVL(MAX(reply_step),0)+1  from board_reply where reply_id = 4))
+            
+            
+INSERT INTO BOARD_REPLY 
+		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
+				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 
+            				(SELECT NVL(MAX(reply_step),0)+1 from board_reply where reply_id = #{replyId}), 
+            				(SELECT NVL(MAX(reply_level),0)+1   from board_reply where reply_id = #{replyId}));
+
+        
+desc board_reply;
+            
+--댓글, 대댓글 순서            
+SELECT REPLY_ID, BOARD_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REPLY_LEVEL, REPLY_REF, REPLY_STEP
+    FROM BOARD_REPLY
+    WHERE BOARD_ID = 17 
+        ORDER BY REPLY_REF ASC, REPLY_STEP  Asc; 
+        
+        
+

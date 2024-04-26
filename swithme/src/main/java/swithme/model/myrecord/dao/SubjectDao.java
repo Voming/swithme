@@ -1,6 +1,5 @@
 package swithme.model.myrecord.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import swithme.model.myrecord.dto.SubjectAddDto;
 import swithme.model.myrecord.dto.SubjectDeleteDto;
 import swithme.model.myrecord.dto.SubjectDto;
+import swithme.model.myrecord.dto.SubjectModifyDto;
 
 public class SubjectDao {
 //	private Integer subjectId;
@@ -44,14 +44,10 @@ public class SubjectDao {
 	}
 
 	//과목 수정 update TODO
-	public int update(SqlSession session, SubjectAddDto dto) {
-		//과목,맴버 ID를 조건으로 하는 행의 과목이름과 컬러 변경
-		// TODO EJKIM !!!! TODO_EJKIM  SubjectAddDto --> SubjectUpdatesDto
+	public int update(SqlSession session, SubjectModifyDto dto) {
 		return session.update("subject.update", dto);
 	}
 	
-	/*후순위*/
-	//과목 삭제 delete DEL_DATE = default //조건 : 과목,맴버 아이디 
 	public int delete(SqlSession session, SubjectDeleteDto dto) {
 		System.out.println("************sbuject delete   "+dto);
 		return session.update("subject.delete", dto);

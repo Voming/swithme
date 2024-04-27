@@ -42,6 +42,8 @@ public class BoardReplyContentController extends HttpServlet {
 			int boardId = Integer.parseInt(boardIdStr);
 			List<BoardReplyDto> replydtolist = service.selectBoardReplyList(boardId); //댓글들 읽기
 			System.out.println(replydtolist);
+			
+			request.setAttribute("replyList", replydtolist);
 			response.getWriter().append(new Gson().toJson(replydtolist));
 		
 		} catch (NumberFormatException e) {

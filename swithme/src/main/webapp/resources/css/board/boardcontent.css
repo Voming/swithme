@@ -80,8 +80,7 @@
 .wrap-body > div.board-reply > div:nth-child(2) {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font2);
-	text-align: center;
-	margin: 10px 10px 30px; 
+	margin: 10px 0 30px 0; 
 }
 
 .wrap-body > div.board-reply > div.replylist > div.replynone {
@@ -120,6 +119,7 @@
 	font-size: var(--font4);
 	border: none;
 	resize: none;
+	width: 100%;
 	background: var(--color_gray_2);
 }
 
@@ -295,6 +295,7 @@ textarea:focus {
 }
 
 .wrap-body > div.board-reply > div.replylist > div.reply2 > form > div.r-2 > div > textarea {
+	width: 100%;
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font4);
 	border: none;

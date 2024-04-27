@@ -78,7 +78,7 @@
 						</div>
 						<div class="r-2">
 							<div>
-								<textarea name="replyContent" cols="144" rows="5" placeholder="내용을 입력하시오."></textarea>
+								<textarea name="replyContent" rows="5" placeholder="내용을 입력하시오."></textarea>
 							</div>
 						</div>
 						<div class="r-3">
@@ -184,12 +184,10 @@ function boardReplyClickHandler(){
 		error: ajaxErrorHandler	
 	});
 	
-	if($(this).text() == "등록") {		
-		$(this).text("삭제");		
-		return;
-	} else {
-		$(this).text("등록");
-	}
+		if($(this).parents().children('li').text() > 0) {
+			$('textarea').text("");
+			return;
+		} 
 
 	
 }
@@ -300,7 +298,7 @@ function ReplyMoreClickHandler(){
 					</div>
 					<div class="r-2">
 						<div>
-							<textarea name="replyContent" cols="130" rows="5" placeholder="내용을 입력하시오."></textarea>
+							<textarea name="replyContent" rows="5" placeholder="내용을 입력하시오."></textarea>
 						</div>
 					</div>
 					<div class="r-3">

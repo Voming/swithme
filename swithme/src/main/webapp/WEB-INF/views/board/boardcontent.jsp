@@ -198,7 +198,7 @@ function displayReplyWrap(datalist){
 
 	var htmlVal = '';
 	if(datalist.length == 0) {
-		htmlVal += `<div><p>댓글이 없습니다.</p> </div>`;
+		htmlVal += `<div class="pgroup"><p>댓글이 없습니다.</p> </div>`;
 	} else  {
 		for(var idx in datalist){
 			var replydto = datalist[idx];

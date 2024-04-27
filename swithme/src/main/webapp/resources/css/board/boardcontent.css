@@ -5,12 +5,12 @@
 	margin: auto;
 }
 
-.wrap-body > div.pgroup > p {
+.wrap-body > div.board-reply > div.replylist > div > p{
 	font-family: "IM_Hyemin-Bold";
-	font-size: var(--font1);
+	font-size: var(--font3);
 	font-weight: bolder;
 	text-align: center;
-	margin-top: 60px;
+	margin-top: 30px;
 }
 
 .wrap-body .title {

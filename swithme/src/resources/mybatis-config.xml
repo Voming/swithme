@@ -24,6 +24,7 @@
 		<typeAlias type="swithme.model.board.dto.BoardDto" alias="BoardDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardListDto" alias="BoardListDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardInsertDto" alias="BoardInsertDto"/>
+		<typeAlias type="swithme.model.board.dto.BoardUpdateDto" alias="BoardUpdateDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardContentDto" alias="BoardContentDto"/>
 		<typeAlias type="swithme.model.board.dto.BoardReplyDto" alias="BoardReplyDto"/>
 		

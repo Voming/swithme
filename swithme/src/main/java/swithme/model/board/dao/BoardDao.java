@@ -11,6 +11,7 @@ import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardContentDto;
 import swithme.model.board.dto.BoardListDto;
 import swithme.model.board.dto.BoardReplyDto;
+import swithme.model.board.dto.BoardUpdateDto;
 
 public class BoardDao {
 
@@ -47,7 +48,7 @@ public class BoardDao {
 		System.out.println(boardId);
 		BoardContentDto result = session.selectOne("board.selectOne", boardId);
 		
-		System.out.println("BoardContentDto : " + result);
+		System.out.println("BoardContentDao : " + result);
 		
 		return result;
 			
@@ -90,7 +91,7 @@ public class BoardDao {
 	
 
 	//게시글 수정
-	public int update(SqlSession session, BoardDto dto) {
+	public int update(SqlSession session, BoardUpdateDto dto) {
 		int result = session.update("board.update", dto);
 		
 		return result;

@@ -13,6 +13,7 @@ import swithme.model.board.dto.BoardDto;
 import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.dto.BoardListDto;
 import swithme.model.board.dto.BoardReplyDto;
+import swithme.model.board.dto.BoardUpdateDto;
 
 public class BoardService {
 
@@ -87,7 +88,7 @@ public class BoardService {
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectOne(session, boardId);
 
-		System.out.println("BoardContentDao" + boardId);
+		System.out.println("BoardContentService : " + boardId);
 
 		session.close();
 
@@ -141,7 +142,7 @@ public class BoardService {
 	}
 
 	// 게시글 수정
-	public int update(BoardDto dto) {
+	public int update(BoardUpdateDto dto) {
 		int result = 0;
 
 		SqlSession session = MybatisTemplate.getSqlSession();

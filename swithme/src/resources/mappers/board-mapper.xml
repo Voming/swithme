@@ -50,7 +50,7 @@
 				(SELECT NVL(MAX(reply_level),0)+1 FROM BOARD_REPLY where reply_id=#{replyId}))
 	</insert>
 
-	<update id="update" parameterType="BoardDto">
+	<update id="update" parameterType="BoardUpdateDto">
 		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID = #{boardId}
 	</update>
 

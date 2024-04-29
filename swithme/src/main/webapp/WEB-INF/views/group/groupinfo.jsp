@@ -190,7 +190,7 @@ function btnExitClickHandler() {
 				<div class="group-box">
 					<ul>
 						<c:if test="${not empty groupSumList }">
-						<a href="${pageContext.request.contextPath}/test?memid=\${groupSumDto.memId}"> 
+						<a href="${pageContext.request.contextPath}/test?memId=\${groupSumDto.memId}"> 
 							<c:forEach items="${groupSumList}" var="groupSumDto">
 								<li class="mem-box"><img alt="기본 아이콘"
 									src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">

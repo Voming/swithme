@@ -30,7 +30,6 @@
 				method : "post",
 				dataType : "json",
 				success : function(param) {
-					console.log(param);
 					var data1 = param.prolist;
 					//1 : 기술사 2: 기능장 3: 기사 산업기사
 					//기술사
@@ -166,9 +165,7 @@
 							});
 						}
 					})
-					for(var i=0; i<eventsArr.length ; i++){
-						console.log(eventsArr[i]);
-					}
+				
 					
 					//달력 세팅
 					var calendarEl = document.getElementById('calendar');

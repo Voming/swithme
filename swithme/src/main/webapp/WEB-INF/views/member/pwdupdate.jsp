@@ -32,7 +32,7 @@
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -43,20 +43,21 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-update">
-			<form id="update-form">
+			<form id="update-form" action="${pageContext.request.contextPath}/update" method="post">
 			<div>
 			<p>기존 비밀번호</p>
-			<input>
+			<input type="password" name="pwd" id="pwd" required>
+			<span><button class="btn check" id="check"><p>확인</p></button></span>
 			</div>
 			
 			<div>
 			<p>변경 비밀번호</p>
-			<input type="password" name="pwd" id="pwd" required>
+			<input type="password" name="newpwd" id="newpwd" required>
 			</div>
 			<div>
 			<p>변경 비밀번호 확인</p>
-			<input type="password" name="pwdr" id="pwdr" required>
-			<span class="desc-pwdr"></span>
+			<input type="password" name="newpwd2" id="newpwd2" required>
+			<span class="desc-newpwd"></span>
 			</div>
 			<div>
 			<button class="btn update" id="update"><p>변경완료</p></button>
@@ -73,17 +74,22 @@
 
 <script>
 $("input").keyup(function(){
-	var pwd1=$("[name=pwd]").val().trim();
-	var pwd2=$("[name=pwdr]").val().trim();
+	var pwd1=$("[name=newpwd]").val().trim();
+	var pwd2=$("[name=newpwd2]").val().trim();
 	if(pwd1 != "" || pwd2 != ""){
 		if(pwd1 == pwd2) {
-			$(".desc-pwdr").html("일치").css('color', 'green');
+			$(".desc-newpwd").html("일치").css('color', 'green');
 		} else{
-			$(".desc-pwdr").html("불일치").css('color', 'red');
+			$(".desc-newpwd").html("불일치").css('color', 'red');
 		}
 	}
 });
 	
+	
+
+
+
+
 </script>
 </body>
 </html>

@@ -72,7 +72,7 @@
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>
@@ -162,8 +162,7 @@
 							</div>
 							<!-- TODO 과목 수정 -->
 							<div>
-								<button type="button" class="btn re-sub btn-primary"
-									data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								<button type="button" class="btn re-sub btn-primary">
 									<p>과목 수정하기</p>
 								</button>
 								<!-- Modal -->
@@ -351,11 +350,6 @@ function btnRemoveSubjectClickHandler(){
 	/* 삭제할 과목이 선택 되었는가 */
 	if(subjectName == null){
 		alert("삭제할 과목을 먼저 선택해주세요");
-		location.reload(true);
-		//history.go(0);
-		
-		//이벤트 전 화면으로 이동
-		//history.back();
 	}else{
 		var deleteTime = getCurrentDateTime(); 
 		//console.log("name=selectNameM-------> "+$("[name=selectNameM]").val());
@@ -379,17 +373,12 @@ function btnRemoveSubjectClickHandler(){
 function btnReSubClickHandler(){
 	if(subjectName == null){
 		alert("수정할 과목을 먼저 선택해주세요");
-		location.reload();
-		//이것도 아닌 것 같은데
-		 $(".modal").css("display", "none");
-		//history.go(0);
-		
-		//이벤트 전 화면으로 이동 - 로그인 페이지로 이동해버림
-		//history.back();
 	}else{
 		$("#bfore-title").text(subjectName);
 		var col=chooseBorderColor(String(subjectColor));
 		$("#bfore-title").css('color',col);
+		var myReSubModal = new bootstrap.Modal(document.getElementById('staticBackdrop')); 
+		myReSubModal.show();
 	}
 }
 

@@ -14,11 +14,12 @@ import static swithme.jdbc.common.JdbcTemplate.close;
 import swithme.model.member.dto.MemberDto;
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.member.dto.MemberLoginDto;
+import swithme.model.member.dto.MemberUpdateDto;
 
 
 
 public class MemberDao {
-	//select one login
+	//loginGetInfo
 		public MemberInfoDto loginGetInfo(Connection conn, MemberLoginDto dto) {
 			MemberInfoDto result=null;
 			String sql = "SELECT MEM_ID,MEM_EMAIL,MEM_PWD  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
@@ -44,7 +45,7 @@ public class MemberDao {
 		}
 		
 		
-		//select one login
+		//login
 		public int login(Connection conn, MemberLoginDto dto) {
 			int result = 0;
 			String sql = "SELECT COUNT(*) c  FROM MEMBER WHERE MEM_ID=? AND MEM_PWD=?";
@@ -163,14 +164,15 @@ public class MemberDao {
 		}
 		
 		//update
-		public int update (Connection conn, MemberDto dto) {
+		public int update (Connection conn, MemberUpdateDto updatedto) {
 			int result= 0;
-			String sql="";   //TODO
+			String sql="UPDATE MEMBER SET MEM_PWD=? WHERE MEM_ID=?";   
 			PreparedStatement pstmt=null;
 			
 			try {
 				pstmt=conn.prepareStatement(sql);
-	
+				pstmt.setString(1, updatedto.getMemPwdNew());
+				pstmt.setString(2, updatedto.getMemId());
 				result=pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -181,16 +183,17 @@ public class MemberDao {
 		
 		//delete
 		public int delete (Connection conn, String memId) {
-			int result= 0;
+			System.out.println("DAO 진입");
+			System.out.println("DAO>>>>>>"+memId);
+			int result=0;
 			String sql="DELETE FROM MEMBER WHERE MEM_ID=?";
 			PreparedStatement pstmt=null;
 
 			try {
 				pstmt=conn.prepareStatement(sql);
-
 				pstmt.setString(1, memId);
-				
 				result=pstmt.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

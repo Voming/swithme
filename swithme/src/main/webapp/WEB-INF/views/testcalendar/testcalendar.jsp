@@ -32,6 +32,39 @@
 
 		function loadedHandler() {
 			$(".btn.update").on("click", btnUpdateClickHandler);
+			
+			//달력에 들어갈 이벤트 내용 가져오기
+			$(".btn.update").on("click", btnUpdateClickHandler);
+			const eventsArr = [];
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/test/event.ajax"
+				, method : "post"
+				, dataType: "json"
+				, success : function(result){ 
+					console.log(result);
+					var indlist = result.indlist;
+					const eventIdx = 0;
+					for(var i in indlist){
+						var dto = indlist[i];
+						eventsArr[eventIdx++] = 
+				            {
+				            	title : dto.title,
+				                start : dto.ddddstart,
+				                end : dto.ddddsend
+				             };
+						if( !dto.ddddstart_ex) {
+							eventsArr[eventIdx++] = 
+				            {
+				            	title : dto.title,
+				                start : dto.ddddstart_ex,
+				                end : dto.ddddsend_ex
+				             };
+						}// if
+					}// for
+					//calendar new
+				}
+				,error : ajaxErrorHandler
+			} ); 
 		}
 		
 		function btnUpdateClickHandler(){
@@ -59,7 +92,7 @@
 							<li><a href="#">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a class="active"
-								href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
+								href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>

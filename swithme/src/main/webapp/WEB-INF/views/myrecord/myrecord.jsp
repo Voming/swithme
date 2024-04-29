@@ -154,6 +154,8 @@
 							</div>
 						</div>
 						<div class="subject-modal">
+							<!-- TODO 과목 삭제 -->
+							<div></div>
 							<!-- TODO 과목 수정 -->
 							<div>
 								<button type="button" class="btn re-sub btn-primary"
@@ -240,13 +242,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="sub-title">
-							<p>출석</p>
-						</div>
-						<div id='calendar' class="study-calender"></div>
+						
 						<div class="statistics-part">
 							<div class="sub-title grid-item"">
-								<p>통계</p>
 								<p>시간기록을 종료한 값만 통계에 반영됩니다</p>
 							</div>
 							<div class="grid-item">
@@ -257,20 +255,24 @@
 								<p>과목별 공부시간</p>
 								<canvas id="myChart2" ></canvas>
 							</div>
+							<!-- grid-item 4번 - -->
+							<div class="grid-item">
+								<div id='calendar' class="study-calender"></div>
+							</div>
 							<div class="grid-item">
 								<p>공부시간 누적 ▼</p>
 								<canvas id="myChart10" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>일간 최대학습시간 ▼ </p>
+								<p>일간 최대학습시간 ▼</p>
 								<canvas id="myChart3" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>월별 총 학습시간 ▼ </p>
+								<p>월별 총 학습시간 ▼</p>
 								<canvas id="myChart4" ></canvas>
 							</div>
 							<div class="grid-item">
-								<p>일간 과목별 학습시간 ▼ </p>
+								<p>일간 과목별 학습시간 ▼</p>
 								<canvas id="myChart5" ></canvas>
 							</div>
 							<div class="grid-item">

@@ -20,6 +20,7 @@ public class TestCalUpdateController extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//service.deleteAll(); 
 		//1 : 기술사 2: 기능장 3: 기사 산업기사
 		service.testCalApiCall(1); 
 		service.testCalApiCall(2);

@@ -190,12 +190,14 @@ function btnExitClickHandler() {
 				<div class="group-box">
 					<ul>
 						<c:if test="${not empty groupSumList }">
+						<a href="${pageContext.request.contextPath}/test?memId=\${groupSumDto.memId}"> 
 							<c:forEach items="${groupSumList}" var="groupSumDto">
 								<li class="mem-box"><img alt="기본 아이콘"
 									src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
 									<p>${groupSumDto.memId}</p>
 									<p>${groupSumDto.sumMin}</p></li>
 							</c:forEach>
+							</a>
 						</c:if>
 					</ul>
 				</div>

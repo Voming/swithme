@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .wrap-body .wrap-calendar {
-	height: 450px;
+	height: 580px;
 	width: 100%;
 	background-color: rgb(221, 204, 255, 0.2);
 }
@@ -9,10 +9,13 @@
 #calendar {
 	padding-top: 30px; 
 	max-width : 600px;
-	height: 400px;
+	height: 500px;
 	margin: 0 auto;
 	z-index: 100px;
-	max-width: 500px;
+}
+
+.fc-event-title.fc-sticky{
+    white-space: normal;
 }
 
 .fc-header-toolbar .fc-toolbar-title {
@@ -40,7 +43,7 @@
 }
 
 #calendar > div.fc-view-harness.fc-view-harness-active > div > table{
-	font-size: var(--font4);
+	font-size: var(--font3);
 	font-family: "IM_Hyemin-Regular";
 }
 
@@ -55,4 +58,22 @@
 	/* 자식 요소(.child)를 중앙 정렬하기 */
 	display: flex;
 	justify-content: center;
+}
+
+.wrap-body .wrap-content .btn{
+	margin-top: 15px;
+	background-color: var(--color_purple_3);
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font5);
+	color: black;
+	border: 0;
+	height: 20px;
+	width: 130px;
+	border-radius: 10px;
+}
+
+.wrap-body .wrap-content .btn:hover{
+	background: var(--color_purple_1);
+	color: white;
+	cursor: pointer;
 }

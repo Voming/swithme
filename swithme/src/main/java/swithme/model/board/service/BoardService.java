@@ -164,14 +164,36 @@ public class BoardService {
 	}
 	
 	// 댓글 삭제
-	public int deleteBoardReply(Integer boardId) {
-		int result = 0;
+	public Map<String, Object> deleteBoardReply(Map<String, String> paramMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 
-		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.deleteBoardReply(session, boardId);
-
+		SqlSession session = MybatisTemplate.getSqlSession(false);
+		
+		int checkMyReplyResult = dao.checkMyReply(session, paramMap);
+		//나의 댓글만 지울수 있게 확인 여부 나타내기
+		if(checkMyReplyResult < 1) {
+			resultMap.put("deleteResult", -2);
+			//나의 댓글이 아닌 경우 -2로 지정
+		} else { 
+			//나의 댓글이라면 그때부터 삭제 가능
+			int result = dao.checkReplyLevel2(session, paramMap);
+			if(result > 0) {
+				resultMap.put("deleteResult", -1);
+				//댓글에 대댓글이 달려있어서 삭제할 수 없는 상황인 경우 -1로 지정
+			} else {
+				result = dao.deleteBoardReply(session, paramMap);
+				resultMap.put("deleteResult", result);
+				if(result > 0) {
+					List<BoardReplyDto> dtolist = dao.selectBoardReplyList(session, Integer.parseInt(paramMap.get("boardId")));
+					//dao에서는 boardId가 integer형태라서 string 형태에서 int 형태로 바꾸기
+					resultMap.put("dtolist", dtolist);
+					//dtolist에 값이 들어있을수도 있고 없을 수도 있음(0이면 없고 -1, -2여도 오류라서 값이 들어있지 않음)
+				}
+			}
+		}
+		session.commit(); //위에 false라고 해서 이거 써줘야함
 		session.close();
-		return result;
+		return resultMap;
 	}
 
 	

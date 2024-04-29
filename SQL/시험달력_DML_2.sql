@@ -57,5 +57,7 @@ END;
 /
 
 COMMIT;
-
+create sequence SEQ_DESCR_PRO;
+drop sequence SEQ_DESCR_PRO;
 EXEC PRO_TEST_DELETE();
+select SEQ_DESCR_PRO.nextval from dual;

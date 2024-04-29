@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.wrap-body .wrap-events {
+	width: 960px;
+	margin: 0 auto;
+	align-items: center;
+	/* 자식 요소(.child)를 중앙 정렬하기 */
+	display: flex;
+	justify-content: center;
+}
+
+ .wrap-events table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  .wrap-events th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }

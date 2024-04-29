@@ -2,10 +2,12 @@ package swithme.model.member.service;
 
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import swithme.model.member.dao.MemberDao;
-import swithme.model.member.dto.MemberBoardListDto;
 import swithme.model.member.dto.MemberDto;
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.member.dto.MemberLoginDto;
@@ -51,15 +53,6 @@ public class MemberService {
 		return result;
 	}
 	
-	//select all - boardlist
-	public List<MemberBoardListDto> selectAllBoardList() {
-		List<MemberBoardListDto> result = null;
-		Connection conn = getConnection(false);
-		result = dao.selectAllBoardList(conn);
-		close(conn);
-		return result;
-	}
-	
 	// select one
 	public MemberDto selectOne(String memId) {
 		MemberDto result = null;
@@ -68,6 +61,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
 	// insert
 	public int insert(MemberDto dto) {
 		int result = 0;

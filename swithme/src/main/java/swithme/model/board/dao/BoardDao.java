@@ -34,10 +34,11 @@ public class BoardDao {
 	
 	// 페이지 당 나오는 게시글 수 뽑기
 	//위에꺼 토대로 얘가 배치됨 - 게시글 관련 데이터까지 뽑는거
-	public List<BoardListDto> selectPage(SqlSession session, int start, int end) {
-		Map<String, Integer> param = new HashMap<String, Integer>();
+	public List<BoardListDto> selectPage(SqlSession session, int start, int end, String memId) {
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("startRounum", start);
 		param.put("endRounum", end);
+		param.put("memId", memId);
  		List<BoardListDto> result =session.selectList("board.selectPage", param);
 		
 		return result;
@@ -99,9 +100,20 @@ public class BoardDao {
 	
 	
 	//게시글 삭제
-	public int delete(SqlSession session, Integer boardId) {
-		int result = session.delete("board.delete", boardId);
+	public int deleteBoard(SqlSession session, Integer boardId) {
+		int result = session.delete("board.deleteBoard", boardId);
 		return result;
 	}
-
+	
+	//댓글 삭제
+	public int deleteBoardReply(SqlSession session, Integer boardId) {
+		int result = session.delete("board.deleteBoard", boardId);
+		return result;
+	}
+	
+	//대댓글 삭제
+	public int deleteBoardReplyAgain(SqlSession session, Integer boardId) {
+		int result = session.delete("board.deleteBoard", boardId);
+		return result;
+	}
 }

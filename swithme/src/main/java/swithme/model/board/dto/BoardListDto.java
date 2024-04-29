@@ -13,7 +13,7 @@ public class BoardListDto {
 	private int boardId;
 	private String title;
 	private String boardWriter;
-	private String writeTime; //timeStamp
+	private String writeTime; //date
 	private int readCount;
 	
 	
@@ -52,10 +52,4 @@ public class BoardListDto {
 	public int getReadCount() {
 		return readCount;
 	}
-	
-	
-	
-
-	
-	
 }

@@ -19,7 +19,7 @@ public class BoardService {
 
 	BoardDao dao = new BoardDao();
 
-	public Map<String, Object> selectPage(int boardNum, int boardPageNum, int currentPage) {
+	public Map<String, Object> selectPage(int boardNum, int boardPageNum, int currentPage, String memId) {
 
 		// 현재페이지: currentPage
 		// 게시판 페이지 하단에 표시할 페이지 수: boardPageNum
@@ -49,7 +49,7 @@ public class BoardService {
 		int endPageNum = (startPageNum + boardPageNum > totalPageCount) ? totalPageCount
 				: startPageNum + boardPageNum - 1;
 
-		List<BoardListDto> boardlistdto = dao.selectPage(session, start, end);
+		List<BoardListDto> boardlistdto = dao.selectPage(session, start, end, memId);
 		session.close();
 
 		result = new HashMap<String, Object>();
@@ -153,14 +153,27 @@ public class BoardService {
 	}
 
 	// 게시글 삭제
-	public int delete(Integer boardId) {
+	public int deleteBoard(Integer boardId) {
 		int result = 0;
 
 		SqlSession session = MybatisTemplate.getSqlSession();
-		result = dao.delete(session, boardId);
+		result = dao.deleteBoard(session, boardId);
 
 		session.close();
 		return result;
 	}
+	
+	// 댓글 삭제
+	public int deleteBoardReply(Integer boardId) {
+		int result = 0;
+
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.deleteBoardReply(session, boardId);
+
+		session.close();
+		return result;
+	}
+
+	
 
 }

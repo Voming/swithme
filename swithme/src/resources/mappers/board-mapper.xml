@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
-	<select id="selectAllList" resultType="BoardListDto">
+	<select id="selectAllList" resultType="BoardListDto" parameterType="string">
 		SELECT BOARD_ID, TITLE, BOARD_WRITER, WRITE_TIME, READ_COUNT FROM BOARD
+		<if test="memId != null">
+		WHERE BOARD_WRITER = #{memId}
+		</if>
 	</select>
 
 	<select id="selectTotalPageCount" resultType="_int">
@@ -13,7 +16,11 @@
 		SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
 		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME,
-		BOARD_WRITER, READ_COUNT FROM BOARD ORDER BY BOARD_ID DESC) T1 ) T2
+		BOARD_WRITER, READ_COUNT FROM BOARD 
+		<if test="memId != null">
+		WHERE BOARD_WRITER = #{memId}
+		</if>
+		 ORDER BY BOARD_ID DESC) T1 ) T2
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select>
 
@@ -54,7 +61,17 @@
 		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID = #{boardId}
 	</update>
 
-	<delete id="delete" parameterType="_int">
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_LEVEL = #{replyLevel};
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_LEVEL = #{replyLevel};
 		DELETE FROM BOARD WHERE BOARD_ID = #{boardId}
+	</delete>
+	
+	<delete id="deleteBoardReply" parameterType="_int">
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId};
+	</delete>
+	
+	<delete id="deleteBoardReplyAgain" parameterType="_int">
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId};
 	</delete>
 </mapper>

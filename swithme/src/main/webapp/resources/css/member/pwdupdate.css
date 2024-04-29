@@ -8,15 +8,19 @@
 	font-size: var(--font3);
     font-family: "IM_Hyemin-Regular";
 }
-
-
+.wrap-body .wrap-update {
+	width: 800px;
+}
+.wrap-body .wrap-update form{
+	text-align:center;
+}
 .wrap-body .wrap-update p{
 	font-size: var(--font3);
     font-family: "IM_Hyemin-Regular";
 }
 
 .wrap-body .wrap-update input{
-	width: 100%;
+	width: 600px;
     height: 30px;
     padding: 0 10px;
     box-sizing: border-box;
@@ -26,6 +30,10 @@
     outline: none;
 }
 
+.wrap-body .wrap-update .btn.check{
+	background-color:white;
+	border:none;
+}
 .wrap-body .wrap-update .btn.update{
 	text-align: center;
 	width: 40%;

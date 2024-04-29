@@ -46,10 +46,13 @@ public class MyrecordController extends HttpServlet {
 					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 					request.setAttribute("sublist", sublist);
 					request.setAttribute("memId", memId);
+					
+					System.out.println("\n\n >>>>>>>>>>    >>>>>>   >>>>>>   sublist");
+					System.out.println("\n\n"+sublist);
 
 			
 		    		calendarList = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
-		    		System.out.println("\n\n"+calendarList);
+		    		
 		    		request.setAttribute("calendarList", calendarList);
 		    		
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);

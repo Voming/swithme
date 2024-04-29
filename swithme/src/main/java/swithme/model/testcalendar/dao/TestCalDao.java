@@ -7,15 +7,16 @@ import org.apache.ibatis.session.SqlSession;
 
 import swithme.jdbc.common.MybatisTemplate;
 import swithme.model.testcalendar.dto.IndengineerDto;
+import swithme.model.testcalendar.dto.MastercraftsmentDto;
+import swithme.model.testcalendar.dto.ProengineerDto;
 
 public class TestCalDao {
-	public int insert(List<IndengineerDto> dtolist) {
+	public int insertInd(List<IndengineerDto> dtolist) {
 		SqlSession session =  MybatisTemplate.getSqlSession(false);
-		int resultCount = 0;
+	
 		int result = 0;
 		System.out.println("======== list size : "+ dtolist.size());
 		for(int i=0; i < dtolist.size(); i++) {
-//		for(int i=0; i < 2; i++) {
 			IndengineerDto dto = dtolist.get(i);
 			System.out.println(dto);
 			try {
@@ -28,28 +29,69 @@ public class TestCalDao {
 					System.out.println("--2@$@$@$@#$-----------");
 				}
 			} catch (PersistenceException e){
-				// 무결성 (unique) 하지 않을ㄸ째
 				System.out.println("unique");
 				result = session.update("testcalendar.updateIndEngineer", dto);
 			}
-			//resultCount += result;
-		}
-//		DESCR_ID          NOT NULL NUMBER 
-//		DOCREGSTARTDT     NOT NULL DATE   
-//		DOCREGENDDT       NOT NULL DATE   
-//		DOCREGSTARTDT_EX           DATE   
-//		DOCREGENDDT_EX             DATE   
-//		DOCEXAMDT         NOT NULL DATE   
-//		DOCPASSDT         NOT NULL DATE   
-//		PRACREGSTARTDT    NOT NULL DATE   
-//		PRACREGENDDT      NOT NULL DATE   
-//		PRACREGSTARTDT_EX          DATE   
-//		PRACREGENDDT_EX            DATE   
-//		PRACEXAMSTARTDT   NOT NULL DATE   
-//		PRACEXAMENDDT     NOT NULL DATE   
-//		PRACPASSDT        NOT NULL DATE  
-		
+			
+		}		
 		session.commit();
+		session.close();
+		return result;
+	}
+	
+	public int insertMaster(List<MastercraftsmentDto> dtolist) {
+		SqlSession session =  MybatisTemplate.getSqlSession(false);
+	
+		int result = 0;
+		System.out.println("======== list size : "+ dtolist.size());
+		for(int i=0; i < dtolist.size(); i++) {
+			MastercraftsmentDto dto = dtolist.get(i);
+			System.out.println(dto);
+			try {
+				result = session.insert("testcalendar.insertDescrMaseter", dto);
+				System.out.println(result);
+				System.out.println(dto.getDescrId());
+				if(result > 0) {
+					result = session.insert("testcalendar.insertMasterCraftsment", dto);
+				} else {
+					System.out.println("--2@$@$@$@#$-----------");
+				}
+			} catch (PersistenceException e){
+				System.out.println("unique");
+				result = session.update("testcalendar.updateMasterCraftsment", dto);
+			}
+			
+		}		
+		session.commit();
+		session.close();
+		return result;
+	}
+	
+	public int insertPro(List<ProengineerDto> dtolist) {
+		SqlSession session =  MybatisTemplate.getSqlSession(false);
+	
+		int result = 0;
+		System.out.println("======== list size : "+ dtolist.size());
+		for(int i=0; i < dtolist.size(); i++) {
+			ProengineerDto dto = dtolist.get(i);
+			System.out.println(dto);
+			try {
+				result = session.insert("testcalendar.insertDescrPro", dto);
+				System.out.println(result);
+				System.out.println(dto.getDescrId());
+				if(result > 0) {
+					result = session.insert("testcalendar.insertProEngineer", dto);
+				} else {
+					System.out.println("--2@$@$@$@#$-----------");
+				}
+			} catch (PersistenceException e){
+				System.out.println("unique");
+				result = session.update("testcalendar.updateProEngineer", dto);
+			}
+			
+		}		
+		session.commit();
+		session.close();
 		return result;
 	}
 }

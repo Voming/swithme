@@ -98,22 +98,34 @@ public class BoardDao {
 		return result;
 	}
 	
-	
 	//게시글 삭제
 	public int deleteBoard(SqlSession session, Integer boardId) {
 		int result = session.delete("board.deleteBoard", boardId);
 		return result;
 	}
 	
-	//댓글 삭제
-	public int deleteBoardReply(SqlSession session, Integer boardId) {
-		int result = session.delete("board.deleteBoard", boardId);
+	//게시글 삭제하기 전게시글에 댓들, 대댓글 있을 경우 다 삭제하고 게시글 삭제하기
+	// - mybatis에 작성
+	public int deleteBoardReplyAll(SqlSession session, Integer boardId) {
+		int result = session.delete("board.deleteBoardReplyAll", boardId);
 		return result;
 	}
+
 	
-	//대댓글 삭제
-	public int deleteBoardReplyAgain(SqlSession session, Integer boardId) {
-		int result = session.delete("board.deleteBoard", boardId);
+	// 댓글 삭제 - 나의 글 여부 확인
+	public int checkMyReply(SqlSession session, Map<String, String> paramMap) {
+		int result = session.selectOne("board.checkMyReply", paramMap);
+		return result;
+	}
+
+	//댓글 삭제
+	public int deleteBoardReply(SqlSession session, Map<String, String> paramMap) {
+		int result = session.delete("board.deleteBoardReply", paramMap);
+		return result;
+	}
+	// 댓글 삭제 - 대댓글 달려있는지에 대한 확인 => 달려있으면 못지움
+	public int checkReplyLevel2(SqlSession session, Map<String, String> paramMap) {
+		int result = session.selectOne("board.checkReplyLevel2", paramMap);
 		return result;
 	}
 }

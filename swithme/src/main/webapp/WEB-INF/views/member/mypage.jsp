@@ -59,7 +59,7 @@
 					</div>
 					
 					<div class="myboard">
-						<a href="${pageContext.request.contextPath}/myboard">내가 쓴 게시글</a>
+						<a href="${pageContext.request.contextPath}/mypage/myboard">내가 쓴 게시글</a>
 					</div>
 					<span> 
 						<button class="btn logout" id="logout"><p>로그아웃</p></button>

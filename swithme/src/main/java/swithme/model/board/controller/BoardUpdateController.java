@@ -73,12 +73,13 @@ public class BoardUpdateController extends HttpServlet {
 				BoardUpdateDto dto = new BoardUpdateDto(boardId, boardWriter, title, content); 
 				int result = service.update(dto);
 				
+				response.sendRedirect(request.getContextPath() + "/board/content?id=" + boardId);
+				
 			} catch (NumberFormatException e) {
 				System.out.println("NUMBERFORMATEXCEPTION");
 			}
 			
 				
-			response.sendRedirect(request.getContextPath() + "/board");
 			
 	}
 }

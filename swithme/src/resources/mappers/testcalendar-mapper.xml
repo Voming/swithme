@@ -23,4 +23,48 @@
 		pracregenddt_ex = #{pracregenddt}
 	where descr_id = #{descrId}
 </update>
+
+<insert id="insertDescrMaseter" parameterType="MastercraftsmentDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+		select SEQ_DESCR_MASTER.nextval descr_Id from dual
+	</selectKey>
+	insert into descr_master values (#{descrId}, #{description})
+</insert>
+<insert id="insertMasterCraftsment" parameterType="MastercraftsmentDto">
+	insert 	into master_craftsment (DESCR_ID, DOCREGSTARTDT, DOCREGENDDT, DOCEXAMDT, DOCPASSDT, PRACREGSTARTDT, PRACREGENDDT, PRACEXAMSTARTDT, PRACEXAMENDDT, PRACPASSDT) 
+    values (#{descrId}, #{docregstartdt}, #{docregenddt}, #{docexamdt}, #{docpassdt}, #{pracregstartdt}, #{pracregenddt}, #{pracexamstartdt}, #{pracexamenddt}, #{pracpassdt}) 
+</insert>
+<update id="updateMasterCraftsment" parameterType="MastercraftsmentDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+	select DESCR_ID from descr_master where description = #{description}
+	</selectKey>
+	update master_craftsment set  
+		docregstartdt_ex = #{docregstartdt},
+		docregenddt_ex = #{docregenddt},
+		pracregstartdt_ex = #{pracregstartdt},
+		pracregenddt_ex = #{pracregenddt}
+	where descr_id = #{descrId}
+</update>
+
+<insert id="insertDescrPro" parameterType="ProengineerDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+		select SEQ_DESCR_PRO.nextval descr_Id from dual
+	</selectKey>
+	insert into descr_pro values (#{descrId}, #{description})
+</insert>
+<insert id="insertProEngineer" parameterType="ProengineerDto">
+	insert 	into pro_engineer (DESCR_ID, DOCREGSTARTDT, DOCREGENDDT, DOCEXAMDT, DOCPASSDT, PRACREGSTARTDT, PRACREGENDDT, PRACEXAMSTARTDT, PRACEXAMENDDT, PRACPASSDT) 
+    values (#{descrId}, #{docregstartdt}, #{docregenddt}, #{docexamdt}, #{docpassdt}, #{pracregstartdt}, #{pracregenddt}, #{pracexamstartdt}, #{pracexamenddt}, #{pracpassdt}) 
+</insert>
+<update id="updateProEngineer" parameterType="ProengineerDto">
+	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
+	select DESCR_ID from descr_pro where description = #{description}
+	</selectKey>
+	update pro_engineer set  
+		docregstartdt_ex = #{docregstartdt},
+		docregenddt_ex = #{docregenddt},
+		pracregstartdt_ex = #{pracregstartdt},
+		pracregenddt_ex = #{pracregenddt}
+	where descr_id = #{descrId}
+</update>
 </mapper>

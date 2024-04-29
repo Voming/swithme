@@ -75,11 +75,13 @@ public class TestCalService {
 					String pracexamenddt = getTagValue("pracexamenddt", eElement);
 					String pracpassdt = getTagValue("pracpassdt", eElement);
 
-					ProengineerDto dto = new ProengineerDto(description, docregstartdt, docregenddt, docexamdt, docpassdt,
+					ProengineerDto dto = new ProengineerDto(0, description, docregstartdt, docregenddt, docexamdt, docpassdt,
 							pracregstartdt, pracregenddt, pracexamstartdt, pracexamenddt, pracpassdt);
 					dtolist.add(dto);
 				}
 				System.out.println("기술사 : " + dtolist);
+				int result = dao.insertPro(dtolist);
+				System.out.println(result);
 			}else if(tabNum == 2) {
 				List<MastercraftsmentDto> dtolist = new ArrayList<MastercraftsmentDto>();
 				for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -97,11 +99,13 @@ public class TestCalService {
 					String pracexamenddt = getTagValue("pracexamenddt", eElement);
 					String pracpassdt = getTagValue("pracpassdt", eElement);
 
-					MastercraftsmentDto dto = new MastercraftsmentDto(description, docregstartdt, docregenddt, docexamdt, docpassdt,
+					MastercraftsmentDto dto = new MastercraftsmentDto(0, description, docregstartdt, docregenddt, docexamdt, docpassdt,
 							pracregstartdt, pracregenddt, pracexamstartdt, pracexamenddt, pracpassdt);
 					dtolist.add(dto);
 				}
 				System.out.println("기능장 : " + dtolist);
+				int result = dao.insertMaster(dtolist);
+				System.out.println(result);
 			}else if(tabNum == 3) {
 				List<IndengineerDto> dtolist = new ArrayList<IndengineerDto>();
 				for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -124,7 +128,7 @@ public class TestCalService {
 					dtolist.add(dto);
 				}
 				System.out.println("기사 산업기사 : " + dtolist);
-				int result = dao.insert(dtolist);
+				int result = dao.insertInd(dtolist);
 				System.out.println(result);
 			}
 	

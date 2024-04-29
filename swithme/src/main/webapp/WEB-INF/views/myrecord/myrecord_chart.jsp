@@ -47,7 +47,6 @@ let recordTimeList=[];
 let subjectColorList=[];
 
 var colorNum; //세미콜론
-var numnum;
 function chooseColor(colorNum){
 var colNum;
 switch (colorNum) {
@@ -72,26 +71,26 @@ return colNum;
 }
 //그래프 선 
 function chooseBorderColor(colorNum){
-	var colNum;
+var colNum2;
 	switch (colorNum) {
 		case '1':
-			colNum = 'rgba(255,179,229,1)';
+			colNum2 = 'rgba(255,179,229,1)';
 			break;
 		case '2':
-			colNum = 'rgba(255,225,111,1)';
+			colNum2 = 'rgba(255,225,111,1)';
 			break;
 		case '3':
-			colNum = 'rgba(174,213,129,1)';
+			colNum2 = 'rgba(174,213,129,1)';
 			break;
 		case '4':
-			colNum = 'rgba(153,187,255,1)';
+			colNum2 = 'rgba(153,187,255,1)';
 			break;
 		case '5':
-			colNum = 'rgba(191,128,255,1)';
+			colNum2 = 'rgba(191,128,255,1)';
 			break;
 		
 	}//괄호 위치 중요
-	return colNum;
+	return colNum2;
 	}
 //당일 과목별 학습 todayStudyTime
 function todayStudyTime(){

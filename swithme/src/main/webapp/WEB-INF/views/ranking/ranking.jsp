@@ -23,7 +23,7 @@
 								href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/testcalendar">시험달력</a></li>
+								href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>

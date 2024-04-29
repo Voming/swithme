@@ -14,14 +14,16 @@ public class IndEngineerSetDto {
 //	PRACREGENDDT_EX            DATE   
 //	PRACEXAMSTARTDT   NOT NULL DATE   
 //	PRACEXAMENDDT     NOT NULL DATE   
-//	PRACPASSDT        NOT NULL DATE
-	private Integer descrId;
+//	PRACPASSDT        NOT NULL DATE   
+	private String description;
 	private String docregstartdt;
 	private String docregenddt;
 	private String docregstartdtEx;
 	private String docregenddtEx;
 	private String docexamdt;
 	private String docpassdt;
+	private String pracregstartdt;
+	private String pracregenddt;
 	private String pracregstartdtEx;
 	private String pracregenddtEx;
 	private String pracexamstartdt;
@@ -30,24 +32,28 @@ public class IndEngineerSetDto {
 
 	@Override
 	public String toString() {
-		return "IndEngineerSetDto [descrId=" + descrId + ", docregstartdt=" + docregstartdt + ", docregenddt="
+		return "IndEngineerSetDto [description=" + description + ", docregstartdt=" + docregstartdt + ", docregenddt="
 				+ docregenddt + ", docregstartdtEx=" + docregstartdtEx + ", docregenddtEx=" + docregenddtEx
-				+ ", docexamdt=" + docexamdt + ", docpassdt=" + docpassdt + ", pracregstartdtEx=" + pracregstartdtEx
-				+ ", pracregenddtEx=" + pracregenddtEx + ", pracexamstartdt=" + pracexamstartdt + ", pracexamenddt="
-				+ pracexamenddt + ", pracpassdt=" + pracpassdt + "]";
+				+ ", docexamdt=" + docexamdt + ", docpassdt=" + docpassdt + ", pracregstartdt=" + pracregstartdt
+				+ ", pracregenddt=" + pracregenddt + ", pracregstartdtEx=" + pracregstartdtEx + ", pracregenddtEx="
+				+ pracregenddtEx + ", pracexamstartdt=" + pracexamstartdt + ", pracexamenddt=" + pracexamenddt
+				+ ", pracpassdt=" + pracpassdt + "]";
 	}
 
-	public IndEngineerSetDto(Integer descrId, String docregstartdt, String docregenddt, String docregstartdtEx,
-			String docregenddtEx, String docexamdt, String docpassdt, String pracregstartdtEx, String pracregenddtEx,
-			String pracexamstartdt, String pracexamenddt, String pracpassdt) {
+	public IndEngineerSetDto(String description, String docregstartdt, String docregenddt, String docregstartdtEx,
+			String docregenddtEx, String docexamdt, String docpassdt, String pracregstartdt, String pracregenddt,
+			String pracregstartdtEx, String pracregenddtEx, String pracexamstartdt, String pracexamenddt,
+			String pracpassdt) {
 		super();
-		this.descrId = descrId;
+		this.description = description;
 		this.docregstartdt = docregstartdt;
 		this.docregenddt = docregenddt;
 		this.docregstartdtEx = docregstartdtEx;
 		this.docregenddtEx = docregenddtEx;
 		this.docexamdt = docexamdt;
 		this.docpassdt = docpassdt;
+		this.pracregstartdt = pracregstartdt;
+		this.pracregenddt = pracregenddt;
 		this.pracregstartdtEx = pracregstartdtEx;
 		this.pracregenddtEx = pracregenddtEx;
 		this.pracexamstartdt = pracexamstartdt;
@@ -55,8 +61,8 @@ public class IndEngineerSetDto {
 		this.pracpassdt = pracpassdt;
 	}
 
-	public Integer getDescrId() {
-		return descrId;
+	public String getDescription() {
+		return description;
 	}
 
 	public String getDocregstartdt() {
@@ -81,6 +87,14 @@ public class IndEngineerSetDto {
 
 	public String getDocpassdt() {
 		return docpassdt;
+	}
+
+	public String getPracregstartdt() {
+		return pracregstartdt;
+	}
+
+	public String getPracregenddt() {
+		return pracregenddt;
 	}
 
 	public String getPracregstartdtEx() {

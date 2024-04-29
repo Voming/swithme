@@ -15,6 +15,11 @@ import swithme.model.testcalendar.dto.ProengineerDto;
 
 public class TestCalDao {
 
+	public int deleteAll(SqlSession session) {
+		int result = session.delete("testcalendar.deleteAll");
+		return result;
+	}
+	
 	public List<ProEngineerSetDto> selectProList(SqlSession session) {
 		List<ProEngineerSetDto> result = session.selectList("testcalendar.selectProList");
 		return result;

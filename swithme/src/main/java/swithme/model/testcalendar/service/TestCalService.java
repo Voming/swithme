@@ -28,6 +28,14 @@ import swithme.server.common.ServerTemplate;
 public class TestCalService {
 	private TestCalDao dao = new TestCalDao();
 	
+	public int deleteAll() {
+		int result = 0;
+		SqlSession session = MybatisTemplate.getSqlSession();
+		result = dao.deleteAll(session);
+		session.close();
+		return result;
+	}
+	
 	public List<ProEngineerSetDto> selectProList() {
 		List<ProEngineerSetDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();

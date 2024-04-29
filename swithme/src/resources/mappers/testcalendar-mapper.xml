@@ -18,9 +18,7 @@
 	</selectKey>
 	update ind_engineer set  
 		docregstartdt_ex = #{docregstartdt},
-		docregenddt_ex = #{docregenddt},
-		pracregstartdt_ex = #{pracregstartdt},
-		pracregenddt_ex = #{pracregenddt}
+		docregenddt_ex = #{docregenddt}
 	where descr_id = #{descrId}
 </update>
 
@@ -40,9 +38,7 @@
 	</selectKey>
 	update master_craftsment set  
 		docregstartdt_ex = #{docregstartdt},
-		docregenddt_ex = #{docregenddt},
-		pracregstartdt_ex = #{pracregstartdt},
-		pracregenddt_ex = #{pracregenddt}
+		docregenddt_ex = #{docregenddt}
 	where descr_id = #{descrId}
 </update>
 
@@ -62,9 +58,7 @@
 	</selectKey>
 	update pro_engineer set  
 		docregstartdt_ex = #{docregstartdt},
-		docregenddt_ex = #{docregenddt},
-		pracregstartdt_ex = #{pracregstartdt},
-		pracregenddt_ex = #{pracregenddt}
+		docregenddt_ex = #{docregenddt}
 	where descr_id = #{descrId}
 </update>
 
@@ -85,4 +79,19 @@
 	, E.PRACREGSTARTDT, E.PRACREGENDDT, E.PRACREGSTARTDT_EX, E.PRACREGENDDT_EX, E.PRACEXAMSTARTDT, E.PRACEXAMENDDT, E.PRACPASSDT
 	 FROM IND_ENGINEER E JOIN DESCR_IND D ON (E.DESCR_ID = D.DESCR_ID)
 </select>
+
+<delete id="deleteAll">
+	{CALL DECLARE
+
+	BEGIN
+	delete from ind_engineer;
+	delete from descr_ind;
+
+	delete from MASTER_CRAFTSMENT;
+	delete from descr_master;
+
+	delete from pro_engineer;
+	delete from descr_pro;
+	END}
+</delete>
 </mapper>

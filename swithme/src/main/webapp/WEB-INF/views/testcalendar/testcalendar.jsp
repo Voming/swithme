@@ -16,69 +16,193 @@
 </head>
 <body>
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				initialView : 'dayGridMonth',
-				titleFormat : function(date) {
-					year = date.date.year;
-					return year + " 시험 일정";
-				}
-			});
-			calendar.render();
-		});
-
 		$(loadedHandler);
 
 		function loadedHandler() {
-			$(".btn.update").on("click", btnUpdateClickHandler);
-			
 			//달력에 들어갈 이벤트 내용 가져오기
 			$(".btn.update").on("click", btnUpdateClickHandler);
-			const eventsArr = [];
-			$.ajax( { 
-				url : "${pageContext.request.contextPath}/test/event.ajax"
-				, method : "post"
-				, dataType: "json"
-				, success : function(result){ 
-					console.log(result);
-					var indlist = result.indlist;
-					const eventIdx = 0;
-					for(var i in indlist){
-						var dto = indlist[i];
-						eventsArr[eventIdx++] = 
-				            {
-				            	title : dto.title,
-				                start : dto.ddddstart,
-				                end : dto.ddddsend
-				             };
-						if( !dto.ddddstart_ex) {
-							eventsArr[eventIdx++] = 
-				            {
-				            	title : dto.title,
-				                start : dto.ddddstart_ex,
-				                end : dto.ddddsend_ex
-				             };
-						}// if
-					}// for
-					//calendar new
-				}
-				,error : ajaxErrorHandler
-			} ); 
-		}
-		
-		function btnUpdateClickHandler(){
-			// 시험 내용 업데이트 하기
-			$.ajax( { 
-				url : "${pageContext.request.contextPath}/test/update.ajax"
-				, method : "post"
-				, success : function(result){ 
+
+			//달력 값 받아오기
+			var eventsArr = [];
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/test/event.ajax",
+				method : "post",
+				dataType : "json",
+				success : function(param) {
+					console.log(param);
+					var data1 = param.prolist;
+					//1 : 기술사 2: 기능장 3: 기사 산업기사
+					//기술사
+					$.each(data1, function(index, dto) {
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "필기접수",
+								start : dto.docregstartdt,
+								end : dto.docregenddt,
+								color : '#8066FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "필기접수 추가일정",
+								start : dto.docregstartdtEx,
+								end : dto.docregenddtEx,
+								color : '#BF80FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "실기접수",
+								start : dto.pracregstartdt,
+								end : dto.pracregenddt,
+								color : '#8066FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "실기접수 추가일정",
+								start : dto.pracregstartdtEx,
+								end : dto.pracregenddtEx,
+								color : '#BF80FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+					})
+					//기능장
+					var data2 = param.masterlist;
+					$.each(data2, function(index, dto) {
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "필기접수",
+								start : dto.docregstartdt,
+								end : dto.docregenddt,
+								color : '#6680FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "필기접수 추가일정",
+								start : dto.docregstartdtEx,
+								end : dto.docregenddtEx,
+								color : '#99BBFF',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "실기접수",
+								start : dto.pracregstartdt,
+								end : dto.pracregenddt,
+								color : '#6680FF',
+								allDay : true,
+								textColor : 'black'
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "실기접수 추가일정",
+								start : dto.pracregstartdtEx,
+								end : dto.pracregenddtEx,
+								color : '#99BBFF',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+					})
+					//기사 산업기사
+					var data3 = param.indlist;
+					$.each(data3, function(index, dto) {
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "필기접수",
+								start : dto.docregstartdt,
+								end : dto.docregenddt,
+								color : '#EE99FF',
+								allDay : true,
+								textColor : 'black'
+								
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "필기접수 추가일정",
+								start : dto.docregstartdtEx,
+								end : dto.docregenddtEx,
+								color : '#FFB3E5',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdt) {
+							eventsArr.push({
+								title : dto.description + "실기접수",
+								start : dto.pracregstartdt,
+								end : dto.pracregenddt,
+								color : '#EE99FF',
+								allDay : true,
+								textColor : 'black'
+								
+							});
+						} 
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "실기접수 추가일정",
+								start : dto.pracregstartdtEx,
+								end : dto.pracregenddtEx,
+								color : '#FFB3E5',
+								allDay : true,
+								textColor : 'black'
+							});
+						}
+					})
+					for(var i=0; i<eventsArr.length ; i++){
+						console.log(eventsArr[i]);
+					}
 					
-				}
-				,error : ajaxErrorHandler
-			} ); 
-		}
+					//달력 세팅
+					var calendarEl = document.getElementById('calendar');
+					var calendar = new FullCalendar.Calendar(calendarEl, {
+						initialView : 'dayGridMonth',
+						titleFormat : function(date) {
+							return date.date.year + '년  시험 일정' + (parseInt(date.date.month) + 1) + '월';
+						},
+						selectable : true,
+						droppable : true,
 		
+						events:eventsArr,
+						trigger: 'hover',
+						expandRows: true 
+						
+						
+					});
+					calendar.render();
+				},
+				error : ajaxErrorHandler
+			});
+		}
+
+		function btnUpdateClickHandler() {
+			// 시험 내용 업데이트 하기
+			$.ajax({
+				url : "${pageContext.request.contextPath}/test/update.ajax",
+				method : "post",
+				success : function(result) {
+
+				},
+				error : ajaxErrorHandler
+			});
+		}
 	</script>
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -104,10 +228,11 @@
 		<div class="wrap-body">
 			<div class="wrap-calendar">
 				<div id='calendar'></div>
+				<div class="wrap-content">
+				<button class="btn update" >시험달력 업데이트</button>
 			</div>
-			<div class="wrap-content">
-				<button class="btn update">시험달력 업데이트</button>
 			</div>
+			
 		</div>
 	</div>
 	<div class="wrap-footer">

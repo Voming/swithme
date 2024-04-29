@@ -38,13 +38,13 @@ public class TestCalEventController extends HttpServlet {
 //		System.out.println(indlist);
 		//1 : 기술사 2: 기능장 3: 기사 산업기사
 		Map<String, Object> allList = new HashMap<String, Object>();
-		allList.put("기술사", prolist);
-		allList.put("기능장", masterlist);
-		allList.put("기사,산업기사", indlist);
+		allList.put("prolist", prolist);
+		allList.put("masterlist", masterlist);
+		allList.put("indlist", indlist);
 		
 		System.out.println("allList : " + allList);
 		Gson gson = new Gson();
-		response.getWriter().append(gson.toJson(prolist));
+		response.getWriter().append(gson.toJson(allList));
 		
 	}
 

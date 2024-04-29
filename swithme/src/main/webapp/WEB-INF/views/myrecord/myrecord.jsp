@@ -116,7 +116,7 @@
 													</div>
 												</c:when>
 												<c:otherwise>
-													<div id="${vo.subjectName}" class="subId" data-subject-name="${vo.subjectName}" data-subject-id="${vo.subjectId}" >${vo.subjectName}</div>
+													<div id="${vo.subjectName}" class="subId" data-subject-name="${vo.subjectName}" data-subject-id="${vo.subjectId}" data-subject-color="${vo.subjectColor}">${vo.subjectName}</div>
 												</c:otherwise>
 											</c:choose> <c:choose>
 												<c:when test="${empty vo.difftime}">
@@ -155,7 +155,11 @@
 						</div>
 						<div class="subject-modal">
 							<!-- TODO 과목 삭제 -->
-							<div></div>
+							<div>
+								<button class="btn remove-sub" type="button" data-bs-dismiss="modal">
+									<p>과목 삭제하기</p>
+								</button>
+							</div>
 							<!-- TODO 과목 수정 -->
 							<div>
 								<button type="button" class="btn re-sub btn-primary"
@@ -166,11 +170,11 @@
 								<div class="add-sub modal" id="staticBackdrop">
 									<div class="modal-dialog .modal-dialog-centered">
 										<div class="modal-content">
-											<div class="btn modal-close" data-bs-dismiss="modal">x</div>
+											<!-- <div class="btn modal-close" data-bs-dismiss="modal">x</div> -->
 											<!-- controller 추가 -->
 											<form id="frm-modify">
 												<div class="subject ">
-													<p class="title"id="bfore-title">수정할 과목 이름</p>
+													<p class="title" id="bfore-title">수정할 과목 이름</p>
 												</div>
 												<div class="modify-name">
 													<input type="text" name="subNameM"
@@ -187,8 +191,9 @@
 													</select>
 												</div>
 												<div><p>변경할 색상을 선택하지 않으면 핑크가 기본 색깔로 지정됩니다</p></div>
-												<button class="btn remove-sub" type="button" data-bs-dismiss="modal">
-													<p>삭제</p>
+												<!-- 취소버튼 -->
+												<button class="btn" type="button" data-bs-dismiss="modal">
+													<p>취소</p>
 												</button>
 												<button type="submit" class="btn modify-done">
 													<p>완료</p>
@@ -210,7 +215,7 @@
 								<div class="add-sub modal" id="exampleModal2">
 									<div class="modal-dialog .modal-dialog-centered">
 										<div class="modal-content">
-											<div class="btn modal-close" data-bs-dismiss="modal">x</div>
+											<!-- <div class="btn modal-close" data-bs-dismiss="modal">x</div> -->
 											<!-- controller 추가 -->
 											<form id="frm-add">
 												<div class="subject ">
@@ -295,6 +300,7 @@
 <script type="text/javascript">
 let subjectName;
 let subjectId;
+let subjectColor;
 $(loadedHandler);
 function loadedHandler() {
 
@@ -336,9 +342,57 @@ function subIdClickHandler(){
 function subIdClickHandler(){
 	 subjectName = $(this).data('subject-name');
 	 subjectId = $(this).data('subject-id');
-	 
+	 subjectColor = $(this).data('subject-color');
 	$("#selSub").text(subjectName);
 }
+//과목 삭제하기
+function btnRemoveSubjectClickHandler(){
+	
+	/* 삭제할 과목이 선택 되었는가 */
+	if(subjectName == null){
+		alert("삭제할 과목을 먼저 선택해주세요");
+		location.reload(true);
+		//history.go(0);
+		
+		//이벤트 전 화면으로 이동
+		//history.back();
+	}else{
+		var deleteTime = getCurrentDateTime(); 
+		//console.log("name=selectNameM-------> "+$("[name=selectNameM]").val());
+		//console.log("deleteTime ------> "+deleteTime);
+		//console.log("subjectId ------> "+subjectId);
+	
+		$.ajax({
+			type : "post",
+			url : "${pageContext.request.contextPath}/myrecord/deletesubject.ajax",
+			data : {subjectId : subjectId, deleteTime: deleteTime },
+			error : ajaxErrorHandler,
+			success : function(result) {
+				console.log("delete 성공");
+				alert("삭제되었습니다");
+				location.reload(true);
+			}
+		});
+	}
+}
+//과목 수정하기초입
+function btnReSubClickHandler(){
+	if(subjectName == null){
+		alert("수정할 과목을 먼저 선택해주세요");
+		location.reload();
+		//이것도 아닌 것 같은데
+		 /$(".modal").css("display", "none");
+		//history.go(0);
+		
+		//이벤트 전 화면으로 이동 - 로그인 페이지로 이동해버림
+		//history.back();
+	}else{
+		$("#bfore-title").text(subjectName);
+		var col=chooseBorderColor(String(subjectColor));
+		$("#bfore-title").css('color',col);
+	}
+}
+
 // 과목 수정하기
 function btnModifyDoneSubjectClickHandler(){
 	
@@ -370,39 +424,8 @@ function btnAddSubjectClickHandler() {
 	frm.action = "${pageContext.request.contextPath}/addsubject";
 	frm.submit();
 }
-//과목 수정하기초입
-function btnReSubClickHandler(){
-	console.log("아아아아아아앍   ");
 
-	if(subjectName == null){
-		alert("수정할 과목을 먼저 선택해주세요");
-		location.reload(true);
-		//history.go(0);
-		
-		//이벤트 전 화면으로 이동
-		//history.back();
-	}
-	$("#bfore-title").text(subjectName);
-}
-//과목 삭제하기
-function btnRemoveSubjectClickHandler(){
-	var deleteTime = getCurrentDateTime(); 
-	//console.log("name=selectNameM-------> "+$("[name=selectNameM]").val());
-	console.log("deleteTime ------> "+deleteTime);
-	console.log("subjectId ------> "+subjectId);
 
-	$.ajax({
-		type : "post",
-		url : "${pageContext.request.contextPath}/myrecord/deletesubject.ajax",
-		data : {subjectId : subjectId, deleteTime: deleteTime },
-		error : ajaxErrorHandler,
-		success : function(result) {
-			console.log("delete 성공");
-			alert("삭제되었습니다");
-			location.reload(true);
-		}
-	});
-}
 let intervalCountdownID;
 let startTime;
 let endTime;

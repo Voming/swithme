@@ -4,16 +4,18 @@ public class SubjectDifftimeDto {
 		private Integer subjectId;
 		private String subjectName;
 		private String difftime;
+		private String subjectColor;
 		@Override
 		public String toString() {
 			return "SubjectDifftimeDto [subjectId=" + subjectId + ", subjectName=" + subjectName + ", difftime="
-					+ difftime + "]";
+					+ difftime + ", subjectColor=" + subjectColor + "]";
 		}
-		public SubjectDifftimeDto(Integer subjectId, String subjectName, String difftime) {
+		public SubjectDifftimeDto(Integer subjectId, String subjectName, String difftime, String subjectColor) {
 			super();
 			this.subjectId = subjectId;
 			this.subjectName = subjectName;
 			this.difftime = difftime;
+			this.subjectColor = subjectColor;
 		}
 		public Integer getSubjectId() {
 			return subjectId;
@@ -24,9 +26,7 @@ public class SubjectDifftimeDto {
 		public String getDifftime() {
 			return difftime;
 		}
-		
-
-		
-		
-
+		public String getSubjectColor() {
+			return subjectColor;
+		}
 }

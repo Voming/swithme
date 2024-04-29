@@ -80,11 +80,12 @@ where RECORD_MEM_ID = 'won'
 
 ;
 -----------당일 과목별 공부시간 합계--
+--SUBJECT_COLOR
 ---------------------------------- 방법 2 total 시간이 가장 위로
-select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME  
+select SUBJECT_ID, SUBJECT_NAME ,DIFFTIME,SUBJECT_COLOR
 from 
 (
-SELECT SUBJECT_ID, SUBJECT_NAME,SUBJECT_DEL_DATE 
+SELECT SUBJECT_ID, SUBJECT_NAME,SUBJECT_DEL_DATE ,SUBJECT_COLOR
 FROM SUBJECT 
 WHERE MEM_ID ='won' 
 ) t1 

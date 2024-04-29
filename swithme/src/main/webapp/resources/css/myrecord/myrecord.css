@@ -23,10 +23,7 @@ a{
 	font-size: 15px;
 	margin : 1px;
 }
-.wrap-body .wrap-main .myrecord .sub-title >p:nth-child(1){
-	font-family: "IM_Hyemin-Bold";
-	font-size: 20px;
-}
+
 /* 과목 추가 모달 css */
 .wrap-body .myrecord .add-sub
  {
@@ -188,11 +185,16 @@ a{
 }
 
 /* 모달  */
+
 .wrap-body .myrecord .subject-modal .btn{
 	width : 120px;
 	margin : 5px;
 }
-
+.wrap-body .myrecord .subject-modal .title{
+	margin-top:20px;
+	padding-top:15px;
+	font-size:23px;
+}
 
 /* 글 부분 */
  .wrap-body .myrecord  .wrap-modal > .modal-content {

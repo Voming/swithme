@@ -10,24 +10,43 @@
 <link href="${pageContext.request.contextPath}/resources/css/testcalendar/testcalendarhome.css" rel="stylesheet">
 <!-- full calendar-->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 <title>SWITH.ME</title>
 </head>
 <body>
- <script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView : 'dayGridMonth',
+				titleFormat : function(date) {
+					year = date.date.year;
+					return year + " 시험 일정";
+				}
+			});
+			calendar.render();
+		});
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          titleFormat: function (date) {
-        	  year = date.date.year;
-              return year + " 시험 일정";
-            }
-        });
-        calendar.render();
-      });
+		$(loadedHandler);
 
-    </script>
+		function loadedHandler() {
+			$(".btn.update").on("click", btnUpdateClickHandler);
+		}
+		
+		function btnUpdateClickHandler(){
+			// 시험 내용 업데이트 하기
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/test/update.ajax"
+				, method : "post"
+				, success : function(result){ 
+					
+				}
+				,error : ajaxErrorHandler
+			} ); 
+		}
+		
+	</script>
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -51,7 +70,10 @@
 		</div>
 		<div class="wrap-body">
 			<div class="wrap-calendar">
-			 <div id='calendar'></div>
+				<div id='calendar'></div>
+			</div>
+			<div class="wrap-content">
+				<button class="btn update">시험달력 업데이트</button>
 			</div>
 		</div>
 	</div>

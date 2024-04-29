@@ -1,6 +1,8 @@
 package swithme.model.member.controller;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +18,7 @@ import swithme.model.member.dto.MemberInfoDto;
 @WebServlet("/mypage/myboard")
 public class MemberBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    BoardService service = new BoardService();
+	BoardService service = new BoardService();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,19 +33,6 @@ public class MemberBoardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("/WEB-INF/views/member/myboard.jsp").forward(request, response);
-	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setAttribute("boardlistdto", service.selectAllList());
-		//setAttribute를 통해서 boardlistdto 라는 이름에 service에서 selectAllList()를 통해 값을 불러와서 넣어줌
-		
-		
 		//한 페이지 당 나오는 게시글 수
 		int boardNum = 15;
 		
@@ -65,17 +54,31 @@ public class MemberBoardController extends HttpServlet {
 			}
 			
 		}
-			
-		
+		String memId = null;
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
+		System.out.println(loginInfo.getMemId());
 		
-		String boardWriter = null;
-		if (loginInfo != null) { //로그인 했을 때
-			boardWriter = loginInfo.getMemId();
-			
+		if(loginInfo != null) {
+			memId = loginInfo.getMemId();
 		}
-		request.getSession().setAttribute("memId", loginInfo.getMemId());
+		//loginInfo 에서 memId만 뽑음
+		 Map<String, Object> result = service.selectPage(boardNum, boardPageNum, currentPage, memId);
+		 //service.selectPage(boardNum, boardPageNum, currentPage, memId) 이 db로 갔다가 다시 와서 result 에 담음
+		 //위에 memId = loginInfo.getMemId(); 때문에 memId에 값이 들어가서 mapper에서 if의 조건식에 충족에 되서 if안에 있는 sql까지 활용
+		 
+		request.setAttribute("mapboardlist", result);
+		// jsp에 보냄
+		
+		request.getRequestDispatcher("/WEB-INF/views/member/myboard.jsp").forward(request, response);
+	}
 
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		
 	}
 

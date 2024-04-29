@@ -35,7 +35,6 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("boardlistdto", service.selectAllList());
 		//setAttribute를 통해서 boardlistdto 라는 이름에 service에서 selectAllList()를 통해 값을 불러와서 넣어줌
 		
 		
@@ -60,8 +59,9 @@ public class BoardListController extends HttpServlet {
 			}
 			
 		}
-			
-		request.setAttribute("mapboardlist", service.selectPage(boardNum, boardPageNum, currentPage));
+		String memId = null;
+		//memId 를 null로 설정해서 밑에 memId 는 null로 가서 mapper의 if문을 활용 안함
+		request.setAttribute("mapboardlist", service.selectPage(boardNum, boardPageNum, currentPage, memId));
 		// 3. 여기서 다시 jsp로 값을 내보냄(int형으로 내보냄 - 페이지 숫자가 보임) 
 		request.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(request, response);
 

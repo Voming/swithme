@@ -53,7 +53,8 @@
 					</div>
 					<div>
 						<label class="emailcheck">이메일 확인</label>
-						<input onclick="emailsendHanler" type="text" name="emailr" id="emailr" placeholder="인증코드" disabled="disabled" required>
+						<input onclick="sendEmailHandler" type="text" name="emailr" id="emailr" placeholder="인증코드" disabled="disabled" required>
+						<input type="hidden" name="code" id="code">
 						<button disabled="disabled"  class="checkcode"><p>인증</p></button>
 					</div>
 					<div>
@@ -120,7 +121,6 @@ function btnCheckClickHandler(){
 		$(".desc-pwd").html("")
 	}
 });
- 
  
 
 </script>
@@ -190,6 +190,59 @@ $('[name=email]').on('blur', function(){
 
 
 
+<script>
+
+//인증번호 발송
+function sendEmailHandler(){
+	$.ajax({
+		url:"${pageContext.request.contextPath }/mail" , 
+		type:'post',
+		async:false, 
+		success: function(result){
+			if(result != null){
+				alret("인증번호 발송");
+				$("[name=emailr]").val(result);
+			}else{
+				alert("다시 시도해주세요")
+			}
+		}
+	,error : function(request, status, error){
+		alert("code: "+request.status + "\n" + "message: " 
+				+ request.responseText + "\n"
+				+ "error: "+error);
+	}
+		
+	});
 	
+}
+//인증번호 확인
+ function checkHandler(){
+	var codeVal=$("#code").val(); 
+	var inputVal=$(".emailr").val();
+	
+	$.ajax({
+		url:  "${pageContext.request.contextPath }/mailcode" , 
+		method:"post",
+		date:{codeVal:codeVal ,inputVal:inputVal },
+		async:false ,
+		success:function(result){
+			if(result==1){
+				alert("인증완료");
+				$(".checkcode").prop("disabled",true);
+				$(".checkcode").text("인증완료");
+			}else{
+				alert("인증코드를 확인해주세요")
+			}
+		}
+		,error : function(request, status, error){
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+	});
+}
+ 
+ </script>
+
 </body>
 </html>

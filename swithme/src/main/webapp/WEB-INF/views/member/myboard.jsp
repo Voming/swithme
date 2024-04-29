@@ -13,7 +13,6 @@
 <body>
 
 [[${loginInfo }]]
-[[${boardlistdto}]]
 
 	<div class="wrapper">
 		<div class="wrap-header">
@@ -54,7 +53,7 @@
 						<col style="width: 5%;" >
 					</colgroup>
 					<tr class="tr-first">
-						<td style="text-align: center;"></td>
+						<td style="text-align: center;"><input type="checkbox" id="allCheck"></td>
 						<td style="text-align: center;">번호</td>
 						<td style="text-align: center;">제목</td>
 						<td>작성자</td>
@@ -74,7 +73,7 @@
 							<tbody>
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
 									<tr class="tr-sec">
-										<td><input type="checkbox"></td>
+										<td style="text-align: center;"><input type="checkbox" class="item"></td>
 										<td style="text-align: center;">${dto.boardId}</td>
 										<td><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
 										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
@@ -153,6 +152,10 @@ function loadedHandler() {
 	$(".page").on("mouseenter", pageMouseEnterHandler);
 	$(".page").on("mouseleave", pageMouseLeaveHandler);
 
+	
+	/* checkbox 전체 선택 */
+	$("#allCheck").on("click", allCheckHandler);
+	
 	/* 	$(".btn.delete").on("click", btnDeleteClickHandler); */
 }
 
@@ -171,6 +174,12 @@ function pageMouseEnterHandler(){
 /*마우스 뗐을 때 다시 원래색 변환 */
 function pageMouseLeaveHandler(){
 	$(this).children().css('color', 'black');
+}
+
+
+/* 체크박스 선택 */
+function allCheckHandler(){
+	$("input[type='checkbox']").prop("checked", true);
 }
 
 /* function btnDeleteClickHandler(){

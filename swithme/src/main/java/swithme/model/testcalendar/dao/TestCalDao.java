@@ -6,11 +6,31 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
 import swithme.jdbc.common.MybatisTemplate;
+import swithme.model.testcalendar.dto.IndEngineerSetDto;
 import swithme.model.testcalendar.dto.IndengineerDto;
+import swithme.model.testcalendar.dto.MasterCraftsmentSetDto;
 import swithme.model.testcalendar.dto.MastercraftsmentDto;
+import swithme.model.testcalendar.dto.ProEngineerSetDto;
 import swithme.model.testcalendar.dto.ProengineerDto;
 
 public class TestCalDao {
+
+	public List<ProEngineerSetDto> selectProList(SqlSession session) {
+		List<ProEngineerSetDto> result = session.selectList("testcalendar.selectProList");
+		return result;
+	}
+
+	public List<MasterCraftsmentSetDto> selectMasterList(SqlSession session) {
+		List<MasterCraftsmentSetDto> result = session.selectList("testcalendar.selectMasterList");
+		return result;
+	}
+
+	
+	public List<IndEngineerSetDto> selectIndList(SqlSession session) {
+		List<IndEngineerSetDto> result = session.selectList("testcalendar.selectIndList");
+		return result;
+	}
+	
 	public int insertInd(List<IndengineerDto> dtolist) {
 		SqlSession session =  MybatisTemplate.getSqlSession(false);
 	

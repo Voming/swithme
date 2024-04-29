@@ -381,7 +381,7 @@ function btnReSubClickHandler(){
 		alert("수정할 과목을 먼저 선택해주세요");
 		location.reload();
 		//이것도 아닌 것 같은데
-		 /$(".modal").css("display", "none");
+		 $(".modal").css("display", "none");
 		//history.go(0);
 		
 		//이벤트 전 화면으로 이동 - 로그인 페이지로 이동해버림

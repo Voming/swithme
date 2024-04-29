@@ -47,3 +47,12 @@
 #calendar > div.fc-view-harness.fc-view-harness-active > div > table > thead > tr > th{
 	font-family: "IM_Hyemin-Bold";
 }
+
+.wrap-body .wrap-content {
+	width: 960px;
+	margin: 0 auto;
+	align-items: center;
+	/* 자식 요소(.child)를 중앙 정렬하기 */
+	display: flex;
+	justify-content: center;
+}

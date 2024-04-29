@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.testcalendar.service.TestCalService;
 
-@WebServlet("/test")
-public class TestCalController extends HttpServlet {
+@WebServlet("/test/update.ajax")
+public class TestCalUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TestCalService service = new TestCalService();
   
-    public TestCalController() {
+    public TestCalUpdateController() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/testcalendar/testcalendar.jsp").forward(request, response);
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		//1 : 기술사 2: 기능장 3: 기사 산업기사
+		service.testCalApiCall(1); 
+		service.testCalApiCall(2);
+		service.testCalApiCall(3);
+		
 	}
 
 }

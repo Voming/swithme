@@ -44,7 +44,7 @@
 	<insert id="insertReplyWrite" parameterType="BoardReplyDto">
 		INSERT INTO BOARD_REPLY 
 		VALUES((SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY) , #{boardId}, #{replyWriterid}, #{replyContent},
-				default, (SELECT NVL(MAX(reply_ref),0)+1 FROM BOARD_REPLY), 1, 1)
+				default, (SELECT NVL(MAX(REPLY_ID),0)+1 FROM BOARD_REPLY), 1, 1)
 	</insert>
 
 	<insert id="insertReplyWriteAgain" parameterType="BoardReplyDto">
@@ -61,17 +61,26 @@
 		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID = #{boardId}
 	</update>
 
-	<delete id="deleteBoard" parameterType="_int">
-		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_LEVEL = #{replyLevel};
-		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_LEVEL = #{replyLevel};
+	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM BOARD WHERE BOARD_ID = #{boardId}
 	</delete>
 	
-	<delete id="deleteBoardReply" parameterType="_int">
-		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId};
+	<delete id="deleteBoardReplyAll" parameterType="int">
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId}
 	</delete>
 	
-	<delete id="deleteBoardReplyAgain" parameterType="_int">
-		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId};
+	<delete id="deleteBoardReply" parameterType="map">
+		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId}
 	</delete>
+	
+	<select id="checkReplyLevel2" resultType="int" parameterType="map">
+	SELECT COUNT(*) CNT FROM BOARD_REPLY 
+	WHERE REPLY_REF = (SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID=#{replyId} AND REPLY_LEVEL=1) 
+		AND REPLY_LEVEL=2 
+	</select>
+	<select id="checkMyReply" resultType="int" parameterType="map">
+	SELECT COUNT(*) CNT FROM BOARD_REPLY 
+	WHERE REPLY_ID=#{replyId} AND REPLY_WRITER_ID = #{memId}
+	</select>
+	
 </mapper>

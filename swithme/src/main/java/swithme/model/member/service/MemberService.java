@@ -9,6 +9,7 @@ import swithme.model.member.dto.MemberBoardListDto;
 import swithme.model.member.dto.MemberDto;
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.member.dto.MemberLoginDto;
+import swithme.model.member.dto.MemberUpdateDto;
 
 import static swithme.jdbc.common.JdbcTemplate.*;
 
@@ -77,7 +78,7 @@ public class MemberService {
 		return result;
 	}
 	// update
-	public int update(MemberDto dto) {
+	public int update(MemberUpdateDto dto) {
 		int result = 0;
 		Connection conn = getConnection(false);
 		result = dao.update(conn, dto);

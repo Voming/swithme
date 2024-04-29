@@ -344,10 +344,17 @@ DELETE FROM BOARD_REPLY ;
 rollback;
 commit;
 
---대댓글 지우기
+--댓글 지우기
 DELETE FROM BOARD_REPLY WHERE reply_id = 6 AND REPLY_LEVEL = 1 and 0 = (select count(*) cnt from board_reply where reply_ref=6 and reply_level=2);
-DELETE FROM BOARD WHERE BOARD_ID=3;
+--query문 안에서 대댓글 있나 확인 먼저 하기
+-- 대댓글이 없다면 지우기
+
+
 (select count(*) cnt from board_reply where reply_ref = (select reply_ref from board_reply where reply_id=7 and reply_level=1) and reply_level=2 );
+
+
 
 select count(*) cnt from board_reply where board_id='2';
 COMMIT;
+ 
+select * FROM board_reply;

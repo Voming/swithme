@@ -14,23 +14,15 @@ import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.service.RecordService;
 
-/**
- * Servlet implementation class MyrecordController
- */
 @WebServlet("/myrecord")
 public class MyrecordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public MyrecordController() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String subjectName = request.getParameter("subjectName");
     	List<RecordCalendarDto> calendarList = null;
@@ -40,17 +32,14 @@ public class MyrecordController extends HttpServlet {
 //					request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 //				}
 //				String memId = loginInfo.getMemId();
+
 				String memId = null;
-				if (loginInfo != null) { //로그인 했을 때
+				if (loginInfo != null ) { //로그인 했을 때
 					memId = loginInfo.getMemId();
 					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
 					request.setAttribute("sublist", sublist);
 					request.setAttribute("memId", memId);
 					
-					System.out.println("\n\n >>>>>>>>>>    >>>>>>   >>>>>>   sublist");
-					System.out.println("\n\n"+sublist);
-
-			
 		    		calendarList = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 		    		
 		    		request.setAttribute("calendarList", calendarList);

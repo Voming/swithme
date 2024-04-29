@@ -19,35 +19,18 @@ import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.service.RecordService;
 
-/**
- * Servlet implementation class RecoradStartTimeController
- */
 @WebServlet("/myrecord/todayrecord.ajax")
 public class DayStudyTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+
+	
 	public DayStudyTimeController() {
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {		
-			
 			
 			List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result2 = service.fourdayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
@@ -59,8 +42,6 @@ public class DayStudyTimeController extends HttpServlet {
 			//월별 
 			List<DateDifftimeDto> result6=service.monthStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result7 = service.monthBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
-			
-			
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("dayStudyTimeList", result);				//오늘의 과목별 학습 시간

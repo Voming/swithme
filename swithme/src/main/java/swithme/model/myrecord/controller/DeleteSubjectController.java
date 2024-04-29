@@ -11,9 +11,6 @@ import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.SubjectDeleteDto;
 import swithme.model.myrecord.service.SubjectService;
 
-/**
- * Servlet implementation class RecoradStartTimeController
- */
 @WebServlet("/myrecord/deletesubject.ajax")
 public class DeleteSubjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

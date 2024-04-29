@@ -12,23 +12,14 @@ import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.SubjectAddDto;
 import swithme.model.myrecord.service.SubjectService;
 
-/**
- * Servlet implementation class AddSubjectController
- */
 @WebServlet("/addsubject")
 public class AddSubjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SubjectService service = new SubjectService();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public AddSubjectController() {
         super();    
     }
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax 는 TODO");
 		

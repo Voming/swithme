@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!--부트스트랩  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/board/boardupdate.css" rel="stylesheet">
 <title>게시글 수정</title>
@@ -56,8 +59,25 @@
 					</div>
 				</div>
 					<div class="wrap-btn">
-						<div class="btn">
-							<button type="button" class="btn update">수정</button>
+						<div class="btn-group">
+							<button type="button" class="btn update" data-bs-toggle="modal"
+									data-bs-target="#updateModal">수정</button>
+
+								<!-- Modal -->
+								<div class="update modal" id="updateModal">
+									<div class="modal-dialog .modal-dialog-centered">
+										<div class="modal-content">
+										 	<div>정말 수정하시겠습니까?</div>
+											<button type="button"  class="btn done">
+												<p>완료</p>
+											</button>
+											<button type="button" class="btn esc"  data-bs-dismiss="modal">
+												<p>취소</p>
+											</button>
+										</div>
+									</div>
+								</div>
+
 							<button type="button" class="btn board" onClick="location.href='${pageContext.request.contextPath}/board'">목록</button>
 							<input type="hidden" name="boardId" value="${dto.boardId }">
 						</div>
@@ -75,7 +95,7 @@
 $(loadedHandler);
 
 function loadedHandler(){
- 	$(".btn.update").on("click", btnUpdateClickHandler);
+ 	$(".btn.done").on("click", btnUpdateClickHandler);
  	
  	console.log('${loginInfo.memId}');
  	console.log('${param.id}');

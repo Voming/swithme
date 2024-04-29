@@ -233,16 +233,21 @@ function displayReplyWrap(datalist){
 													값 꺼내쓸 때 변수에 담아야 함*/
 			} else {
 				htmlVal += `<li></li>`;
-			}
-	
 				/* 대댓글은 댓글Id를 알아야 찾아갈 수 있음 */
 				/* 댓글id는 boardId를 알고 있기 때문에(boardId 데이터를 가지고 있음) 대댓글에서까지 boardId 알 필요 없음 */
-				htmlVal += `
-								<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>
-							</ul>
+			}	
+				if (replydto.replyWriterid == "${loginInfo.memId}") {
+					/* 로그인 아이디와 댓글 쓴 아이디가 일치할 경우 삭제 버튼 보이게 하기 */
+					htmlVal += `
+									<li class="replydel" data-replyid="\${replydto.replyId}" style="cursor: pointer;">삭제</li>`;
+				} else {
+					
+				}
+					htmlVal += `
+								</ul>
+							</div>
 						</div>
-					</div>
-				`;
+					`;
 		} // for
 	}  // else 
 	$(".replylist").html(htmlVal);
@@ -342,7 +347,6 @@ function boardReplyMoreClickHandler(){
 		return;
 	}
 
-	
 	$.ajax({
 		url: "${pageContext.request.contextPath}/board/reply/write",
 		method: "post",
@@ -351,7 +355,7 @@ function boardReplyMoreClickHandler(){
 		success: function(result){
 			console.log(result);
 			if(result == null) {
-				alert("오류났어요~");
+				alert("대댓글 등록 오류");
 				
 			} else {
 				displayReplyWrap(result);
@@ -374,11 +378,42 @@ function ReplyEscClickHandler(){
 	$(this).parents(".reply2").remove();
 }
 
-/* 댓글 삭제하기 */
+/* 댓글, 대댓글 삭제하기 */
 function ReplydelClickHandler(){
 	var replyId = $(this).data("replyid");
-	console.log("삭제할 replyId-----"+replyId );
+	console.log("삭제할 replyId : "+replyId );
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/board/reply/delete",
+		method: "post",
+		data: {replyId: replyId, boardId: "${dto.boardId }"},
+		/* replyId랑 boardId 들고 가야함 */
+		dataType: 'json',
+		success: function(resultMap){
+			/* controller에서 map 형태로 값 가지고옴 */
+			console.log(resultMap);
+			if(resultMap.deleteResult == -2 ) {
+				alert("본인이 작성한 글만 삭제 가능 합니다.");
+			} else if(resultMap.deleteResult == -1 ) {
+				alert("댓글이 있어서 글 삭제를 할 수 없습니다.");
+				/* 대댓글이 있어서 삭제할 수 없음*/
+			} else if(resultMap.deleteResult == 0 ) {
+				alert("삭제에 실패했습니다. 다시 시도해주세요.");
+			} else {
+				alert("삭제되었습니다.");
+				
+				displayReplyWrap(resultMap.dtolist);
+				//삭제하고 다시 댓글, 대댓글 데이터 출력하는 함수 사용
+				
+			}
+		},
+		error: ajaxErrorHandler	
+		
+	});	
+	
 }
+
+
 
 /* 게시글 작성 */
 function boardWriteClickHandler(){

@@ -9,12 +9,90 @@
 	justify-content: center;
 }
 
- .wrap-events table {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  .wrap-events th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  }
+.wrap-events table {
+	width: 960px;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	text-align: center;
+	margin: 15px 0 30px 0;
+}
+
+.wrap-events table p{
+	padding: 3px 0;
+}
+
+.wrap-events th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font5);
+	vertical-align:middle;
+}
+
+.wrap-events th{
+	font-weight: bold;
+}
+
+.wrap-events a {
+	/* 탭 꾸미기 */
+	font-family: "IM_Hyemin-Regular";
+}
+
+.test-tab-nav {
+	padding: 20px 0;
+	display: flex;
+	text-align: center;
+}
+
+.test-tab-nav li {
+	text-align: center;
+}
+
+.test-tab-nav li a {
+	padding: 3px 20px;
+	margin-right: 10px;
+	font-weight: bold;
+	font-size: var(--font4);
+}
+
+.tab-body .test-tab-nav li a {
+	border: 2px solid var(--color_purple_1);
+	border-radius: 10px;
+}
+
+.tab-body .test-tab-nav li a:hover, .tab-body .test-tab-nav li a.active
+	{
+	background: var(--color_purple_1);
+	color: white;
+	border-radius: 10px;
+}
+
+.tab-body .all-txt{
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font2);
+	margin-top: 50px;
+}
+
+.wrap-events .wrap-link{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+}
+
+.wrap-events .wrap-link button{
+	margin-top: 15px;
+	background-color: var(--color_purple_3);
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font3);
+	color: black;
+	border: 0;
+	height: 30px;
+	width: 200px;
+	border-radius: 10px;
+}
+
+.wrap-events .wrap-link button:hover{
+	background: var(--color_purple_1);
+	color: white;
+	cursor: pointer;
+}

@@ -150,21 +150,48 @@ function loadedHandler() {
 	
 	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
 	$(".page").on("mouseenter", pageMouseEnterHandler);
-	$(".page").on("mouseleave", pageMouseLeaveHandler);
+ 	$(".page").on("mouseleave", pageMouseLeaveHandler); 
 
 	
 	/* checkbox 전체 선택 */
-	$("#allCheck").on("click", allCheckHandler);
+ 	$("#allCheck").on("click", allCheckHandler);
+ 	
+ 	/* checkbox 하나 눌렀을때  */
+ 	$(".item").on("click", itemCheckHandler); 
 	
 	/* 	$(".btn.delete").on("click", btnDeleteClickHandler); */
 }
 
 function pageChangeHandler(){
 	location.href = "${pageContext.request.contextPath}/mypage/myboard?page="+$("input.pageHidden").val();
-	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식
+	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
 }
 
- */
+
+
+function allCheckHandler(){
+    var checkall = $("#allCheck");
+    var itemcheck = $(".item");
+    if(checkall.is(":checked")){
+        $(itemcheck).prop("checked",true);
+    } else {
+        $(itemcheck).prop("checked",false);
+    }
+
+}
+
+function itemCheckHandler(){
+	
+ 	var itemcheck = $(".item");
+
+	if($(".item:checked").length < $(".item").length ) {
+		$("#allCheck").prop("checked", false);	
+	} else {
+		$("#allCheck").prop("checked", true);	
+	}
+}
+
+
 /*마우스 올렸을 때 색 변환 */
 function pageMouseEnterHandler(){
 	console.error($(this).text());
@@ -175,17 +202,6 @@ function pageMouseEnterHandler(){
 function pageMouseLeaveHandler(){
 	$(this).children().css('color', 'black');
 }
-
-
-/* 체크박스 선택 */
-function allCheckHandler(){
-	$("input[type='checkbox']").prop("checked", true);
-}
-
-/* function btnDeleteClickHandler(){
-	
-} */
-
 
 
 </script>	

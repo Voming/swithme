@@ -73,13 +73,12 @@ select SEQ_BOARD_ID.nextval from dual;
 
 --현재 seq값 순서 확인
 select SEQ_BOARD_ID.currval from dual;
-ALTER sequence SEQ_BOARD_ID increment by  -38;
-ALTER SEQUENCE SEQ_BOARD_ID INCREMENT BY 1;
+select content from board;
 
 rollback;
 commit;
 
-delete from board;
+delete from board where board_id in(40,3);
 commit;
 
 select * from member;
@@ -290,11 +289,6 @@ delete from board_reply
     and  ( select reply_ref  from board_reply where REPLY_ID = 4 ) 
     
     ;
- select * 
- from ( select reply_ref, reply_step, reply_level  from board_reply where REPLY_ID = 4 ) t1
- where reply_step any<(select 
- ;
-
 
 delete from board where board_id = 17;
 
@@ -334,6 +328,33 @@ SELECT REPLY_ID, BOARD_ID, REPLY_WRITER_ID ,REPLY_CONTENT, REPLY_WRITE_TIME, REP
     FROM BOARD_REPLY
     WHERE BOARD_ID = 17 
         ORDER BY REPLY_REF ASC, REPLY_STEP  Asc; 
-        
+
+ALTER TABLE BOARD
+WHERE BOARD_ID = 4
+DELETE ON CASCADE;
+
+ALTER TABLE BOARD WHERE BOARD_ID = 4 DELETE ON CASCADE;
         
 
+SELECT * FROM BOARD_REPLY WHERE BOARD_ID = 2 order by reply_ref asc, reply_step asc;
+select * from board_reply order by board_id , reply_ref, reply_step;
+desc BOARD_REPLY;
+
+DELETE FROM BOARD_REPLY ;
+rollback;
+commit;
+
+--댓글 지우기
+DELETE FROM BOARD_REPLY WHERE reply_id = 6 AND REPLY_LEVEL = 1 and 0 = (select count(*) cnt from board_reply where reply_ref=6 and reply_level=2);
+--query문 안에서 대댓글 있나 확인 먼저 하기
+-- 대댓글이 없다면 지우기
+
+
+(select count(*) cnt from board_reply where reply_ref = (select reply_ref from board_reply where reply_id=7 and reply_level=1) and reply_level=2 );
+
+
+
+select count(*) cnt from board_reply where board_id='2';
+COMMIT;
+ 
+select * FROM board_reply;

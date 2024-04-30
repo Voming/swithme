@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <!-- calendar -->
 <link href="${pageContext.request.contextPath}/resources/css/testcalendar/testcalendarhome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/testcalendar/testcalendartable.css" rel="stylesheet">
 <!-- full calendar-->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -184,6 +185,8 @@
 						
 					});
 					calendar.render();
+					
+					//테이블 세팅
 				},
 				error : ajaxErrorHandler
 			});
@@ -226,10 +229,52 @@
 			<div class="wrap-calendar">
 				<div id='calendar'></div>
 				<div class="wrap-content">
-				<button class="btn update" >시험달력 업데이트</button>
+					<button class="btn update">시험달력 업데이트</button>
+				</div>
 			</div>
+			<div class="wrap-events">
+				<table class="tb-events">
+					<thead>
+						<tr>
+							<th>시행회차</th>
+							<th>필기시험 접수</th>
+							<th>필기시험</th>
+							<th>필기시험 발표</th>
+							<th>실기시험 접수</th>
+							<th>실기시험</th>
+							<th>실기시험 발표</th>
+						</tr>
+					</thead>
+					<tbody>
+				
+						<tr>
+							<td>Lorem</td>
+							<td>Ipsum</td>
+							<td>Dolor</td>
+						</tr>
+						<tr>
+							<td>Lorem</td>
+							<td>Ipsum</td>
+							<td>Dolor</td>
+						</tr>
+						<tr>
+							<td>Lorem</td>
+							<td>Ipsum</td>
+							<td>Dolor</td>
+						</tr>
+						<tr>
+							<td>Lorem</td>
+							<td>Ipsum</td>
+							<td>Dolor</td>
+						</tr>
+						<tr>
+							<td>Lorem</td>
+							<td>Ipsum</td>
+							<td>Dolor</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			
 		</div>
 	</div>
 	<div class="wrap-footer">

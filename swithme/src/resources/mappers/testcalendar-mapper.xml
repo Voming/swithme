@@ -80,18 +80,7 @@
 	 FROM IND_ENGINEER E JOIN DESCR_IND D ON (E.DESCR_ID = D.DESCR_ID)
 </select>
 
-<delete id="deleteAll">
-	{CALL DECLARE
-
-	BEGIN
-	delete from ind_engineer;
-	delete from descr_ind;
-
-	delete from MASTER_CRAFTSMENT;
-	delete from descr_master;
-
-	delete from pro_engineer;
-	delete from descr_pro;
-	END}
+<delete id="deleteAll" statementType="CALLABLE">
+	{CALL PRO_TEST_DELETE}
 </delete>
 </mapper>

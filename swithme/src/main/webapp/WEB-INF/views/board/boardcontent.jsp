@@ -395,7 +395,7 @@ function ReplydelClickHandler(){
 			if(resultMap.deleteResult == -2 ) {
 				alert("본인이 작성한 글만 삭제 가능 합니다.");
 			} else if(resultMap.deleteResult == -1 ) {
-				alert("댓글이 있어서 글 삭제를 할 수 없습니다.");
+				alert("댓글이 있어서 삭제를 할 수 없습니다.");
 				/* 대댓글이 있어서 삭제할 수 없음*/
 			} else if(resultMap.deleteResult == 0 ) {
 				alert("삭제에 실패했습니다. 다시 시도해주세요.");

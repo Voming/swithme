@@ -112,12 +112,20 @@ public class RecordService {
 		return result;
 	}
 	
-	// selectOne
+	// 유저 각오
 	public String selectComment(String memId) {
 		String comment = null;
 		SqlSession session = getSqlSession();
 		comment = dao.selectComment(session, memId);
 		session.close();
 		return comment;
+	}
+	// 당일 총 공부시간
+	public String selectTotalDifftime(String memId) {
+		String difftime = null;
+		SqlSession session = getSqlSession();
+		difftime = dao.selectTotalDifftime(session, memId);
+		session.close();
+		return difftime;
 	}
 }

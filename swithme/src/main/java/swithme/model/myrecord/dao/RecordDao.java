@@ -77,5 +77,8 @@ public class RecordDao {
 	public String selectComment(SqlSession session,String memId) {
 		return session.selectOne("record.selectComment", memId);
 	}
-
+//	당일 총 공부시간 
+	public String selectTotalDifftime(SqlSession session,String memId) {
+		return session.selectOne("record.selectTotalDifftime", memId);
+	}
 }

@@ -83,10 +83,14 @@
 			<div class="wrap-ranking">
 
 				<div class="grid">
-					<div class="grid-item ">									
-						<p class="user-name"> ${memId}</p>
-						<p class="user-comment">${comment}</p>
+					<div class="grid-item ">	
+						<div>
+							<p class="user-name"> ${memId}</p>
+							<p class="user-comment">${comment}</p>
+						</div>								
+						<div class="user-difftime">${difftime}</div>
 					</div>
+					
 					<div class="grid-item">
 						<p>시간기록을 종료한 값만 통계에 반영됩니다</p>
 					</div>

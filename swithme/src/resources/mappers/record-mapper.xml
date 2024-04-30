@@ -124,4 +124,10 @@ from record join SUBJECT on RECORD_SUBJECT_ID=SUBJECT_ID WHERE RECORD_MEM_ID= #{
 SELECT MEM_COMMENT FROM MEMBER WHERE MEM_ID=#{memId}
 </select>
 
+<select id="selectTotalDifftime" parameterType="string" resultType="string">
+SELECT SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+from RECORD
+where RECORD_MEM_ID =#{memId} and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
+</select>
+
 </mapper>

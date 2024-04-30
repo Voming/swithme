@@ -39,6 +39,15 @@ FROM (
     )
 );
 select trunc(sysdate) from dual;
+------당일 과목합계
+SELECT 
+    j.mem_id AS "MEM_ID",
+     NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
+    FROM SUBJECT j
+    join RECORD  r on (j.mem_id = r.record_mem_id)
+    WHERE  r.RECORD_end = SYSDATE  and MEM_ID='won'
+    GROUP BY   j.mem_id
+    ;   
 -----------과목 시간 합계 리스트 사용불가 추후에 공부시간만 뽑아올 때 사용가능--
 SELECT RECORD_SUBJECT_ID
 ,(SELECT SUBJECT_NAME from SUBJECT where SUBJECT_ID=RECORD_SUBJECT_ID) AS SUBJECT_NAME
@@ -124,6 +133,15 @@ WHERE SUBJECT_DEL_DATE IS NULL
 ;
 --------유저 각오--------------------------------------------------------------
 SELECT MEM_COMMENT FROM MEMBER WHERE MEM_ID='song';
+
+--오늘 총 학습 시간----------------------------------------------------------
+--방법1 초단위
+select SUM(DIFFTIME) as DIFFTIME from v_record_sec where TO_CHAR(RECORD_DATE, 'YYYY-MM-DD')=TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND RECORD_MEM_ID='won';
+--방법2 초단위 x
+SELECT SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+from RECORD
+where RECORD_MEM_ID ='won' and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
+;
 
 ------------------------------------------------------------------------
 SELECT

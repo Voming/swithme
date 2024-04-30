@@ -34,8 +34,9 @@ public class SelectedUserInfoController extends HttpServlet {
 
 				if (loginInfo != null ) { //로그인 했을 때
 					memId = request.getParameter("memId");
-					request.setAttribute("comment", service.selectComment(memId));
 					request.setAttribute("memId", memId);
+					request.setAttribute("comment", service.selectComment(memId));
+					request.setAttribute("difftime", service.selectTotalDifftime(memId));
 					
 					
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/selectedUserInfo.jsp").forward(request, response);
@@ -61,7 +62,7 @@ public class SelectedUserInfoController extends HttpServlet {
 				List<DateDifftimeDto> result6=service.monthStudyTime(memId);
 				List<DayStudyTimeDto> result7 = service.monthBySubject(memId);
 				//calendar
-				List<RecordCalendarDto> calResult = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+				List<RecordCalendarDto> calResult = service.studyTimeByCalList(memId);
 				
 				Map<String, Object> resultMap = new HashMap<String, Object>();
 				resultMap.put("dayStudyTimeList", result);				//오늘의 과목별 학습 시간

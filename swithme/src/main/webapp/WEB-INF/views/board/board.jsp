@@ -141,7 +141,7 @@
 $(loadedHandler);
 function loadedHandler() {
 	$(".btn.write").on("click", btnWriteClickHandler);
-	$("li.page").on("click", pageChangeHandler);
+	$(".page").on("click", pageChangeHandler);
 
 	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
 	$(".page").on("mouseenter", pageMouseEnterHandler);
@@ -150,7 +150,7 @@ function loadedHandler() {
 }
 
 function pageChangeHandler(){
-	location.href = "${pageContext.request.contextPath}/board?page="+$("input.pageHidden").val();
+	location.href = "${pageContext.request.contextPath}/board?page="+ $(this).text();
 	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
 }
 
@@ -162,7 +162,7 @@ function btnWriteClickHandler() {
 
 /*마우스 올렸을 때 색 변환 */
 function pageMouseEnterHandler(){
-	console.error($(this).text());
+	console.log($(this).text());
 	$(this).children().css('color', 'white');
 }
 

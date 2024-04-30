@@ -31,8 +31,11 @@ public class BoardService {
 //		--총 게시글 개수 알아보기 
 //		SELECT COUNT(*)/n개 FROM BOARD;
 //		DB 가서 그때그때 알아와야함 - 게시글이 몇개이냐에 따라 달라질 수 있어서
-		int totalboardCount = dao.selectTotalPageCount(session);
-
+		int totalboardCount = dao.selectTotalPageCount(session, memId);
+		//나의 게시글에서 memId가 쓴 게시글에 따라 게시글 수가 달라지기 때문에 필요
+		
+		System.out.println("totalboardCount: "+totalboardCount);
+		
 		int start = boardNum * (currentPage - 1) + 1;
 		int end = boardNum * currentPage;
 
@@ -58,6 +61,7 @@ public class BoardService {
 		result.put("startPageNum", startPageNum);
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPage);
+		System.out.println(result);
 		return result;
 
 	}
@@ -152,27 +156,53 @@ public class BoardService {
 		return result;
 	}
 
-	// 게시글 삭제
-	public int deleteBoard(Integer boardId) {
+	
+	//게시글 삭제
+//	public int deleteBoard(Integer boardId) {
+//		int result = 0;
+//		SqlSession session = MybatisTemplate.getSqlSession();
+//		
+//		int replyCount = dao.selectReplyCount(session, boardId);
+//
+//		if(replyCount > 0) {
+//		//  게시글에 댓글 달려있으면
+//			result = dao.deleteBoardReplyAll(session, boardId);
+//			if(result < 0) {
+//				return result;
+//				//댓글 지우다 오류 발생
+//			}
+//		}
+//		result = dao.deleteBoard(session, boardId);
+//		//위에서 댓글들 지웠으니 게시글 자체 지우기
+//
+//		session.close();
+//		return result;
+//	}
+//	
+
+	// 게시글 한 개 이상 삭제
+	public int deleteBoards(List<Integer> boardIdList) {
 		int result = 0;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		
-		int replyCount = dao.selectReplyCount(session, boardId);
-
-		if(replyCount > 0) {
-		//  게시글에 댓글 달려있으면
-			result = dao.deleteBoardReplyAll(session, boardId);
-			if(result < 0) {
-				return result;
-				//댓글 지우다 오류 발생
+		for(Integer boardId : boardIdList ) {
+			int replyCount = dao.selectReplyCount(session, boardId);
+	
+			if(replyCount > 0) {
+			//  게시글에 댓글 달려있으면
+				result = dao.deleteBoardReplyAll(session, boardId);
+				if(result < 0) {
+					return result;
+					//댓글 지우다 오류 발생
+				}
 			}
+			result = dao.deleteBoard(session, boardId);
+			//위에서 댓글들 지웠으니 게시글 자체 지우기
 		}
-		result = dao.deleteBoard(session, boardId);
-		//위에서 댓글들 지웠으니 게시글 자체 지우기
-
 		session.close();
 		return result;
 	}
+	
 	
 	// 댓글 삭제
 	public Map<String, Object> deleteBoardReply(Map<String, String> paramMap) {

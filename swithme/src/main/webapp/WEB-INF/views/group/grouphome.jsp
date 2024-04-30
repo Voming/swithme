@@ -77,9 +77,7 @@
 					<div class="modal_btn">
 						<img class="img_g" src="\${moreDto.sgroupImgPath}" alt="그룹 사진">
 						<div class="tag">
-							<p style="background-color: black; padding: 3px; font-size: var(--font5);">
-							공개
-							</p>
+							<p style="background-color: black; padding: 3px; font-size: var(--font5);">공개</p>
 						</div>
 						<div class="description">
 							<p class="for-modal" style="display: none;">\${moreDto.sgroupId}</p>
@@ -98,6 +96,9 @@
 				console.log(checkcnt);
 				$(".btn.more").hide();
 			}
+			
+			$(".modal_btn").on("click", btnOpenClickHandler);
+			$(".close_btn").on("click", btnCloseClickHandler);
 		}
 		
 		//나의 리스트 가져오기

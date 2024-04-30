@@ -8,8 +8,12 @@
 		</if>
 	</select>
 
-	<select id="selectTotalPageCount" resultType="_int">
+	<!-- memId에 따라 나의 게시글에 나타나는 페이지 수 달라짐 + 전체 게시판에서 페이지 수 -->
+	<select id="selectTotalPageCount" resultType="_int" parameterType="string">
 		SELECT COUNT(*) c FROM BOARD
+		<if test="memId != null">
+		WHERE BOARD_WRITER = #{memId}
+		</if>
 	</select>
 	
 	<select id="selectPage" resultType="BoardListDto" parameterType="map">
@@ -83,6 +87,7 @@
 	WHERE REPLY_REF = (SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID=#{replyId} AND REPLY_LEVEL=1) 
 		AND REPLY_LEVEL=2 
 	</select>
+	
 	<select id="checkMyReply" resultType="int" parameterType="map">
 	SELECT COUNT(*) CNT FROM BOARD_REPLY 
 	WHERE REPLY_ID=#{replyId} AND REPLY_WRITER_ID = #{memId}

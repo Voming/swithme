@@ -4,7 +4,7 @@
 
 <insert id="insertDescrInd" parameterType="IndengineerDto">
 	<selectKey order="BEFORE" keyProperty="descrId" resultType="int">
-		select SEQ_DESCR_IDN.nextval descr_Id from dual
+		select SEQ_DESCR_IND.nextval descr_Id from dual
 	</selectKey>
 	insert into descr_ind values (#{descrId}, #{description})
 </insert>

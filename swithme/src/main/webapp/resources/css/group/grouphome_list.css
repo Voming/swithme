@@ -104,3 +104,28 @@
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3 ;
 }
+
+.group-tab-content .wrap-countb{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+}
+
+#tab01 div button{
+	margin-top: 15px;
+	background-color: var(--color_purple_3);
+	font-family: "IM_Hyemin-Regular";
+	font-size: var(--font4);
+	color: black;
+	border: 0;
+	height: 20px;
+	width: 100px;
+	border-radius: 10px;
+}
+
+#tab01 div button:hover{
+	background: var(--color_purple_1);
+	color: white;
+	cursor: pointer;
+}
+

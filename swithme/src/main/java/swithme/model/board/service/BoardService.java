@@ -155,9 +155,20 @@ public class BoardService {
 	// 게시글 삭제
 	public int deleteBoard(Integer boardId) {
 		int result = 0;
-
 		SqlSession session = MybatisTemplate.getSqlSession();
+		
+		int replyCount = dao.selectReplyCount(session, boardId);
+
+		if(replyCount > 0) {
+		//  게시글에 댓글 달려있으면
+			result = dao.deleteBoardReplyAll(session, boardId);
+			if(result < 0) {
+				return result;
+				//댓글 지우다 오류 발생
+			}
+		}
 		result = dao.deleteBoard(session, boardId);
+		//위에서 댓글들 지웠으니 게시글 자체 지우기
 
 		session.close();
 		return result;

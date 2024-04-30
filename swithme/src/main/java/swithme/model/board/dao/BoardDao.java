@@ -111,6 +111,12 @@ public class BoardDao {
 		return result;
 	}
 
+	//게시글 삭제 하기 전 댓글, 대댓글 있나 확인
+	public int selectReplyCount(SqlSession session, Integer boardId) {
+		int result = session.selectOne("board.selectReplyCount", boardId);
+		return result;
+	}
+	
 	
 	// 댓글 삭제 - 나의 글 여부 확인
 	public int checkMyReply(SqlSession session, Map<String, String> paramMap) {

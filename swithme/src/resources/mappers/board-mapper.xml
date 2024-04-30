@@ -73,6 +73,11 @@
 		DELETE FROM BOARD_REPLY WHERE BOARD_ID = #{boardId} AND REPLY_ID = #{replyId}
 	</delete>
 	
+	<select id="selectReplyCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) CNT FROM BOARD_REPLY 
+		WHERE BOARD_ID = ${boardId} 
+	</select>
+	
 	<select id="checkReplyLevel2" resultType="int" parameterType="map">
 	SELECT COUNT(*) CNT FROM BOARD_REPLY 
 	WHERE REPLY_REF = (SELECT REPLY_REF FROM BOARD_REPLY WHERE REPLY_ID=#{replyId} AND REPLY_LEVEL=1) 

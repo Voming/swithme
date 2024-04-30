@@ -49,7 +49,7 @@ public class BoardListController extends HttpServlet {
 		//client 가 페이지 지정하고 들어온게 있다면 그것에 맞게 현재페이지 바껴야함
 		
 		String pageNum = request.getParameter("page");
-//		1. 앞에서 string 값을 받아와서(페이지가 일단 값이 string으로 옴
+//		1. 앞에서 string 값을 받아와서(페이지가 일단 값이 string으로 옴 => url 통해 들어옴
 		if(pageNum != null && !pageNum.equals("")) {
 			
 			try {

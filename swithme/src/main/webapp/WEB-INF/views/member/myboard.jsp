@@ -11,10 +11,7 @@
 <title>나의 게시판</title>
 </head>
 <body>
-
-[[${loginInfo }]]
-
-	<div class="wrapper">
+		<div class="wrapper">
 		<div class="wrap-header">
 			<header>
 				<%@include file="/WEB-INF/views/basic/header.jsp"%>
@@ -39,8 +36,7 @@
 		
 		<div class="wrap-body">
 			<div class="pgroup">
-				<p class="p-first">자유 게시판</p>
-				<p class="p-sec">자유롭게 소통해요~</p>
+				<p class="p-first">나의 게시판</p>
 			</div>
 			<div>
 				<table>
@@ -60,40 +56,10 @@
 						<td>작성일</td>
 						<td style="text-align: center;">조회수</td>
 					</tr>
-					<c:choose>
-						<c:when test="${empty mapboardlist.boardlistdto}">
-	          				<tr>
-	          					<td colspan="6" style="border-bottom: none; text-align:center;">
-	          						게시글이 존재하지 않습니다.
-	          					</td>
-	          				</tr>
-	          			
-	          			</c:when>
-						<c:otherwise>
-							<tbody>
-								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
-									<tr class="tr-sec">
-										<td style="text-align: center;"><input type="checkbox" class="item"></td>
-										<td style="text-align: center;">${dto.boardId}</td>
-										<td><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
-										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
-										<!-- url에 있는 parameter 값 가지고 와서 쓸 수 있기 때문에 여기 있는 id는
-										BoardContentController에에서 쓰임 -->
-										<td>${dto.boardWriter}</td>
-										<td>${dto.writeTime}</td>
-										<td style="text-align: center;">${dto.readCount}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</c:otherwise>
-					</c:choose>
-<!-- 					<tr>
-						<td colspan="5">
-							<div class="btn">
-								<button type="button" class="btn write">글작성</button>
-							</div>
-						</td>
-					</tr> -->
+					<tbody class="tbody-my">
+						<tr class="tr-sec">
+						</tr>
+					</tbody>
 				</table>
 				<div class="btn">
 					<button type="button" class="btn delete">삭제</button>
@@ -142,10 +108,32 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	
+
+	<div class="wrap-footer">
+		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
+	</div>
+	
 	
 <script>
 $(loadedHandler);
+
 function loadedHandler() {
+	$.ajax({
+		url: "${pageContext.request.contextPath}/mypage/myboard",
+		method: "post",
+		data: { page : "1"},
+		dataType: 'json',
+		success: function(result){
+			console.log(result);
+			if(result == null) {
+				console.log("!!!!!글 없어요!!!!");
+			} 
+			displayboardWrap(result);
+		},
+		error: ajaxErrorHandler		
+	});
+	
+	
 	$("li.page").on("click", pageChangeHandler);
 	
 	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
@@ -159,14 +147,48 @@ function loadedHandler() {
  	/* checkbox 하나 눌렀을때  */
  	$(".item").on("click", itemCheckHandler); 
 	
-	/* 	$(".btn.delete").on("click", btnDeleteClickHandler); */
+	$(".btn.delete").on("click", btnDeleteClickHandler);
 }
+
+
+function displayboardWrap(datalist){
+	console.log(datalist.boardlistdto);
+	htmlVal = '';
+	if(datalist.length == 0){
+		htmlVal += `
+		<tr class="tr-sec">
+			<td colspan="6" style="border-bottom: none; text-align:center;">
+				게시글이 존재하지 않습니다.
+			</td>
+		</tr>
+		`;
+	} 
+	else{ 
+		for(var idx in datalist){
+			var dto = datalist[idx];
+			if(dto){
+				htmlVal += `	
+				<tr class="tr-sec">
+					<td style="text-align: center;"><input type="checkbox" class="item" name="checkitem"></td>
+					<td style="text-align: center;" class="boardId-txt">\${dto.boardId}</td>
+					<td onclick="location.href='${pageContext.request.contextPath }/board/content?id=\${dto.boardId }'">\${dto.title }</td>
+					<td>\${dto.boardWriter}</td>
+					<td>\${dto.writeTime}</td>
+					<td style="text-align: center;">\${dto.readCount}</td>
+				</tr>
+				`;
+			}
+		}
+	}
+	$(".tbody-my").html(htmlVal);
+				
+}
+
 
 function pageChangeHandler(){
-	location.href = "${pageContext.request.contextPath}/mypage/myboard?page="+$("input.pageHidden").val();
+	location.href = "${pageContext.request.contextPath}/mypage/myboard?page="+$(this).text();
 	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
 }
-
 
 
 function allCheckHandler(){
@@ -194,7 +216,6 @@ function itemCheckHandler(){
 
 /*마우스 올렸을 때 색 변환 */
 function pageMouseEnterHandler(){
-	console.error($(this).text());
 	$(this).children().css('color', 'white');
 }
 
@@ -203,6 +224,48 @@ function pageMouseLeaveHandler(){
 	$(this).children().css('color', 'black');
 }
 
+
+function btnDeleteClickHandler(){
+	var cbList = [];
+	let idx = 0;
+	var checkBoard = null;
+	$('input:checkbox[name=checkitem]').each(function (index) {
+		if($(this).is(":checked")==true){
+		  	console.log($(this).parent().parent().find('.boardId-txt').text());
+			var item = $(this).parent().parent().find('.boardId-txt').text();
+			checkBoard = new Object;
+			checkBoard.idx = idx;
+			checkBoard.boardId = item;
+			//idx, boardId라는 이름을 정함
+			cbList.push(checkBoard);
+			idx++;
+	    }
+	});
+	console.log(cbList);
+	
+	$.ajax({
+        type : "post",
+          url:"${pageContext.request.contextPath}/mypage/myboard/delete",
+          data: JSON.stringify(cbList),
+          contentType: "application/json; charset=utf-8",
+          success: function(result){
+        	  console.log(result);
+        	 loadboard(); 
+          },
+          error: ajaxErrorHandler
+      });
+	
+	
+}
+
+
+//ajax error 부분
+function ajaxErrorHandler (request, status, error){
+	//controller에서 전달해준 값 여기서 호출
+	alert("code: "+request.status + "\n" + "message: " 
+			+ request.responseText + "\n"
+			+ "error: "+error);
+}
 
 </script>	
 	

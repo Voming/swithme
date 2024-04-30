@@ -11,6 +11,8 @@
 <title>나의 게시판</title>
 </head>
 <body>
+
+[[${loginInfo }]]
 		<div class="wrapper">
 		<div class="wrap-header">
 			<header>
@@ -68,7 +70,7 @@
 
 			<div>
 				<ul>
-					<c:if test="${mapboardlist.startPageNum > 1}">
+					<c:if test="${startPageNum > 1}">
 						<li><a href="${pageContext.request.contextPath }/mypage/myboard?page=${mapboardlist.startPageNum-1 }"></a></li>
 						<!-- paging 처리 : form 태그 쓰지 않아도 controller로 값이 전달되고 전달된 값을 getParameter() 로 꺼내 쓰고 service로 보냄 -->
 						<!-- ? 뒤에 page는 name이고 = 뒤가 value 라서 value 로 이동해줘 라는 뜻
@@ -118,21 +120,10 @@
 $(loadedHandler);
 
 function loadedHandler() {
-	$.ajax({
-		url: "${pageContext.request.contextPath}/mypage/myboard",
-		method: "post",
-		data: { page : "1"},
-		dataType: 'json',
-		success: function(result){
-			console.log(result);
-			if(result == null) {
-				console.log("!!!!!글 없어요!!!!");
-			} 
-			displayboardWrap(result);
-		},
-		error: ajaxErrorHandler		
-	});
+
+	console.log('${dataObj.startPageNum}');
 	
+	console.log( "로그인아이디 : " + '${loginInfo.memId}');
 	
 	$("li.page").on("click", pageChangeHandler);
 	
@@ -148,49 +139,19 @@ function loadedHandler() {
  	$(".item").on("click", itemCheckHandler); 
 	
 	$(".btn.delete").on("click", btnDeleteClickHandler);
+	
+	//게시글 삭제 이후 남은 게시글 출력
+	loadboard();
 }
 
 
-function displayboardWrap(datalist){
-	console.log(datalist.boardlistdto);
-	htmlVal = '';
-	if(datalist.length == 0){
-		htmlVal += `
-		<tr class="tr-sec">
-			<td colspan="6" style="border-bottom: none; text-align:center;">
-				게시글이 존재하지 않습니다.
-			</td>
-		</tr>
-		`;
-	} 
-	else{ 
-		for(var idx in datalist){
-			var dto = datalist[idx];
-			if(dto){
-				htmlVal += `	
-				<tr class="tr-sec">
-					<td style="text-align: center;"><input type="checkbox" class="item" name="checkitem"></td>
-					<td style="text-align: center;" class="boardId-txt">\${dto.boardId}</td>
-					<td onclick="location.href='${pageContext.request.contextPath }/board/content?id=\${dto.boardId }'">\${dto.title }</td>
-					<td>\${dto.boardWriter}</td>
-					<td>\${dto.writeTime}</td>
-					<td style="text-align: center;">\${dto.readCount}</td>
-				</tr>
-				`;
-			}
-		}
-	}
-	$(".tbody-my").html(htmlVal);
-				
-}
-
-
+//밑에 페이지 눌렀을 때 페이지 바뀌는 것
 function pageChangeHandler(){
 	location.href = "${pageContext.request.contextPath}/mypage/myboard?page="+$(this).text();
 	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
 }
 
-
+//체크 박스 전체 선택
 function allCheckHandler(){
     var checkall = $("#allCheck");
     var itemcheck = $(".item");
@@ -202,8 +163,8 @@ function allCheckHandler(){
 
 }
 
+//체크 박스 하나 클릭 시 전체 선택 취소
 function itemCheckHandler(){
-	
  	var itemcheck = $(".item");
 
 	if($(".item:checked").length < $(".item").length ) {
@@ -225,21 +186,15 @@ function pageMouseLeaveHandler(){
 }
 
 
+//게시글 삭제 - ajax로 list형태를 보냄
 function btnDeleteClickHandler(){
 	var cbList = [];
-	let idx = 0;
-	var checkBoard = null;
-	$('input:checkbox[name=checkitem]').each(function (index) {
-		if($(this).is(":checked")==true){
-		  	console.log($(this).parent().parent().find('.boardId-txt').text());
-			var item = $(this).parent().parent().find('.boardId-txt').text();
-			checkBoard = new Object;
-			checkBoard.idx = idx;
-			checkBoard.boardId = item;
-			//idx, boardId라는 이름을 정함
-			cbList.push(checkBoard);
-			idx++;
-	    }
+	//배열로 선언
+	$('input[name=checkitem]:checked').each(function (index) {
+		var item = $(this).parent().parent().find('.boardId-txt').text();
+	  	console.log(item);
+		cbList.push(item);
+		//cbList에 push를 통해 item 집어넣기
 	});
 	console.log(cbList);
 	
@@ -255,9 +210,67 @@ function btnDeleteClickHandler(){
           error: ajaxErrorHandler
       });
 	
-	
 }
 
+//나의 게시글에서 삭제한 게시글을 조회하는 함수
+function loadboard(){
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/mypage/myboard",
+		method: "post",
+		data: { page : "1"},
+		/* 여기서 memId를 데이터로 안들고 가는 이유는 이미 controller에서 로그인한 정보의 memId를 꺼내서 가지고 가고있음 */
+		dataType: 'json',
+		success: function(result){
+			console.log(result);
+			if(result == null) {
+				console.log("게시글 조회 실패");
+			} 
+			displayboardWrap(result);
+		},
+		error: ajaxErrorHandler		
+	});
+}
+
+
+
+//남은 게시글 출력하는 함수
+function displayboardWrap(dataObj){
+	console.log("dataObj : " + dataObj);
+	//console창 찍어보면 object 형태( { } 가 있음)
+	console.log("dataObj.boardlistdto : " + dataObj.boardlistdto);
+	
+	htmlVal = '';
+	if(dataObj.boardlistdto.length == 0){
+		htmlVal += `
+		<tr class="tr-sec">
+			<td colspan="6" style="border-bottom: none; text-align:center;">
+				게시글이 존재하지 않습니다.
+			</td>
+		</tr>
+		`;
+	} 
+	else{ 
+		for(var idx in dataObj.boardlistdto){
+			var dto = dataObj.boardlistdto[idx];
+			if(dto){
+				htmlVal += `	
+				<tr class="tr-sec">
+					<td style="text-align: center;"><input type="checkbox" class="item" name="checkitem"></td>
+					<td style="text-align: center;" class="boardId-txt">\${dto.boardId}</td>
+					<td onclick="location.href='${pageContext.request.contextPath }/board/content?id=\${dto.boardId }'">\${dto.title }</td>
+					<td>\${dto.boardWriter}</td>
+					<td>\${dto.writeTime}</td>
+					<td style="text-align: center;">\${dto.readCount}</td>
+				</tr>
+				`;
+			}
+		}
+	}
+	$(".tbody-my").html(htmlVal);
+	
+	console.log(dataObj.currentPage);
+}
 
 //ajax error 부분
 function ajaxErrorHandler (request, status, error){

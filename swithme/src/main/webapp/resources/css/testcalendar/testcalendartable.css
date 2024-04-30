@@ -11,7 +11,7 @@
 
 .wrap-events table {
 	width: 960px;
-	border-top: 1px solid #444444;
+	border-top: 2px solid var(--color_gray_2);
 	border-collapse: collapse;
 	text-align: center;
 	margin: 15px 0 30px 0;
@@ -22,7 +22,7 @@
 }
 
 .wrap-events th, td {
-	border-bottom: 1px solid #444444;
+	border-bottom: 1px solid var(--color_gray_2);
 	padding: 10px;
 	font-family: "IM_Hyemin-Regular";
 	font-size: var(--font5);

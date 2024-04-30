@@ -80,7 +80,7 @@
 								end : dto.docexamdt,
 								color : '#8066FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						} 
 						if (dto.docpassdt) {
@@ -110,7 +110,7 @@
 								end : dto.pracexamenddt,
 								color : '#8066FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						}
 						if (dto.docregstartdtEx) {
@@ -155,7 +155,7 @@
 								end : dto.docexamdt,
 								color : '#6680FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						} 
 						if (dto.docpassdt) {
@@ -185,7 +185,7 @@
 								end : dto.pracexamenddt,
 								color : '#6680FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						}
 						if (dto.docregstartdtEx) {
@@ -208,7 +208,7 @@
 								title : dto.description + "필기접수",
 								start : dto.docregstartdt,
 								end : dto.docregenddt,
-								color : '#DDFFDD', //3
+								color : '#FFDFF4', //3
 								 
 								textColor : 'black'
 								
@@ -219,7 +219,7 @@
 								title : dto.description + "필기접수 추가일정",
 								start : dto.docregstartdtEx,
 								end : dto.docregenddtEx,
-								color : '#DDFFDD', //3
+								color : '#FFDFF4', //3
 								 
 								textColor : 'black'
 							});
@@ -229,9 +229,9 @@
 								title : dto.description + "필기시험",
 								start : dto.docexamdt,
 								end : dto.docexamdt,
-								color : '#AED581', //1
+								color : '#EE99FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						} 
 						if (dto.docpassdt) {
@@ -239,7 +239,7 @@
 								title : dto.description + "필기시험 발표",
 								start : dto.docpassdt,
 								end : dto.docpassdt,
-								color : '#C5E1A5', //2
+								color : '#FFB3E5', //2
 								 
 								textColor : 'black'
 							});
@@ -249,7 +249,7 @@
 								title : dto.description + "실기접수",
 								start : dto.pracregstartdt,
 								end : dto.pracregenddt,
-								color : '#DDFFDD', //3
+								color : '#FFDFF4', //3
 								 
 								textColor : 'black'
 							});
@@ -259,9 +259,9 @@
 								title : dto.description + "실기시험",
 								start : dto.pracexamstartdt,
 								end : dto.pracexamenddt,
-								color : '#AED581', //1
+								color : '#EE99FF', //1
 								 
-								textColor : 'black'
+								textColor : 'white'
 							});
 						}
 						if (dto.docregstartdtEx) {
@@ -269,7 +269,7 @@
 								title : dto.description + "합격자 발표",
 								start : dto.pracpassdt,
 								end : dto.pracpassdt,
-								color : '#C5E1A5',//2
+								color : '#FFB3E5',//2
 								 
 								textColor : 'black'
 							});
@@ -288,7 +288,14 @@
 		
 						events:eventsArr,
 						trigger: 'hover',
-						expandRows: true 
+						expandRows: true ,
+						eventDataTransform: function(event) {    
+							//end 하루 더 안나오는거 해결
+							if(event.allDay) {                                                                                                                                               
+								event.end = moment(event.end).add(1, 'days')                                                                                                                 
+							}
+							return event;  
+						}   
 					});
 					calendar.render();
 				},

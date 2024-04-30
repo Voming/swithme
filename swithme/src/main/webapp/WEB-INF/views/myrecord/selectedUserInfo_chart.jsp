@@ -66,9 +66,7 @@ url: "${pageContext.request.contextPath }/selecteduser/info.ajax"
 ,dataType:"json"
 ,success: function(resultMap){
 	console.log("---->>>>  resultMap");
-	console.log(resultMap);
-	console.log(resultMap.dayStudyTimeList);
-	console.log(resultMap.fourdayStudyTimeList);
+	//console.log(resultMap);
 	displayTodayStudyTime(resultMap.dayStudyTimeList);
 	displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
 	displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
@@ -166,8 +164,8 @@ function displayFourdayStudyTimeChart (result){
 				recordDateList[j] = diffTimeByDayList[j].onlyDate;
 			}
 		}
-		console.log("subData");
-		console.log(subData);
+		//console.log("subData");
+		//console.log(subData);
 		fourDifftimeList[i] = {
 		        label: result[i].subjectName,
 		        data:subData,
@@ -176,12 +174,12 @@ function displayFourdayStudyTimeChart (result){
 		        borderWidth:2
 		};
 	}
-	console.log("4일치 데이터 뽑아옴");
-	console.log(foursubejctNameList);
-	console.log(foursubejctNameList);
-	console.log(fourDifftimeList);
-	console.log(foursubjectColorList);
-	console.log(recordDateList);
+	//console.log("4일치 데이터 뽑아옴");
+	//console.log(foursubejctNameList);
+	//console.log(foursubejctNameList);
+	//console.log(fourDifftimeList);
+	//console.log(foursubjectColorList);
+	//console.log(recordDateList);
 	/* 	var data = {
 			 	labels:  subejctNameList,
 				datasets: [{
@@ -254,8 +252,8 @@ function displayFourdayStudyTimeChart (result){
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						console.log("----- parsed !!     ");
-						console.log(context.parsed.y);
+						//console.log("----- parsed !!     ");
+						//console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -321,8 +319,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -391,8 +387,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -460,8 +454,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -551,8 +543,6 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						console.log("----- parsed !!     ");
-						console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);

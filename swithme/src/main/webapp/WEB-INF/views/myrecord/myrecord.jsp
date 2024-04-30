@@ -1,6 +1,4 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
-<%@page import="java.util.List"%>
-<%@page import="swithme.model.myrecord.dto.RecordCalendarDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -25,35 +23,7 @@
 <script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			headerToolbar:{
-				left:'dayGridMonth,timeGridDay,timeGridWeek' ,
-				center:'title' ,
-				right:'today prev,next' 				
-			},
-			selectable : true,
-			droppable : true,
-			editable : true,
-			events:[
-				<%List<RecordCalendarDto> calendarList = (List<RecordCalendarDto>)request.getAttribute("calendarList");%>
-				<%if (calendarList != null) {%>
-	            <%for (RecordCalendarDto vo : calendarList) {%>
-	            {
-	            	title : '<%=vo.getSubjectName()%>',
-	                start : '<%=vo.getRecordStart()%>',
-	                end : '<%=vo.getRecordEnd()%>',
-	           		color : chooseColor('<%=vo.getSubjectColor() %>')
-	             },
-				<%}  // for
-				} // if %>
-			]
-		});
-		calendar.render();
-	});
-	
+
 </script>
 
 
@@ -300,9 +270,10 @@
 let subjectName;
 let subjectId;
 let subjectColor;
-$(loadedHandler);
-function loadedHandler() {
-
+$(document).ready(function(){  
+	console.log("myrecord - document ready !!!!");
+	myrecord_chart_jsp_loadedHandler();
+	
 	$("#start").on("click", startClickHandler);
 	$("#stop").on("click", stopClickHandler);
 
@@ -325,7 +296,7 @@ function loadedHandler() {
 	$(".btn.modify-done").on("click", btnModifyDoneSubjectClickHandler);
 	/* 과목 삭제하기 */
 	$(".btn.remove-sub").on("click", btnRemoveSubjectClickHandler);
-}
+});
 		
 		/*과목 이름 클릭시 해당과목이름 화면에 띄움, subjectName 받아오기 */
 /* 		

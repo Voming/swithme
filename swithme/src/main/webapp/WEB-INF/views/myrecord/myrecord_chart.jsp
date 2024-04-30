@@ -36,12 +36,13 @@ const data = {
 		};
 */
  -->  
-    
+
 <script>
-$(document).ready(function(){
+function myrecord_chart_jsp_loadedHandler(){  
+	console.log("myrecord_chart - document ready!!!!");
 	todayStudyTime();
 	//fourdayStudyTime();
-});
+};
 let subejctNameList =[];
 let recordTimeList=[];
 let subjectColorList=[];
@@ -95,24 +96,25 @@ var colNum2;
 //당일 과목별 학습 todayStudyTime
 function todayStudyTime(){
 $.ajax({
-url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
-,method:"post"
-,error : ajaxErrorHandler
-//,data : {numnum : numnum} //data없인 안되는걸까??
-,dataType:"json"
-,success: function(resultMap){
-	console.log("---->>>>  resultMap");
-	console.log(resultMap);
-	console.log(resultMap.dayStudyTimeList);
-	console.log(resultMap.fourdayStudyTimeList);
-	displayTodayStudyTime(resultMap.dayStudyTimeList);
-	displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
-	displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
-	displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
-	displayAccStudyTime(resultMap.accStudyTime);
-	displayMonthStudyTime(resultMap.monthStudyTime);
-	displayMonthBySubject(resultMap.monthBySubject);
-	
+	url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
+	,method:"post"
+	,error : ajaxErrorHandler
+	//,data : {numnum : numnum} //data없인 안되는걸까??
+	,dataType:"json"
+	,success: function(resultMap){
+		console.log("---->>>>  resultMap");
+		console.log(resultMap);
+		console.log("---->>>>>>>>>>>>>  calResult");
+		console.log(resultMap.byCalendar);
+		displayTodayStudyTime(resultMap.dayStudyTimeList);
+		displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
+		displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
+		displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
+		displayAccStudyTime(resultMap.accStudyTime);
+		displayMonthStudyTime(resultMap.monthStudyTime);
+		displayMonthBySubject(resultMap.monthBySubject);
+		displayByCalendar(resultMap.byCalendar);  //달력
+		
 	}  // successcbf
 });  // ajax
 }  // f
@@ -689,4 +691,47 @@ function displayMonthBySubject(result){
 	}//options
 	});
 }	
+/**달력********************************************************/	
+let titlelist=[];
+let startlist=[];
+let endlist=[];
+let colorlist=[];
+
+function displayByCalendar(bycalendar){
+	console.log("function안에 ㅋ랠린더");
+	//console.log(bycalendar);//이것은 달력값을 list로 가져온 것입니다
+	console.log(bycalendar[0].recordEnd);//이것은 달력값을 list로 가져온 것입니다
+	//흠...가능할지도
+	console.log("@@@@@@@@@@@@@@@@@@@");
+	var eventDataArr = createEventArray(bycalendar);
+	console.log(eventDataArr);
+	
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		headerToolbar:{
+			left:'dayGridMonth,timeGridDay,timeGridWeek' ,
+			center:'title' ,
+			right:'today prev,next' 				
+		},
+		selectable : true,
+		droppable : true,
+		editable : true,
+		events: eventDataArr
+	});
+	calendar.render();
+}
+function createEventArray(bycalendar) {
+    var events = [];
+    bycalendar.forEach(function(eventData) {
+        var event = {
+            title: eventData.subjectName,
+            start: new Date(eventData.recordStart), // recordStart가 날짜 문자열일 경우
+            end: new Date(eventData.recordEnd), // recordEnd가 날짜 문자열일 경우
+            color: chooseColor(eventData.subjectColor)
+        };
+        events.push(event);
+    });
+    return events;
+}
 </script>

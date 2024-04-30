@@ -34,6 +34,8 @@
 			droppable : true,
 			editable : true,
 			events:[
+				
+				
 				<%List<RecordCalendarDto> calendarList = (List<RecordCalendarDto>)request.getAttribute("calendarList");%>
 				<%if (calendarList != null) {%>
 	            <%for (RecordCalendarDto vo : calendarList) {%>
@@ -45,6 +47,7 @@
 	             },
 				<%}  // for
 				} // if %>
+				
 			]
 		});
 		calendar.render();
@@ -82,6 +85,7 @@
 				<div class="grid">
 					<div class="grid-item ">									
 						<p class="user-name"> ${memId}</p>
+						<p class="user-resolution">유저의 각오 </p>
 					</div>
 					<div class="grid-item">
 						<p>시간기록을 종료한 값만 통계에 반영됩니다</p>

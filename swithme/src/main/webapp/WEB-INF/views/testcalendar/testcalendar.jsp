@@ -17,11 +17,28 @@
 </head>
 <body>
 	<script>
+	var testevent = [{
+		allDay:true,
+		color:"#8066FF",
+		end:"2024-04-22",
+		start:"2024-04-21",
+		textColor:"black",
+		title:"기술사(2024년도 제132회)필기접수"
+		}
+	];
 		$(loadedHandler);
 
 		function loadedHandler() {
 			//달력에 들어갈 이벤트 내용 가져오기
 			$(".btn.update").on("click", btnUpdateClickHandler);
+			
+			// 탭
+            $('.test-tab-nav a').click(function () {
+                $('.test-tab-content > div').hide().filter(this.hash).fadeIn();
+                $('.test-tab-nav a').removeClass('active');
+                $(this).addClass('active');
+                return false;
+            }).filter(':eq(0)').click();
 
 			//달력 값 받아오기
 			var eventsArr = [];
@@ -31,17 +48,18 @@
 				method : "post",
 				dataType : "json",
 				success : function(param) {
-					var data1 = param.prolist;
 					//1 : 기술사 2: 기능장 3: 기사 산업기사
 					//기술사
+					var data1 = param.prolist;
+					wrapeventdisplay1(data1);
 					$.each(data1, function(index, dto) {
 						if (dto.docregstartdt) {
 							eventsArr.push({
 								title : dto.description + "필기접수",
 								start : dto.docregstartdt,
 								end : dto.docregenddt,
-								color : '#8066FF',
-								allDay : true,
+								color : '#DDCCFF', //3
+								 
 								textColor : 'black'
 							});
 						} 
@@ -50,8 +68,28 @@
 								title : dto.description + "필기접수 추가일정",
 								start : dto.docregstartdtEx,
 								end : dto.docregenddtEx,
-								color : '#BF80FF',
-								allDay : true,
+								color : '#DDCCFF', //3
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docexamdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험",
+								start : dto.docexamdt,
+								end : dto.docexamdt,
+								color : '#8066FF', //1
+								 
+								textColor : 'black'
+							});
+						} 
+						if (dto.docpassdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험 발표",
+								start : dto.docpassdt,
+								end : dto.docpassdt,
+								color : '#BF80FF', //2
+								 
 								textColor : 'black'
 							});
 						}
@@ -59,33 +97,44 @@
 							eventsArr.push({
 								title : dto.description + "실기접수",
 								start : dto.pracregstartdt,
-								end : dto.pracregenddt,
-								color : '#8066FF',
-								allDay : true,
+								end : dto.pracregenddt, 
+								color : '#DDCCFF', //3
+								 
 								textColor : 'black'
 							});
 						} 
 						if (dto.docregstartdtEx) {
 							eventsArr.push({
-								title : dto.description + "실기접수 추가일정",
-								start : dto.pracregstartdtEx,
-								end : dto.pracregenddtEx,
-								color : '#BF80FF',
-								allDay : true,
+								title : dto.description + "실기시험",
+								start : dto.pracexamstartdt,
+								end : dto.pracexamenddt,
+								color : '#8066FF', //1
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "합격자 발표",
+								start : dto.pracpassdt,
+								end : dto.pracpassdt,
+								color : '#BF80FF', //2
+								 
 								textColor : 'black'
 							});
 						}
 					})
 					//기능장
 					var data2 = param.masterlist;
+					wrapeventdisplay2(data2);
 					$.each(data2, function(index, dto) {
 						if (dto.docregstartdt) {
 							eventsArr.push({
 								title : dto.description + "필기접수",
 								start : dto.docregstartdt,
 								end : dto.docregenddt,
-								color : '#6680FF',
-								allDay : true,
+								color : '#CCDDFF', //3
+								 
 								textColor : 'black'
 							});
 						} 
@@ -94,8 +143,28 @@
 								title : dto.description + "필기접수 추가일정",
 								start : dto.docregstartdtEx,
 								end : dto.docregenddtEx,
-								color : '#99BBFF',
-								allDay : true,
+								color : '#CCDDFF', //3
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docexamdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험",
+								start : dto.docexamdt,
+								end : dto.docexamdt,
+								color : '#6680FF', //1
+								 
+								textColor : 'black'
+							});
+						} 
+						if (dto.docpassdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험 발표",
+								start : dto.docpassdt,
+								end : dto.docpassdt,
+								color : '#99BBFF', //2
+								 
 								textColor : 'black'
 							});
 						}
@@ -104,32 +173,43 @@
 								title : dto.description + "실기접수",
 								start : dto.pracregstartdt,
 								end : dto.pracregenddt,
-								color : '#6680FF',
-								allDay : true,
+								color : '#CCDDFF', //3
+								 
 								textColor : 'black'
 							});
 						} 
 						if (dto.docregstartdtEx) {
 							eventsArr.push({
-								title : dto.description + "실기접수 추가일정",
-								start : dto.pracregstartdtEx,
-								end : dto.pracregenddtEx,
-								color : '#99BBFF',
-								allDay : true,
+								title : dto.description + "실기시험",
+								start : dto.pracexamstartdt,
+								end : dto.pracexamenddt,
+								color : '#6680FF', //1
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "합격자 발표",
+								start : dto.pracpassdt,
+								end : dto.pracpassdt,
+								color : '#99BBFF', //2
+								 
 								textColor : 'black'
 							});
 						}
 					})
 					//기사 산업기사
 					var data3 = param.indlist;
+					wrapeventdisplay3(data3);					
 					$.each(data3, function(index, dto) {
 						if (dto.docregstartdt) {
 							eventsArr.push({
 								title : dto.description + "필기접수",
 								start : dto.docregstartdt,
 								end : dto.docregenddt,
-								color : '#EE99FF',
-								allDay : true,
+								color : '#DDFFDD', //3
+								 
 								textColor : 'black'
 								
 							});
@@ -139,8 +219,28 @@
 								title : dto.description + "필기접수 추가일정",
 								start : dto.docregstartdtEx,
 								end : dto.docregenddtEx,
-								color : '#FFB3E5',
-								allDay : true,
+								color : '#DDFFDD', //3
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docexamdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험",
+								start : dto.docexamdt,
+								end : dto.docexamdt,
+								color : '#AED581', //1
+								 
+								textColor : 'black'
+							});
+						} 
+						if (dto.docpassdt) {
+							eventsArr.push({
+								title : dto.description + "필기시험 발표",
+								start : dto.docpassdt,
+								end : dto.docpassdt,
+								color : '#C5E1A5', //2
+								 
 								textColor : 'black'
 							});
 						}
@@ -149,25 +249,33 @@
 								title : dto.description + "실기접수",
 								start : dto.pracregstartdt,
 								end : dto.pracregenddt,
-								color : '#EE99FF',
-								allDay : true,
+								color : '#DDFFDD', //3
+								 
 								textColor : 'black'
-								
 							});
 						} 
 						if (dto.docregstartdtEx) {
 							eventsArr.push({
-								title : dto.description + "실기접수 추가일정",
-								start : dto.pracregstartdtEx,
-								end : dto.pracregenddtEx,
-								color : '#FFB3E5',
-								allDay : true,
+								title : dto.description + "실기시험",
+								start : dto.pracexamstartdt,
+								end : dto.pracexamenddt,
+								color : '#AED581', //1
+								 
+								textColor : 'black'
+							});
+						}
+						if (dto.docregstartdtEx) {
+							eventsArr.push({
+								title : dto.description + "합격자 발표",
+								start : dto.pracpassdt,
+								end : dto.pracpassdt,
+								color : '#C5E1A5',//2
+								 
 								textColor : 'black'
 							});
 						}
 					})
 				
-					
 					//달력 세팅
 					var calendarEl = document.getElementById('calendar');
 					var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -181,16 +289,128 @@
 						events:eventsArr,
 						trigger: 'hover',
 						expandRows: true 
-						
-						
 					});
 					calendar.render();
-					
-					//테이블 세팅
 				},
 				error : ajaxErrorHandler
 			});
 		}
+		
+		//일정 테이블 만들기
+		function wrapeventdisplay1(datalist){
+			console.log(datalist);
+			htmlVal = '';
+			for(var idx in datalist){
+				var testinfo = datalist[idx];
+				if(!testinfo.docregstartdtEx){
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}else{
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>
+								<p>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</p>
+								<p>빈자리 접수</p>
+								<p>\${testinfo.docregstartdtEx} ~ \${testinfo.docregenddtEx}</p>
+							 </td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}
+			}
+			$(".tb-1").html(htmlVal);
+		}
+		
+		function wrapeventdisplay2(datalist){
+			console.log(datalist);
+			htmlVal = '';
+			for(var idx in datalist){
+				var testinfo = datalist[idx];
+				if(!testinfo.docregstartdtEx){
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}else{
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>
+								<p>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</p>
+								<p>빈자리 접수</p>
+								<p>\${testinfo.docregstartdtEx} ~ \${testinfo.docregenddtEx}</p>
+							 </td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}
+			}
+			$(".tb-2").html(htmlVal);
+		}
+		function wrapeventdisplay3(datalist){
+			console.log(datalist);
+			htmlVal = '';
+			for(var idx in datalist){
+				var testinfo = datalist[idx];
+				if(!testinfo.docregstartdtEx){
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}else{
+					htmlVal += `	
+						<tr>
+							<td>\${testinfo.description}</td>
+							<td>
+								<p>\${testinfo.docregstartdt} ~ \${testinfo.docregenddt}</p>
+								<p>빈자리 접수</p>
+								<p>\${testinfo.docregstartdtEx} ~ \${testinfo.docregenddtEx}</p>
+							 </td>
+							<td>\${testinfo.docexamdt}</td>
+							<td>\${testinfo.docpassdt}</td>
+							<td>\${testinfo.pracregstartdt} ~ \${testinfo.pracregenddt}</td>
+							<td>\${testinfo.pracexamstartdt} ~ \${testinfo.pracexamenddt}</td>
+							<td>\${testinfo.pracpassdt}</td>
+						</tr>
+						`;
+				}
+			}
+			$(".tb-3").html(htmlVal);
+		}
+		
+		
 
 		function btnUpdateClickHandler() {
 			// 시험 내용 업데이트 하기
@@ -233,47 +453,38 @@
 				</div>
 			</div>
 			<div class="wrap-events">
-				<table class="tb-events">
-					<thead>
-						<tr>
-							<th>시행회차</th>
-							<th>필기시험 접수</th>
-							<th>필기시험</th>
-							<th>필기시험 발표</th>
-							<th>실기시험 접수</th>
-							<th>실기시험</th>
-							<th>실기시험 발표</th>
-						</tr>
-					</thead>
-					<tbody>
-				
-						<tr>
-							<td>Lorem</td>
-							<td>Ipsum</td>
-							<td>Dolor</td>
-						</tr>
-						<tr>
-							<td>Lorem</td>
-							<td>Ipsum</td>
-							<td>Dolor</td>
-						</tr>
-						<tr>
-							<td>Lorem</td>
-							<td>Ipsum</td>
-							<td>Dolor</td>
-						</tr>
-						<tr>
-							<td>Lorem</td>
-							<td>Ipsum</td>
-							<td>Dolor</td>
-						</tr>
-						<tr>
-							<td>Lorem</td>
-							<td>Ipsum</td>
-							<td>Dolor</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="tab-body">
+					<p class="all-txt">상세일정</p>
+					<ul class="test-tab-nav">
+						<li><a href="#tab01">기술사</a></li>
+						<li><a href="#tab02">기능장</a></li>
+						<li><a href="#tab03">기사 산업기사</a></li>
+					</ul>
+					<div class="test-tab-content">
+						<c:forEach var="i" begin="1" end="3" step="1">
+							<div id="tab0${i}">
+								<table class="tb-events">
+									<thead>
+										<tr>
+											<th>시행회차</th>
+											<th>필기시험 접수</th>
+											<th>필기시험</th>
+											<th>필기시험 발표</th>
+											<th>실기시험 접수</th>
+											<th>실기시험</th>
+											<th>합격자 발표</th>
+										</tr>
+									</thead>
+									<tbody class="tb-${i}">
+									</tbody>
+								</table>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="wrap-link">
+						<button onclick="location.href='https://www.q-net.or.kr/crf021.do?id=crf02101&gSite=Q&gId=&scheType=01'">시험 상세정보 보러 이동하기</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

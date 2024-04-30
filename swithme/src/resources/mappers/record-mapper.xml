@@ -120,7 +120,6 @@ select SUBJECT_NAME, RECORD_START , RECORD_END ,SUBJECT_COLOR
 from record join SUBJECT on RECORD_SUBJECT_ID=SUBJECT_ID WHERE RECORD_MEM_ID= #{memId} order by RECORD_START
 </select>
 
-
 <select id="selectOne" parameterType="int" resultType="RecordDto">
 SELECT * FROM RECORD WHERE RECORD_ID=#{recordId}
 </select>

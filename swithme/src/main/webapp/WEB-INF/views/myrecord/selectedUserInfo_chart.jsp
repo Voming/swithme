@@ -1,48 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!--  샘플
-/* 도넛차트
-const data = {
-		  labels: [
-		    'Red',
-		    'Blue',
-		    'Yellow'
-		    ,'ㅇㅇ'
-		    ,'ㅁㅇㄴㄹ'
-		  ],
-		  datasets: [{
-		    label: 'My First Dataset',
-		    data: [300, 50, 100,12,34],
-		    backgroundColor: [
-		      'rgb(255, 99, 132)',
-		      'rgb(54, 162, 235)',
-		      'rgb(255, 205, 86)',
-		      'rgb(255, 205, 86)',
-		      'rgb(255, 205, 86)'
-		    ],
-		    hoverOffset: 4
-		  }]
-		};
-*/
-	// 그래프 옵션
-/*
-	var options = {
-		scales : {
-
-           x: {
-               type: 'category',
-               }
-           }
-		};
-*/
- -->  
-
+    <!--  유저용 -->  
+    
 <script>
-function myrecord_chart_jsp_loadedHandler(){  
-	console.log("myrecord_chart - document ready!!!!");
+$(document).ready(function(){
 	todayStudyTime();
-	//fourdayStudyTime();
-};
+});
 let subejctNameList =[];
 let recordTimeList=[];
 let subjectColorList=[];
@@ -96,25 +59,22 @@ var colNum2;
 //당일 과목별 학습 todayStudyTime
 function todayStudyTime(){
 $.ajax({
-	url: "${pageContext.request.contextPath }/myrecord/todayrecord.ajax"
-	,method:"post"
-	,error : ajaxErrorHandler
-	//,data : {numnum : numnum} //data없인 안되는걸까??
-	,dataType:"json"
-	,success: function(resultMap){
-		console.log("---->>>>  resultMap");
-		console.log(resultMap);
-		console.log("---->>>>>>>>>>>>>  calResult");
-		console.log(resultMap.byCalendar);
-		displayTodayStudyTime(resultMap.dayStudyTimeList);
-		displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
-		displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
-		displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
-		displayAccStudyTime(resultMap.accStudyTime);
-		displayMonthStudyTime(resultMap.monthStudyTime);
-		displayMonthBySubject(resultMap.monthBySubject);
-		displayByCalendar(resultMap.byCalendar);  //달력
-		
+url: "${pageContext.request.contextPath }/selecteduser/info.ajax"
+,method:"post"
+,error : ajaxErrorHandler
+//,data : {memId:memId} //TODO 
+,dataType:"json"
+,success: function(resultMap){
+	console.log("---->>>>  resultMap");
+	//console.log(resultMap);
+	displayTodayStudyTime(resultMap.dayStudyTimeList);
+	displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
+	displayThirtydayStudyTime(resultMap.thirtydayStudyTime);
+	displayThirtyDayStudyTimeBySubjectChart(resultMap.thirtydayStudyTimeBySubject);
+	displayAccStudyTime(resultMap.accStudyTime);
+	displayMonthStudyTime(resultMap.monthStudyTime);
+	displayMonthBySubject(resultMap.monthBySubject);
+	
 	}  // successcbf
 });  // ajax
 }  // f
@@ -204,8 +164,8 @@ function displayFourdayStudyTimeChart (result){
 				recordDateList[j] = diffTimeByDayList[j].onlyDate;
 			}
 		}
-		console.log("subData");
-		console.log(subData);
+		//console.log("subData");
+		//console.log(subData);
 		fourDifftimeList[i] = {
 		        label: result[i].subjectName,
 		        data:subData,
@@ -214,12 +174,12 @@ function displayFourdayStudyTimeChart (result){
 		        borderWidth:2
 		};
 	}
-	console.log("4일치 데이터 뽑아옴");
-	console.log(foursubejctNameList);
-	console.log(foursubejctNameList);
-	console.log(fourDifftimeList);
-	console.log(foursubjectColorList);
-	console.log(recordDateList);
+	//console.log("4일치 데이터 뽑아옴");
+	//console.log(foursubejctNameList);
+	//console.log(foursubejctNameList);
+	//console.log(fourDifftimeList);
+	//console.log(foursubjectColorList);
+	//console.log(recordDateList);
 	/* 	var data = {
 			 	labels:  subejctNameList,
 				datasets: [{
@@ -292,8 +252,8 @@ function displayFourdayStudyTimeChart (result){
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						console.log("----- parsed !!     ");
-						console.log(context.parsed.y);
+						//console.log("----- parsed !!     ");
+						//console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -359,8 +319,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -429,8 +387,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -498,8 +454,6 @@ options:{
 					if (chartLabel) {
 						chartLabel +=' : ';
 					}
-					console.log("----- parsed !!     ");
-					console.log(context.parsed.y);
                     var charthours = parseInt(context.parsed.y/(60*60));
                     var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                     var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -589,8 +543,6 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						console.log("----- parsed !!     ");
-						console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -691,47 +643,4 @@ function displayMonthBySubject(result){
 	}//options
 	});
 }	
-/**달력********************************************************/	
-let titlelist=[];
-let startlist=[];
-let endlist=[];
-let colorlist=[];
-
-function displayByCalendar(bycalendar){
-	console.log("function안에 ㅋ랠린더");
-	//console.log(bycalendar);//이것은 달력값을 list로 가져온 것입니다
-	console.log(bycalendar[0].recordEnd);//이것은 달력값을 list로 가져온 것입니다
-	//흠...가능할지도
-	console.log("@@@@@@@@@@@@@@@@@@@");
-	var eventDataArr = createEventArray(bycalendar);
-	console.log(eventDataArr);
-	
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView : 'dayGridMonth',
-		headerToolbar:{
-			left:'dayGridMonth,timeGridDay,timeGridWeek' ,
-			center:'title' ,
-			right:'today prev,next' 				
-		},
-		selectable : true,
-		droppable : true,
-		editable : true,
-		events: eventDataArr
-	});
-	calendar.render();
-}
-function createEventArray(bycalendar) {
-    var events = [];
-    bycalendar.forEach(function(eventData) {
-        var event = {
-            title: eventData.subjectName,
-            start: new Date(eventData.recordStart), // recordStart가 날짜 문자열일 경우
-            end: new Date(eventData.recordEnd), // recordEnd가 날짜 문자열일 경우
-            color: chooseColor(eventData.subjectColor)
-        };
-        events.push(event);
-    });
-    return events;
-}
 </script>

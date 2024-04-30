@@ -1,7 +1,9 @@
 package swithme.model.myrecord.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,42 +11,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import swithme.model.member.dto.MemberInfoDto;
+import swithme.model.myrecord.dto.DateDifftimeDto;
+import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
+import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordCalendarDto;
-import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.service.RecordService;
 
-@WebServlet("/myrecord")
-public class MyrecordController extends HttpServlet {
+@WebServlet("/selecteduser/info")
+public class SelectedUserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-
-    public MyrecordController() {
+       
+    public SelectedUserInfoController() {
         super();
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String subjectName = request.getParameter("subjectName");
     	List<RecordCalendarDto> calendarList = null;
 				// memId 세션확인
 				MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
-//				if(loginInfo == null) {
-//					request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
-//				}
-//				String memId = loginInfo.getMemId();
 
 				String memId = null;
 				if (loginInfo != null ) { //로그인 했을 때
-					memId = loginInfo.getMemId();
-					List<SubjectDifftimeDto> sublist = service.subjectDifftime(memId);
-					request.setAttribute("sublist", sublist);
+					//TODO memId 받아오기
+					memId = "song";//request.getParameter("memId");
 					request.setAttribute("memId", memId);
 					
-		    		calendarList = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+					System.out.println("\n\n >>>>>>>>>>    >>>>>>   >>>>>> rankingInfo  sublist");
+			
+		    		calendarList = service.studyTimeByCalList(memId);
 		    		
 		    		request.setAttribute("calendarList", calendarList);
-		    		
-					request.getRequestDispatcher("/WEB-INF/views/myrecord/myrecord.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/views/myrecord/selectedUserInfo.jsp").forward(request, response);
 				}
 	}
 }

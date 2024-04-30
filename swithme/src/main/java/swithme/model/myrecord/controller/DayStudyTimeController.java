@@ -17,37 +17,21 @@ import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
+import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.service.RecordService;
 
-/**
- * Servlet implementation class RecoradStartTimeController
- */
 @WebServlet("/myrecord/todayrecord.ajax")
 public class DayStudyTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+
+	
 	public DayStudyTimeController() {
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {		
-			
 			
 			List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result2 = service.fourdayStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
@@ -59,7 +43,7 @@ public class DayStudyTimeController extends HttpServlet {
 			//월별 
 			List<DateDifftimeDto> result6=service.monthStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result7 = service.monthBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
-			
+			List<RecordCalendarDto> calResult = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -69,7 +53,8 @@ public class DayStudyTimeController extends HttpServlet {
 			resultMap.put("thirtydayStudyTimeBySubject", result4); 	//하루 과목별 학습시간 30일치
 			resultMap.put("accStudyTime", result5); 	//누적학습시간
 			resultMap.put("monthStudyTime", result6); 	//월별 총 학습 시간
-			resultMap.put("monthBySubject", result7); 	//월별 과목별 학습시간
+			resultMap.put("monthBySubject", result7); 	//월별 과목별 학습시간3
+			resultMap.put("byCalendar", calResult); 	//달력에 띄울 학습시간
 			
 			response.getWriter().append(new Gson().toJson(resultMap));
 		//이게 맞나..???

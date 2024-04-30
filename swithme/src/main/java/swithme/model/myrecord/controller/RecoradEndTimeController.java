@@ -11,9 +11,6 @@ import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.service.RecordService;
 
-/**
- * Servlet implementation class RecoradStartTimeController
- */
 @WebServlet("/myrecord/recordend.ajax")
 public class RecoradEndTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -58,11 +58,12 @@ var colNum2;
 	}
 //당일 과목별 학습 todayStudyTime
 function todayStudyTime(){
+	var memId = "${memId}";
 $.ajax({
 url: "${pageContext.request.contextPath }/selecteduser/info"
 ,method:"post"
 ,error : ajaxErrorHandler
-//,data : {memId:memId} //TODO 
+,data : {memId:memId} //TODO 
 ,dataType:"json"
 ,success: function(resultMap){
 	console.log("---->>>>  resultMap");

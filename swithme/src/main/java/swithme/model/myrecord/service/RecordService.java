@@ -113,15 +113,11 @@ public class RecordService {
 	}
 	
 	// selectOne
-	public RecordDto selectOne(int recordSubjectId) {
-		RecordDto vo = null;
+	public String selectComment(String memId) {
+		String comment = null;
 		SqlSession session = getSqlSession();
-		vo = dao.selectOne(session, recordSubjectId);
+		comment = dao.selectComment(session, memId);
 		session.close();
-		return vo;
+		return comment;
 	}
-
-
-	// rec은 delete,update없음
-
 }

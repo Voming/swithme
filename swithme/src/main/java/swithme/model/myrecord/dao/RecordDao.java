@@ -73,11 +73,9 @@ public class RecordDao {
 		return session.selectList("record.studyTimeByCalList",memId);
 	}
 
-
-//	-----------------------------------------------------
-	// selectOne
-	public RecordDto selectOne(SqlSession session, int recordId) {
-		return session.selectOne("record.selectOne", recordId);
+//	유저 각오
+	public String selectComment(SqlSession session,String memId) {
+		return session.selectOne("record.selectComment", memId);
 	}
 
 }

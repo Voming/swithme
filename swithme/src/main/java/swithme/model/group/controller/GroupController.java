@@ -24,7 +24,7 @@ public class GroupController extends HttpServlet implements Serializable{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//전체 그룹
-		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 20);
+		List<GroupDto> OpenGrouplist = service.selectAllOpenList(1, 2); //end 값 수정하기
 		request.getSession().setAttribute("OpenGrouplist", OpenGrouplist);
 		//추천 그룹
 		List<GroupDto> RandGrouplist = service.selectRandList();

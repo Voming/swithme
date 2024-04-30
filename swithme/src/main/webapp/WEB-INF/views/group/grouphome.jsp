@@ -1,6 +1,7 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,8 @@
 <body>
 	<script>
 		$(loadedHandler);
-
+		let morecnt = 0;
+		
 		function loadedHandler() {
 			$(getGroupMylist);
 
@@ -39,8 +41,64 @@
 			$(".btn.find").on("click", btnFindClickHandler);
 			$(".modal_btn").on("click", btnOpenClickHandler);
 			$(".close_btn").on("click", btnCloseClickHandler);
+			$(".btn.more").on("click", btnMoreClickHandler);
 			$(".modal").hide();	
         }
+		
+		//더보기
+		function btnMoreClickHandler(){
+			morecnt += 1;
+			console.log(morecnt);
+			
+			$.ajax( { 
+				url : "${pageContext.request.contextPath}/group/more.ajax"
+				, method : "post"
+				,data : { 
+					more : morecnt
+				}
+				, dataType : 'json'
+				, success : function(result){ 
+					if(result != null){
+						console.log(result);
+					 	displayGroupMorelist(result); 
+					}
+				}
+				,error : ajaxErrorHandler
+			} ); 
+		}
+		
+		//더보기 리스트 뿌리기
+		function displayGroupMorelist(datalist){
+			var htmlVal = '';
+			for(var idx in datalist){
+				var moreDto = datalist[idx];
+				htmlVal+= `
+				<li>
+					<div class="modal_btn">
+						<img class="img_g" src="\${moreDto.sgroupImgPath}" alt="그룹 사진">
+						<div class="tag">
+							<p style="background-color: black; padding: 3px; font-size: var(--font5);">
+							공개
+							</p>
+						</div>
+						<div class="description">
+							<p class="for-modal" style="display: none;">\${moreDto.sgroupId}</p>
+							<p class="name"
+								style="font-size: var(--font4); font-weight: bold;">\${moreDto.sgroupName}</p>
+							<p class="name-sub" style="font-size: var(--font5);">\${moreDto.sgroupEx}</p>
+						</div>
+					</div>
+				</li>
+				`;
+			}
+			
+			$(".group-box.t1").html(htmlVal);
+			var checkcnt =  (morecnt+1)*2;
+			if(datalist.length > checkcnt){
+				console.log(checkcnt);
+				$(".btn.more").hide();
+			}
+		}
 		
 		//나의 리스트 가져오기
 		function getGroupMylist(){
@@ -232,7 +290,8 @@
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a class="active"
+								href="${pageContext.request.contextPath}/group">그룹</a></li>
 							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
@@ -247,113 +306,128 @@
 		<!--모달 팝업-->
 		<div class="modal">
 			<div class="modal_popup">
-			 <div></div>
+				<div></div>
 			</div>
 		</div>
 		<div class="wrap-body">
-				<div class="wrap-group">
-					<div class="wrap-my">
-						<div class="txt-my">
-							<p>내 그룹</p>
-						</div>
-						<div class="owl-carousel">
-							<!-- 나의 그룹 리스트 ajax -->
-						</div>
+			<div class="wrap-group">
+				<div class="wrap-my">
+					<div class="txt-my">
+						<p>내 그룹</p>
+					</div>
+					<div class="owl-carousel">
+						<!-- 나의 그룹 리스트 ajax -->
 					</div>
 				</div>
-				<div class="wrap-search">
-					<div>
-						<p>그룹찾기</p>
-					</div>
-					<div>
-						<div class="search">
-							<form id="frm-find">
-								<input type="text" name="find"
-									placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
-								<button type="button" class="btn find">
-									<img class="search-btn" src="${pageContext.request.contextPath}/resources/images/find.png" alt="찾기">
-								</button>
-							</form>
-						</div>
-					</div>
-					<div class="move-make">
-						<div>
-							<p>원하는 그룹이 없다면?</p>
-						</div>
-						<div>
-							<button type="button" class="btn make"
-								onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹
-								생성하러 가기</button>
-						</div>
+			</div>
+			<div class="wrap-search">
+				<div>
+					<p>그룹찾기</p>
+				</div>
+				<div>
+					<div class="search">
+						<form id="frm-find">
+							<input type="text" name="find"
+								placeholder="&nbsp;찾고 싶은 그룹 명을 입력하세요">
+							<button type="button" class="btn find">
+								<img class="search-btn"
+									src="${pageContext.request.contextPath}/resources/images/find.png"
+									alt="찾기">
+							</button>
+						</form>
 					</div>
 				</div>
-				<div class="wrap-openlist">
-					<div class="tab-body">
-						<p class="all-txt">전체그룹</p>
-						<ul class="group-tab-nav">
-							<li><a href="#tab01">공개 그룹</a></li>
-							<li><a href="#tab02">추천 그룹</a></li>
-						</ul>
-						<div class="group-tab-content">
-							<div id="tab01">
-								<ul class="group-box">
-									<c:if test="${not empty OpenGrouplist }">
-										<c:forEach items="${OpenGrouplist}" var="groupDto">
-											<li>
-												<div class="modal_btn">
-													<img class="img_g" src="${groupDto.sgroupImgPath}" alt="그룹 사진">
-													<div class="tag">
-														<p
-															style="background-color: black; padding: 3px; font-size: var(--font5);">
-															<c:if test="${groupDto.sgroupOpen == '0'}">공개</c:if>
-															<c:if test="${groupDto.sgroupOpen == '1'}">비공개</c:if>
-														</p>
-													</div>
-													<div class="description">
-														<p class="for-modal" style="display:none;">${groupDto.sgroupId}</p>
-														<p class="name"
-															style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
-														<p class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</p>
-													</div>
+				<div class="move-make">
+					<div>
+						<p>원하는 그룹이 없다면?</p>
+					</div>
+					<div>
+						<button type="button" class="btn make"
+							onclick="location.href='${pageContext.request.contextPath}/group/create'">그룹
+							생성하러 가기</button>
+					</div>
+				</div>
+			</div>
+			<div class="wrap-openlist">
+				<div class="tab-body">
+					<p class="all-txt">전체그룹</p>
+					<ul class="group-tab-nav">
+						<li><a href="#tab01">공개 그룹</a></li>
+						<li><a href="#tab02">추천 그룹</a></li>
+					</ul>
+					<div class="group-tab-content">
+						<div id="tab01">
+							<ul class="group-box t1">
+								<c:if test="${not empty OpenGrouplist }">
+									<c:forEach items="${OpenGrouplist}" var="groupDto">
+										<li>
+											<div class="modal_btn">
+												<img class="img_g" src="${groupDto.sgroupImgPath}"
+													alt="그룹 사진">
+												<div class="tag">
+													<p
+														style="background-color: black; padding: 3px; font-size: var(--font5);">
+														<c:if test="${groupDto.sgroupOpen == '0'}">공개</c:if>
+														<c:if test="${groupDto.sgroupOpen == '1'}">비공개</c:if>
+													</p>
 												</div>
-											</li>
-										</c:forEach>
-									</c:if>
-								</ul>
-							</div>
-							<div id="tab02">
-								<ul class="group-box">
-									<c:if test="${not empty RandGrouplist }">
-										<c:forEach items="${RandGrouplist}" var="randDto">
-											<li>
-												<div class=modal_btn>
-													<img class="btn-open-modal img_g" src="${randDto.sgroupImgPath}" alt="그룹 사진">
-													<div class="tag">
-														<p
-															style="background-color: black; padding: 3px; font-size: var(--font5);">
-															<c:if test="${randDto.sgroupOpen == '0'}">공개</c:if>
-															<c:if test="${randDto.sgroupOpen == '1'}">비공개</c:if>
-														</p>
-													</div>
-													<div class="description">
-														<p class="for-modal" style="display:none;">${randDto.sgroupId}</p>
-														<p class="name"
-															style="font-size: var(--font4); font-weight: bold;">${randDto.sgroupName}</p>
-														<p class="name-sub" style="font-size: var(--font5);">${randDto.sgroupEx}</p>
-													</div>
+												<div class="description">
+													<p class="for-modal" style="display: none;">${groupDto.sgroupId}</p>
+													<p class="name"
+														style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
+													<p class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</p>
 												</div>
-											</li>
-										</c:forEach>
-									</c:if>
-								</ul>
-							</div>
+											</div>
+										</li>
+									</c:forEach>
+								</c:if>
+							</ul>
+							<c:if test="${RandGrouplist.size() > 2}">
+								<div class="wrap-countb">
+									<button class="btn more">더보기</button>
+								</div>
+							</c:if>
+						</div>
+						<div id="tab02">
+							<ul class="group-box">
+								<c:if test="${not empty RandGrouplist }">
+									<c:forEach items="${RandGrouplist}" var="randDto">
+										<li>
+											<div class=modal_btn>
+												<img class="btn-open-modal img_g"
+													src="${randDto.sgroupImgPath}" alt="그룹 사진">
+												<div class="tag">
+													<p
+														style="background-color: black; padding: 3px; font-size: var(--font5);">
+														<c:if test="${randDto.sgroupOpen == '0'}">공개</c:if>
+														<c:if test="${randDto.sgroupOpen == '1'}">비공개</c:if>
+													</p>
+												</div>
+												<div class="description">
+													<p class="for-modal" style="display: none;">${randDto.sgroupId}</p>
+													<p class="name"
+														style="font-size: var(--font4); font-weight: bold;">${randDto.sgroupName}</p>
+													<p class="name-sub" style="font-size: var(--font5);">${randDto.sgroupEx}</p>
+												</div>
+											</div>
+										</li>
+									</c:forEach>
+									
+								</c:if>
+							</ul>
+							<%-- <c:if test="${RandGrouplist.size() > 2}">
+								<div class="wrap-countb">
+									<button>더보기</button>
+								</div>
+							</c:if> --%>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="wrap-footer">
+	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	<!-- carousel -->

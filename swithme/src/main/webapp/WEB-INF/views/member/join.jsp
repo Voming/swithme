@@ -53,7 +53,7 @@
 					</div>
 					<div>
 						<label class="emailcheck">이메일 확인</label>
-						<input onclick="sendEmailHandler" type="text" name="emailr" id="emailr" placeholder="인증코드" disabled="disabled" required>
+						<input onclick="sendEmailHandler" type="text" name="emailsend" id="emailsend" placeholder="인증코드" disabled="disabled" required>
 						<input type="hidden" name="code" id="code">
 						<button disabled="disabled"  class="checkcode"><p>인증</p></button>
 					</div>
@@ -218,7 +218,7 @@ function sendEmailHandler(){
 //인증번호 확인
  function checkHandler(){
 	var codeVal=$("#code").val(); 
-	var inputVal=$(".emailr").val();
+	var inputVal=$(".emailsend").val();
 	
 	$.ajax({
 		url:  "${pageContext.request.contextPath }/mailcode" , 

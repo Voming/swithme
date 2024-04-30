@@ -1,5 +1,6 @@
 package swithme.model.group.controller;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -73,10 +74,17 @@ public class GroupUpdateController extends HttpServlet {
 
 			// form enctype = "multipart/form-data"형태로 전달된 경우
 			String uploadPath = request.getServletContext().getRealPath("files");
+			//만약 필요한 파일이 만들어져있지 않다면 만들기
+			File uploadPathFile = new File(uploadPath); 
+			if(!uploadPathFile.exists()) {
+				uploadPathFile.mkdirs();
+			}
+			
 			int uploadFileLimit = 10 * 1024 * 1024; // 10M 제한
 			
 			//MultipartRequest
-			MultipartRequest multiReq = new MultipartRequest(request, uploadPath, // 서버에 저장할 디렉토리
+			MultipartRequest multiReq = new MultipartRequest(request, 
+					uploadPath, // 서버에 저장할 디렉토리
 					uploadFileLimit, // 업로드 파일 크기 제한
 					"UTF-8", new DefaultFileRenamePolicy() // was서버에 저장할 디렉토리에 동일 이름이 존재할 때 새로운 이름 부여 방식
 			);

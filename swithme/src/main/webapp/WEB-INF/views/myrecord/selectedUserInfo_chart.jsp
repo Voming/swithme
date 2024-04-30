@@ -59,7 +59,7 @@ var colNum2;
 //당일 과목별 학습 todayStudyTime
 function todayStudyTime(){
 $.ajax({
-url: "${pageContext.request.contextPath }/selecteduser/info.ajax"
+url: "${pageContext.request.contextPath }/selecteduser/info"
 ,method:"post"
 ,error : ajaxErrorHandler
 //,data : {memId:memId} //TODO 
@@ -74,7 +74,7 @@ url: "${pageContext.request.contextPath }/selecteduser/info.ajax"
 	displayAccStudyTime(resultMap.accStudyTime);
 	displayMonthStudyTime(resultMap.monthStudyTime);
 	displayMonthBySubject(resultMap.monthBySubject);
-	
+	displayByCalendar(resultMap.byCalendar);  //달력
 	}  // successcbf
 });  // ajax
 }  // f
@@ -642,5 +642,48 @@ function displayMonthBySubject(result){
 		}
 	}//options
 	});
-}	
+}
+/**달력********************************************************/	
+let titlelist=[];
+let startlist=[];
+let endlist=[];
+let colorlist=[];
+
+function displayByCalendar(bycalendar){
+	console.log("function안에 캘린더 유저꺼!!!");
+	//console.log(bycalendar);//이것은 달력값을 list로 가져온 것입니다
+	console.log(bycalendar[0].recordEnd);//이것은 달력값을 list로 가져온 것입니다
+	//흠...가능할지도
+	console.log("@@@@@@@@@@@@@@@@@@@");
+	var eventDataArr = createEventArray(bycalendar);
+	console.log(eventDataArr);
+	
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		headerToolbar:{
+			left:'dayGridMonth,timeGridDay,timeGridWeek' ,
+			center:'title' ,
+			right:'today prev,next' 				
+		},
+		selectable : true,
+		droppable : true,
+		editable : true,
+		events: eventDataArr
+	});
+	calendar.render();
+}
+function createEventArray(bycalendar) {
+    var events = [];
+    bycalendar.forEach(function(eventData) {
+        var event = {
+            title: eventData.subjectName,
+            start: new Date(eventData.recordStart), // recordStart가 날짜 문자열일 경우
+            end: new Date(eventData.recordEnd), // recordEnd가 날짜 문자열일 경우
+            color: chooseColor(eventData.subjectColor)
+        };
+        events.push(event);
+    });
+    return events;
+}
 </script>

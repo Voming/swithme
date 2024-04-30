@@ -698,7 +698,7 @@ let endlist=[];
 let colorlist=[];
 
 function displayByCalendar(bycalendar){
-	console.log("function안에 ㅋ랠린더");
+	console.log("function안에 캘린더");
 	//console.log(bycalendar);//이것은 달력값을 list로 가져온 것입니다
 	console.log(bycalendar[0].recordEnd);//이것은 달력값을 list로 가져온 것입니다
 	//흠...가능할지도

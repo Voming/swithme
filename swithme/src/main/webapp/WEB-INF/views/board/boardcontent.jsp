@@ -175,8 +175,8 @@ function boardReplyClickHandler(){
 			console.log(result);
 			if(result == null) {
 				alert("오류났어요~");
-				
 			} else {
+				$(".frm-reply [name=replyContent]").val("");
 				displayReplyWrap(result);
 				/* 함수를 정의한 것이기 때문에 밑에서 값 넣어줘야함 */
 			}

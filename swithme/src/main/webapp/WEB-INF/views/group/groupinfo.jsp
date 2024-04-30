@@ -122,6 +122,7 @@ function displaySetColor() {
 	
 	$(".setcolor.n1").css("font-family", "IM_Hyemin-Bold");
 	$(".setcolor.n1").css("background-color", "white");
+	$(".d1").css("background-color", "#CCDDFF");
 }
 function btnExitClickHandler() {
 	$.ajax({

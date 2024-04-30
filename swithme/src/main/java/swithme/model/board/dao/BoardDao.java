@@ -25,12 +25,10 @@ public class BoardDao {
 		// 게시판에서 게시글 list 전체 수 구하기 - 페이지 수 계산하려함
 		//ex. 게시글이 총 20개면 5개로 나눈다 했을때 총 4페이지 나옴
 		//총 페이지 수가 결정됨 - 숫자만 뽑는거
-	public int selectTotalPageCount(SqlSession session) {
-		int result =  session.selectOne("board.selectTotalPageCount");
-		
+	public int selectTotalPageCount(SqlSession session, String memId) {
+		int result =  session.selectOne("board.selectTotalPageCount", memId);
 		return result;
 	} 
-	
 	
 	// 페이지 당 나오는 게시글 수 뽑기
 	//위에꺼 토대로 얘가 배치됨 - 게시글 관련 데이터까지 뽑는거

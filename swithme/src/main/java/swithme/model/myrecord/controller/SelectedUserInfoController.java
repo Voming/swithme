@@ -24,26 +24,20 @@ import swithme.model.myrecord.service.RecordService;
 public class SelectedUserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
-       
+    private String memId;   
     public SelectedUserInfoController() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	List<RecordCalendarDto> calendarList = null;
 				// memId 세션확인
 				MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 
-				String memId = null;
 				if (loginInfo != null ) { //로그인 했을 때
-					//TODO memId 받아오기
-					memId = "song";//request.getParameter("memId");
+					memId = request.getParameter("memId");
+					request.setAttribute("comment", service.selectComment(memId));
 					request.setAttribute("memId", memId);
 					
-					System.out.println("\n\n >>>>>>>>>>    >>>>>>   >>>>>> rankingInfo  sublist");
-			
-		    		calendarList = service.studyTimeByCalList(memId);
-		    		
-		    		request.setAttribute("calendarList", calendarList);
+					
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/selectedUserInfo.jsp").forward(request, response);
 				}
 	}
@@ -54,8 +48,7 @@ public class SelectedUserInfoController extends HttpServlet {
 
 			String memId = null;
 			if (loginInfo != null ) { //로그인 했을 때
-				//TODO memId 받아오기
-				memId = "song";//request.getParameter("memId");
+				memId = request.getParameter("memId");
 				
 				List<DayStudyTimeBySubjectDto> result = service.dayStudyTime(memId);
 				List<DayStudyTimeDto> result2 = service.fourdayStudyTime(memId);

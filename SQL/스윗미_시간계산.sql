@@ -122,6 +122,9 @@ group by RECORD_SUBJECT_ID
 on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_DEL_DATE IS NULL
 ;
+--------유저 각오--------------------------------------------------------------
+SELECT MEM_COMMENT FROM MEMBER WHERE MEM_ID='song';
+
 ------------------------------------------------------------------------
 SELECT
     SYSDATE + 1, -- 현재시간 + 1일

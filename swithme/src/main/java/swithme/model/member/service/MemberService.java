@@ -1,11 +1,7 @@
 package swithme.model.member.service;
 
-
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 import swithme.model.member.dao.MemberDao;
 import swithme.model.member.dto.MemberDto;

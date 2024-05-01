@@ -28,7 +28,7 @@ public class GroupMoreListController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String more = request.getParameter("more");
-		int moreCnt = (Integer.parseInt(more) + 1) * 2; //곱하는 값 수정하기
+		int moreCnt = (Integer.parseInt(more) + 2) * 4; //곱하는 값 수정하기
 		
 		List<GroupDto> MoreGrouplist = service.selectAllOpenList(1, moreCnt);
 		

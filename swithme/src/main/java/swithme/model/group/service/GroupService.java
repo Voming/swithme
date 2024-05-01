@@ -211,10 +211,15 @@ public class GroupService {
 		
 		//그룹 멤버가 5명이 아니라면 가입 시킴
 		int  memCount = dao.selectMemCount(session, dto.getSgroupId());
-		if(memCount < 5) {	
-			result =  dao.insertJoinMember(session, dto);
+		//가입된 그룹이 5개가 아니라면 가입
+		int myGCount = dao.selectMyCount(session, dto.getSgroupMemId());
+
+		if(memCount > 5) {	
+			result =  -2;
+		} else if( myGCount >= 5) {
+			result = -3;
 		} else {
-			result = -2;
+			result =  dao.insertJoinMember(session, dto);
 		}
 		
 		session.close();

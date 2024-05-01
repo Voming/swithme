@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import swithme.model.member.dao.MemberDao;
 import swithme.model.member.dto.MemberInfoDto;
 import swithme.model.member.service.MemberService;
 

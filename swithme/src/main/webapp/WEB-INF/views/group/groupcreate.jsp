@@ -65,7 +65,7 @@ function btnCreateClickHandler(){
 		, success : function(result){
 			console.log("ajax result : "+ result);
 			if(result == "-1"){
-				alert("그룹은 5개 이하로 생성 및 가입이 가능합니다.");
+				alert("그룹 생성 실패 \n 그룹은 5개 이하로 생성 및 가입이 가능합니다.");
 			} else if(result == "0"){
 				alert("그룹 생성이 불가합니다");
 			} else{

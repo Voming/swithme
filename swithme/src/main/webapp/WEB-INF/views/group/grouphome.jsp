@@ -91,11 +91,11 @@
 			}
 			
 			$(".group-box.t1").html(htmlVal);
-			var checkcnt =  (morecnt+1)*2;
-			if(datalist.length > checkcnt){
+			
+			/*if(datalist.length > checkcnt){
 				console.log(checkcnt);
 				$(".btn.more").hide();
-			}
+			}*/
 			
 			$(".modal_btn").on("click", btnOpenClickHandler);
 			$(".close_btn").on("click", btnCloseClickHandler);
@@ -149,10 +149,11 @@
 			console.log('open clicked!');
 			var m_groupid = $(this).find(".for-modal").text().trim();
 			var m_open = $(this).find("div.tag > p").text().trim();
-			var m_img = $('.img_g').attr("src").trim();
+			var m_img = $(this).find(".img_g").attr("src").trim();
 			var m_name = $(this).find(".description>.name").text().trim();
 			var m_name_sub = $(this).find(".description>.name-sub").text().trim();
 			
+			console.log(m_img);
 			//만약 이미 가입한 그룹이라면 그룹 정보 페이지로 이동
 			$.ajax( { 
 				url : "${pageContext.request.contextPath}/group/join/check.ajax"
@@ -165,7 +166,7 @@
 						alert("해당 그룹으로 이동합니다");
 						$(".modal").hide();	
 						location.href="${pageContext.request.contextPath}/group/info?groupId=" + m_groupid;
-					}else{
+					} else{
 						var htmlMval= '';
 						htmlMval += `
 							<form>
@@ -219,7 +220,9 @@
 						alert("비밀번호가 틀렸습니다");
 					} else if(result == "-2"){
 						alert("죄송합니다. 그룹 정원이 차있으므로 가입이 불가합니다.");
-					} 
+					} else if(result == "-3"){
+						alert("가입 불가! 이미 가입한 그룹이 5개입니다.");
+					}
 				}
 				,error : ajaxErrorHandler
 			} ); 
@@ -383,7 +386,7 @@
 									</c:forEach>
 								</c:if>
 							</ul>
-							<c:if test="${RandGrouplist.size() > 2}">
+							<c:if test="${OpenGrouplist.size() > 4}">
 								<div class="wrap-countb">
 									<button class="btn more">더보기</button>
 								</div>
@@ -395,8 +398,7 @@
 									<c:forEach items="${RandGrouplist}" var="randDto">
 										<li>
 											<div class=modal_btn>
-												<img class="btn-open-modal img_g"
-													src="${randDto.sgroupImgPath}" alt="그룹 사진">
+												<img class="btn-open-modal img_g" src="${randDto.sgroupImgPath}" alt="그룹 사진">
 												<div class="tag">
 													<p
 														style="background-color: black; padding: 3px; font-size: var(--font5);">
@@ -416,11 +418,6 @@
 									
 								</c:if>
 							</ul>
-							<%-- <c:if test="${RandGrouplist.size() > 2}">
-								<div class="wrap-countb">
-									<button>더보기</button>
-								</div>
-							</c:if> --%>
 						</div>
 					</div>
 				</div>

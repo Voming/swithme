@@ -63,9 +63,10 @@
 #tab01 > div > div > .ranking-wrap {
 	font-family: "IM_Hyemin-Regular";
 	position: relative;
+	margin-bottom: 20px;
 }
 
-#tab01 > div > div > div:nth-child(2) > div.ranknum {
+#tab01 > div > div > .ranking-wrap > div.ranknum {
 	width: 50px;
     height: 50px;
 	color: #fff;
@@ -75,7 +76,7 @@
 	position: relative;
 } 
 
-#tab01 > div > div > div:nth-child(2) > div.ranknum > p {
+#tab01 > div > div > .ranking-wrap > div.ranknum > p {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 30px;
 
@@ -108,9 +109,10 @@
 #tab02 > div > div > .ranking-wrap {
 	font-family: "IM_Hyemin-Regular";
 	position: relative;
+	margin-bottom: 20px;
 }
 
-#tab02 > div > div > div:nth-child(2) > div.ranknum {
+#tab02 > div > div > .ranking-wrap > div.ranknum {
 	width: 50px;
     height: 50px;
 	color: #fff;
@@ -120,7 +122,7 @@
 	position: relative;
 } 
 
-#tab02 > div > div > div:nth-child(2) > div.ranknum > p {
+#tab02 > div > div > .ranking-wrap > div.ranknum > p {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 30px;
 	
@@ -142,7 +144,7 @@
 }
 
 /* 막대그래프 */
-.rank-bar {
+.ranking-wrap > .rank-bar {
         color: #fff;
         font-size: 11px;
         line-height: 25px;
@@ -164,7 +166,7 @@
  		
 }
  
-.rank-bar * {
+.ranking-wrap >  .rank-bar * {
         -webkit-transition: all 0.5s ease;
           -moz-transition: all 0.5s ease;
            -ms-transition: all 0.5s ease;
@@ -173,7 +175,7 @@
 }
  
  /* 퍼센트 없는거 - 원래 노란색이었음 */
-.rank-bar div {
+.ranking-wrap > .rank-bar div {
         background-color: #8066FF;
         position: relative;
         padding-left: 25px;

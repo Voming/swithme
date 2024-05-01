@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/ranking/ranking.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>전체 랭킹</title>
@@ -45,7 +46,7 @@
 				<div id="tab01">
 					<div class="daily">
 						<div class="daily-bar">
-							<p>나의 순위는 ___ 입니다.</p>
+							<p class="ranknum">나의 순위는 ___ 입니다.</p>
 							<div class="ranking-wrap">
 								<div class="ranknum"><p>1</p></div>
 								<div class="memId">${loginInfo.memId }</div>
@@ -58,7 +59,7 @@
 				<div id="tab02">
 					<div class="monthly">
 						<div class="monthly-bar">
-							<p>나의 순위는 ___ 입니다.</p>
+							<p class="ranknum">나의 순위는 ___ 입니다.</p>
 							<div class="ranking-wrap">
 									<div class="ranknum"><p>1</p></div>
 									<div class="memId">${loginInfo.memId }</div>
@@ -83,7 +84,6 @@
 $(loadedHandler);
 
 function loadedHandler(){
-	console.log('${loginInfo.memId}');
 	
 	$('.btn.tab01').on('click', btnDailyClickHandler);
 	$('.btn.tab02').on('click', btnMonthlyClickHandler);
@@ -97,10 +97,10 @@ function btnDailyClickHandler() {
     $(this).css('background-color', '8066FF').css('color', 'white');
     $('.btn.tab02').css('background-color', 'white').css('color', 'black');
     
-/* 	$.ajax({
+/*  	$.ajax({
 		url: "{pageContext.request.contextPath}/ranking",
 		method: "post", 
-		data: {memId,'${loginInfo.memId}'}, 
+		data: {memId :'${loginInfo.memId}'}, 
 		dataType: 'json',
 		success: function(result){
 			console.result();
@@ -126,37 +126,58 @@ function btnDailyClickHandler() {
 
 function btnMonthlyClickHandler() {
 	
-/* 	$.ajax({
-		url: "{pageContext.request.contextPath}/ranking",
-		method: "post",
-		data: {memId,'${loginInfo.memId}'},
-		dataType: 'json',
-		success: function(result){
-			console.log("monthly : " + result);
-			displayMonthWrap();
-		},
-		error: ajaxErrorHandler
-	}); */
-	
-	
-	
     $('.daily').hide();
     $('.monthly').show();
     $(this).css('background-color', '8066FF').css('color', 'white');
     $('.btn.tab01').css('background-color', 'white').css('color', 'black');
 
+	console.log('${loginInfo.memId}');
+    
+	var memId = '${loginInfo.memId}';
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/ranking/monthly",
+		method: "post",
+		data: { memId : memId },
+		dataType: 'json',
+		success: function(result){
+			console.log("monthly : " + result);
+			displayMonthWrap(result);
+		},
+		error: ajaxErrorHandler
+	});
+	
+	
+
 } 
 
-/* function displayMonthWrap(){
+function displayMonthWrap(datalist){
+	console.log('${loginInfo.memId}');
 	
-	var htmlVal: '';
-	html += `
-		
-		`;
+	var htmlVal =  '';
+	if(datalist.length == 0) {
+		htmlVal += `<div class="rankNone"><p>순위가 없습니다.</p></div>`;
+	} else {
+		for(var idx in datalist) {
+			var monthlyTime = datalist[idx];		
+			htmlVal += `
+					<div class="ranking-wrap">
+						<div class="ranknum"><p>1</p></div>
+						<div class="memId">${loginInfo.memId }</div>
+						<div class="studyrecord">\${monthlyTime.difftime}</div>
+						<div class="rank-bar"><div data-width="${loginInfo.memId }"><span>${loginInfo.memId }</span></div></div>							
+					</div>
+				`;		
+		}
+	}
 	
 	$('.monthly-bar').html(htmlVal);
+	console.log($('.monthly-bar').children().eq(0).children('.ranknum'));
 
-} */
+	$('.monthly-bar').children().eq(0).children('.ranknum').css('background-color', '8066FF').css('color', 'white');
+	$('.monthly-bar').children().eq(1).children('.ranknum').css('background-color', 'var(--color_purple_2)').css('color', 'white');
+	$('.monthly-bar').children().eq(2).children('.ranknum').css('background-color', 'var(--color_pink_1)').css('color', 'white');
+}
 
 //ajax error 부분
 function ajaxErrorHandler (request, status, error){

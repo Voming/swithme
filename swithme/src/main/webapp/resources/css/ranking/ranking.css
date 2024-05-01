@@ -50,3 +50,139 @@
     cursor: pointer;
     padding: 5px 30px;
 }
+
+
+/* 여기서부터 순위 나타나기 시작 */
+
+/* 일일통계 */
+#tab01 > div > div > p{
+	font-family: "IM_Hyemin-Regular";
+	margin-bottom: 30px;
+}
+
+#tab01 > div > div > .ranking-wrap {
+	font-family: "IM_Hyemin-Regular";
+	position: relative;
+	margin-bottom: 20px;
+}
+
+#tab01 > div > div > .ranking-wrap > div.ranknum {
+	width: 50px;
+    height: 50px;
+	color: #fff;
+    background-color: #8066FF;
+    border-radius: 100px;
+    text-align: center;
+	position: relative;
+} 
+
+#tab01 > div > div > .ranking-wrap > div.ranknum > p {
+	font-family: "IM_Hyemin-Bold";
+	font-size: 30px;
+
+	position: absolute;
+	top: 9px;
+	left: 14px;
+}
+
+#tab01 > div > div > div > div.memId {
+	position: absolute;
+	top: 0;
+	left: 80px;
+}
+
+#tab01 > div > div > div > div.studyrecord {
+	position: absolute;
+	top: 0;
+	right: 90px;
+}
+
+
+
+
+/* 월일통계 */
+#tab02 > div > div > p{
+	font-family: "IM_Hyemin-Regular";
+	margin-bottom: 30px;
+}
+
+#tab02 > div > div > .ranking-wrap {
+	font-family: "IM_Hyemin-Regular";
+	position: relative;
+	margin-bottom: 20px;
+}
+
+#tab02 > div > div > .ranking-wrap > div.ranknum {
+	width: 50px;
+    height: 50px;
+	color: #fff;
+    background-color: #8066FF;
+    border-radius: 100px;
+    text-align: center;
+	position: relative;
+} 
+
+#tab02 > div > div > .ranking-wrap > div.ranknum > p {
+	font-family: "IM_Hyemin-Bold";
+	font-size: 30px;
+	
+	position: absolute;
+	top: 9px;
+	left: 14px;
+}
+
+#tab02 > div > div > div > div.memId {
+	position: absolute;
+	top: 0;
+	left: 80px;
+}
+
+#tab02 > div > div > div > div.studyrecord {
+	position: absolute;
+	top: 0;
+	right: 90px;
+}
+
+/* 막대그래프 */
+.ranking-wrap > .rank-bar {
+        color: #fff;
+        font-size: 11px;
+        line-height: 25px;
+        height: 25px;
+        margin-bottom: 5px;
+        width: 85%;
+ 
+        background-color: var(--color_purple_3);
+ 
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+                border-radius: 20px;
+                
+		position: absolute;
+ 		top: 25px;
+ 		left: 65px;
+ 		
+ 		
+}
+ 
+.ranking-wrap >  .rank-bar * {
+        -webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+           -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+               transition: all 0.5s ease;
+}
+ 
+ /* 퍼센트 없는거 - 원래 노란색이었음 */
+.ranking-wrap > .rank-bar div {
+        background-color: #8066FF;
+        position: relative;
+        padding-left: 25px;
+        width: 80%;
+ 
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+           -ms-border-radius: 2px;
+                border-radius: 20px;
+}

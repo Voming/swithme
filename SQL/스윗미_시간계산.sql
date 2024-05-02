@@ -221,7 +221,13 @@ SELECT
         WHERE  r.RECORD_START >= ( SYSDATE - 7 ) and sgroup_id = 53
         GROUP BY s.sgroup_mem_id
         ; 
---한 달 공부 시간 통계   
+--한 달 공부 시간 통계 1년--사용
+select TO_CHAR(MMONTH,'mm') ONLY_DATE, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+left join
+(select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID= 'won' group by to_char(record_date,'yy-mm')) 
+on TO_CHAR(MMONTH,'yy-mm') = RDAY
+order by MMONTH
+;
 
 -----월 공부시간 합 // 한달 총 공부시간 -- 
 SELECT 
@@ -253,15 +259,7 @@ FROM (
         TRUNC(RECORD_END, 'MM')
 );
 --------------------------------------
-SELECT 
-    j.mem_id AS "MEM_ID",
-     NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
-    FROM SUBJECT j
-    join RECORD  r on (j.mem_id = r.record_mem_id)
-    WHERE  r.RECORD_end >= ( SYSDATE - 30 )  and MEM_ID='won'
-    GROUP BY   j.mem_id
-    ;   
-    
+
 select record_mem_id, to_char(record_start,'YYYY-MM-DD HH24:Mi:SS'), to_char(record_end,'YYYY-MM-DD HH24:Mi:SS') from record where record_mem_id = 'song';
 
 SELECT NUMTODSINTERVAL(sum((RECORD_END - RECORD_START)),'day')  from record  WHERE record_mem_id='b';
@@ -367,14 +365,26 @@ on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_ID IS NULL
 ;
 
---일일 ranking ----------------------------------------------
+--일일 ranking 00:00:00출력----------------------------------------------
 SELECT record_mem_id, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
 from RECORD
 where to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
 group by record_mem_id
 order by DIFFTIME desc
 ;
+--일일 ranking 사용----------------------------------------------
 
+select record_mem_id, sum(NVL(DIFFTIME, 0)) DIFFTIME  from V_RECORD_SEC where TO_CHAR(RECORD_DATE,'yy-mm-dd')= TO_CHAR(sysdate,'yy-mm-dd') group by record_mem_id order by DIFFTIME desc
+;
+
+--월간 랭킹 -사용
+select TO_CHAR(MMONTH,'mm') ONLY_DATE,record_mem_id, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+left join
+(select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME,record_mem_id from V_RECORD_SEC group by to_char(record_date,'yy-mm'),record_mem_id) 
+on TO_CHAR(MMONTH,'yy-mm') = RDAY
+where TO_CHAR(MMONTH,'yy-mm') = TO_CHAR(sysdate,'yy-mm')
+order by difftime desc
+;
 
 
 

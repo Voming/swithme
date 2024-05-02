@@ -22,14 +22,11 @@ public class GroupJoinController extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/group/join.ajax post");
-		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String memId = loginInfo.getMemId();
 		
 		String groupIdstr = request.getParameter("m_group_id");
 		String pwdstr = request.getParameter("m_pwd");
-		System.out.println("m_group_id : " + groupIdstr + " m_pwd : " + pwdstr);
 		
 		int result = 0;
 		int inResult = 0;
@@ -41,7 +38,6 @@ public class GroupJoinController extends HttpServlet {
 		}
 		
 		String rPwd = service.selectJoinPwd(groupId); //실제 비밀번호 체크
-		System.out.println("rPwd : " + rPwd);
 		
 		if(!pwdstr.equals(rPwd)) { //비밀번호 일치하지않으면 오류 발생
 			result = -1;
@@ -50,7 +46,6 @@ public class GroupJoinController extends HttpServlet {
 		}
 		
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);
-		System.out.println(dto);
 		inResult = service.insertJoinMember(dto);
 		response.getWriter().append(String.valueOf(inResult));
 	}

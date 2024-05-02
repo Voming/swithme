@@ -12,7 +12,7 @@
 <jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 </head>
 <body>
-	<script>
+<script>
 $(loadedHandler);
 
 function loadedHandler() {
@@ -44,7 +44,6 @@ function btnOpenClickHandler(){
 }
 
 function btnUpdateClickHandler(){
-	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
 		return;
@@ -56,11 +55,7 @@ function btnUpdateClickHandler(){
 		} 
 	}
 	
-	console.log($(".frm-create").serialize());
-	
 	// ajax - encType="multipart/form-data" 
-	console.log( new FormData($(".frm-create").get(0)) );
-	
 	$.ajax({
 		url:"${pageContext.request.contextPath }/group/update"
 		, method : "post"
@@ -70,7 +65,7 @@ function btnUpdateClickHandler(){
 		, processData : false
 		, dataType:  'text'
 		, success : function(result){
-			console.log("ajax result : "+ result);
+			/* console.log("ajax result : "+ result); */
 			if(result == "0"){
 				alert("그룹 수정이 불가합니다");
 			}else if(result == "-1"){
@@ -94,12 +89,10 @@ function btnUpdateClickHandler(){
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/test">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>

@@ -83,7 +83,6 @@ public class TestCalService {
 
 			// 제일 첫번째 태그
 			doc.getDocumentElement().normalize();
-			System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
 			// 파싱할 tag
 			NodeList nList = doc.getElementsByTagName("item");

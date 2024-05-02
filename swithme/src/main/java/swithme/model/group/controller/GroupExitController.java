@@ -11,9 +11,6 @@ import swithme.model.group.dto.GroupMemberDto;
 import swithme.model.group.service.GroupService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class GroupExitController
- */
 @WebServlet("/group/exit.ajax")
 public class GroupExitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

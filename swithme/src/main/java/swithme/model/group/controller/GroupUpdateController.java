@@ -38,8 +38,6 @@ public class GroupUpdateController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("/group/update doGet()");
-
 		String groupIdstr = request.getParameter("groupId");
 		try {
 			groupId = Integer.parseInt(groupIdstr);
@@ -49,7 +47,6 @@ public class GroupUpdateController extends HttpServlet {
 		}
 		GroupDto groupInfo = service.selectGroupInfoOne(groupId); // 입력칸에 원래 있던 그룹 정보 넣음
 
-		System.out.println("groupId : " + groupId);
 		request.getSession().setAttribute("groupInfo", groupInfo);
 		request.getRequestDispatcher("/WEB-INF/views/group/groupupdate.jsp").forward(request, response);
 	}
@@ -60,7 +57,6 @@ public class GroupUpdateController extends HttpServlet {
 		
 		Properties prop = new Properties();
 		String currentPath = ServerTemplate.class.getResource("./").getPath();
-		System.out.println("currentPath : " + currentPath);
 		
 		try { //cloudinary 키 받아오기
 			prop.load(new FileReader(currentPath + "cloudinary.properties"));
@@ -101,24 +97,18 @@ public class GroupUpdateController extends HttpServlet {
 				groupPwdstr = "0";
 			} else {
 				groupOpen = "1";
-				if (groupPwdstr != null && !groupPwdstr.equals("")) {
-					try {
-						int groupPwd = 0;
-						groupPwd = Integer.parseInt(groupPwdstr);
-						System.out.println("비밀번호 : " + groupPwd);
-					} catch (NumberFormatException e) {
-						result = -1;
-						response.getWriter().append(String.valueOf(result));
-						e.printStackTrace();
-					}
-				}
+				/*
+				 * if (groupPwdstr != null && !groupPwdstr.equals("")) { try { int groupPwd = 0;
+				 * groupPwd = Integer.parseInt(groupPwdstr); } catch (NumberFormatException e) {
+				 * result = -1; response.getWriter().append(String.valueOf(result));
+				 * e.printStackTrace(); } }
+				 */
 			}
 			
 			if (filePath == null) {  //파일이 없는 경우 파일 제외하고 업데이트
 				System.out.println("첨부파일이 없었습니다.");
 				//사진 없이 업데이트
 				GroupUpdateMinDto dtomin = new GroupUpdateMinDto(groupId, groupName, groupOpen, groupPwdstr, groupExp);
-				System.out.println(dtomin);
 				result = service.updateMin(dtomin);
 			} else { //파일이 있는 경우 파일 포함해서 업데이트
 				// Cloudinary
@@ -127,7 +117,6 @@ public class GroupUpdateController extends HttpServlet {
 						ObjectUtils.asMap("eager", Arrays
 								.asList(new EagerTransformation().width(290).height(180).crop("fill").gravity("north"))));
 
-				System.out.println(uploadResult.get("url"));
 				String imgPath = (String) uploadResult.get("url");
 				String imgName = (String) uploadResult.get("original_filename");
 				

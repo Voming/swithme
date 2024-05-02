@@ -14,9 +14,6 @@ import com.google.gson.Gson;
 import swithme.model.group.dto.GroupDto;
 import swithme.model.group.service.GroupService;
 
-/**
- * Servlet implementation class GroupMoreListController
- */
 @WebServlet("/group/more.ajax")
 public class GroupMoreListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +25,7 @@ public class GroupMoreListController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String more = request.getParameter("more");
-		int moreCnt = (Integer.parseInt(more) + 2) * 4; //곱하는 값 수정하기
+		int moreCnt = (Integer.parseInt(more) + 2) * 4; //더보기 눌렀을때 늘어나는 값
 		
 		List<GroupDto> MoreGrouplist = service.selectAllOpenList(1, moreCnt);
 		

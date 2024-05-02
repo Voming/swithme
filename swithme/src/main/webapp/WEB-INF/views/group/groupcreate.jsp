@@ -29,7 +29,6 @@ function btnOpenClickHandler(){
 		$(".wrap-open").after(htmlVal);  
 	}	
 	var isOpen = $('input[type=radio]:checked').val();
-	console.log(isOpen);
 }
 
 
@@ -37,7 +36,6 @@ function btnOpenClickHandler(){
 
 
 function btnCreateClickHandler(){
-	console.log("클릭");
 	if ($("[name=groupName]").val().trim().length == 0) {
 		alert("빈칸만 입력할 수 없습니다. 그룹명을 작성해주세요");
 		return;
@@ -49,11 +47,7 @@ function btnCreateClickHandler(){
 		} 
 	}
 	
-	console.log($(".frm-create").serialize());
-	
 	// ajax - encType="multipart/form-data" 
-	console.log( new FormData($(".frm-create").get(0)) );
-	
 	$.ajax({
 		url:"${pageContext.request.contextPath }/group/create"
 		, method : "post"
@@ -63,7 +57,6 @@ function btnCreateClickHandler(){
 		, processData : false
 		, dataType:  'text'
 		, success : function(result){
-			console.log("ajax result : "+ result);
 			if(result == "-1"){
 				alert("그룹 생성 실패 \n 그룹은 5개 이하로 생성 및 가입이 가능합니다.");
 			} else if(result == "0"){
@@ -87,12 +80,10 @@ function btnCreateClickHandler(){
 					<div class="nav2-wrap">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/test">시험달력</a></li>
+							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
 					</div>
 				</div>

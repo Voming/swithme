@@ -1,6 +1,5 @@
 <jsp:include page="/WEB-INF/views/common/links_file.jsp" />
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -306,7 +305,6 @@
 		
 		//일정 테이블 만들기
 		function wrapeventdisplay1(datalist){
-			console.log(datalist);
 			htmlVal = '';
 			for(var idx in datalist){
 				var testinfo = datalist[idx];
@@ -344,7 +342,6 @@
 		}
 		
 		function wrapeventdisplay2(datalist){
-			console.log(datalist);
 			htmlVal = '';
 			for(var idx in datalist){
 				var testinfo = datalist[idx];
@@ -381,7 +378,6 @@
 			$(".tb-2").html(htmlVal);
 		}
 		function wrapeventdisplay3(datalist){
-			console.log(datalist);
 			htmlVal = '';
 			for(var idx in datalist){
 				var testinfo = datalist[idx];

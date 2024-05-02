@@ -45,7 +45,7 @@ public class GroupCreateController extends HttpServlet {
 		
 		Properties prop = new Properties();
 		String currentPath = ServerTemplate.class.getResource("./").getPath();
-		System.out.println("currentPath : "+ currentPath);
+		
 		try {
 			prop.load(new FileReader(currentPath + "cloudinary.properties"));
 			String cloud_name = prop.getProperty("cloud.name");
@@ -59,17 +59,8 @@ public class GroupCreateController extends HttpServlet {
 			  "api_secret", api_secret, 
 			  "secure", true));
 			
-//			//TODO 입력하기 전에 체크하도록
-//			//만약 가입한 그룹이 5개라면 더이상 그룹 생성 불가능
-//			int mGroupCount = service.selectMyCount(groupWriter);
-//			if(mGroupCount > 5) {
-//				result = -1;
-//				response.getWriter().append(String.valueOf(result));
-//				return;
-//			}
-			
 			String uploadPath = request.getServletContext().getRealPath("files");
-			System.out.println("uploadPath : " + uploadPath ); 
+			
 			//만약 필요한 파일이 만들어져있지 않다면 만들기
 			File uploadPathFile = new File(uploadPath); 
 			if(!uploadPathFile.exists()) {
@@ -93,7 +84,6 @@ public class GroupCreateController extends HttpServlet {
 						    "eager", Arrays.asList(
 						    	      new EagerTransformation().width(290).height(180).crop("fill").gravity("north"))));
 			
-			System.out.println(uploadResult.get("url"));
 			String imgPath = (String) uploadResult.get("url");
 			String imgName = (String) uploadResult.get("original_filename");
 			
@@ -115,20 +105,15 @@ public class GroupCreateController extends HttpServlet {
 				groupPwdstr = "0";
 			}else {
 				groupOpen = "1";
-				if(groupPwdstr != null && !groupPwdstr.equals("")) {
-					try {
-						int groupPwd = 0;
-						groupPwd = Integer.parseInt(groupPwdstr);
-						System.out.println("비밀번호 : " + groupPwd);
-					} catch (NumberFormatException e) {
-						result = -1;
-						response.getWriter().append(String.valueOf(result));
-						e.printStackTrace();
-					}
-				}
+				/*
+				 * if(groupPwdstr != null && !groupPwdstr.equals("")) { try { int groupPwd = 0;
+				 * groupPwd = Integer.parseInt(groupPwdstr); } catch (NumberFormatException e) {
+				 * result = -1; response.getWriter().append(String.valueOf(result));
+				 * e.printStackTrace(); } }
+				 */
 			}
 			GroupCreateDto dto = new GroupCreateDto(groupWriter, groupName, groupOpen, groupPwdstr, groupExp, imgPath, imgName);
-			System.out.println(dto);
+			
 			result = service.insert(dto);
 			
 			response.getWriter().append(String.valueOf(result));

@@ -48,7 +48,6 @@
 		//더보기
 		function btnMoreClickHandler(){
 			morecnt += 1;
-			console.log(morecnt);
 			
 			$.ajax( { 
 				url : "${pageContext.request.contextPath}/group/more.ajax"
@@ -59,7 +58,7 @@
 				, dataType : 'json'
 				, success : function(result){ 
 					if(result != null){
-						console.log(result);
+						/* console.log(result); */
 					 	displayGroupMorelist(result); 
 					}
 				}
@@ -146,14 +145,12 @@
 		
 		//모달 열기
 		function btnOpenClickHandler() {
-			console.log('open clicked!');
 			var m_groupid = $(this).find(".for-modal").text().trim();
 			var m_open = $(this).find("div.tag > p").text().trim();
 			var m_img = $(this).find(".img_g").attr("src").trim();
 			var m_name = $(this).find(".description>.name").text().trim();
 			var m_name_sub = $(this).find(".description>.name-sub").text().trim();
 			
-			console.log(m_img);
 			//만약 이미 가입한 그룹이라면 그룹 정보 페이지로 이동
 			$.ajax( { 
 				url : "${pageContext.request.contextPath}/group/join/check.ajax"
@@ -203,7 +200,6 @@
 		//그룹 가입하기
 		function btnJoinClickHandler() {
 			var m_groupid = $(this).parent().find(".m_group_id").text();
-			console.log('join clicked!');
 			$.ajax( { 
 				url : "${pageContext.request.contextPath}/group/join.ajax"
 				,method : "post"
@@ -230,7 +226,7 @@
 		
 		//모달 닫기
 		function btnCloseClickHandler() {
-			console.log('close clicked!');
+			/* console.log('close clicked!'); */
 			$(".modal").hide();	
 		}
 		

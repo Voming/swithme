@@ -18,8 +18,7 @@ public class RecoradStartTimeController extends HttpServlet {
 	public RecoradStartTimeController() {
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//jsp-> servlet 정보 받아오기
 		String subjectIdStr = request.getParameter("subjectId");
 		String startTime = request.getParameter("startTime");
@@ -27,7 +26,6 @@ public class RecoradStartTimeController extends HttpServlet {
 		
 		//class로 정보 전달
 		int result = service.insertStartTime(new RecordTimeDto(subjectId,((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId(), startTime));
-		System.out.println(result);
 		//servlet으로 전달
 		response.getWriter().append(String.valueOf(result));
 	}

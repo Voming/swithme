@@ -15,16 +15,15 @@ import swithme.model.myrecord.service.RecordService;
 public class RecoradEndTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
+	
 	public RecoradEndTimeController() {
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String subjectIdStr = request.getParameter("subjectId");
 		String endTime = request.getParameter("endTime");
 		int subjectId = Integer.parseInt(subjectIdStr);
 		int result = service.insertEndTime(new RecordTimeDto(subjectId,((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId(), endTime));
-		System.out.println(result);
 		response.getWriter().append(String.valueOf(result));
 	}
 }

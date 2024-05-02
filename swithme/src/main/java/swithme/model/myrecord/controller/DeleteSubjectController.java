@@ -25,7 +25,6 @@ public class DeleteSubjectController extends HttpServlet {
 		int subjectId = Integer.parseInt(subjectIdStr);
 		
 		int result = service.delete(new SubjectDeleteDto(subjectId,((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId(), deleteTime));
-		System.out.println(result);
 		response.getWriter().append(String.valueOf(result));
 	}
 

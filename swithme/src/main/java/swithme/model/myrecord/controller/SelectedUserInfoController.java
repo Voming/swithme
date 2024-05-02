@@ -25,6 +25,7 @@ public class SelectedUserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();
     private String memId;   
+    
     public SelectedUserInfoController() {
         super();
     }
@@ -37,7 +38,6 @@ public class SelectedUserInfoController extends HttpServlet {
 					request.setAttribute("memId", memId);
 					request.setAttribute("comment", service.selectComment(memId));
 					request.setAttribute("difftime", service.selectTotalDifftime(memId));
-					
 					
 					request.getRequestDispatcher("/WEB-INF/views/myrecord/selectedUserInfo.jsp").forward(request, response);
 				}

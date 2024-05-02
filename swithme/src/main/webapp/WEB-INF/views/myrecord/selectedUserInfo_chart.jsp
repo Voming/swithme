@@ -66,7 +66,6 @@ url: "${pageContext.request.contextPath }/selecteduser/info"
 ,data : {memId:memId} //TODO 
 ,dataType:"json"
 ,success: function(resultMap){
-	console.log("---->>>>  resultMap");
 	//console.log(resultMap);
 	displayTodayStudyTime(resultMap.dayStudyTimeList);
 	displayFourdayStudyTimeChart(resultMap.fourdayStudyTimeList);
@@ -181,40 +180,7 @@ function displayFourdayStudyTimeChart (result){
 	//console.log(fourDifftimeList);
 	//console.log(foursubjectColorList);
 	//console.log(recordDateList);
-	/* 	var data = {
-			 	labels:  subejctNameList,
-				datasets: [{
-				    label: '오늘의 공부시간',
-				    data:recordTimeList ,
-				    backgroundColor:subjectColorList,    //subjectColorList, '#FFE16F','#AED581','#99BBFF','#BF80FF'
-				    hoverOffset: 4
-				  }]
-				}; */
-				/*
-		//과목별로 const가 생성되어야한다.	day가 아님	
-		const sub0 = {
-		        label:foursubejctNameList[0],
-		        data:[2,1,5],
-		        backgroundColor:foursubjectColorList[0],
-		        borderColor:'#CBCE91',
-		        borderWidth:1
-		}
-		const sub1 = {
-		        label:foursubejctNameList[1],
-		        data:[3,2,4],
-		        backgroundColor:foursubjectColorList[1],
-		        borderColor:'#CBCE91',
-		        borderWidth:1
-		}
-		const sub2 = {
-		        label:foursubejctNameList[3],
-		        data:[4,3,3],
-		        backgroundColor:foursubjectColorList[3],
-		        borderColor:'#CBCE91',
-		        borderWidth:1
-		}
-*/
-		
+	
 		//그래프 생성
 		// 여기
 	var ctx = document.getElementById('myChart2').getContext('2d');
@@ -248,13 +214,10 @@ function displayFourdayStudyTimeChart (result){
 			tooltip:{
 				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수 //호버했을 때 뜨는 것 콜백
 					label: function(context){
-						console.log(context);
 						var chartLabel=context.dataset.label || '';
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						//console.log("----- parsed !!     ");
-						//console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -539,7 +502,6 @@ function displayThirtyDayStudyTimeBySubjectChart (result){
 			tooltip:{
 				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수 //호버했을 때 뜨는 것 콜백
 					label: function(context){
-						console.log(context);
 						var chartLabel=context.dataset.label || '';
 						if (chartLabel) {
 							chartLabel +=' : ';
@@ -625,13 +587,10 @@ function displayMonthBySubject(result){
 			tooltip:{
 				callbacks:{//함수가 끝나고 난 뒤 실행되는 함수 //호버했을 때 뜨는 것 콜백
 					label: function(context){
-						console.log(context);
 						var chartLabel=context.dataset.label || '';
 						if (chartLabel) {
 							chartLabel +=' : ';
 						}
-						console.log("----- parsed !!     ");
-						console.log(context.parsed.y);
                         var charthours = parseInt(context.parsed.y/(60*60));
                         var chartminutes = parseInt(context.parsed.y/60-charthours*60);
                         var chartseconds = parseInt(context.parsed.y-chartminutes*60-charthours*60*60);
@@ -651,13 +610,7 @@ let endlist=[];
 let colorlist=[];
 
 function displayByCalendar(bycalendar){
-	console.log("function안에 캘린더 유저꺼!!!");
-	//console.log(bycalendar);//이것은 달력값을 list로 가져온 것입니다
-	console.log(bycalendar[0].recordEnd);//이것은 달력값을 list로 가져온 것입니다
-	//흠...가능할지도
-	console.log("@@@@@@@@@@@@@@@@@@@");
 	var eventDataArr = createEventArray(bycalendar);
-	console.log(eventDataArr);
 	
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {

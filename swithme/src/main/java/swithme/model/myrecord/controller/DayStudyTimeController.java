@@ -43,6 +43,7 @@ public class DayStudyTimeController extends HttpServlet {
 			//월별 
 			List<DateDifftimeDto> result6=service.monthStudyTime(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			List<DayStudyTimeDto> result7 = service.monthBySubject(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
+			//달력
 			List<RecordCalendarDto> calResult = service.studyTimeByCalList(((MemberInfoDto)request.getSession().getAttribute("loginInfo")).getMemId());
 			
 			
@@ -57,7 +58,6 @@ public class DayStudyTimeController extends HttpServlet {
 			resultMap.put("byCalendar", calResult); 	//달력에 띄울 학습시간
 			
 			response.getWriter().append(new Gson().toJson(resultMap));
-		//이게 맞나..???
 		}catch(NumberFormatException e) {
 			response.sendRedirect(request.getContextPath()+"/myrecord");
 		}

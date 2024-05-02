@@ -13,47 +13,13 @@
 <link	href="${pageContext.request.contextPath}/resources/css/myrecord/selectedUserInfo.css"	rel="stylesheet">
 <!--chart.js CDN  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/chart.js"></script>
 <!-- moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <!-- 풀캘린더 CDN -->
 <script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 
-<%-- <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			headerToolbar:{
-				left:'dayGridMonth,timeGridDay,timeGridWeek' ,
-				center:'title' ,
-				right:'today prev,next' 				
-			},
-			selectable : true,
-			droppable : true,
-			editable : true,
-			events:[
-				
-				
-				<%List<RecordCalendarDto> calendarList = (List<RecordCalendarDto>)request.getAttribute("calendarList");%>
-				<%if (calendarList != null) {%>
-	            <%for (RecordCalendarDto vo : calendarList) {%>
-	            {
-	            	title : '<%=vo.getSubjectName()%>',
-	                start : '<%=vo.getRecordStart()%>',
-	                end : '<%=vo.getRecordEnd()%>',
-	           		color : chooseColor('<%=vo.getSubjectColor() %>')
-	             },
-				<%}  // for
-				} // if %>
-				
-			]
-		});
-		calendar.render();
-	});
-	
-</script> --%>
 <title>SWITH.ME</title>
 </head>
 <body>

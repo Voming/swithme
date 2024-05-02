@@ -267,7 +267,7 @@ let subjectName;
 let subjectId;
 let subjectColor;
 $(document).ready(function(){  
-	console.log("myrecord - document ready !!!!");
+	//console.log("myrecord - document ready !!!!");
 	myrecord_chart_jsp_loadedHandler();
 	
 	$("#start").on("click", startClickHandler);
@@ -294,16 +294,7 @@ $(document).ready(function(){
 	$(".btn.remove-sub").on("click", btnRemoveSubjectClickHandler);
 });
 		
-		/*과목 이름 클릭시 해당과목이름 화면에 띄움, subjectName 받아오기 */
-/* 		
-function ready() {$(".subId").on("click",subIdClickHandler);}
-document.addEventListener("DOMContentLoaded", ready);
-function subIdClickHandler(){
-	var tagId = $(this).data('subject-name');
-	alert(tagId);
-	
-} 
-*/
+
 // 과목선택하기
 function subIdClickHandler(){
 	 subjectName = $(this).data('subject-name');
@@ -319,17 +310,13 @@ function btnRemoveSubjectClickHandler(){
 		alert("삭제할 과목을 먼저 선택해주세요");
 	}else{
 		var deleteTime = getCurrentDateTime(); 
-		//console.log("name=selectNameM-------> "+$("[name=selectNameM]").val());
-		//console.log("deleteTime ------> "+deleteTime);
-		//console.log("subjectId ------> "+subjectId);
-	
+
 		$.ajax({
 			type : "post",
 			url : "${pageContext.request.contextPath}/myrecord/deletesubject.ajax",
 			data : {subjectId : subjectId, deleteTime: deleteTime },
 			error : ajaxErrorHandler,
 			success : function(result) {
-				console.log("delete 성공");
 				alert("삭제되었습니다");
 				location.reload(true);
 			}
@@ -361,8 +348,8 @@ function btnModifyDoneSubjectClickHandler(){
 		data : {subjectName : subjectName, subNameModi: subNameModi,colorModi:colorModi },
 		error : ajaxErrorHandler,
 		success : function(result) {
-			console.log("-------- ajax result");
-			console.log(result);
+			//console.log("-------- ajax result");
+			//console.log(result);
 			if(result != -1){			
 				alert("수정이 완료되었습니다.");
 			}else{
@@ -374,7 +361,7 @@ function btnModifyDoneSubjectClickHandler(){
 }
 // 과목 추가하기  
 function btnAddSubjectClickHandler() {
-	console.log($("#frm-add").serialize());
+	//console.log($("#frm-add").serialize());
 	var frm = document.getElementById("frm-add");
 	frm.method = "post";
 	frm.action = "${pageContext.request.contextPath}/addsubject";
@@ -389,22 +376,6 @@ let diffMSec;
 let diffMin;
 let diffHour;
 let diffTime;
-//시간계산
-/* 	
-// 10보다 작은 값에 0을 붙임
-function addZero(n) {
-	return n < 10 ? '0' + n : n;
-}
-// 현재 시간을 리턴
-function getCurrentDate() {
-	var currentDate = new Date();
-	return currentDate.getFullYear().toString()
-			+ addZero(currentDate.getMonth() + 1)
-			+ addZero(currentDate.getDate())
-			+ addZero(currentDate.getHours())
-			+ addZero(currentDate.getMinutes())
-			+ addZero(currentDate.getSeconds());
-		} */
 
 function startClickHandler() {
 	
@@ -427,7 +398,6 @@ function startClickHandler() {
 		data : {subjectId : subjectId, startTime: sendDateTime },
 		error : ajaxErrorHandler,
 		success : function(result) {
-			console.log("start 성공");
 		}
 	});
 
@@ -448,8 +418,6 @@ function stopClickHandler() {
 		data : {subjectId : subjectId, endTime: sendDateTime },
 		error : ajaxErrorHandler,
 		success : function(result) {
-			console.log("성공");
-			//location.replace="${pageContext.request.contextPath}/myrecord";
 			location.reload(true);
 		}
 	});

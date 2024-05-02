@@ -11,8 +11,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/group/groupmodal.css" rel="stylesheet">
 
 <!-- carousel -->
-<link href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.carousel.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/group/carousel_assets/owl.theme.default.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/owlcarousel2-2.3.4/carousel_assets/owl.carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/owlcarousel2-2.3.4/carousel_assets/owl.theme.default.css" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
@@ -431,11 +431,8 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	<!-- carousel -->
-	<script
-		src="${pageContext.request.contextPath}/resources/css/group/carousel_js/owl.carousel.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/css/group/carousel_js/owl.autoplay.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/css/group/carousel_js/owl.navigation.js"></script>
+<script src="${pageContext.request.contextPath}/resources/owlcarousel2-2.3.4/carousel_js/owl.carousel.js"></script>
+<script src="${pageContext.request.contextPath}/resources/owlcarousel2-2.3.4/carousel_js/owl.autoplay.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/owlcarousel2-2.3.4/carousel_js/owl.navigation.js"></script>
 </body>
 </html>

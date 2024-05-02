@@ -7,10 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <!--부트스트랩  -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-
-<link href="${pageContext.request.contextPath}/resources/css/basic/bootstrap_js/bootstrap.min.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/bootstrap-5.0.2/bootstrap.min.css" rel="stylesheet" />
 <!-- jQuery 선언 및 css연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"	rel="stylesheet">
@@ -502,13 +499,12 @@ function currentTimeHandler() {
 
 		/* today(); */
 	</script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/index.global.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/locales-all.global.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/daygrid/index.global.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/timegrid/index.global.js"></script>
+<!-- full calendar -->
+<script src="${pageContext.request.contextPath}/resources/fullcalendar-6.1.11/dist/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/fullcalendar-6.1.11/dist/index.global.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/css/basic/bootstrap_js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/bootstrap_js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap-5.0.2/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap-5.0.2/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -190,12 +190,12 @@ function btnExitClickHandler() {
 				<p class="now">공부현황</p>
 				<div class="group-box">
 					<ul>
-						<c:if test="${not empty groupSumList }">
-							<c:forEach items="${groupSumList}" var="groupSumDto">
-									<li class="mem-box" onclick="location.href='${pageContext.request.contextPath}/selecteduser/info?memId=${groupSumDto.memId}'">
+						<c:if test="${not empty groupSumDayList }">
+							<c:forEach items="${groupSumDayList}" var="DayDto"  begin="1">
+									<li class="mem-box" onclick="location.href='${pageContext.request.contextPath}/selecteduser/info?memId=${DayDto.memId }'">
 									<img alt="기본 아이콘" src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
-										<p>${groupSumDto.memId}</p>
-										<p>${groupSumDto.sumMin}</p>
+										<p>${DayDto.memId }</p>
+										<p>${DayDto.d1 }</p>
 									</li>
 							</c:forEach>
 						</c:if>

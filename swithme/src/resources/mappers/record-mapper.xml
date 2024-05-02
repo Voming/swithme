@@ -133,4 +133,24 @@ from RECORD
 where RECORD_MEM_ID =#{memId} and to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
 </select>
 
+
+<!-- 랭킹 - 일간 -->
+<select  id="rankingDaily" resultType="RankingDto">
+select record_mem_id, sum(NVL(DIFFTIME, 0)) DIFFTIME  
+from V_RECORD_SEC where TO_CHAR(RECORD_DATE,'yy-mm-dd')= TO_CHAR(sysdate,'yy-mm-dd') 
+group by record_mem_id order by DIFFTIME desc
+</select>
+
+<!-- 랭킹 - 월간  -->
+
+<select  id="rankingMonthly" resultType="RankingDto">
+select record_mem_id, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+left join
+(select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME,record_mem_id from V_RECORD_SEC 
+group by to_char(record_date,'yy-mm'),record_mem_id) 
+on TO_CHAR(MMONTH,'yy-mm') = RDAY
+where TO_CHAR(MMONTH,'yy-mm') = TO_CHAR(sysdate,'yy-mm')
+order by difftime desc
+</select>
+
 </mapper>

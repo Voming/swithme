@@ -12,30 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import swithme.model.member.dto.MemberInfoDto;
-import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.service.RecordService;
 import swithme.model.ranking.dto.RankingDto;
 
-
 /**
- * Servlet implementation class RankingMonthlyController
+ * Servlet implementation class RankingDailyController
  */
-@WebServlet("/ranking/monthly")
-public class RankingMonthlyController extends HttpServlet {
+@WebServlet("/ranking/daily")
+public class RankingDailyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RecordService service = new RecordService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RankingMonthlyController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RankingDailyController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memId = request.getParameter("memId");
@@ -43,14 +41,14 @@ public class RankingMonthlyController extends HttpServlet {
 		
 		if (loginInfo != null) { // 로그인 했을 때
 			memId = loginInfo.getMemId();
-			System.out.println("monthly controller");
-			List<RankingDto> dto = service.rankingMonthly();
-			System.out.println("월간 랭킹" + dto);
+			System.out.println("em\\드감?????");
+			List<RankingDto> dto = service.rankingDaily();
+			System.out.println("일간 랭킹" + dto);
 
-			request.setAttribute("monthlyTime", dto);
+			request.setAttribute("dailyTime", dto);
 			response.getWriter().append(new Gson().toJson(dto));
 
 		}
-	}
 
+	}
 }

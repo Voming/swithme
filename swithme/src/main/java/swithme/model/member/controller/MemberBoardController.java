@@ -31,6 +31,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		String memId = loginInfo.getMemId();
 		List<BoardListDto> dto = service.selectAllList(memId);
 		//BoardListDto 안에 있는 필드명 가져와서 쓰는 것
+		System.out.println("나의 게시판" + dto);
 		
 		request.setAttribute("boardlist", dto);
 		

@@ -46,13 +46,13 @@
 				<div id="tab01">
 					<div class="daily">
 						<div class="daily-bar">
-							<p class="ranknum">나의 순위는 ___ 입니다.</p>
+							<%-- <p class="ranknum">나의 순위는 ___ 입니다.</p>
 							<div class="ranking-wrap">
 								<div class="ranknum"><p>1</p></div>
 								<div class="memId">${loginInfo.memId }</div>
 								<div class="studyrecord">00:36:00</div>
 								<div class="rank-bar"><div data-width="${loginInfo.memId }"><span>${loginInfo.memId }</span></div></div>							
-							</div>
+							</div> --%>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,10 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 	
-	
+<!-- 	- 일간/월간 controller 분리
+- dto 만들기
+- idx 가 0부터 시작이라서 count라는 변수 선언하고 1을 집어넣어서 그걸로 숫자 표시하기
+-  -->
 <!-- 공간 차지 안하지만 실제 테이블처럼 활용(가상 테이블) - view -->
 
 <script>
@@ -87,7 +90,14 @@ function loadedHandler(){
 	
 	$('.btn.tab01').on('click', btnDailyClickHandler);
 	$('.btn.tab02').on('click', btnMonthlyClickHandler);
+	 btnDailyClickHandler();
 }
+
+var chartLabel='';
+var charthours=0;
+var chartminutes=0 ;
+var chartseconds=0;
+
 
 
 function btnDailyClickHandler() {
@@ -97,31 +107,59 @@ function btnDailyClickHandler() {
     $(this).css('background-color', '8066FF').css('color', 'white');
     $('.btn.tab02').css('background-color', 'white').css('color', 'black');
     
-/*  	$.ajax({
-		url: "{pageContext.request.contextPath}/ranking",
+ 	$.ajax({
+		url: "${pageContext.request.contextPath}/ranking/daily",
 		method: "post", 
-		data: {memId :'${loginInfo.memId}'}, 
 		dataType: 'json',
 		success: function(result){
-			console.result();
-			displayDailyWrap();
+			console.log(result);
+			displayDailyWrap(result);
 		}, 
 		error: ajaxErrorHandler
 		
-	}); */
+	});
 
 }
 
-/* function displayDailyWrap(){
-	
+function displayDailyWrap(datalist){
+	console.log("displayDailyWrap >>>>>");
 	var htmlVal = '';
-	htmlVal += `
-		
-		`;
+	if(datalist.length == 0) {
+		htmlVal += `<div class="rankNone"><p>순위가 없습니다.</p></div>`;
+	} else {
+		var count = 1;
+		for(var idx in datalist) {
+			var dailyTime = datalist[idx];
+			//시간 단위 변경 초-> 00:00:00
+			chartLabel='';
+			/* 반복문이라서 얘를 선언 안하고 돌면 이전 기록이 있는 상태에서 다음 기록 추가되서 출력됨
+ 			  => 초기화 해줌*/
+			charthours =  parseInt(dailyTime.difftime/(60*60)).toString().padStart(2, '0');
+ 			  /* padStart -> 2자리인데 공란은 0으로 채워줘 */
+ 			  /* 총자리수, 공란 => 왼쪽부터 차례대로 채움  */
+ 			chartminutes = parseInt(dailyTime.difftime/60-charthours*60).toString().padStart(2, '0');
+			chartseconds = parseInt(dailyTime.difftime-chartminutes*60-charthours*60*60).toString().padStart(2, '0');
+			chartLabel += charthours+' : '+chartminutes+' : '+chartseconds;			
+			console.log(chartLabel);
+			htmlVal += `
+				<div class="ranking-wrap">
+					<div class="ranknum"><p>\${count}</p></div>
+					<div class="memId">\${dailyTime.recordMemId}</div>
+					<div class="studyrecord">\${chartLabel}</div>
+					<div class="rank-bar"><div data-width="\${dailyTime.recordMemId}"><span>\${dailyTime.recordMemId}</span></div></div>							
+				</div>
+				`;	
+					/* memId 에서 list 형태로 왔기 때문에 하나씩 꺼내줘야함 */
+			count++;
+		}
+	}
 	
 	$('.daily-bar').html(htmlVal);
+	$('.daily-bar').children().eq(0).children('.ranknum').css('background-color', '8066FF').css('color', 'white');
+	$('.daily-bar').children().eq(1).children('.ranknum').css('background-color', 'var(--color_purple_2)').css('color', 'white');
+	$('.daily-bar').children().eq(2).children('.ranknum').css('background-color', 'var(--color_pink_1)').css('color', 'white');
 	
-} */
+}
 
 
 function btnMonthlyClickHandler() {
@@ -132,42 +170,53 @@ function btnMonthlyClickHandler() {
     $('.btn.tab01').css('background-color', 'white').css('color', 'black');
 
 	console.log('${loginInfo.memId}');
-    
-	var memId = '${loginInfo.memId}';
 	
 	$.ajax({
 		url: "${pageContext.request.contextPath}/ranking/monthly",
 		method: "post",
-		data: { memId : memId },
+		/* 이 함수 안에서 변수 선언해서 정의해줘야 memId 값 사용 가능
+			- 그냥 el태그 써서 보내려하면 not defined라는 오류 뜸 */
 		dataType: 'json',
 		success: function(result){
 			console.log("monthly : " + result);
-			displayMonthWrap(result);
+			displayMonthlyWrap(result);
 		},
 		error: ajaxErrorHandler
 	});
-	
-	
 
 } 
 
-function displayMonthWrap(datalist){
+
+function displayMonthlyWrap(datalist){
 	console.log('${loginInfo.memId}');
 	
 	var htmlVal =  '';
 	if(datalist.length == 0) {
 		htmlVal += `<div class="rankNone"><p>순위가 없습니다.</p></div>`;
 	} else {
+		var count = 1;
 		for(var idx in datalist) {
-			var monthlyTime = datalist[idx];		
+			var monthlyTime = datalist[idx];
+			//시간 단위 변경 초-> 00:00:00
+			chartLabel='';
+			/* 반복문이라서 얘를 선언 안하고 돌면 이전 기록이 있는 상태에서 다음 기록 추가되서 출력됨
+ 			  => 초기화 해줌*/
+			charthours =  parseInt(monthlyTime.difftime/(60*60)).toString().padStart(2, '0');
+ 			  /* padStart -> 2자리인데 공란은 0으로 채워줘 */
+ 			  /* 총자리수, 공란 => 왼쪽부터 차례대로 채움  */
+ 			chartminutes = parseInt(monthlyTime.difftime/60-charthours*60).toString().padStart(2, '0');
+			chartseconds = parseInt(monthlyTime.difftime-chartminutes*60-charthours*60*60).toString().padStart(2, '0');
+			chartLabel += charthours+' : '+chartminutes+' : '+chartseconds;			
+			console.log(chartLabel);
 			htmlVal += `
 					<div class="ranking-wrap">
-						<div class="ranknum"><p>1</p></div>
-						<div class="memId">${loginInfo.memId }</div>
-						<div class="studyrecord">\${monthlyTime.difftime}</div>
-						<div class="rank-bar"><div data-width="${loginInfo.memId }"><span>${loginInfo.memId }</span></div></div>							
+						<div class="ranknum"><p>\${count}</p></div>
+						<div class="memId">\${monthlyTime.recordMemId}</div>
+						<div class="studyrecord">\${chartLabel}</div>
+						<div class="rank-bar"><div data-width="\${monthlyTime.recordMemId}"><span>\${monthlyTime.recordMemId}</span></div></div>							
 					</div>
-				`;		
+				`;	
+			count++;
 		}
 	}
 	

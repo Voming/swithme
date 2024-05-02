@@ -24,6 +24,12 @@
  	margin: 60px 40px 0 40px;
 
 }
+.wrap-body > div.pgroup > p {
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font1);
+	text-align: center;
+	margin-top: 30px;
+}
 
 .wrap-body > div.main-content > div.title > div.t-1 > div {
 	font-family: "IM_Hyemin-Bold";

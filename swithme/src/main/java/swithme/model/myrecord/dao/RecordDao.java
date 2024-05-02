@@ -16,6 +16,7 @@ import swithme.model.myrecord.dto.SubjectDifftimeDto;
 //RECORD_MEM_ID     NOT NULL VARCHAR2(20) 
 //RECORD_START      NOT NULL TIMESTAMP(6) 
 //RECORD_END                 TIMESTAMP(6) 
+import swithme.model.ranking.dto.RankingDto;
 
 //private Integer recordId;
 //private Integer recordSubjectId;
@@ -79,5 +80,16 @@ public class RecordDao {
 //	당일 총 공부시간 
 	public String selectTotalDifftime(SqlSession session,String memId) {
 		return session.selectOne("record.selectTotalDifftime", memId);
+	}
+	
+	
+// 	랭킹 - 일간
+	public List<RankingDto> rankingDaily(SqlSession session){
+		return session.selectList("record.rankingDaily");
+	}
+	
+// 	랭킹 - 월간
+	public List<RankingDto> rankingMonthly(SqlSession session){
+		return session.selectList("record.rankingMonthly");
 	}
 }

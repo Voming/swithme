@@ -13,6 +13,7 @@ import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
+import swithme.model.ranking.dto.RankingDto;
 
 public class RecordService {
 	
@@ -127,4 +128,28 @@ public class RecordService {
 		session.close();
 		return difftime;
 	}
+	
+	// 랭킹 - 일간
+	public List<RankingDto> rankingDaily(){
+		List<RankingDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.rankingDaily(session);
+		System.out.println("일간 랭킹 ...........................");
+		System.out.println(result);
+		session.close();
+		return result;
+	}
+	
+	// 랭킹 - 일간
+	public List<RankingDto> rankingMonthly(){
+		List<RankingDto> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.rankingMonthly(session);
+		System.out.println("==========월간 랭킹==========");
+		System.out.println(result);
+		session.close();
+		return result;
+	}
+	
+	
 }

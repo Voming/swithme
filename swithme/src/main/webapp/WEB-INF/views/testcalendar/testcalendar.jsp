@@ -500,8 +500,8 @@
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
 <!-- full calendar -->
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/index.global.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/locales-all.global.js"></script>
-<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/daygrid/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/fullcalendar-6.1.11/dist/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/fullcalendar-6.1.11/dist/index.global.min.js"></script>
+
 </body>
 </html>

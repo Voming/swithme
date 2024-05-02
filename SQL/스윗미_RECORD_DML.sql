@@ -132,7 +132,10 @@ exec PRO_RECORD_INSERT_MORNING('song','JAVA','30');
 exec PRO_RECORD_INSERT_LUNCH('song','spring','30');
 exec PRO_RECORD_INSERT_DINNER('song','C#','30');
 
---hyo
+--5/2
+exec PRO_RECORD_MMDD_MORNING('won','HTML',5,1);
+exec PRO_RECORD_MMDD_DINNER('won','SQL',5,1);
+--5/2
 exec PRO_RECORD_MMDD_MORNING('won','JAVA',5,2);
 exec PRO_RECORD_MMDD_LUNCH('won','CSS',5,2);
 exec PRO_RECORD_MMDD_DINNER('won','SQL',5,2);

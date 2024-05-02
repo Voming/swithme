@@ -146,15 +146,19 @@ let foursubjectColorBorderList=[];
 let recordDateList=[]; 
 
 function displayFourdayStudyTimeChart (result){
+	
 	const sub = new Array();
 
 	for(let i = 0 ; i < result.length;i++){	
 		var resultItem = result[i];
+		
 		foursubejctNameList[i] = result[i].subjectName;
 	  	foursubjectColorList[i] = chooseColor(result[i].color);
 	  	foursubjectColorBorderList[i] = chooseBorderColor(result[i].color);
+	  	
 		var diffTimeByDayList = result[i].diffTimeByDayList;
 		var subData = new Array();
+		
 		for(let j=0; j<result[i].diffTimeByDayList.length; j++){
 			subData[j] = diffTimeByDayList[j].difftime;
 			if(i==0) {
@@ -169,6 +173,7 @@ function displayFourdayStudyTimeChart (result){
 		        borderWidth:2
 		};
 	}
+	
 /* 	console.log("4일치 데이터 뽑아옴");
 	console.log(foursubejctNameList);
 	console.log(foursubejctNameList);
@@ -290,8 +295,9 @@ options:{
 		}
 	}
 }//options
+});	//myChart3
 
-});	
+
 }
 /**** myChart10 누적 그래프******************************************/
  function displayAccStudyTime(result){

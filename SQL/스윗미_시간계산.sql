@@ -17,6 +17,16 @@ FROM (
             record_mem_id = 'hyuk' and RECORD_end >= ( SYSDATE - 30 )
     )
 );
+	select t1.SUBJECT_NAME, SUBJECT_COLOR "COLOR", TO_CHAR(DDAY,'MM-DD') ONLY_DATE, NVL(DIFFTIME, 0) DIFFTIME
+	from 
+		(select * from (select SUBJECT_NAME, SUBJECT_COLOR from subject where mem_id='won') t1 cross join v_dday4 ) t1
+		left join 
+		(select SUBJECT_NAME, RECORD_DATE, DIFFTIME from V_RECORD_SEC where RECORD_MEM_ID ='won') t2
+		on t1.SUBJECT_NAME = t2.SUBJECT_NAME and DDAY = TRUNC(t2.RECORD_DATE)
+	order by t1.subject_name ASC, DDAY ASC;
+select * from (select SUBJECT_NAME, SUBJECT_COLOR from subject where mem_id='won') t1 cross join v_dday4 ;
+
+
 -----00:00:00으로 표현 
 SELECT 
     nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
@@ -378,14 +388,13 @@ select record_mem_id, sum(NVL(DIFFTIME, 0)) DIFFTIME  from V_RECORD_SEC where TO
 ;
 
 --월간 랭킹 -사용
-select TO_CHAR(MMONTH,'mm') ONLY_DATE,record_mem_id, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
+select record_mem_id, NVL(DIFFTIME, 0) DIFFTIME  from V_MMONTH12
 left join
 (select to_char(record_date,'yy-mm') RDAY, round(sum(DIFFTIME),0) DIFFTIME,record_mem_id from V_RECORD_SEC group by to_char(record_date,'yy-mm'),record_mem_id) 
 on TO_CHAR(MMONTH,'yy-mm') = RDAY
 where TO_CHAR(MMONTH,'yy-mm') = TO_CHAR(sysdate,'yy-mm')
 order by difftime desc
 ;
-
 
 
 

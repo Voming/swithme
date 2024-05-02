@@ -7,6 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swithme.model.member.dto.MemberInfoDto;
+import swithme.model.member.dto.MemberUpdateDto;
+import swithme.model.member.service.MemberService;
+
+
+
+
 /**
  * Servlet implementation class PwdChangeController
  */
@@ -14,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PwdUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MemberService service=new MemberService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,7 +40,32 @@ public class PwdUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	
+		
+		
+		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo"); 
+			String memId = loginInfo.getMemId();
+			String memPwd = loginInfo.getMemPwd();
+			String pwd = request.getParameter("pwd");
+			String newpwd=request.getParameter("newpwd");
+			String newpwd2=request.getParameter("newpwd2");
+			
+			System.out.println("memId>>>>  "+memId);
+			System.out.println("pwd>>>>>  "+pwd);
+			System.out.println("newpwd>>>>>  "+newpwd);
+			
+			
+			MemberUpdateDto dto= new MemberUpdateDto(memId,memPwd,newpwd);
+			int result=service.update(dto);
+			
+			//MemberUpdateDto resultInfo = new MemberService().update(dto);
+			if(memPwd.equals(pwd) && newpwd.equals(newpwd2)) {
+				result=1;
+				//request.getSession().setAttribute("loginInfo", newpwd);
+			}
+			response.getWriter().append(String.valueOf(result));
+			response.sendRedirect(request.getContextPath()+"/mypage");
+
 	}
 
 }

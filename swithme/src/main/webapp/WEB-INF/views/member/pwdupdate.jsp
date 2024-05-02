@@ -19,6 +19,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SWITH.ME</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -46,19 +47,21 @@
 			<form id="update-form" action="${pageContext.request.contextPath}/update" method="post">
 			<div>
 			<p>기존 비밀번호</p>
-			<input type="password" name="pwd" id="pwd" required>
-			<span><button class="btn check" id="check"><p>확인</p></button></span>
+			<input type="text" name="pwd" id="pwd" >
+			
 			</div>
 			
 			<div>
 			<p>변경 비밀번호</p>
-			<input type="password" name="newpwd" id="newpwd" required>
+			<input type="password" name="newpwd" id="newpwd">
 			</div>
+			
 			<div>
 			<p>변경 비밀번호 확인</p>
-			<input type="password" name="newpwd2" id="newpwd2" required>
+			<input type="password" name="newpwd2" id="newpwd2" >
 			<span class="desc-newpwd"></span>
 			</div>
+			
 			<div>
 			<button class="btn update" id="update"><p>변경완료</p></button>
 			</div>
@@ -76,6 +79,7 @@
 $("input").keyup(function(){
 	var pwd1=$("[name=newpwd]").val().trim();
 	var pwd2=$("[name=newpwd2]").val().trim();
+	
 	if(pwd1 != "" || pwd2 != ""){
 		if(pwd1 == pwd2) {
 			$(".desc-newpwd").html("일치").css('color', 'green');
@@ -86,10 +90,48 @@ $("input").keyup(function(){
 });
 	
 	
+/* function pwdChangeHandler(){
+	var frm= document.getElementById("update-form");
+	frm.method="post";
+	frm.action="${pageContext.request.contextPath}/update";
+	frm.submit();
+} */
+ 
+$("#check").on('click',function checkPwdHandler(){
+	var pwd=$('#pwd').val().trim();
 
+});
 
+$(loadedHandler);
 
+function loadedHandler(){
+	$(".btn.update").on("click", btnCheckClickHandler);
+}
 
+function btnCheckClickHandler(){
+	var pwd = $("[name=pwd]").val().trim();
+	var newpwd=$("[name=newpwd]").val().trim();
+	var newpwd2=$("[name=newpwd2]").val().trim();
+
+	$.ajax({  
+		url : "${pageContext.request.contextPath }/update"
+		,method : "post"
+		,data : { pwd:pwd , newpwd:newpwd ,newpwd2:newpwd2}
+		,success : function(result){
+			console.log(result);
+			if(result==1){
+				alert("비밀번호 변경가능");
+			}else {
+				alert("비밀번호 불일치");
+			}	
+		}
+		,error : function(request, status, error){
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+	});
+}
 </script>
 </body>
 </html>

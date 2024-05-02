@@ -109,19 +109,19 @@ insert into record values(SEQ_RECORD_ID.nextval
 --------------------------------------------
 insert into record values(SEQ_RECORD_ID.nextval
     ,(select SUBJECT_ID from SUBJECT where mem_id='hyuk' and subject_name='C#') 
-    ,'hyuk',(SELECT TO_DATE('2024-04-10 12:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-09 17:30:53', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+    ,'hyuk',(SELECT TO_DATE('2024-04-10 12:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-10 17:30:53', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 insert into record values(SEQ_RECORD_ID.nextval
     ,(select SUBJECT_ID from SUBJECT where mem_id='hyuk' and subject_name='HTML') 
-    ,'hyuk',(SELECT TO_DATE('2024-04-10 18:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-09 20:30:47', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+    ,'hyuk',(SELECT TO_DATE('2024-04-10 18:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-10 20:30:47', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 insert into record values(SEQ_RECORD_ID.nextval
     ,(select SUBJECT_ID from SUBJECT where mem_id='hyuk' and subject_name='천칭') 
-    ,'hyuk',(SELECT TO_DATE('2024-04-10 06:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-09 07:40:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+    ,'hyuk',(SELECT TO_DATE('2024-04-10 06:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-10 07:40:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 insert into record values(SEQ_RECORD_ID.nextval
     ,(select SUBJECT_ID from SUBJECT where mem_id='hyuk' and subject_name='C#') 
-    ,'hyuk',(SELECT TO_DATE('2024-04-10 09:50:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-09 11:23:22', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+    ,'hyuk',(SELECT TO_DATE('2024-04-10 09:50:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-10 11:23:22', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 insert into record values(SEQ_RECORD_ID.nextval
     ,(select SUBJECT_ID from SUBJECT where mem_id='hyuk' and subject_name='HTML') 
-    ,'hyuk',(SELECT TO_DATE('2024-04-10 08:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-09 09:40:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+    ,'hyuk',(SELECT TO_DATE('2024-04-10 08:30:15', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-04-10 09:40:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 
 
 commit;

@@ -125,11 +125,20 @@ FULL JOIN
 SELECT RECORD_SUBJECT_ID, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
 FROM RECORD 
 WHERE RECORD_MEM_ID = 'won'
-        and TRUNC(RECORD_END)=TRUNC(SYSDATE-0)
+        and TRUNC(RECORD_END)=TRUNC(SYSDATE)
 group by RECORD_SUBJECT_ID
 ) t2
 on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_DEL_DATE IS NULL
+;
+---------일일 과목별 학습 시간--------------------------
+SELECT distinct SUBJECT_NAME
+, SUBJECT_COLOR
+, SUBSTR(DIFFTIME,12,8) DIFFTIME
+, TRUNC(SYSDATE) as ONLY_DATE    
+from V_RECORD 
+join (select * from subject where MEM_ID ='won') using (SUBJECT_NAME)
+where RECORD_MEM_ID ='won' and TRUNC(RECORD_DATE) = TRUNC(SYSDATE)
 ;
 --------유저 각오--------------------------------------------------------------
 SELECT MEM_COMMENT FROM MEMBER WHERE MEM_ID='song';

@@ -17,10 +17,13 @@ ORDER BY SUBJECT_ID ASC NULLS FIRST
 
 <!-- 과목별 일일 공부시간 -->
 <select id="dayStudyTime" parameterType="string" resultType="DayStudyTimeBySubjectDto">
-SELECT SUBJECT_NAME
-, (select SUBJECT_COLOR from subject where SUBJECT.SUBJECT_NAME = V_RECORD.SUBJECT_NAME AND MEM_ID=#{memId} ) as "COLOR"
-, SUBSTR(DIFFTIME,12,8) DIFFTIME, TRUNC(RECORD_DATE) as ONLY_DATE    
-from V_RECORD where RECORD_MEM_ID =#{memId} and TRUNC(RECORD_DATE) = TRUNC(SYSDATE)
+SELECT distinct SUBJECT_NAME
+, SUBJECT_COLOR COLOR
+, SUBSTR(DIFFTIME,12,8) DIFFTIME
+, TRUNC(SYSDATE) as ONLY_DATE    
+from V_RECORD 
+join (select * from subject where MEM_ID =#{memId}) using (SUBJECT_NAME)
+where RECORD_MEM_ID =#{memId} and TRUNC(RECORD_DATE) = TRUNC(SYSDATE)
 </select>
 
 <!-- 현재 일자 기준 최근 4일 이내 과목별 학습시간 -->

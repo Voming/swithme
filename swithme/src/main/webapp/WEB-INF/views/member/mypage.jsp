@@ -47,12 +47,12 @@
 						<span class="memid">${loginInfo.memId}</span>
 					</div>
 					<div class="pwd">
-					비밀번호 <span class="mempwd">${loginInfo.memPwd}</span>
+					비밀번호 <span class="mempwd">********</span>
 					<a href="${pageContext.request.contextPath}/update">수정하기</a>	
 					</div>
 					<div>
 						<span>각오</span>
-						<input type="text" name="fight">
+						<input type="text" name="comment">
 					</div>
 					<div>
 						<button type="button" class="btn change" id="change"><p>수정완료</p></button>
@@ -81,6 +81,7 @@ $(loadHandler);
 function loadHandler() {
 	$(".btn.logout").on("click",btnLogoutClickHandler);
 	//$(".btn.out").on("click",btnOutClickHandler);
+	$(".btn.change").on("click", btnChangeHandler);
 }
 
 
@@ -106,6 +107,12 @@ function btnOutClickHandler(){
 	out.submit();
 	
 	
+}
+
+function btnChangeHandler(){
+	var comment=$("[name=comment]").val().trim()
+	
+	alert("수정완료");
 }
 
 </script>

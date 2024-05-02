@@ -46,6 +46,12 @@ function btnCreateClickHandler(){
 			return;
 		} 
 	}
+	if ($("[name=uploadfile]").length > 0){
+		if ($("[name=uploadfile]").val().trim().length == 0) {
+			alert("대표사진을 첨부해주세요");
+			return;
+		} 
+	}
 	
 	// ajax - encType="multipart/form-data" 
 	$.ajax({

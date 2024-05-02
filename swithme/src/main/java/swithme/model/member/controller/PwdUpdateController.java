@@ -40,8 +40,6 @@ public class PwdUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo"); 
 			String memId = loginInfo.getMemId();
@@ -51,21 +49,21 @@ public class PwdUpdateController extends HttpServlet {
 			String newpwd2=request.getParameter("newpwd2");
 			
 			System.out.println("memId>>>>  "+memId);
+			System.out.println("memPwd++++++  "+memPwd);
 			System.out.println("pwd>>>>>  "+pwd);
-			System.out.println("newpwd>>>>>  "+newpwd);
+			System.out.println("newpwd++++++  "+newpwd);
 			
 			
 			MemberUpdateDto dto= new MemberUpdateDto(memId,memPwd,newpwd);
 			int result=service.update(dto);
 			
-			//MemberUpdateDto resultInfo = new MemberService().update(dto);
-			if(memPwd.equals(pwd) && newpwd.equals(newpwd2)) {
+			
+			if(newpwd.equals(newpwd2)) {
 				result=1;
-				//request.getSession().setAttribute("loginInfo", newpwd);
+			}else {
+				result=0;
 			}
 			response.getWriter().append(String.valueOf(result));
-			response.sendRedirect(request.getContextPath()+"/mypage");
-
 	}
 
 }

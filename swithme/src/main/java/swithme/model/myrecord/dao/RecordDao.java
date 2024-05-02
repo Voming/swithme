@@ -9,7 +9,6 @@ import swithme.model.myrecord.dto.DateDifftimeDto;
 import swithme.model.myrecord.dto.DayStudyTimeBySubjectDto;
 import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordCalendarDto;
-import swithme.model.myrecord.dto.RecordDto;
 import swithme.model.myrecord.dto.RecordTimeDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 //RECORD_ID         NOT NULL NUMBER       

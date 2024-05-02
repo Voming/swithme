@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swithme.model.member.dto.MemberInfoDto;
-import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.dto.SubjectDifftimeDto;
 import swithme.model.myrecord.service.RecordService;
 
@@ -25,7 +24,7 @@ public class MyrecordController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String subjectName = request.getParameter("subjectName");
-    	List<RecordCalendarDto> calendarList = null;
+//    	List<RecordCalendarDto> calendarList = null;
 				// memId 세션확인
 				MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 //				if(loginInfo == null) {

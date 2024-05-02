@@ -3,9 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- wellcom -->
-<link
-	href="<%=request.getContextPath()%>/resources/css/basic/welcome.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/basic/welcome.css" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>

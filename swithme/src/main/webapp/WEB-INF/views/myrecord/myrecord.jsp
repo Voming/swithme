@@ -218,7 +218,7 @@
 						</div>
 						
 						<div class="statistics-part">
-							<div class="sub-title grid-item"">
+							<div class="sub-title grid-item">
 								<p>시간기록을 종료한 값만 통계에 반영됩니다</p>
 							</div>
 							<div class="grid-item">

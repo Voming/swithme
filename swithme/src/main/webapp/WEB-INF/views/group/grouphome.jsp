@@ -240,6 +240,8 @@
 				alert("빈문자열만 입력할 수 없습니다. 검색할 그룹명을 작성해주세요.");
 				return;
 			}
+			
+			$(".btn.more").hide();
 
 			$.ajax({
 				url:"${pageContext.request.contextPath }/group/find.ajax"

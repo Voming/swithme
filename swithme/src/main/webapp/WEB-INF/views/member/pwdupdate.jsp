@@ -47,7 +47,8 @@
 			<form id="update-form" action="${pageContext.request.contextPath}/update" method="post">
 			<div>
 			<p>기존 비밀번호</p>
-			<input type="text" name="pwd" id="pwd" >
+			<!-- <input type="text" name="pwd" id="pwd" > -->
+			<div class="mempwd">${loginInfo.memPwd}</div>
 			</div>
 			
 			<div>
@@ -108,14 +109,13 @@ function loadedHandler(){
 }
 
 function btnCheckClickHandler(){
-	var pwd = $("[name=pwd]").val().trim();
 	var newpwd=$("[name=newpwd]").val().trim();
 	var newpwd2=$("[name=newpwd2]").val().trim();
 
 	$.ajax({  
 		url : "${pageContext.request.contextPath }/update"
 		,method : "post"
-		,data : { pwd:pwd , newpwd:newpwd ,newpwd2:newpwd2}
+		,data : { newpwd:newpwd ,newpwd2:newpwd2}
 		,success : function(result){
 			console.log(result);
 			if(result>0){

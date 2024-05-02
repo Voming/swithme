@@ -49,7 +49,7 @@ public class PwdUpdateController extends HttpServlet {
 			String newpwd2=request.getParameter("newpwd2");
 			
 			System.out.println("memId>>>>  "+memId);
-			System.out.println("memPwd>>>>>>>>  "+memPwd);
+			System.out.println("memPwd++++++  "+memPwd);
 			System.out.println("pwd>>>>>  "+pwd);
 			System.out.println("newpwd++++++  "+newpwd);
 			
@@ -58,7 +58,7 @@ public class PwdUpdateController extends HttpServlet {
 			int result=service.update(dto);
 			
 			
-			if(memPwd.equals(pwd) && newpwd.equals(newpwd2)) {
+			if(newpwd.equals(newpwd2)) {
 				result=1;
 			}else {
 				result=0;

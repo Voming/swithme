@@ -120,7 +120,7 @@ function btnCheckClickHandler(){
 			console.log(result);
 			if(result>0){
 				alert("비밀번호 변경");
-				location.href="${pageContext.request.contextPath }/mypage";
+				location.href="${pageContext.request.contextPath }/login";
 			}else {
 				alert("비밀번호 불일치");
 				location.href="${pageContext.request.contextPath }/mypage"

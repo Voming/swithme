@@ -9,14 +9,15 @@
 <!-- calendar -->
 <link href="${pageContext.request.contextPath}/resources/css/testcalendar/testcalendarhome.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/testcalendar/testcalendartable.css" rel="stylesheet">
-<!-- full calendar-->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp"/>
 <title>SWITH.ME</title>
 </head>
 <body>
 	<script>
+
+	
 	var testevent = [{
 		allDay:true,
 		color:"#8066FF",
@@ -285,7 +286,7 @@
 						},
 						selectable : true,
 						droppable : true,
-		
+						
 						events:eventsArr,
 						trigger: 'hover',
 						expandRows: true ,
@@ -498,6 +499,9 @@
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
-
+<!-- full calendar -->
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/locales-all.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/daygrid/index.global.js"></script>
 </body>
 </html>

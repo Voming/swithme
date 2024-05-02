@@ -18,9 +18,6 @@
 <!-- moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-<!-- 풀캘린더 CDN -->
-
-<script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 <script>
 
@@ -535,5 +532,9 @@ function currentTimeHandler() {
 
 		/* today(); */
 	</script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/locales-all.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/daygrid/index.global.js"></script>
+<script src="${pageContext.request.contextPath}/resources/css/basic/fullcalendar_js/timegrid/index.global.js"></script>
 </body>
 </html>

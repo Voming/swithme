@@ -91,7 +91,9 @@ public class BoardService {
 		BoardContentDto result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 		result = dao.selectOne(session, boardId);
-
+		if(result != null) {
+			dao.updateReadCount(session, boardId);
+		}
 		System.out.println("BoardContentService : " + boardId);
 
 		session.close();

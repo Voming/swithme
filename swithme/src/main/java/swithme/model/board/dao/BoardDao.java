@@ -88,6 +88,12 @@ public class BoardDao {
 
 	}
 	
+	//조회수
+	public int updateReadCount(SqlSession session, Integer boardId) {
+		int result = session.update("board.updateReadCount", boardId);
+		
+		return result;
+	}
 
 	//게시글 수정
 	public int update(SqlSession session, BoardUpdateDto dto) {

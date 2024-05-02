@@ -50,7 +50,7 @@
 							<li>${dto.boardWriter }</li>
 							<li>${dto.writeTime }</li>
 							<li>
-								<p>${dto.boardLike }<p>
+								<p>${dto.readCount}<p>
 							</li>
 						</ul>
 					</div>

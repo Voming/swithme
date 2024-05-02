@@ -29,7 +29,7 @@
 	</select>
 
 	<select id="selectOne" resultType="BoardContentDto" parameterType="int">
-		SELECT BOARD_ID, TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME, BOARD_LIKE, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
+		SELECT BOARD_ID, TITLE, BOARD_WRITER, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME, READ_COUNT, CONTENT FROM BOARD WHERE BOARD_ID = #{boardId}
 	</select>
 	
 	<select id="selectBoardReplyList" resultType="BoardReplyDto" parameterType="int">
@@ -63,6 +63,10 @@
 
 	<update id="update" parameterType="BoardUpdateDto">
 		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE BOARD_ID = #{boardId}
+	</update>
+	
+	<update id="updateReadCount" parameterType="int">
+		UPDATE BOARD SET READ_COUNT = READ_COUNT +1 WHERE BOARD_ID = #{boardId}
 	</update>
 
 	<delete id="deleteBoard" parameterType="int">

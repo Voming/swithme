@@ -6,22 +6,22 @@ public class BoardContentDto {
 	private String title;
 	private String boardWriter;
 	private String writeTime; //timeStamp
-	private Integer boardLike;
+	private Integer readCount;
 	private String content;
 
 	@Override
 	public String toString() {
 		return "BoardContentDto [boardId=" + boardId + ", title=" + title + ", boardWriter=" + boardWriter
-				+ ", writeTime=" + writeTime + ", boardLike=" + boardLike + ", content=" + content + "]";
+				+ ", writeTime=" + writeTime + ", readCount=" + readCount + ", content=" + content + "]";
 	}
 
-	public BoardContentDto(Integer boardId, String title, String boardWriter, String writeTime, Integer boardLike, String content) {
+	public BoardContentDto(Integer boardId, String title, String boardWriter, String writeTime, Integer readCount, String content) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
 		this.boardWriter = boardWriter;
 		this.writeTime = writeTime;
-		this.boardLike = boardLike;
+		this.readCount = readCount;
 //		this.content = content;
 		content = content.replaceAll("\\r?\\n","<br>");
 		//줄바꿈 태그 바꾸기 -> 그냥 글을 쓰면 화면상 줄바꿈이 나타나지 않음
@@ -45,8 +45,8 @@ public class BoardContentDto {
 		return writeTime;
 	}
 
-	public Integer getBoardLike() {
-		return boardLike;
+	public Integer getReadCount() {
+		return readCount;
 	}
 
 	public String getContent() {

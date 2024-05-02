@@ -15,8 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link	href="${pageContext.request.contextPath}/resources/css/myrecord/myrecord.css"	rel="stylesheet">
 <!--chart.js CDN  -->
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet"> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" rel="stylesheet">
+<script src="https://fastly.jsdelivr.net/npm/chart.js"></script>
 <!-- moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 

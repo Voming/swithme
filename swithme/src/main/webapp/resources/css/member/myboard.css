@@ -52,13 +52,13 @@
 	margin: 20px;	
 }
 
-.wrap-body .btn {
+.wrap-body .wrap-btn {
 	display: flex;
 	justify-content:end;
 
 }
 
-.wrap-body .btn.delete {
+.wrap-body > div:nth-child(2) > div > div > .btn.delete {
 	font-family: "IM_Hyemin-Bold";
 	font-size: var(--font3);
 	font-weight: bolder;
@@ -70,7 +70,86 @@
 
 }
 
-.wrap-body .btn.delete:hover {
+.wrap-body > div:nth-child(2) > div > div > .btn.delete:hover {
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+
+.modal-content{
+	width: 300px;	
+}
+
+a{
+	color: black;
+    text-decoration: none;
+}
+
+ .wrap-body .wrap-btn .modal-content {
+    margin: 0 auto;
+    /*가운데 정렬 , 기본 option*/
+    width: 500px;
+    position: relative;
+    top: 50px;
+    left: 100px;
+    background-color: white;
+    border: 2px solid  #8066FF;
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr ;
+    grid-template-rows: 50px 30px 40px 40px 20px;
+ 
+}
+
+#updateModal > div > div > div {
+	grid-column:2/5;
+	grid-row:2/3;
+	text-align: center;
+}
+
+
+#updateModal > div > div > button.btn {
+	width: 100px;
+	height: 40px;
+}
+
+#updateModal > div > div > button.btn.done {
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	grid-column:2/3;
+	grid-row:4/5;
+}
+
+#updateModal > div > div > button.btn.done:hover{
+	border: none;
+	border-radius: 20px;
+	background: #8066FF;
+	color: white;
+	padding: 10px 30px;
+	cursor: pointer;
+}
+
+#updateModal > div > div > button.btn.esc {
+	border: none;
+	border-radius: 20px;
+	background: #DDCCFF;
+	padding: 10px 30px;
+	font-family: "IM_Hyemin-Bold";
+	font-size: var(--font3);
+	font-weight: bolder;
+	grid-column:4/5;
+	grid-row:4/5;
+}
+
+#updateModal > div > div > button.btn.esc:hover {
 	border: none;
 	border-radius: 20px;
 	background: #8066FF;

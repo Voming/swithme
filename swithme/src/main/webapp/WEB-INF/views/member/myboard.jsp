@@ -5,15 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/member/myboard.css" rel="stylesheet">
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <title>나의 게시판</title>
 </head>
 <body>
 
 [[${loginInfo }]]
-		<div class="wrapper">
+	<div class="wrapper">
 		<div class="wrap-header">
 			<header>
 				<%@include file="/WEB-INF/views/basic/header.jsp"%>
@@ -61,13 +61,12 @@
 					<tbody class="tbody-my">
 						<tr class="tr-sec">
 							<c:choose>
-						<c:when test="${empty mapboardlist}">
+						<c:when test="${empty boardlist}">
 	          				<tr>
 	          					<td colspan="5" style="border-bottom: none;">
 	          						게시글이 존재하지 않습니다.
 	          					</td>
 	          				</tr>
-	          			
 	          			</c:when>
 						<c:otherwise>
 							<tbody>
@@ -91,11 +90,30 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="btn">
-					<button type="button" class="btn delete">삭제</button>
+				<div class="wrap-btn">
+					<div class="btn-group">
+						<button type="button" class="btn delete" data-bs-toggle="modal"
+								data-bs-target="deleteModal">삭제</button>
+
+							<!-- Modal -->
+<!--  							<div class="delete modal" id="deleteModal">
+								<div class="modal-dialog .modal-dialog-centered">
+									<div class="modal-content">
+									 	<div>정말 삭제하시겠습니까?</div>
+										<button type="button"  class="btn yes">
+											<p>예</p>
+										</button>
+										<button type="button" class="btn no"  data-bs-dismiss="modal">
+											<p>아니오</p>
+										</button>
+									</div>
+								</div>
+							</div> -->
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>	
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
@@ -175,7 +193,7 @@ function btnDeleteClickHandler(){
 	
 	
 	$.ajax({
-        type : "post",
+       	  method : "post",
           url:"${pageContext.request.contextPath}/mypage/myboard/delete",
           data: JSON.stringify(cbList),
           contentType: "application/json; charset=utf-8",
@@ -199,6 +217,7 @@ function ajaxErrorHandler (request, status, error){
 
 </script>	
 	
-	
+<script src="${pageContext.request.contextPath}/resources/bootstrap-5.0.2/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap-5.0.2/bootstrap.bundle.min.js"></script>	
 </body>
 </html>

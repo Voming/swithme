@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 public class Gmail extends Authenticator {
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {
-		InputStream input = getClass().getClassLoader().getResourceAsStream("driver.properties");
+		InputStream input = getClass().getClassLoader().getResourceAsStream("mail.properties");
 		Properties prop = new Properties();
 		try {
 			prop.load(input);

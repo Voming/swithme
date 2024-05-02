@@ -1,7 +1,7 @@
 package swithme.model.member.controller;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
 
@@ -18,16 +18,15 @@ import javax.mail.Session;
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
-import swithme.jdbc.common.JdbcTemplate;
 
 /**
  * Servlet implementation class MailSendController
  */
-@WebServlet("/mail")
+@WebServlet("/mailsend")
 public class MailSendController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	Properties prop = new Properties();
+	private Properties prop = new Properties();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,7 +46,7 @@ public class MailSendController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 랜덤 문자열
-				int leftLimit = 97; // 'a'
+				int leftLimit = 97; // 'a' 난수 생성
 				int rightLimit = 122; // 'z'
 				int codeLength = 8;
 				Random rand = new Random();
@@ -57,15 +56,20 @@ public class MailSendController extends HttpServlet {
 					sb.append((char)randLimitInt);
 					}
 				String code = sb.toString();
-				
-				String currentPath = JdbcTemplate.class.getResource("").getPath();
-				prop.load(new FileReader(currentPath + "driver.properties"));
+				InputStream input = getClass().getClassLoader().getResourceAsStream("mail.properties");
+				try {
+					prop.load(input);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 				//회원 인증 이메일 발송 내용
 				//발송인
 				String from = prop.getProperty("google.mail");
+				System.out.println("from:"+from);
 				//수신인
-				String to = request.getParameter("mail");
+				String to = request.getParameter("mailto");
+				System.out.println("to:"+to);
 				//메일 제목
 				String subject = "";
 				//메일 내용
@@ -101,7 +105,11 @@ public class MailSendController extends HttpServlet {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
+				
+				response.getWriter().append(code);
 			}
+	
+	
 	
 }
 

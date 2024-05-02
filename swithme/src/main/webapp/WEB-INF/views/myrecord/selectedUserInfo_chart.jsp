@@ -60,7 +60,7 @@ var colNum2;
 function todayStudyTime(){
 	var memId = "${memId}";
 $.ajax({
-url: "${pageContext.request.contextPath }/selecteduser/info"
+url: "${pageContext.request.contextPath }/group/selecteduser/info"
 ,method:"post"
 ,error : ajaxErrorHandler
 ,data : {memId:memId} //TODO 

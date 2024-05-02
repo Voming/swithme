@@ -17,7 +17,8 @@
 <!-- moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <!-- 풀캘린더 CDN -->
-<script	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script	src="https://fastly.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/common_function.jsp" />
 
 <title>SWITH.ME</title>
@@ -30,10 +31,9 @@
 				<div class="bn">
 					<div class="nav2-wrap">
 						<ul>
-							<li><a class="active"
-								href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
+							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/test">시험달력</a></li>
@@ -53,8 +53,19 @@
 						<div>
 							<p class="user-name"> ${memId}</p>
 							<p class="user-comment">${comment}</p>
-						</div>								
-						<div class="user-difftime">${difftime}</div>
+						</div>	
+						<!--  TODO-->	
+						<c:choose>
+							<c:when test="${empty difftime}">
+								<div  class="user-difftime">
+									<p>00:00:00</p>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="user-difftime">${difftime}</div>
+							</c:otherwise>
+						</c:choose>					
+
 					</div>
 					
 					<div class="grid-item">

@@ -84,7 +84,8 @@
 												<c:otherwise>
 													<div id="${vo.subjectName}" class="subId" data-subject-name="${vo.subjectName}" data-subject-id="${vo.subjectId}" data-subject-color="${vo.subjectColor}">${vo.subjectName}</div>
 												</c:otherwise>
-											</c:choose> <c:choose>
+											</c:choose> 
+											<c:choose>
 												<c:when test="${empty vo.difftime}">
 													<div>
 														<p>00:00:00</p>

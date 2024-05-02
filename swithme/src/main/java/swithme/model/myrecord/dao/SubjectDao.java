@@ -30,26 +30,20 @@ public class SubjectDao {
 	}
 	
 	//과목 불러오기...? select 
-	//TODO 유저 아이디에 맞는 것만
 	public List<SubjectDto> select(SqlSession session,String memId) {
 		return session.selectList("subject.select", memId);
 	}
-	
-	
 	//과목 추가 insert
-	//public 
-//	TODO subjectId 시퀀스 넣기
 	public int insert(SqlSession session, SubjectAddDto dto) {
 		return session.insert("subject.insert", dto);
 	}
-
-	//과목 수정 update TODO
+	
+	//과목 수정
 	public int update(SqlSession session, SubjectModifyDto dto) {
 		return session.update("subject.update", dto);
 	}
-	
+	//과목 삭제
 	public int delete(SqlSession session, SubjectDeleteDto dto) {
-		System.out.println("************sbuject delete   "+dto);
 		return session.update("subject.delete", dto);
 	}
 	

@@ -28,8 +28,6 @@ public class SubjectModifyController extends HttpServlet {
 		String subjectName= request.getParameter("subjectName");
 		String modifySubName= request.getParameter("subNameModi");
 		String modifySubColor= request.getParameter("colorModi");
-		System.out.println("\n>>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax modifySubName : "+modifySubName);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax color : "+modifySubColor);
 		
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String memId = loginInfo.getMemId();

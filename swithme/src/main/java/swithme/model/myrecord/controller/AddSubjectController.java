@@ -21,7 +21,6 @@ public class AddSubjectController extends HttpServlet {
         super();    
     }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax 는 TODO");
 		
 		String subName= request.getParameter("subName");
 		String selectColor= request.getParameter("selectColor");
@@ -29,7 +28,6 @@ public class AddSubjectController extends HttpServlet {
 		// memId
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String memId = loginInfo.getMemId();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>> /addsubject.ajax 는 MEMID  " + memId);
 		
 		SubjectAddDto dto = new SubjectAddDto( memId, subName, selectColor);
 		
@@ -38,7 +36,6 @@ public class AddSubjectController extends HttpServlet {
 //		to Json getWrite....
 		
 		int result = service.insert(dto);
-		//TODO ajax
 		if(result >0) {
 			response.sendRedirect(request.getContextPath()+"/myrecord");
 		}else {

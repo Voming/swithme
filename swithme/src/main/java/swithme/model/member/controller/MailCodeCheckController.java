@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MailCodeCheckController
  */
-@WebServlet("/MailCodeCheckController")
+@WebServlet("/mailcode")
 public class MailCodeCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,9 +31,12 @@ public class MailCodeCheckController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String code = request.getParameter("code");
-		String emailsend = request.getParameter("emailsend");
-		if(emailsend.equals(code)) {
+		String codeVal = request.getParameter("codeVal");
+		String emailcodeVal = request.getParameter("emailcodeVal");
+		System.out.println("codeVal: "+codeVal); 
+		System.out.println("emailcodeVal: "+emailcodeVal); 
+		
+		if(emailcodeVal.equals(codeVal)) {
 			response.getWriter().append("1");
 		} else {
 			response.getWriter().append("0");

@@ -48,14 +48,14 @@
 					</div>
 					<div>
 						<label>이메일</label><input type="email" name="email"  id="email" required>
-						<button type="button" class="btn code"><p>인증코드</p></button>
+						<button type="button" class="btn code" onclick="sendEmailHandler"><p>인증코드</p></button>
 						<span class="desc-email"></span>
 					</div>
 					<div>
 						<label class="emailcheck">이메일 확인</label>
-						<input onclick="sendEmailHandler" type="text" name="emailsend" id="emailsend" placeholder="인증코드" disabled="disabled" required>
+						<input type="text" name="emailsend" id="emailsend" placeholder="인증코드" required>
 						<input type="hidden" name="code" id="code">
-						<button disabled="disabled"  class="checkcode"><p>인증</p></button>
+						<button class="checkcode"><p>인증</p></button>
 					</div>
 					<div>
 						<label>비밀번호</label><input type="password" name="pwd" id="pwd" placeholder="영문자와 숫자로만 5글자 이상 입력하세요" required>
@@ -85,6 +85,8 @@ $(loadedHandler);
 
 function loadedHandler(){
 	$(".btn.dcheck").on("click", btnCheckClickHandler);
+	$(".btn.code").on("click", sendEmailHandler);
+	$(".checkcode").on("click", checkHandler);
 }
 
 function btnCheckClickHandler(){
@@ -156,7 +158,7 @@ $("input").keyup(function(){
 $("input").keyup(function(){
 	var id=$("#id").val().trim();
 	var email=$("#email").val().trim();
-	var emailr=$("#emailr").val().trim();
+	var emailr=$("#emailsend").val().trim();
 	var pwd=$("#pwd").val().trim();
 	var pwdr=$("#pwdr").val().trim();
 	
@@ -194,14 +196,20 @@ $('[name=email]').on('blur', function(){
 
 //인증번호 발송
 function sendEmailHandler(){
+	if($("#email").val().trim().length < 5){
+		alert("다시입력");
+	}
+	
 	$.ajax({
-		url:"${pageContext.request.contextPath }/mail" , 
-		type:'post',
+		url:"${pageContext.request.contextPath }/mailsend" , 
+		type:"post",
+		data : {mailto : $("#email").val() },
 		async:false, 
 		success: function(result){
-			if(result != null){
-				alret("인증번호 발송");
-				$("[name=emailr]").val(result);
+			console.log(result);
+			if(result){
+				alert("인증번호 발송");
+				$("#code").val(result);
 			}else{
 				alert("다시 시도해주세요")
 			}
@@ -217,19 +225,19 @@ function sendEmailHandler(){
 }
 //인증번호 확인
  function checkHandler(){
-	var codeVal=$("#code").val(); 
-	var inputVal=$(".emailsend").val();
+	var codeVal=$("#code").val();  //hidden input
+	var emailcodeVal=$("#emailsend").val()//인증코드쓰기
+	console.log("codeVal: " + codeVal);
+	console.log("emailcodeVal text: " + emailcodeVal);
 	
 	$.ajax({
 		url:  "${pageContext.request.contextPath }/mailcode" , 
 		method:"post",
-		date:{codeVal:codeVal ,inputVal:inputVal },
+		data:{codeVal:codeVal , emailcodeVal:emailcodeVal },
 		async:false ,
 		success:function(result){
 			if(result==1){
 				alert("인증완료");
-				$(".checkcode").prop("disabled",true);
-				$(".checkcode").text("인증완료");
 			}else{
 				alert("인증코드를 확인해주세요")
 			}

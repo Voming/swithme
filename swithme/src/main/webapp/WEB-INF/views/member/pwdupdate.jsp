@@ -48,7 +48,6 @@
 			<div>
 			<p>기존 비밀번호</p>
 			<input type="text" name="pwd" id="pwd" >
-			
 			</div>
 			
 			<div>
@@ -119,10 +118,12 @@ function btnCheckClickHandler(){
 		,data : { pwd:pwd , newpwd:newpwd ,newpwd2:newpwd2}
 		,success : function(result){
 			console.log(result);
-			if(result==1){
-				alert("비밀번호 변경가능");
+			if(result>0){
+				alert("비밀번호 변경");
+				location.href="${pageContext.request.contextPath }/mypage";
 			}else {
 				alert("비밀번호 불일치");
+				location.href="${pageContext.request.contextPath }/mypage"
 			}	
 		}
 		,error : function(request, status, error){

@@ -130,7 +130,7 @@ function btnExitClickHandler() {
 		, method : "post"
 		, data :  {"groupId" : ${groupInfo.sgroupId}}
 		, success: function(result){
-			console.log(result);
+			/* console.log(result); */
 			if(result > 0){
 				alert("그룹을 탈퇴 성공! \n마지막 멤버라면 그룹이 사라집니다.");
 				location.href='${pageContext.request.contextPath}/group'
@@ -152,7 +152,7 @@ function btnExitClickHandler() {
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/myrecord">나의기록</a></li>
 							<li><a class="active" href="${pageContext.request.contextPath}/group">그룹</a></li>
-							<li><a href="#">랭킹</a></li>
+							<li><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 							<li><a href="${pageContext.request.contextPath}/board">커뮤니티</a></li>
 							<li><a href="${pageContext.request.contextPath}/test">시험달력</a></li>
 						</ul>
@@ -253,6 +253,5 @@ function btnExitClickHandler() {
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
-
 </body>
 </html>

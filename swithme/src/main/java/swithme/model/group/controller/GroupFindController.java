@@ -28,7 +28,7 @@ public class GroupFindController extends HttpServlet {
 		String findstr = request.getParameter("find");	
 		//그룹 검색하기
 		List<GroupDto> findGrouplist = service.selectFindList(findstr);
-		//request.getSession().setAttribute("findGrouplist", findGrouplist);
+		
 		Gson gson = new Gson();
 		response.getWriter().append(gson.toJson(findGrouplist));
 	}

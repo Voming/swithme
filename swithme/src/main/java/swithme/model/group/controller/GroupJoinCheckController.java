@@ -18,21 +18,18 @@ public class GroupJoinCheckController extends HttpServlet {
   
     public GroupJoinCheckController() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/group/join/chehck.ajax");
 		MemberInfoDto loginInfo = (MemberInfoDto)request.getSession().getAttribute("loginInfo");
 		String memId = loginInfo.getMemId();
 		
 		String groupIdstr = request.getParameter("m_group_id");
 		int groupId = Integer.parseInt(groupIdstr);
 		
+		//가입된 그룹인지 체크
 		GroupMemberDto dto = new GroupMemberDto(groupId, memId);
-		System.out.println("dto : " + dto);
 		int result = service.selectJoinCheck(dto);
-		System.out.println(result);
 		
 		response.getWriter().append(String.valueOf(result));
 	}

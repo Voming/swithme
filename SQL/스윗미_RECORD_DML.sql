@@ -139,6 +139,25 @@ exec PRO_RECORD_MMDD_DINNER('won','SQL',5,1);
 exec PRO_RECORD_MMDD_MORNING('won','JAVA',5,2);
 exec PRO_RECORD_MMDD_LUNCH('won','CSS',5,2);
 exec PRO_RECORD_MMDD_DINNER('won','SQL',5,2);
+--5/3
+exec PRO_RECORD_MMDD_DAWN('won','JAVA',5,3);
+exec PRO_RECORD_MMDD_NIGHT('won','SQL',5,3);
+insert into record values(SEQ_RECORD_ID.nextval
+    ,(select SUBJECT_ID from SUBJECT where mem_id='won' and subject_name='CSS') 
+    ,'won',(SELECT TO_DATE('2024-05-03 08:35:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-05-03 08:50:55', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
 
+exec PRO_RECORD_MMDD_DAWN('song','spring',5,3);
+exec PRO_RECORD_MMDD_NIGHT('song','C#',5,3);
+insert into record values(SEQ_RECORD_ID.nextval
+    ,(select SUBJECT_ID from SUBJECT where mem_id='song' and subject_name='spring') 
+    ,'song',(SELECT TO_DATE('2024-05-03 08:35:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-05-03 08:50:55', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+
+exec PRO_RECORD_MMDD_DAWN('hyo','JAVA',5,3);
+insert into record values(SEQ_RECORD_ID.nextval
+    ,(select SUBJECT_ID from SUBJECT where mem_id='hyo' and subject_name='HTML') 
+    ,'hyo',(SELECT TO_DATE('2024-05-03 08:35:00', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_START FROM dual),(SELECT TO_DATE('2024-05-03 08:50:55', 'YYYY-MM-DD HH24:MI:SS') AS RECORD_END FROM dual));
+
+exec PRO_RECORD_MMDD_NIGHT('kim','spring',5,3);
 
 commit;
+

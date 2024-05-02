@@ -16,8 +16,8 @@ import swithme.model.board.dto.BoardUpdateDto;
 public class BoardDao {
 
 	//게시글 한 페이지에 나열
-		public List<BoardListDto> selectAllList(SqlSession session) {
-			List<BoardListDto> result = session.selectList("board.selectAllList");
+		public List<BoardListDto> selectAllList(SqlSession session, String memId) {
+			List<BoardListDto> result = session.selectList("board.selectAllList", memId);
 			return result;
 
 		}

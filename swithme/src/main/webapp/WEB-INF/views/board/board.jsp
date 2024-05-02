@@ -67,6 +67,7 @@
 						<c:otherwise>
 							<tbody>
 								<c:forEach items="${mapboardlist.boardlistdto}" var="dto">
+								<!-- mapboardlist 안에 boardlistdto를 dto로 분리시킴 -->
 									<tr class="tr-sec">
 										<td style="text-align: center;">${dto.boardId}</td>
 										<td><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
@@ -97,7 +98,7 @@
 			<div>
 				<ul>
 					<c:if test="${mapboardlist.startPageNum > 1}">
-						<li><a href="${pageContext.request.contextPath }/board?page=${mapboardlist.startPageNum-1 }"></a></li>
+						<li><a href="${pageContext.request.contextPath }/board?page=${mapboardlist.startPageNum-1 }">&lt;</a></li>
 						<!-- paging 처리 : form 태그 쓰지 않아도 controller로 값이 전달되고 전달된 값을 getParameter() 로 꺼내 쓰고 service로 보냄 -->
 						<!-- ? 뒤에 page는 name이고 = 뒤가 value 라서 value 로 이동해줘 라는 뜻
 								request.getParameter() 로 받음 -->
@@ -123,7 +124,7 @@
 					</c:forEach>
 					<c:if
 						test="${mapboardlist.endPageNum < mapboardlist.totalPageCount }">
-						<li><a href="${pageContext.request.contextPath }/board?page=${mapboardlist.endPageNum+1 }"></a></li>
+						<li><a href="${pageContext.request.contextPath }/board?page=${mapboardlist.endPageNum+1 }">&gt;</a></li>
 					</c:if>
 				</ul>
 			</div>

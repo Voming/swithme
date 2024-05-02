@@ -79,10 +79,8 @@
 #tab01 > div > div > .ranking-wrap > div.ranknum > p {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 30px;
-
-	position: absolute;
-	top: 9px;
-	left: 14px;
+	text-align:center;
+	padding-top: 10px;
 }
 
 #tab01 > div > div > div > div.memId {
@@ -125,10 +123,8 @@
 #tab02 > div > div > .ranking-wrap > div.ranknum > p {
 	font-family: "IM_Hyemin-Bold";
 	font-size: 30px;
-	
-	position: absolute;
-	top: 9px;
-	left: 14px;
+	text-align:center;
+	padding-top: 10px;
 }
 
 #tab02 > div > div > div > div.memId {

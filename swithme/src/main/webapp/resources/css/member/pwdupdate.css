@@ -30,6 +30,10 @@
     outline: none;
 }
 
+.wrap-body .wrap-update .mempwd{
+	 height: 30px;
+}
+
 .wrap-body .wrap-update .btn.check{
 	background-color:white;
 	border:none;

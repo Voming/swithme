@@ -20,7 +20,7 @@ import swithme.model.myrecord.dto.DayStudyTimeDto;
 import swithme.model.myrecord.dto.RecordCalendarDto;
 import swithme.model.myrecord.service.RecordService;
 
-@WebServlet("/selecteduser/info")
+@WebServlet("/group/selecteduser/info")
 public class SelectedUserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecordService service = new RecordService();

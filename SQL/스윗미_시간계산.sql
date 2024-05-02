@@ -131,9 +131,9 @@ group by RECORD_SUBJECT_ID
 on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_DEL_DATE IS NULL
 ;
----------일일 과목별 학습 시간--------------------------
+---------일일 과목별 학습 시간---사용-----------------------
 SELECT distinct SUBJECT_NAME
-, SUBJECT_COLOR
+, SUBJECT_COLOR COLOR
 , SUBSTR(DIFFTIME,12,8) DIFFTIME
 , TRUNC(SYSDATE) as ONLY_DATE    
 from V_RECORD 
@@ -223,7 +223,7 @@ SELECT
         ; 
 --한 달 공부 시간 통계   
 
------월 공부시간 합 // 한달 총 공부시간 -- TODO 조건식 수정 
+-----월 공부시간 합 // 한달 총 공부시간 -- 
 SELECT 
     TO_CHAR(RECORD_MONTH, 'YYYY-MM') AS month,
     nvl2(FLOOR(total_seconds / 3600), LPAD(FLOOR(total_seconds / 3600), 2, '0'), '00') || ':' ||
@@ -242,7 +242,7 @@ FROM (
         FROM 
             record
         WHERE 
-            record_mem_id = 'b' 
+            record_mem_id = 'won' 
             --AND RECORD_end >= (SYSDATE - 30)
               AND TO_CHAR(RECORD_END, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM') -- 월이 동일한 경우만 선택
             -- AND TRUNC(RECORD_END, 'MM') BETWEEN ADD_MONTHS(SYSDATE, -2) AND ADD_MONTHS(SYSDATE, -1) -- 두 달 전인 경우만 선택
@@ -258,7 +258,7 @@ SELECT
      NUMTODSINTERVAL( sum(r.RECORD_END - r.RECORD_START) ,'day') AS "SUM_MIN"
     FROM SUBJECT j
     join RECORD  r on (j.mem_id = r.record_mem_id)
-    WHERE  r.RECORD_end >= ( SYSDATE - 30 )  and MEM_ID='b'
+    WHERE  r.RECORD_end >= ( SYSDATE - 30 )  and MEM_ID='won'
     GROUP BY   j.mem_id
     ;   
     
@@ -367,8 +367,13 @@ on (SUBJECT_ID = RECORD_SUBJECT_ID)
 WHERE SUBJECT_ID IS NULL
 ;
 
------------------------------------------------------
-
+--일일 ranking ----------------------------------------------
+SELECT record_mem_id, SUBSTR(NUMTODSINTERVAL( SUM( CAST(RECORD_END as DATE) - CAST(RECORD_START as DATE) ), 'day' ), 12, 8) as DIFFTIME
+from RECORD
+where to_char(RECORD_START, 'yyyymmdd') =  to_char(SYSDATE, 'yyyymmdd')
+group by record_mem_id
+order by DIFFTIME desc
+;
 
 
 

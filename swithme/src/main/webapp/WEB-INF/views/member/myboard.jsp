@@ -60,6 +60,34 @@
 					</tr>
 					<tbody class="tbody-my">
 						<tr class="tr-sec">
+							<c:choose>
+						<c:when test="${empty mapboardlist}">
+	          				<tr>
+	          					<td colspan="5" style="border-bottom: none;">
+	          						게시글이 존재하지 않습니다.
+	          					</td>
+	          				</tr>
+	          			
+	          			</c:when>
+						<c:otherwise>
+							<tbody>
+								<c:forEach items="${boardlist}" var="dto">
+								<!-- mapboardlist 자체를 dto로 분리시킴 -->
+									<tr class="tr-sec" >
+ 										<td style="text-align: center; border-bottom: 1px solid black;"><input type="checkbox" class="item" name="checkitem" value="${dto.boardId }"></td>
+										<td style="text-align: center; border-bottom: 1px solid black;">${dto.boardId}</td>
+										<td style="border-bottom: 1px solid black;"><a href="${pageContext.request.contextPath }/board/content?id=${dto.boardId }">${dto.title }</a></td>
+										<!-- boardId 에 의해 해당 게시판 상세 페이지로 이동 -->
+										<!-- url에 있는 parameter 값 가지고 와서 쓸 수 있기 때문에 여기 있는 id는
+										BoardContentController에에서 쓰임 -->
+										<td style="border-bottom: 1px solid black;">${dto.boardWriter}</td>
+										<td style="border-bottom: 1px solid black;">${dto.writeTime}</td>
+										<td style="border-bottom: 1px solid black;">${dto.readCount}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</c:otherwise>
+					</c:choose>
 						</tr>
 					</tbody>
 				</table>
@@ -67,50 +95,7 @@
 					<button type="button" class="btn delete">삭제</button>
 				</div>
 			</div>
-
-			<div>
-				<ul>
-					<c:if test="${startPageNum > 1}">
-						<li><a href="${pageContext.request.contextPath }/mypage/myboard?page=${mapboardlist.startPageNum-1 }"></a></li>
-						<!-- paging 처리 : form 태그 쓰지 않아도 controller로 값이 전달되고 전달된 값을 getParameter() 로 꺼내 쓰고 service로 보냄 -->
-						<!-- ? 뒤에 page는 name이고 = 뒤가 value 라서 value 로 이동해줘 라는 뜻
-								request.getParameter() 로 받음 -->
-					</c:if>
-					<c:forEach begin="${mapboardlist.startPageNum }"
-						end="${mapboardlist.endPageNum }" var="page">
-						<c:if test="${mapboardlist.currentPage == page }">
-							<li class="page">
-								${page }
-							</li>
-						</c:if>
-						<c:if test="${mapboardlist.currentPage != page }">
-							<li class="page">
-								<a href="${pageContext.request.contextPath }/mypage/myboard?page=${page }">
-									${page }
-								</a>
-							</li>
-							<input type="hidden" class="pageHidden" value="${page }">
-							<!-- hidden은 화면에 안보이는거라 관리자꺼긴한데 화면상에 육안으로 안보이지만 값은 존재함 -->
-							<!-- 여기에 위에 있는 a 태그 안에 있는 el태그{page} 이 값을 불러오면서
-									페이지 범위를 넓혀줘서 숫자를 누르지 않고 배경 눌러도 페이지 이동 가능-->
-						</c:if>
-					</c:forEach>
-					<c:if
-						test="${mapboardlist.endPageNum < mapboardlist.totalPageCount }">
-						<li><a href="${pageContext.request.contextPath }/mypage/myboard?page=${mapboardlist.endPageNum+1 }"></a></li>
-					</c:if>
-				</ul>
-			</div>
-
 		</div>
-		
-	</div>
-
-	<div class="wrap-footer">
-		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
-	</div>
-	
-
 	<div class="wrap-footer">
 		<%@include file="/WEB-INF/views/basic/footer.jsp"%>
 	</div>
@@ -120,12 +105,8 @@
 $(loadedHandler);
 
 function loadedHandler() {
-
-	console.log('${dataObj.startPageNum}');
 	
 	console.log( "로그인아이디 : " + '${loginInfo.memId}');
-	
-	$("li.page").on("click", pageChangeHandler);
 	
 	/* li태그에 Handler 걸어서 function 안에 a 태그 불러와서 css 색 바꿔주기 */
 	$(".page").on("mouseenter", pageMouseEnterHandler);
@@ -141,15 +122,9 @@ function loadedHandler() {
 	$(".btn.delete").on("click", btnDeleteClickHandler);
 	
 	//게시글 삭제 이후 남은 게시글 출력
-	loadboard();
+	// loadboard();
 }
 
-
-//밑에 페이지 눌렀을 때 페이지 바뀌는 것
-function pageChangeHandler(){
-	location.href = "${pageContext.request.contextPath}/mypage/myboard?page="+$(this).text();
-	/* ?는 쿼리, page는 name, 이 뒤에 오는게 value 이고 이것은 get방식 */
-}
 
 //체크 박스 전체 선택
 function allCheckHandler(){
@@ -190,13 +165,14 @@ function pageMouseLeaveHandler(){
 function btnDeleteClickHandler(){
 	var cbList = [];
 	//배열로 선언
-	$('input[name=checkitem]:checked').each(function (index) {
-		var item = $(this).parent().parent().find('.boardId-txt').text();
-	  	console.log(item);
-		cbList.push(item);
+	
+	$('.item:checked').each(function (index) {
+	  	console.log($(this).val());
+		cbList.push($(this).val());
 		//cbList에 push를 통해 item 집어넣기
 	});
 	console.log(cbList);
+	
 	
 	$.ajax({
         type : "post",
@@ -204,73 +180,14 @@ function btnDeleteClickHandler(){
           data: JSON.stringify(cbList),
           contentType: "application/json; charset=utf-8",
           success: function(result){
-        	  console.log(result);
-        	 loadboard(); 
+				location.reload();
+				/* 해당페이지 다시 로딩하면서 삭제한 게시글 사라진채로 뜸 */
           },
           error: ajaxErrorHandler
       });
 	
 }
 
-//나의 게시글에서 삭제한 게시글을 조회하는 함수
-function loadboard(){
-	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/mypage/myboard",
-		method: "post",
-		data: { page : "1"},
-		/* 여기서 memId를 데이터로 안들고 가는 이유는 이미 controller에서 로그인한 정보의 memId를 꺼내서 가지고 가고있음 */
-		dataType: 'json',
-		success: function(result){
-			console.log(result);
-			if(result == null) {
-				console.log("게시글 조회 실패");
-			} 
-			displayboardWrap(result);
-		},
-		error: ajaxErrorHandler		
-	});
-}
-
-
-
-//남은 게시글 출력하는 함수
-function displayboardWrap(dataObj){
-	console.log("dataObj : " + dataObj);
-	//console창 찍어보면 object 형태( { } 가 있음)
-	console.log("dataObj.boardlistdto : " + dataObj.boardlistdto);
-	
-	htmlVal = '';
-	if(dataObj.boardlistdto.length == 0){
-		htmlVal += `
-		<tr class="tr-sec">
-			<td colspan="6" style="border-bottom: none; text-align:center;">
-				게시글이 존재하지 않습니다.
-			</td>
-		</tr>
-		`;
-	} 
-	else{ 
-		for(var idx in dataObj.boardlistdto){
-			var dto = dataObj.boardlistdto[idx];
-			if(dto){
-				htmlVal += `	
-				<tr class="tr-sec">
-					<td style="text-align: center;"><input type="checkbox" class="item" name="checkitem"></td>
-					<td style="text-align: center;" class="boardId-txt">\${dto.boardId}</td>
-					<td onclick="location.href='${pageContext.request.contextPath }/board/content?id=\${dto.boardId }'">\${dto.title }</td>
-					<td>\${dto.boardWriter}</td>
-					<td>\${dto.writeTime}</td>
-					<td style="text-align: center;">\${dto.readCount}</td>
-				</tr>
-				`;
-			}
-		}
-	}
-	$(".tbody-my").html(htmlVal);
-	
-	console.log(dataObj.currentPage);
-}
 
 //ajax error 부분
 function ajaxErrorHandler (request, status, error){

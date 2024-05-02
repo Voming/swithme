@@ -67,11 +67,11 @@ public class BoardService {
 	}
 
 	// 게시판에 게시글 나타내기
-	public List<BoardListDto> selectAllList() {
+	public List<BoardListDto> selectAllList(String memId) {
 		List<BoardListDto> result = null;
 		SqlSession session = MybatisTemplate.getSqlSession();
 
-		result = dao.selectAllList(session);
+		result = dao.selectAllList(session, memId);
 
 		session.close();
 		return result;

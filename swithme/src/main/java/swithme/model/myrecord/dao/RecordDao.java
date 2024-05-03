@@ -87,6 +87,10 @@ public class RecordDao {
 	public List<RankingDto> rankingDaily(SqlSession session){
 		return session.selectList("record.rankingDaily");
 	}
+// 	랭킹 - 일간 - 1등
+	public RankingDto rankingDailyTop(SqlSession session){
+		return session.selectOne("record.rankingDailyTop");
+	}
 	
 // 	랭킹 - 월간
 	public List<RankingDto> rankingMonthly(SqlSession session){

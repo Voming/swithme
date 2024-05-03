@@ -192,7 +192,7 @@ function btnExitClickHandler() {
 					<ul>
 						<c:if test="${not empty groupSumDayList }">
 							<c:forEach items="${groupSumDayList}" var="DayDto"  begin="1">
-									<li class="mem-box" onclick="location.href='${pageContext.request.contextPath}/selecteduser/info?memId=${DayDto.memId }'">
+									<li class="mem-box" onclick="location.href='${pageContext.request.contextPath}/group/selecteduser/info?memId=${DayDto.memId }'">
 									<img alt="기본 아이콘" src="${pageContext.request.contextPath}/resources/images/studyIcon.jpg">
 										<p>${DayDto.memId }</p>
 										<p>${DayDto.d1 }</p>

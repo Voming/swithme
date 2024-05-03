@@ -47,16 +47,19 @@ public class MailSendController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 랜덤 문자열
 				int leftLimit = 97; // 'a' 난수 생성
-				int rightLimit = 122; // 'z'
+				int rightLimit = 122; // 'z' 난수 생성
 				int codeLength = 8;
-				Random rand = new Random();
+				
+				
+				Random random = new Random();
 				StringBuilder sb = new StringBuilder(codeLength);
+				
 				for(int i = 0; i < codeLength; i++) {
-					int randLimitInt = leftLimit + (int)(rand.nextFloat() * (rightLimit - leftLimit + 1));
+					int randLimitInt = leftLimit + (int)(random.nextFloat() * (rightLimit - leftLimit + 1));
 					sb.append((char)randLimitInt);
 					}
 				String code = sb.toString();
-				InputStream input = getClass().getClassLoader().getResourceAsStream("mail.properties");
+				InputStream input = getClass().getClassLoader().getResourceAsStream("mail.properties"); 
 				try {
 					prop.load(input);
 				} catch (IOException e) {
@@ -71,11 +74,13 @@ public class MailSendController extends HttpServlet {
 				String to = request.getParameter("mailto");
 				System.out.println("to:"+to);
 				//메일 제목
-				String subject = "";
+				String subject = "인증코드메일";
 				//메일 내용
-				String content = " " + code;
+				String content = "인증 코드를 작성해주세요 " + code;
+				System.out.println("code"+code);
 				
-				//고정 부분
+				
+				//고정 부분, 수정X
 				Properties prop = new Properties();
 				prop.put("mail.smtp.user", from);
 				prop.put("mail.smtp.host", "smtp.googlemail.com"); // google SMTP 주소
@@ -105,8 +110,6 @@ public class MailSendController extends HttpServlet {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				
-				response.getWriter().append(code);
 			}
 	
 	

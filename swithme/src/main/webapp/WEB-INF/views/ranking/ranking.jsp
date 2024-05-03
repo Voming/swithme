@@ -144,7 +144,7 @@ function displayDailyWrap(datalist){
 			htmlVal += `
 				<div class="ranking-wrap">
 					<div class="ranknum"><p>\${count}</p></div>
-					<div class="memId">\${dailyTime.recordMemId}</div>
+					<div class="memId" onclick="location.href='${pageContext.request.contextPath}/group/selecteduser/info?memId=\${dailyTime.recordMemId}'" style="cursor: pointer;">\${dailyTime.recordMemId}</div>
 					<div class="studyrecord">\${chartLabel}</div>
 					<div class="rank-bar"><div data-width="\${dailyTime.recordMemId}"><span>\${dailyTime.recordMemId}</span></div></div>							
 				</div>
@@ -211,7 +211,7 @@ function displayMonthlyWrap(datalist){
 			htmlVal += `
 					<div class="ranking-wrap">
 						<div class="ranknum"><p>\${count}</p></div>
-						<div class="memId">\${monthlyTime.recordMemId}</div>
+						<div class="memId"  onclick="location.href='${pageContext.request.contextPath}/group/selecteduser/info?memId=\${monthlyTime.recordMemId}'" style="cursor: pointer;">\${monthlyTime.recordMemId}</div>
 						<div class="studyrecord">\${chartLabel}</div>
 						<div class="rank-bar"><div data-width="\${monthlyTime.recordMemId}"><span>\${monthlyTime.recordMemId}</span></div></div>							
 					</div>

@@ -113,15 +113,19 @@ function btnDailyClickHandler() {
 		dataType: 'json',
 		success: function(result){
 			console.log(result);
-			displayDailyWrap(result);
+			/* result 가 list 하나여서 for문 돌려서 사용 - 기존의 경우 받는 값이 list 하나였기 때문에 그냥 result 만 쓰면됐었는데....  */
+			displayDailyWrap(result.dailyTime, result.dailyTopTime);
+			/* controller에서 매개변수를 두개 받아서 result 에서 둘 다 꺼내서 사용*/
+			
 		}, 
 		error: ajaxErrorHandler
 		
 	});
+ 	
 
 }
 
-function displayDailyWrap(datalist){
+function displayDailyWrap(datalist, dailyTopTime){
 	console.log("displayDailyWrap >>>>>");
 	var htmlVal = '';
 	if(datalist.length == 0) {
@@ -146,7 +150,7 @@ function displayDailyWrap(datalist){
 					<div class="ranknum"><p>\${count}</p></div>
 					<div class="memId" onclick="location.href='${pageContext.request.contextPath}/group/selecteduser/info?memId=\${dailyTime.recordMemId}'" style="cursor: pointer;">\${dailyTime.recordMemId}</div>
 					<div class="studyrecord">\${chartLabel}</div>
-					<div class="rank-bar"><div data-width="\${dailyTime.recordMemId}"><span>\${dailyTime.recordMemId}</span></div></div>							
+					<div class="rank-bar"><div class="rank-bar-child" data-width="\${dailyTime.recordMemId}"><span>\${dailyTime.recordMemId}</span></div><input type="hidden" name="chartsec" value="\${dailyTime.difftime}"></div>
 				</div>
 				`;	
 					/* memId 에서 list 형태로 왔기 때문에 하나씩 꺼내줘야함 */
@@ -158,7 +162,21 @@ function displayDailyWrap(datalist){
 	$('.daily-bar').children().eq(0).children('.ranknum').css('background-color', '8066FF').css('color', 'white');
 	$('.daily-bar').children().eq(1).children('.ranknum').css('background-color', 'var(--color_purple_2)').css('color', 'white');
 	$('.daily-bar').children().eq(2).children('.ranknum').css('background-color', 'var(--color_pink_1)').css('color', 'white');
+ 	
 	
+	
+ 		console.log(dailyTopTime);
+ 		console.log(((10000 / dailyTopTime)*100)+'%');
+	
+ 	$(".rank-bar-child").each(function(idx, item){
+ 		//.rank-bar-child 가 위에서 반복문을 돌고 있어서 여러개 출력 됨
+ 		console.log($(item)[0]);
+ 		var porportion = $(item).next().val() / dailyTopTime;
+ 		/* 0.xx 나옴 - 1등은 1이라서 width=100% */
+ 		/* sql문에서 순서대로 뽑히게 했기 때문에  */
+ 		console.log(porportion);
+ 		$(item).css("width", (porportion*100)+'%');
+ 	});
 }
 
 
@@ -235,6 +253,7 @@ function ajaxErrorHandler (request, status, error){
 			+ request.responseText + "\n"
 			+ "error: "+error);
 }
+
 
 
 /* ajax 사용시 db로 보낼 값이 없으면 data 빼고 쓰면 됨 */

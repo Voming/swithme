@@ -78,7 +78,7 @@ $.ajax({
 });  // ajax
 }  // f
 
-/**** myChart1 ******************************************/
+/**** myChart1 도넛******************************************/
 function displayTodayStudyTime(result){
 	for(let i = 0 ; i < result.length;i++){	
 		subejctNameList.push(result[i].subjectName);
@@ -101,7 +101,8 @@ function displayTodayStudyTime(result){
 				datasets: [{
 				    label: '오늘의 공부시간',
 				    data:recordTimeList ,
-				    backgroundColor:subjectColorList,   
+				    backgroundColor:subjectColorList, 
+				    borderColor:subjectColorList,
 				    hoverOffset: 4
 				  }]
 				};

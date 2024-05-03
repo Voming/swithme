@@ -141,6 +141,13 @@ from V_RECORD_SEC where TO_CHAR(RECORD_DATE,'yy-mm-dd')= TO_CHAR(sysdate,'yy-mm-
 group by record_mem_id order by DIFFTIME desc
 </select>
 
+<!-- 일간 1등만 뽑기 -->
+<select id="rankingDailyTop" resultType="RankingDto">
+select t1.* from (select record_mem_id, sum(NVL(DIFFTIME, 0)) DIFFTIMe
+from V_RECORD_SEC where TO_CHAR(RECORD_DATE,'yy-mm-dd')= TO_CHAR(sysdate,'yy-mm-dd') 
+group by record_mem_id order by 2 desc) t1 where rownum = 1
+</select>
+
 <!-- 랭킹 - 월간  -->
 
 <select  id="rankingMonthly" resultType="RankingDto">

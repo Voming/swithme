@@ -169,12 +169,18 @@
             -o-transition: all 0.5s ease;
                transition: all 0.5s ease;
 }
+
+.rank-bar>div>span{
+	margin-left: 10px;
+}
  
  /* 퍼센트 없는거 - 원래 노란색이었음 */
 .ranking-wrap > .rank-bar div {
         background-color: #8066FF;
         position: relative;
+        /* 
         padding-left: 25px;
+         */
         width: 80%;
  
         -webkit-border-radius: 2px;

@@ -139,6 +139,16 @@ public class RecordService {
 		session.close();
 		return result;
 	}
+	// 랭킹 - 일간 - 1등
+	public RankingDto rankingDailyTop(){
+		RankingDto result = null;
+		SqlSession session = getSqlSession();
+		result = dao.rankingDailyTop(session);
+		System.out.println("일간 랭킹 ...........................");
+		System.out.println(result);
+		session.close();
+		return result;
+	}
 	
 	// 랭킹 - 일간
 	public List<RankingDto> rankingMonthly(){

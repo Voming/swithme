@@ -149,7 +149,8 @@ let recordDateList=[];
 function displayFourdayStudyTimeChart (result){
 	
 	const sub = new Array();
-
+	
+	//for문
 	for(let i = 0 ; i < result.length;i++){	
 		var resultItem = result[i];
 		
@@ -159,13 +160,14 @@ function displayFourdayStudyTimeChart (result){
 	  	
 		var diffTimeByDayList = result[i].diffTimeByDayList;
 		var subData = new Array();
-		
+		//이중 for문
 		for(let j=0; j<result[i].diffTimeByDayList.length; j++){
 			subData[j] = diffTimeByDayList[j].difftime;
 			if(i==0) {
 				recordDateList[j] = diffTimeByDayList[j].onlyDate;
 			}
 		}
+		//뽑아낸 데이터들은 list의 i번째에 아래와 같은 형식으로 저장되고 list자체를 datasets으로 설정하여 통으로 차트에 넣음
 		fourDifftimeList[i] = {
 		        label: result[i].subjectName,
 		        data:subData,

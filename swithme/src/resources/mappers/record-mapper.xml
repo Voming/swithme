@@ -46,12 +46,7 @@ where RECORD_MEM_ID =#{memId} and TRUNC(RECORD_DATE) = TRUNC(SYSDATE)
 </select>
 
 <!-- 일일 최대학습시간 30일-->
-<!--
- <resultMap type="DateDifftimeDto" id="DateDifftimeDtoMap">
-	<result column="DIFFTIME" property="difftime" />
-	<result column="ONLY_DATE" property="onlyDate" />
-</resultMap> 
--->
+
 <select id="thirtydayStudyTime" parameterType="string" resultType="DateDifftimeDto">
 select NVL(ROUND(DIFFTIME), 0) DIFFTIME, TO_CHAR(DDAY,'MM-DD') ONLY_DATE
 from V_DDAY30 

@@ -35,13 +35,13 @@ public class GroupInfoController extends HttpServlet implements Serializable {
 			return;
 		}
 		GroupDto groupInfo = service.selectGroupInfoOne(groupId);
-		request.getSession().setAttribute("groupInfo", groupInfo);
+		request.setAttribute("groupInfo", groupInfo);
 	
 		List<GroupRecordSumDto> groupSumList = service.selectGroupRecordSumList(groupId);
-		request.getSession().setAttribute("groupSumList", groupSumList);
+		request.setAttribute("groupSumList", groupSumList);
 				
 		List<GroupRecordDaySumDto> groupSumDayList = service.selectGroupRecordDaySumList(groupId);
-		request.getSession().setAttribute("groupSumDayList", groupSumDayList);
+		request.setAttribute("groupSumDayList", groupSumDayList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/group/groupinfo.jsp").forward(request, response);
 	}

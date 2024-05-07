@@ -47,7 +47,7 @@ public class GroupUpdateController extends HttpServlet {
 		}
 		GroupDto groupInfo = service.selectGroupInfoOne(groupId); // 입력칸에 원래 있던 그룹 정보 넣음
 
-		request.getSession().setAttribute("groupInfo", groupInfo);
+		request.setAttribute("groupInfo", groupInfo);
 		request.getRequestDispatcher("/WEB-INF/views/group/groupupdate.jsp").forward(request, response);
 	}
 

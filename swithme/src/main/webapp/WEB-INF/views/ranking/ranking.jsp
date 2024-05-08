@@ -168,15 +168,19 @@ function displayDailyWrap(datalist, dailyTopTime){
  		console.log(dailyTopTime);
  		console.log(((10000 / dailyTopTime)*100)+'%');
 	
- 	$(".rank-bar-child").each(function(idx, item){
- 		//.rank-bar-child 가 위에서 반복문을 돌고 있어서 여러개 출력 됨
- 		console.log($(item)[0]);
- 		var porportion = $(item).next().val() / dailyTopTime;
- 		/* 0.xx 나옴 - 1등은 1이라서 width=100% */
- 		/* sql문에서 순서대로 뽑히게 했기 때문에  */
- 		console.log(porportion);
- 		$(item).css("width", (porportion*100)+'%');
- 	});
+ 		if(dailyTopTime > 0) {
+		 	$(".rank-bar-child").each(function(idx, item){
+		 		//.rank-bar-child 가 위에서 반복문을 돌고 있어서 여러개 출력 됨
+		 		console.log($(item)[0]);
+		 		var porportion = $(item).next().val() / dailyTopTime;
+		 		/* 0.xx 나옴 - 1등은 1이라서 width=100% */
+		 		/* sql문에서 순서대로 뽑히게 했기 때문에  */
+		 		console.log(porportion);
+		 		$(item).css("width", (porportion*100)+'%');
+		 	});
+
+ 		} 
+ 		
 }
 
 

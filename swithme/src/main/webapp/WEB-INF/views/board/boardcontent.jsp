@@ -11,9 +11,6 @@
 <title>게시판 상세</title>
 </head>
 <body>
-<!-- 로그인정보 들어오는지 확인 -->
-[[로그인 정보: ${loginInfo}]]
-
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>

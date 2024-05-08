@@ -11,8 +11,6 @@
 <title>나의 게시판</title>
 </head>
 <body>
-
-[[${loginInfo }]]
 	<div class="wrapper">
 		<div class="wrap-header">
 			<header>

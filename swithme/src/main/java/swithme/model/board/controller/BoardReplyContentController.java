@@ -14,25 +14,16 @@ import com.google.gson.Gson;
 import swithme.model.board.dto.BoardReplyDto;
 import swithme.model.board.service.BoardService;
 
-/**
- * Servlet implementation class BoardReplyContentController
- */
 @WebServlet("/board/reply/content")
 public class BoardReplyContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BoardService service = new BoardService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public BoardReplyContentController() {
         super();
        
     }
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("loadedHandler 안에 있는 ajax에서 댓글, 대댓글 정보 받아오기");
 		String boardIdStr = request.getParameter("id");

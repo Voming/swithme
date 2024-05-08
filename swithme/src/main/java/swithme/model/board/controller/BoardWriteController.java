@@ -11,26 +11,18 @@ import swithme.model.board.dto.BoardInsertDto;
 import swithme.model.board.service.BoardService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class BoardWriteController
- */
+
 @WebServlet("/board/write")
 public class BoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private BoardService service = new BoardService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public BoardWriteController() {
         super();
         
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String backPage = (String) request.getSession().getAttribute("backPage");
@@ -41,9 +33,6 @@ public class BoardWriteController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/board/boardwrite.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//jsp에서 여기로 전달

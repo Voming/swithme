@@ -1,39 +1,23 @@
 package swithme.model.board.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import swithme.model.board.service.BoardService;
 
-/**
- * Servlet implementation class BoardListController
- */
 @WebServlet("/board")
 public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService service = new BoardService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public BoardListController() {
         super();
      
     }
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//setAttribute를 통해서 boardlistdto 라는 이름에 service에서 selectAllList()를 통해 값을 불러와서 넣어줌
 		

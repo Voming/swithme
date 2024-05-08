@@ -15,25 +15,15 @@ import com.google.gson.Gson;
 import swithme.model.board.service.BoardService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class BoardReplyDeleteController
- */
 @WebServlet("/board/reply/delete")
 public class BoardReplyDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService service = new BoardService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	
     public BoardReplyDeleteController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String replyId = request.getParameter("replyId");
 		String boardId = request.getParameter("boardId");

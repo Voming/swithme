@@ -15,27 +15,18 @@ import swithme.model.board.dto.BoardReplyDto;
 import swithme.model.board.service.BoardService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class BoardReplyWriteController
- */
 @WebServlet("/board/reply/write")
 //LoginFilter 에서 urlPatterns에 url에 /board/라고 써진 모든 것들을 로그아웃 하기 전까지
 // login 상태 유지시키겠다고 조건 걸어놔서 로그인 유지를 위해 게시글 관련된 url 은 앞에 /board/ 붙여주기
 public class BoardReplyWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService service = new BoardService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public BoardReplyWriteController() {
         super();
 
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String replyAjaxSuccess = null;
 		

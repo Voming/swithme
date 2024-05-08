@@ -12,25 +12,16 @@ import swithme.model.board.dto.BoardUpdateDto;
 import swithme.model.board.service.BoardService;
 import swithme.model.member.dto.MemberInfoDto;
 
-/**
- * Servlet implementation class BoardUpdateController
- */
 @WebServlet("/board/update")
 public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BoardService service = new BoardService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public BoardUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//게시글을 보여줘
 		
@@ -51,9 +42,6 @@ public class BoardUpdateController extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//게시글을 수정해줘
 		

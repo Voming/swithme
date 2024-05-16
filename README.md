@@ -4,6 +4,13 @@
 [1. 프로젝트 소개](#1-프로젝트-소개) <br>
 [2. 개발 환경](#2-개발-환경) <br>
 [3. 팀원 구성](#3-팀원-구성) <br>
+[4. 구현 기능](#4-구현-기능) <br>
+[5. 플로우차트](#5-플로우차트) <br>
+[6. 화면 설계서](#6-화면-설계서) <br>
+[7. 정보구조도](#7-정보구조도) <br>
+[8. ERD 구조](#8-ERD-구조)  <br>
+[9. 요구사항 정의서](#9-요구사항-정의서) <br>
+[10. 클래스 다이어그램](#10-클래스-다이어그램) <br>
 
 <br><br>
 
@@ -37,7 +44,7 @@
 
 <br><br>
 
-## 구현기능
+## 4. 구현-기능
 |기능명|설명|
 |------|---|
 |나의 기록|공부 과목 별 타이머, 달력, 일별/ 월별 공부 기록 통계|
@@ -49,7 +56,7 @@
 
 <br><br>
 
-## 플로우차트
+## 5. 플로우차트
 ![12](https://github.com/Voming/swithme_source/assets/68582465/9eab8a1b-0c06-4ac1-ab1b-acacbc416d17)
 ![13](https://github.com/Voming/swithme_source/assets/68582465/1982a2fb-60b0-47ea-86ff-9dd15efc2b84)
 ![14](https://github.com/Voming/swithme_source/assets/68582465/582424d1-2447-4734-9609-e2ab875f24b9)
@@ -59,28 +66,57 @@
 
 <br><br>
 
-## 주요 기능
+## 6. 화면 설계서
+![화면설계서 (3)_2](https://github.com/Voming/swithme_source/assets/68582465/c81a8280-23b9-41bc-a9b3-96487bc01f96)
+![화면설계서 (3)_3](https://github.com/Voming/swithme_source/assets/68582465/e31b7beb-2a33-4f1b-9668-66401fb1ff3b)
+![화면설계서 (3)_4](https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11)
+![화면설계서 (3)_5](https://github.com/Voming/swithme_source/assets/68582465/b992463b-15a8-4a4c-b8a2-859d7b251f99)
+![화면설계서 (3)_6](https://github.com/Voming/swithme_source/assets/68582465/deb6c423-e21c-4172-8a21-1cae189cd2ea)
+![화면설계서 (3)_7](https://github.com/Voming/swithme_source/assets/68582465/12688ab7-ac28-4018-9fcf-3363c60653ba)
+![화면설계서 (3)_8](https://github.com/Voming/swithme_source/assets/68582465/f4f94df7-26b3-4361-bb03-a053bb379b8d)
+![화면설계서 (3)_9](https://github.com/Voming/swithme_source/assets/68582465/cdc5ac2b-6cfc-4d01-afc6-c2f6f0a52c5e)
+![화면설계서 (3)_10](https://github.com/Voming/swithme_source/assets/68582465/d5d9079c-1721-4d29-a4c3-20996f4fc930)
+![화면설계서 (3)_11](https://github.com/Voming/swithme_source/assets/68582465/9cfc13d2-6324-4174-8d68-44ceaf996b3f)
+![화면설계서 (3)_12](https://github.com/Voming/swithme_source/assets/68582465/b41daeae-3256-4d77-b1c3-0bc571a2abe8)
+![화면설계서 (3)_13](https://github.com/Voming/swithme_source/assets/68582465/423863a5-e8a8-4e5a-bb7a-00a443d437ba)
+![화면설계서 (3)_14](https://github.com/Voming/swithme_source/assets/68582465/49dd1e7b-6054-449b-a8ee-49ccb7ec7b98)
+![화면설계서 (3)_15](https://github.com/Voming/swithme_source/assets/68582465/6afa568a-c937-40b0-99d6-3fb3c3350f29)
+![화면설계서 (3)_16](https://github.com/Voming/swithme_source/assets/68582465/cda84719-921c-4d5c-86f7-d05affce3957)
+![화면설계서 (3)_17](https://github.com/Voming/swithme_source/assets/68582465/0c788643-8953-4324-b5e5-577fe77724e4)
+![화면설계서 (3)_18](https://github.com/Voming/swithme_source/assets/68582465/e7e606c4-e6d9-450f-bf12-de74bd1db955)
+![화면설계서 (3)_19](https://github.com/Voming/swithme_source/assets/68582465/e7851796-3dbd-4190-8e75-b2a659bec21c)
+![화면설계서 (3)_20](https://github.com/Voming/swithme_source/assets/68582465/5f65119f-451f-4ee5-bfe0-bf4bd2a25259)
+![화면설계서 (3)_21](https://github.com/Voming/swithme_source/assets/68582465/a3eb4215-eaa1-4fd3-a139-4d618c53e90f)
+![화면설계서 (3)_22](https://github.com/Voming/swithme_source/assets/68582465/f0cacbc5-00a7-4ca5-afaf-693ab350dcd5)
+![화면설계서 (3)_23](https://github.com/Voming/swithme_source/assets/68582465/029bd738-2b1f-4a21-8e04-5e5d6348c0a8)
+![화면설계서 (3)_24](https://github.com/Voming/swithme_source/assets/68582465/dcfacb26-a431-41d3-92c7-ffff412eb1cc)
+![화면설계서 (3)_25](https://github.com/Voming/swithme_source/assets/68582465/90f8274c-8a8a-4275-b9dd-b1d829f974fd)
+![화면설계서 (3)_26](https://github.com/Voming/swithme_source/assets/68582465/fe39cd91-5298-46b6-b888-58fdabbc72d6)
+![화면설계서 (3)_27](https://github.com/Voming/swithme_source/assets/68582465/0e864436-ac22-4813-9f90-9eca5367cdfc)
+![화면설계서 (3)_28](https://github.com/Voming/swithme_source/assets/68582465/20851d6b-ce8f-4277-a242-88c51f27b96c)
+![화면설계서 (3)_29](https://github.com/Voming/swithme_source/assets/68582465/649fe7c1-f2b0-4eec-b9fe-f2605de4b7a1)
+![화면설계서 (3)_30](https://github.com/Voming/swithme_source/assets/68582465/e2036c64-2b2f-4b0f-83cf-8e623bb046fc)
 
 
 
 <br>
 
-## 정보구조도
+## 7. 정보구조도
 ![7](https://github.com/Voming/swithme_source/assets/68582465/46b01899-6cc6-4dbd-9676-be5fbeec04ea)
 
 <br>
 
-## ERD
+## 8. ERD 구조
 ![8](https://github.com/Voming/swithme_source/assets/68582465/c11a124f-2083-4f7e-a290-adf829a44af1)
 
 <br>
 
-## 요구사항 정의서
+## 9. 요구사항 정의서
 ![9](https://github.com/Voming/swithme_source/assets/68582465/87e25631-22a2-49aa-aa09-6d2edc26802a)
 
 <br>
 
-## 클래스 다이어그램
+## 10. 클래스 다이어그램
 ![10](https://github.com/Voming/swithme_source/assets/68582465/a2517715-053d-4194-a6f1-7ff978c7ead5)
 ![11](https://github.com/Voming/swithme_source/assets/68582465/175ea1e1-7ddd-4c4f-932a-5dd41ac427b2)
 

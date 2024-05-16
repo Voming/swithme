@@ -5,12 +5,13 @@
 [2. 개발 환경](#2-개발-환경) <br>
 [3. 팀원 구성](#3-팀원-구성) <br>
 [4. 구현 기능](#4-구현-기능) <br>
-[5. 플로우차트](#5-플로우차트) <br>
-[6. 화면 설계서](#6-화면-설계서) <br>
-[7. 정보구조도](#7-정보구조도) <br>
-[8. ERD 구조](#8-ERD-구조)  <br>
-[9. 요구사항 정의서](#9-요구사항-정의서) <br>
-[10. 클래스 다이어그램](#10-클래스-다이어그램) <br>
+[5. 정보구조도](#5-정보구조도) <br>
+[6. ERD 구조](#6-ERD-구조)  <br>
+[7. 요구사항 정의서](#7-요구사항-정의서) <br>
+[8. 클래스 다이어그램](#8-클래스-다이어그램) <br>
+[9. 플로우차트](#9-플로우차트) <br>
+[10. 화면 설계서](#10-화면-설계서) <br>
+
 
 <br><br>
 
@@ -56,7 +57,29 @@
 
 <br><br>
 
-## 5. 플로우차트
+
+## 5. 정보구조도
+![7](https://github.com/Voming/swithme_source/assets/68582465/46b01899-6cc6-4dbd-9676-be5fbeec04ea)
+
+<br>
+
+## 6. ERD 구조
+![8](https://github.com/Voming/swithme_source/assets/68582465/c11a124f-2083-4f7e-a290-adf829a44af1)
+
+<br>
+
+## 7. 요구사항 정의서
+![9](https://github.com/Voming/swithme_source/assets/68582465/87e25631-22a2-49aa-aa09-6d2edc26802a)
+
+<br>
+
+## 8. 클래스 다이어그램
+![10](https://github.com/Voming/swithme_source/assets/68582465/a2517715-053d-4194-a6f1-7ff978c7ead5)
+![11](https://github.com/Voming/swithme_source/assets/68582465/175ea1e1-7ddd-4c4f-932a-5dd41ac427b2)
+
+<br>
+
+## 9. 플로우차트
 ![12](https://github.com/Voming/swithme_source/assets/68582465/9eab8a1b-0c06-4ac1-ab1b-acacbc416d17)
 ![13](https://github.com/Voming/swithme_source/assets/68582465/1982a2fb-60b0-47ea-86ff-9dd15efc2b84)
 ![14](https://github.com/Voming/swithme_source/assets/68582465/582424d1-2447-4734-9609-e2ab875f24b9)
@@ -66,7 +89,7 @@
 
 <br><br>
 
-## 6. 화면 설계서
+## 10. 화면 설계서
 ![화면설계서 (3)_2](https://github.com/Voming/swithme_source/assets/68582465/c81a8280-23b9-41bc-a9b3-96487bc01f96)
 ![화면설계서 (3)_3](https://github.com/Voming/swithme_source/assets/68582465/e31b7beb-2a33-4f1b-9668-66401fb1ff3b)
 ![화면설계서 (3)_4](https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11)
@@ -98,26 +121,5 @@
 ![화면설계서 (3)_30](https://github.com/Voming/swithme_source/assets/68582465/e2036c64-2b2f-4b0f-83cf-8e623bb046fc)
 
 
-
-<br>
-
-## 7. 정보구조도
-![7](https://github.com/Voming/swithme_source/assets/68582465/46b01899-6cc6-4dbd-9676-be5fbeec04ea)
-
-<br>
-
-## 8. ERD 구조
-![8](https://github.com/Voming/swithme_source/assets/68582465/c11a124f-2083-4f7e-a290-adf829a44af1)
-
-<br>
-
-## 9. 요구사항 정의서
-![9](https://github.com/Voming/swithme_source/assets/68582465/87e25631-22a2-49aa-aa09-6d2edc26802a)
-
-<br>
-
-## 10. 클래스 다이어그램
-![10](https://github.com/Voming/swithme_source/assets/68582465/a2517715-053d-4194-a6f1-7ff978c7ead5)
-![11](https://github.com/Voming/swithme_source/assets/68582465/175ea1e1-7ddd-4c4f-932a-5dd41ac427b2)
 
 

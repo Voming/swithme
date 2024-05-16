@@ -10,7 +10,7 @@
 - 커뮤니티 기능을 통해 사용자는 학습 경험을 공유하고 지식을 나눌 수 있습니다.
 - 스윗미는 사용자들의 학습을 지원하고 커뮤니티를 형성하여 서로의 성장을 촉진합니다.
 
-#### [**최종 발표 자료**]([https://www.figma.com/proto/xAiLZ6P8yXdaAN7QEstJXU/%EC%B5%9C%EC%A2%85-%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C?node-id=4-257&starting-point-node-id=4%3A257&t=JWPhIwmTihvmOVIX-1]) 🔗
+#### [**최종 발표 자료**](https://www.figma.com/proto/xAiLZ6P8yXdaAN7QEstJXU/%EC%B5%9C%EC%A2%85-%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C?node-id=4-257&starting-point-node-id=4%3A257&t=JWPhIwmTihvmOVIX-1) 🔗
 
 <br><br>
 

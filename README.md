@@ -33,7 +33,7 @@
 |운영체제| Window 10|
 |FrameWork / Library| activation-1.1.1, cloudinary-core-1.32.1, cloudinary-http44-1.32.1, commons-codec-1.9, commons-lang3-3.1, commons-logging-1.2, cos-2022.2, gson-2.10.1, httpclient-4.4, httpcore-4.4, httpmime-4.4, javax.mail-1.6.2, jstl-1.2, mail, mybatis-3.5.15, ojdbc11, spring-context-support-6.1.4, bootstrap-5.0.2, fullcalendar-6.1.11, owlcarousel2-2.3.4, Chart.js- 4.4.1|
 |DB| ORACLE|
-|Tool| Eclipse EE, Visual studio Code, SqlDeveloper, ERDCloud,, Chrome Developer Tool, AWS, excel|
+|Tool| Eclipse EE, Visual studio Code, SqlDeveloper, ERDCloud, Chrome Developer Tool, AWS, excel|
 |WAS| Tomcat 9|
 |Collaboration| GitHub, notion, figma,  google drive|
 |API| 한국산업인력공단_국가기술자격 종목별 시험정보 API|

@@ -23,6 +23,7 @@
 - 스윗미는 사용자들의 학습을 지원하고 커뮤니티를 형성하여 서로의 성장을 촉진합니다.
 
 #### [프로젝트 설명 및 코드 분석](https://www.figma.com/proto/xAiLZ6P8yXdaAN7QEstJXU/%EC%B5%9C%EC%A2%85-%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C?node-id=4-257&starting-point-node-id=4%3A257&t=JWPhIwmTihvmOVIX-1) 🔗
+#### [노션 프로젝트 일정 및 진행 상황](https://gratis-thread-070.notion.site/9304877f2dfb404d982dd4c44ae7cde6?v=7a0312303cc345889207a4a49d44a125&pvs=4) 🔗
 
 <br><br>
 

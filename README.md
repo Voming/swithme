@@ -57,13 +57,42 @@
 |시험달력|국가기술 자격 종목별 시험 정보|
 
 <br><br>
-
 <details>
-	<summary>토글 접기/펼치기</summary>
-  	<div markdown="1">
-      안녕
-  	</div>
+<summary>김보민 - 그룹, 시험달력</summary>
+<div markdown="1">   
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/c81a8280-23b9-41bc-a9b3-96487bc01f96"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/6237058c-ab38-4488-9088-22e6a91d1425"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/e31b7beb-2a33-4f1b-9668-66401fb1ff3b"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/0db35354-1b39-46c9-bb0b-6f6176099b5a"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/2a0c5178-d246-42bb-ab25-6f0afdea0d61"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b6dcc438-8195-4289-8686-1710b2933b02"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/dd59a096-d0da-4da7-8b56-dbf8ef89fa04"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b992463b-15a8-4a4c-b8a2-859d7b251f99"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/4e3f0157-521f-418d-9a0c-79f1ff51e395"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/deb6c423-e21c-4172-8a21-1cae189cd2ea"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/5f07ce6a-18ec-4b62-b596-15a744c306dd"> 
+</div>
 </details>
+<details>
+<summary>오예인 - 로그인, 회원가입</summary>
+<div markdown="1">   
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/c81a8280-23b9-41bc-a9b3-96487bc01f96"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/6237058c-ab38-4488-9088-22e6a91d1425"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/e31b7beb-2a33-4f1b-9668-66401fb1ff3b"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/0db35354-1b39-46c9-bb0b-6f6176099b5a"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/2a0c5178-d246-42bb-ab25-6f0afdea0d61"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b6dcc438-8195-4289-8686-1710b2933b02"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/dd59a096-d0da-4da7-8b56-dbf8ef89fa04"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b992463b-15a8-4a4c-b8a2-859d7b251f99"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/4e3f0157-521f-418d-9a0c-79f1ff51e395"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/deb6c423-e21c-4172-8a21-1cae189cd2ea"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/5f07ce6a-18ec-4b62-b596-15a744c306dd"> 
+</div>
+</details>
+
+
 
 ## 5. 정보구조도
 ![7](https://github.com/Voming/swithme_source/assets/68582465/46b01899-6cc6-4dbd-9676-be5fbeec04ea)

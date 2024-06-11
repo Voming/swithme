@@ -55,8 +55,10 @@
 |로그인, 회원가입|이메일 인증|
 |마이페이지|회원정보 수정, 게시글 관리|
 |시험달력|국가기술 자격 종목별 시험 정보|
-
 <br><br>
+
+
+## 개별 개발 이슈
 <details>
 <summary>김보민 - 그룹, 시험달력</summary>
 <div markdown="1">   
@@ -98,11 +100,10 @@
 
 </div>
 </details>
-<br><br>
+<br>
 <details>
 <summary>김은진 - 나의 기록</summary>
 <div markdown="1">   
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/12688ab7-ac28-4018-9fcf-3363c60653ba"> 
 <img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/f4f94df7-26b3-4361-bb03-a053bb379b8d"> 
 <img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/cdc5ac2b-6cfc-4d01-afc6-c2f6f0a52c5e"> 
 <img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/d5d9079c-1721-4d29-a4c3-20996f4fc930"> 
@@ -118,25 +119,36 @@
 <img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/8039a8d1-dfa0-4f1a-ad69-5c56cf2e2d14"> 
 </div>
 </details>
-<br><br>
+<br>
 <details>
 <summary>송채원 - 커뮤니티</summary>
 <div markdown="1">   
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/c81a8280-23b9-41bc-a9b3-96487bc01f96"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/6237058c-ab38-4488-9088-22e6a91d1425"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/e31b7beb-2a33-4f1b-9668-66401fb1ff3b"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/0db35354-1b39-46c9-bb0b-6f6176099b5a"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/2a0c5178-d246-42bb-ab25-6f0afdea0d61"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b6dcc438-8195-4289-8686-1710b2933b02"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/dd59a096-d0da-4da7-8b56-dbf8ef89fa04"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b992463b-15a8-4a4c-b8a2-859d7b251f99"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/4e3f0157-521f-418d-9a0c-79f1ff51e395"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/deb6c423-e21c-4172-8a21-1cae189cd2ea"> 
-<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/5f07ce6a-18ec-4b62-b596-15a744c306dd"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/dcfacb26-a431-41d3-92c7-ffff412eb1cc"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/cd666564-2af3-423b-a14d-897277e9e77b"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b584b573-122a-4b68-b62e-7ce0491c6406">
+ 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/90f8274c-8a8a-4275-b9dd-b1d829f974fd"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/561dd566-55a9-44f5-bcf6-e14e3616410b"> 
+
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/0e864436-ac22-4813-9f90-9eca5367cdfc"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/20851d6b-ce8f-4277-a242-88c51f27b96c"> 
+
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/e6c6b031-20c5-49a2-892d-daa030dd7d92"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/00e0c95e-d82f-4924-8a0c-72f53c359a1a"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/9f24c85a-0732-4d35-b1c6-4a9f50186c63"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/b8b56f72-8fe9-4f2c-938a-ff3c119a75a1"> 
+
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/fe39cd91-5298-46b6-b888-58fdabbc72d6"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/05c37db4-ef3a-4370-949a-6ff60fe7ac10"> 
+
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/12688ab7-ac28-4018-9fcf-3363c60653ba"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/f0193d31-d239-40ba-8ec7-d423d6a1f395"> 
+
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/029bd738-2b1f-4a21-8e04-5e5d6348c0a8"> 
+<img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/e17ab873-9487-4bd7-8756-79407e62cda1"> 
 </div>
 </details>
-<br><br>
+<br>
 <details>
 <summary>오예인 - 로그인, 회원가입</summary>
 <div markdown="1">   
@@ -154,8 +166,6 @@
 <img alt="image" src="https://github.com/Voming/swithme_source/assets/68582465/5f07ce6a-18ec-4b62-b596-15a744c306dd"> 
 </div>
 </details>
-
-
 
 
 <br><br>
@@ -196,7 +206,6 @@
 ![화면설계서 (3)_4](https://github.com/Voming/swithme_source/assets/68582465/f05fa797-5c0d-4bcb-b275-47199dd96a11)
 ![화면설계서 (3)_5](https://github.com/Voming/swithme_source/assets/68582465/b992463b-15a8-4a4c-b8a2-859d7b251f99)
 ![화면설계서 (3)_6](https://github.com/Voming/swithme_source/assets/68582465/deb6c423-e21c-4172-8a21-1cae189cd2ea)
-타이머
 ![화면설계서 (3)_7](https://github.com/Voming/swithme_source/assets/68582465/12688ab7-ac28-4018-9fcf-3363c60653ba)
 ![화면설계서 (3)_8](https://github.com/Voming/swithme_source/assets/68582465/f4f94df7-26b3-4361-bb03-a053bb379b8d)
 ![화면설계서 (3)_9](https://github.com/Voming/swithme_source/assets/68582465/cdc5ac2b-6cfc-4d01-afc6-c2f6f0a52c5e)
@@ -204,7 +213,6 @@
 ![화면설계서 (3)_11](https://github.com/Voming/swithme_source/assets/68582465/9cfc13d2-6324-4174-8d68-44ceaf996b3f)
 ![화면설계서 (3)_12](https://github.com/Voming/swithme_source/assets/68582465/b41daeae-3256-4d77-b1c3-0bc571a2abe8)
 ![화면설계서 (3)_13](https://github.com/Voming/swithme_source/assets/68582465/423863a5-e8a8-4e5a-bb7a-00a443d437ba)
-그룹
 ![화면설계서 (3)_14](https://github.com/Voming/swithme_source/assets/68582465/49dd1e7b-6054-449b-a8ee-49ccb7ec7b98)
 ![화면설계서 (3)_15](https://github.com/Voming/swithme_source/assets/68582465/6afa568a-c937-40b0-99d6-3fb3c3350f29)
 ![화면설계서 (3)_16](https://github.com/Voming/swithme_source/assets/68582465/cda84719-921c-4d5c-86f7-d05affce3957)
@@ -214,16 +222,12 @@
 ![화면설계서 (3)_20](https://github.com/Voming/swithme_source/assets/68582465/5f65119f-451f-4ee5-bfe0-bf4bd2a25259)
 ![화면설계서 (3)_21](https://github.com/Voming/swithme_source/assets/68582465/a3eb4215-eaa1-4fd3-a139-4d618c53e90f)
 ![화면설계서 (3)_22](https://github.com/Voming/swithme_source/assets/68582465/f0cacbc5-00a7-4ca5-afaf-693ab350dcd5)
-
 ![화면설계서 (3)_23](https://github.com/Voming/swithme_source/assets/68582465/029bd738-2b1f-4a21-8e04-5e5d6348c0a8)
-
 ![화면설계서 (3)_24](https://github.com/Voming/swithme_source/assets/68582465/dcfacb26-a431-41d3-92c7-ffff412eb1cc)
 ![화면설계서 (3)_25](https://github.com/Voming/swithme_source/assets/68582465/90f8274c-8a8a-4275-b9dd-b1d829f974fd)
 ![화면설계서 (3)_26](https://github.com/Voming/swithme_source/assets/68582465/fe39cd91-5298-46b6-b888-58fdabbc72d6)
 ![화면설계서 (3)_27](https://github.com/Voming/swithme_source/assets/68582465/0e864436-ac22-4813-9f90-9eca5367cdfc)
 ![화면설계서 (3)_28](https://github.com/Voming/swithme_source/assets/68582465/20851d6b-ce8f-4277-a242-88c51f27b96c)
-
-
 ![화면설계서 (3)_29](https://github.com/Voming/swithme_source/assets/68582465/649fe7c1-f2b0-4eec-b9fe-f2605de4b7a1)
 ![화면설계서 (3)_30](https://github.com/Voming/swithme_source/assets/68582465/e2036c64-2b2f-4b0f-83cf-8e623bb046fc)
 

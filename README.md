@@ -58,6 +58,12 @@
 
 <br><br>
 
+<details>
+	<summary>토글 접기/펼치기</summary>
+  	<div markdown="1">
+      안녕
+  	</div>
+</details>
 
 ## 5. 정보구조도
 ![7](https://github.com/Voming/swithme_source/assets/68582465/46b01899-6cc6-4dbd-9676-be5fbeec04ea)
